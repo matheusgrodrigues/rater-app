@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+## Rater App - Teste Técnico Trilan Group.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Normas
+   -  Você não deve perguntar nada ao entrevistador ou a qualquer colaborador de uma das empresas do grupo Orquestre até o dia da entrevista técnica.
+   -  Todos os problemas ou dúvidas que o candidato tiver não serão respondidos e ficará a critério da criatividade e habilidade de resolução de problemas do candidato responder às mesmas.
+   -  Deve ser desenvolvido somente pelo candidato.
+   -  Mencionar caso tenha usado ChatGPT/ferramentas parecidas e onde foi usado no código.
+2. Requisitos
+   1. Front end
+      - Fazer um client em React.
+      - O client deverá consumir alguma API pública de filme (Ex.: IMDB).
+      - O client deverá seguir o seguinte design no Figma: https://www.figma.com/design/5R7UpmHp3XAf2VFzyQhQp0/Desafio-t%C3%A9cnico---FrontEnd?node-id=0-1&t=1wQgvm92jp88h9Ds-1.
+      - Utilize o Zustand para state management.
+      - Utilize styled-components para estilizar os componentes.
+      - Implemente filtros de filmes por categoria, título, etc.
+   -  Hospedar o código em um ou mais repositórios públicos no Github.
+   -  Hospedar o front end.
+   -  O projeto em Typescript deve estar configurado no tsconfig com `strict: true`, `strictNullChecks: true`, `noImplicitAny: true`
+3. Diferenciais
 
-## Available Scripts
+   <aside>
+   💡 Embora seja um teste simples, pequenos detalhes visuais e técnicos serão observados.
 
-In the project directory, you can run:
+   </aside>
 
-### `npm start`
+   -  Documentação e legibilidade do código.
+   -  Detalhes visuais no front end como; variáveis, unidades de medida, responsividade, etc.
+   -  Tipagens e solução para fetching entre client e API.
+   -  Ser consistente com decisões de estrutura.
+   -  Tratamento de erros.
+   -  Eventos assíncronos.
+   -  Commits por feature no repositório.
+   -  Estrutura atômica de componentes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Como enviar seu resultado
+   -  Enviar resultado em até **7 dias** do recebimento do desafio no formulário https://forms.gle/Vpds7G5bBuvBJwh99
