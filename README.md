@@ -1,6 +1,11 @@
-## Rater App - Teste Técnico Trilan Group.
+## Rater App - Desafio Técnico Front-end
 
--  [Sobre o Teste](#)
-   -  [Critérios do Teste](#)
--  [Wiki](#)
+![Rater App](/docs/images/splash-screen.png "Rater App")
+
+### Wiki
+
 -  [Introdução]()
+-  [Arquitetura]()
+-  [Padrôes e Normas]()
+-  [Ambientes]()
+-  [Links Úteis]()
