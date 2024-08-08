@@ -1,5 +1,4 @@
-# rater-app
-Teste Técnico Trilan Group
+# rater-app - Teste Técnico Trilan Group
 
 1. Normas
     - Você não deve perguntar nada ao entrevistador ou a qualquer colaborador de uma das empresas do grupo Orquestre até o dia da entrevista técnica.
