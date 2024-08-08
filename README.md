@@ -10,6 +10,10 @@
 -  [Ambientes](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/wiki/AMBIENTES.md)
 -  [Links Úteis](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/wiki/LINKS-UTEIS.md)
 
+### Processos
+
+-  Em breve
+
 ### Instalação e Execução
 
 -  Em breve
