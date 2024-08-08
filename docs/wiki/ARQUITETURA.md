@@ -12,7 +12,8 @@
 -  Typescript
 -  Jira/Notion.
 -  Agil/Scrum
--  DDD/TDD
+-  BDD/TDD
+-  DDD
 -  Clean Code/Clean Architecture
 -  Responsive/Mobile First
 -  Fetch API
