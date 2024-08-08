@@ -1,4 +1,4 @@
-## Rater App - Desafio Técnico Front-end
+## [Rater App](https://rater-app.vercel.app/) - Desafio Técnico Front-end
 
 ![Rater App](/docs/images/splash-screen.png "Rater App")
 
