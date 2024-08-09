@@ -5,7 +5,6 @@ const ref = {
         '8': '0.5rem',
         '12': '0.75rem',
         '24': '1.5rem',
-        '99': '6.19rem',
     },
     lineHeight: {
         '14': '0.88rem',
@@ -81,6 +80,8 @@ const utils = {
 
         ${utils.screen('md', `padding: ${ref.spacing['24']}`)};
     `,
+
+    pxToRem: (px: number, base = 16) => `${px / base}rem`,
 };
 
 declare module 'styled-components' {
