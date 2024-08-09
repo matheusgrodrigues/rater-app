@@ -20,6 +20,7 @@
     "strict": true,
     "module": "esnext",
     "noEmit": true,
+    "types": ["jest", "node"],
     "jsx": "react-jsx",
   },
   "include": [
