@@ -33,6 +33,20 @@ declare module 'styled-components' {
                 '40px': '2.5rem';
             };
 
+            spacing: {
+                '4px': '0.25rem';
+                '6px': '0.38rem';
+                '8px': '0.5rem';
+                '12px': '0.75rem';
+                '16px': '1rem';
+                '22px': '1.38rem';
+                '30px': '1.88rem';
+                '24px': '1.5rem';
+                '43px': '2.69rem';
+                '48px': '3rem';
+                '61px': '3.81rem';
+            };
+
             colors: {
                 white: '#FFFFFF';
                 'secondary-background-1': '#121212';
@@ -47,20 +61,6 @@ declare module 'styled-components' {
                 'secondary-solid-10': '#7C7C7C';
                 'secondary-accessible-text-11': '#B4B4B4';
                 'secondary-accessible-text-12': '#EEEEEE';
-            };
-
-            gap: {
-                '4px': '0.25rem';
-                '6px': '0.38rem';
-                '8px': '0.5rem';
-                '12px': '0.75rem';
-                '16px': '1rem';
-                '22px': '1.38rem';
-                '30px': '1.88rem';
-                '24px': '1.5rem';
-                '43px': '2.69rem';
-                '48px': '3rem';
-                '61px': '3.81rem';
             };
         };
     }
