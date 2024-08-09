@@ -1,7 +1,11 @@
+@import './preflight.css';
+
 html {
-   font-size: 16px;
+    font-size: 16px;
 }
 
 body {
-   margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
