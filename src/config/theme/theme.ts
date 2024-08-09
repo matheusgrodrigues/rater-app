@@ -5,6 +5,7 @@ const ref = {
         '8': '0.5rem',
         '12': '0.75rem',
         '24': '1.5rem',
+        '99': '6.18rem',
     },
     lineHeight: {
         '14': '0.88rem',
@@ -15,8 +16,9 @@ const ref = {
         '28': '1.75rem',
         '48': '3rem',
     },
-    fontFamily: 'Inter',
+    fontFamily: 'Inter, sans-serif',
     fontWeight: {
+        '400': '400',
         '500': '500',
         '600': '600',
         '700': '700',
@@ -37,9 +39,7 @@ const ref = {
         '40': '2.5rem',
     },
     spacing: {
-        '4': '0.25rem',
         '6': '0.38rem',
-        '8': '0.5rem',
         '12': '0.75rem',
         '16': '1rem',
         '22': '1.38rem',
@@ -48,6 +48,12 @@ const ref = {
         '43': '2.69rem',
         '48': '3rem',
         '61': '3.81rem',
+    },
+    padding: {
+        '4': '0.25rem',
+        '8': '0.5rem',
+        '12': '0.75rem',
+        '24': '1.5rem',
     },
     colors: {
         white: '#FFFFFF',

@@ -14,12 +14,22 @@ describe('Deve renderizar o Layout corretamente', () => {
         });
 
         describe('Deve renderizar o formulário de busca, corretamente', () => {
-            it('Deve renderizar o botão de busca', () => {
+            it('Deve renderizar o formulário de busca', () => {
                 const formSearch = screen.getByTestId('header-form-search');
-                const btnSearch = screen.getByTestId('header-form-search-btn-search');
 
                 expect(formSearch).toBeInTheDocument();
+            });
+
+            it('Deve renderizar o botão de busca', () => {
+                const btnSearch = screen.getByTestId('header-form-search-btn-search');
+
                 expect(btnSearch).toBeInTheDocument();
+            });
+
+            it('Deve renderizar o input search', () => {
+                const inputSearch = screen.getByTestId('header-form-search-input');
+
+                expect(inputSearch).toBeInTheDocument();
             });
 
             it('Deve renderizar o botão de filtro', () => {

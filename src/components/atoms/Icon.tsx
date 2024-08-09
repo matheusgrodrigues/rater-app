@@ -43,7 +43,7 @@ export default function Icon({ config, ...props }: IconProps) {
             {...props}
         >
             {icon === 'search-icon' && <SearchIconPath />}
-            {icon == 'filter-icon' && <FilterIconPath />}
+            {icon === 'filter-icon' && <FilterIconPath />}
         </svg>
     );
 }
