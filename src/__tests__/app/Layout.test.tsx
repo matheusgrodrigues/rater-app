@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react';
-
 import RootLayout from '../../app/layout';
+import { render, screen } from '../../core/utils/test-utils/render';
 
 describe('Deve renderizar o Layout corretamente', () => {
     beforeEach(() => render(<RootLayout />));

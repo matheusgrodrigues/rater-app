@@ -7,6 +7,8 @@ import './index.css';
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
 import App from './app/Home';
+import { ThemeProvider } from 'styled-components';
+import { defaultTheme } from './config/theme/theme';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,6 +24,8 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={defaultTheme}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </React.StrictMode>
 );

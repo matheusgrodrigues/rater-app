@@ -1,12 +1,42 @@
 import { Outlet } from 'react-router';
 
+import styled from 'styled-components';
+
+const Header = styled.header`
+    background-color: ${({ theme }) => theme.ref.colors['secondary-background-1']};
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 96px;
+    width: 100%;
+`;
+
+const HeaderContainer = styled.div`
+    ${({ theme }) => theme.utils.container()}
+`;
+
+const Logo = styled.img`
+    height: 23px;
+    width: 86px;
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `
+        height: 35px;
+        width: 128px;
+        `
+        )}
+`;
+
 export default function RootLayout() {
     return (
         <>
-            <header data-testid="header">
-                <div data-testid="header-logo">logo</div>
-                header
-            </header>
+            <Header data-testid="header">
+                <HeaderContainer>
+                    <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
+                </HeaderContainer>
+            </Header>
 
             <Outlet />
         </>
