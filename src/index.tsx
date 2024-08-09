@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import './index.css';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
 import App from './app/Home';
-import { ThemeProvider } from 'styled-components';
+
 import { defaultTheme } from './config/theme/theme';
 
 const router = createBrowserRouter(
