@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { RenderOptions, render as testingLibraryRender } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { defaultTheme } from '../../../config/theme/theme';
+import { defaultTheme } from '../../../config/theme';
 
 interface WrapperProps {
     children: ReactNode;

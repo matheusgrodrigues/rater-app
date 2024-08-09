@@ -9,7 +9,7 @@ import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
 import App from './app/Home';
 
-import { defaultTheme } from './config/theme/theme';
+import { defaultTheme } from './config/theme';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
