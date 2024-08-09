@@ -1,44 +1,21 @@
 import RootLayout from '../../app/layout';
-import { render, screen } from '../../core/utils/test-utils/render';
+import { render, screen } from '../../core/utils/test-utils/testing-library';
 
 describe('Deve renderizar o Layout corretamente', () => {
     beforeEach(() => render(<RootLayout />));
 
-    describe('Deve renderizar o header, corretamente', () => {
-        it('Deve renderizar header com a logo', () => {
-            const header = screen.getByTestId('header');
-            const logo = screen.getByTestId('header-logo');
+    it('Deve renderizar o header', () => {
+        const header = screen.getByTestId('header');
+        expect(header).toBeInTheDocument();
+    });
 
-            expect(header).toBeInTheDocument();
-            expect(logo).toBeInTheDocument();
-        });
+    it('Deve renderizar o container do Outlet', () => {
+        const container = screen.getByTestId('layout-children-container');
+        expect(container).toBeInTheDocument();
+    });
 
-        describe('Deve renderizar o formulário de busca, corretamente', () => {
-            it('Deve renderizar o formulário de busca', () => {
-                const formSearch = screen.getByTestId('header-form-search');
-
-                expect(formSearch).toBeInTheDocument();
-            });
-
-            it('Deve renderizar o botão de busca', () => {
-                const btnSearch = screen.getByTestId('header-form-search-btn-search');
-
-                expect(btnSearch).toBeInTheDocument();
-            });
-
-            it('Deve renderizar o input search', () => {
-                const inputSearch = screen.getByTestId('header-form-search-input');
-
-                expect(inputSearch).toBeInTheDocument();
-            });
-
-            it('Deve renderizar o botão de filtro', () => {
-                const formSearch = screen.getByTestId('header-form-search');
-                const btnFilter = screen.getByTestId('header-form-search-btn-filter');
-
-                expect(formSearch).toBeInTheDocument();
-                expect(btnFilter).toBeInTheDocument();
-            });
-        });
+    it('Deve renderizar o footer', () => {
+        const footer = screen.getByTestId('footer');
+        expect(footer).toBeInTheDocument();
     });
 });
