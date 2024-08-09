@@ -2,19 +2,19 @@ import { DefaultTheme } from 'styled-components';
 
 const ref = {
     borderRadius: {
-        '8px': '0.5rem',
-        '12px': '0.75rem',
-        '24px': '1.5rem',
-        '99px': '6.19rem',
+        '8': '0.5rem',
+        '12': '0.75rem',
+        '24': '1.5rem',
+        '99': '6.19rem',
     },
     lineHeight: {
-        '14px': '0.88rem',
-        '16px': '1rem',
-        '19px': '1.19rem',
-        '22px': '1.38rem',
-        '24px': '1.5rem',
-        '28px': '1.75rem',
-        '48px': '3rem',
+        '14': '0.88rem',
+        '16': '1rem',
+        '19': '1.19rem',
+        '22': '1.38rem',
+        '24': '1.5rem',
+        '28': '1.75rem',
+        '48': '3rem',
     },
     fontFamily: 'Inter',
     fontWeight: {
@@ -30,25 +30,25 @@ const ref = {
         '2xl': '1440px',
     },
     fontSize: {
-        '12px': '0.75rem',
-        '14px': '0.88rem',
-        '16px': '1rem',
-        '20px': '1.25rem',
-        '24px': '1.5rem',
-        '40px': '2.5rem',
+        '12': '0.75rem',
+        '14': '0.88rem',
+        '16': '1rem',
+        '20': '1.25rem',
+        '24': '1.5rem',
+        '40': '2.5rem',
     },
     spacing: {
-        '4px': '0.25rem',
-        '6px': '0.38rem',
-        '8px': '0.5rem',
-        '12px': '0.75rem',
-        '16px': '1rem',
-        '22px': '1.38rem',
-        '30px': '1.88rem',
-        '24px': '1.5rem',
-        '43px': '2.69rem',
-        '48px': '3rem',
-        '61px': '3.81rem',
+        '4': '0.25rem',
+        '6': '0.38rem',
+        '8': '0.5rem',
+        '12': '0.75rem',
+        '16': '1rem',
+        '22': '1.38rem',
+        '30': '1.88rem',
+        '24': '1.5rem',
+        '43': '2.69rem',
+        '48': '3rem',
+        '61': '3.81rem',
     },
     colors: {
         white: '#FFFFFF',
@@ -74,12 +74,12 @@ const utils = {
       }`,
 
     container: () => `
-        max-width: 1440px;
-        padding: ${ref.spacing['16px']};
+        max-width: ${ref.breakpoint['2xl']};
+        padding: ${ref.spacing['16']};
         margin: 0 auto;
         width: 100%;
 
-        ${utils.screen('md', `padding: ${ref.spacing['24px']}`)};
+        ${utils.screen('md', `padding: ${ref.spacing['24']}`)};
     `,
 };
 
