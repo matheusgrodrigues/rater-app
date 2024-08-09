@@ -11,7 +11,7 @@ const LayoutContainer = styled.div`
     display: flex;
 `;
 
-const LayoutChildrenContainer = styled.main`
+const LayoutChildContainer = styled.main`
     flex-direction: column;
     flex-grow: 1;
     display: flex;
@@ -22,9 +22,9 @@ export default function RootLayout() {
         <LayoutContainer>
             <Header />
 
-            <LayoutChildrenContainer data-testid="layout-children-container">
+            <LayoutChildContainer data-testid="layout-children-container">
                 <Outlet />
-            </LayoutChildrenContainer>
+            </LayoutChildContainer>
 
             <Footer />
         </LayoutContainer>
