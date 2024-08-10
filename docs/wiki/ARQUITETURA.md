@@ -18,6 +18,7 @@
 -  Responsive/Mobile First
 -  Fetch API
 -  GitFlow
+-  Prettier/Eslint
 -  [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/)
 -  [Zod](https://zod.dev/)
 -  [React Hook Form](https://react-hook-form.com/)
@@ -30,3 +31,7 @@
 -  [Git/Github](https://github.com/matheusgrodrigues/rater-app)
 -  [React Date Range Picker](https://projects.wojtekmaj.pl/react-daterange-picker/)
 -  [React Calendar](https://projects.wojtekmaj.pl/react-calendar/)
+
+## Estrutura de Arquivos e Pastas
+
+-  Em breve
