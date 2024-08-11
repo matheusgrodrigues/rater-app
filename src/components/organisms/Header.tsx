@@ -3,11 +3,22 @@ import styled from 'styled-components';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import Icon from '../atoms/Icon';
+import { Link } from 'react-router-dom';
 
 const HeaderStyled = styled.header`
     background-color: ${({ theme }) => theme.ref.colors['secondary-background-1']};
-    padding: ${({ theme }) => theme.ref.padding['24']} 0;
     width: 100%;
+    padding-top: ${({ theme }) => theme.ref.padding['24']};
+    padding-bottom: ${({ theme }) => theme.ref.padding['16']};
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `
+       max-height: ${theme.utils.pxToRem(96)};
+       padding: 0;
+        `
+        )}
 `;
 
 const HeaderStyledContainer = styled.div`
@@ -48,7 +59,7 @@ const FormContainer = styled.div`
     justify-content: center;
     flex-grow: 1;
 
-    ${({ theme }) => theme.utils.screen('md', `padding-right: ${theme.utils.pxToRem(343 / 3)}`)};
+    ${({ theme }) => theme.utils.screen('md', `padding-right: ${theme.utils.pxToRem(343 / 2)}`)};
 `;
 
 const Form = styled.form`
@@ -62,7 +73,9 @@ export default function Header() {
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>
-                <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
+                <Link to={{ pathname: '/' }}>
+                    <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
+                </Link>
 
                 <FormContainer>
                     <Form data-testid="header-form-search" onSubmit={(e) => e.preventDefault()}>

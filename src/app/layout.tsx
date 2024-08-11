@@ -11,20 +11,28 @@ const LayoutContainer = styled.div`
     display: flex;
 `;
 
-const LayoutChildrenContainer = styled.main`
+const LayoutChildContainer = styled.main`
     flex-direction: column;
     flex-grow: 1;
     display: flex;
+
+    ${({ theme }) => theme.utils.container()};
+
+    padding-top: 0 !important;
 `;
 
-export default function RootLayout() {
+interface RootLayoutProps {
+    children?: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <LayoutContainer>
             <Header />
 
-            <LayoutChildrenContainer data-testid="layout-children-container">
-                <Outlet />
-            </LayoutChildrenContainer>
+            <LayoutChildContainer data-testid="layout-children-container">
+                {children || <Outlet />}
+            </LayoutChildContainer>
 
             <Footer />
         </LayoutContainer>
