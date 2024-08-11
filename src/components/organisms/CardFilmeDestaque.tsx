@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Badge from '../atoms/Badge';
+import Heading from '../atoms/Heading';
 
 const CardFilmeDestaqueStyled = styled.div`
     width: 100%;
@@ -32,6 +33,16 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                         icon: 'fire',
                     }}
                 />
+
+                <Heading
+                    data-testid="card-filme-destaque-title"
+                    config={{
+                        variant: 'h1',
+                        color: 'white',
+                    }}
+                >
+                    Deadpool & Wolverine
+                </Heading>
             </CardFilmeDestaqueContent>
         </CardFilmeDestaqueStyled>
     );
