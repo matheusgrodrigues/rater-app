@@ -28,14 +28,18 @@ export default function SpecRatingView({ config, ...props }: SpecRatingViewProps
     const { ratingLabel, viewLabel } = config;
     return (
         <SpecRatingViewStyled {...props}>
-            <SpecRating>
-                <Icon config={{ color: 'yellow', icon: 'star', size: 20 }} />
-                <Strong config={{ fontWeight: 600, label: ratingLabel, color: 'white', size: 20 }} />
+            <SpecRating data-testid="spec-rating">
+                <Icon data-testid="spec-rating-star" config={{ color: 'yellow', icon: 'star', size: 20 }} />
+                <Strong
+                    data-testid="spec-rating-number"
+                    config={{ fontWeight: 600, label: ratingLabel, color: 'white', size: 20 }}
+                />
             </SpecRating>
 
-            <BarDivider />
+            <BarDivider data-testid="spec-bar-divider" />
 
             <Strong
+                data-testid="spec-view"
                 config={{
                     fontWeight: 600,
                     label: viewLabel,
