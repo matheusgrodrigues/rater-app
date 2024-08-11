@@ -58,6 +58,7 @@ const ref = {
         '16': '1rem',
         '24': '1.5rem',
         '48': '3rem',
+        '61': '3.81rem',
     },
     colors: {
         yellow: '#eab308',

@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 interface HeadingConfig {
-    variant: 'h1';
+    fontWeight: '700' | '600';
+    fontSize: '40' | '20' | '16';
     color: 'white';
 }
 
 interface HeadingStyledProps {
-    config: Pick<HeadingConfig, 'color'>;
+    config: Omit<HeadingConfig, 'variant'>;
 }
 
 const Heading1 = styled.h1<HeadingStyledProps>`
-    font-size: ${({ theme }) => theme.ref.fontSize['40']};
-    font-weight: ${({ theme }) => theme.ref.fontWeight['700']};
+    font-size: ${({ config, theme }) => theme.ref.fontSize[config.fontSize]};
+    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
     color: ${({ config, theme }) => theme.ref.colors[config.color]};
 `;
 
@@ -21,19 +22,9 @@ interface HeadingProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTML
 }
 
 export default function Heading({ children, config, ...props }: HeadingProps) {
-    const { variant, color } = config;
-
-    const headingConfig = {
-        color,
-    };
-
     return (
-        <>
-            {variant === 'h1' && (
-                <Heading1 config={headingConfig} {...props}>
-                    {children}
-                </Heading1>
-            )}
-        </>
+        <Heading1 config={config} {...props}>
+            {children}
+        </Heading1>
     );
 }

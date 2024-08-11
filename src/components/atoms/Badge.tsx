@@ -5,8 +5,9 @@ import Icon, { IconType } from './Icon';
 const BadgeStyled = styled.div`
     width: 167px;
     height: 36px;
-    background-color: rgb(255 255 255 / 0.2);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(${({ theme }) => theme.utils.pxToRem(6)});
+    background: rgba(238, 238, 238, 0.2);
     border-radius: ${({ theme }) => theme.ref.borderRadius['8']};
     justify-content: center;
     align-items: center;

@@ -41,7 +41,17 @@ const StarIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
     </>
 );
 
-export type IconType = 'search-icon' | 'filter-icon' | 'fire' | 'star';
+const PlayRightIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
+    <>
+        <path
+            fillRule="evenodd"
+            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+            clipRule="evenodd"
+        />
+    </>
+);
+
+export type IconType = 'play-right' | 'search' | 'filter' | 'fire' | 'star';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     config: {
@@ -56,7 +66,7 @@ export default function Icon({ config, ...props }: IconProps) {
 
     const { color, icon, size } = config;
 
-    const fillIconList: IconType[] = ['star'];
+    const fillIconList: IconType[] = ['play-right', 'star'];
 
     return (
         <svg
@@ -71,8 +81,9 @@ export default function Icon({ config, ...props }: IconProps) {
             }}
             {...props}
         >
-            {icon === 'search-icon' && <SearchIconPath />}
-            {icon === 'filter-icon' && <FilterIconPath />}
+            {icon === 'play-right' && <PlayRightIconPath />}
+            {icon === 'search' && <SearchIconPath />}
+            {icon === 'filter' && <FilterIconPath />}
             {icon === 'fire' && <FireIconPath />}
             {icon === 'star' && <StarIconPath />}
         </svg>
