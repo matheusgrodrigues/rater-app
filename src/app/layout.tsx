@@ -15,15 +15,21 @@ const LayoutChildContainer = styled.main`
     flex-direction: column;
     flex-grow: 1;
     display: flex;
+
+    ${({ theme }) => theme.utils.container()};
 `;
 
-export default function RootLayout() {
+interface RootLayoutProps {
+    children?: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <LayoutContainer>
             <Header />
 
             <LayoutChildContainer data-testid="layout-children-container">
-                <Outlet />
+                {children || <Outlet />}
             </LayoutChildContainer>
 
             <Footer />
