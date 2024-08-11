@@ -11,6 +11,12 @@ const RoundedIconButton = styled.button`
     align-items: center;
     display: flex;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        transition: 0.3s;
+        opacity: 0.7;
+    }
 `;
 
 interface ButtonProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {

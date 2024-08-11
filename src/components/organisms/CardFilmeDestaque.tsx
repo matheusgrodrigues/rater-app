@@ -9,8 +9,6 @@ const CardFilmeDestaqueStyled = styled.div`
     padding: ${({ theme }) => theme.ref.padding['12']};
 
     ${({ theme }) => theme.utils.screen('md', `padding: ${theme.ref.padding['48']};`)}
-
-    background: red;
 `;
 
 interface CardFilmeDestaqueProps
