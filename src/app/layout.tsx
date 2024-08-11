@@ -15,9 +15,6 @@ const LayoutChildContainer = styled.main`
     flex-direction: column;
     flex-grow: 1;
     display: flex;
-
-    ${({ theme }) => theme.utils.container()};
-
     padding-top: 0 !important;
 `;
 

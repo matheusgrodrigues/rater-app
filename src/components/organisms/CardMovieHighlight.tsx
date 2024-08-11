@@ -111,22 +111,26 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
 const CardMovieHighlightStyled = styled.div`
     width: 100%;
     height: 100%;
+
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
     max-height: ${({ theme }) => theme.utils.pxToRem(826)};
+    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    padding: ${({ theme }) => theme.ref.padding['12']};
+
     flex-direction: column;
     justify-content: flex-end;
     display: flex;
-    padding-bottom: ${({ theme }) => theme.ref.padding['12']};
-
     position: relative;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
 
-    ${({ theme }) =>
-        theme.utils.screen(
-            'md',
-            `
-        padding-bottom: ${theme.ref.padding['61']};
-        `
-        )}
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+
+    ${({ theme }) => theme.utils.screen('lg', `padding: ${theme.ref.padding['24']};`)}
+    ${({ theme }) => theme.utils.screen('2xl', `padding: ${theme.ref.padding['48']};`)}
 `;
 
 const CardMovieHighlightContent = styled.div`
@@ -211,7 +215,7 @@ const CardMovieHighlightsBadgeMobile = styled.div`
     gap: ${({ theme }) => theme.ref.spacing['6']};
 
     position: absolute;
-    top: 0;
+    top: ${({ theme }) => theme.utils.pxToRem(12)};
 
     ${({ theme }) => theme.utils.screen('md', `display: none;`)}
 `;
