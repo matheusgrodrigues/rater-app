@@ -3,11 +3,6 @@ import styled from 'styled-components';
 import CardFilmeDestaque from '../../components/organisms/CardMovieHighlight';
 import CarrouselFilme from '../../components/organisms/CarrouselMovie';
 
-/*
-const CardFilmeDestaqueContainer = styled.div`
-    padding: ${({ theme }) => theme.ref.padding['16']};
-`; */
-
 function Home() {
     return (
         <SectionDestaques data-testid="section-destaques">

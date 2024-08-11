@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+interface HeadingProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
+    children: React.ReactNode;
+    config: HeadingConfig;
+}
+
+export default function Heading({ children, config, ...props }: HeadingProps) {
+    return (
+        <Heading1 config={config} {...props}>
+            {children}
+        </Heading1>
+    );
+}
+
 interface HeadingConfig {
     fontWeight: '700' | '600';
     fontSize: '40' | '20' | '16';
@@ -15,16 +28,3 @@ const Heading1 = styled.h1<HeadingStyledProps>`
     font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
     color: ${({ config, theme }) => theme.ref.colors[config.color]};
 `;
-
-interface HeadingProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
-    children: React.ReactNode;
-    config: HeadingConfig;
-}
-
-export default function Heading({ children, config, ...props }: HeadingProps) {
-    return (
-        <Heading1 config={config} {...props}>
-            {children}
-        </Heading1>
-    );
-}

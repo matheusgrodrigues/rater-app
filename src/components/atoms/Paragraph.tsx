@@ -7,16 +7,6 @@ interface ParagraphConfig {
     size: 16;
 }
 
-interface ParagraphStyledProps {
-    config: ParagraphConfig;
-}
-
-const ParagraphStyled = styled.p<ParagraphStyledProps>`
-    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
-    font-size: ${({ config, theme }) => theme.ref.fontSize[config.size]};
-    color: ${({ config, theme }) => theme.ref.colors[config.color]};
-`;
-
 interface ParagraphProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> {
     children: React.ReactNode;
@@ -39,3 +29,13 @@ export default function Paragraph({ children, config, ...props }: ParagraphProps
         </ParagraphStyled>
     );
 }
+
+interface ParagraphStyledProps {
+    config: ParagraphConfig;
+}
+
+const ParagraphStyled = styled.p<ParagraphStyledProps>`
+    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
+    font-size: ${({ config, theme }) => theme.ref.fontSize[config.size]};
+    color: ${({ config, theme }) => theme.ref.colors[config.color]};
+`;

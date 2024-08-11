@@ -1,9 +1,43 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import Icon from '../atoms/Icon';
-import { Link } from 'react-router-dom';
+
+export default function Header() {
+    return (
+        <HeaderStyled data-testid="header">
+            <HeaderStyledContainer>
+                <Link to={{ pathname: '/' }}>
+                    <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
+                </Link>
+
+                <FormContainer>
+                    <Form data-testid="header-form-search" onSubmit={(e) => e.preventDefault()}>
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="header-form-search-btn-search"
+                            style={{
+                                position: 'absolute',
+                                left: '0.25rem',
+                                zIndex: 1,
+                            }}
+                        >
+                            <Icon config={{ color: 'white', icon: 'search', size: 24 }} />
+                        </Button>
+
+                        <Input data-testid="header-form-search-input" placeholder="Pesquisar..." type="search" />
+
+                        <Button config={{ variant: 'rounded-icon-button' }} data-testid="header-form-search-btn-filter">
+                            <Icon config={{ color: 'white', icon: 'filter', size: 24 }} />
+                        </Button>
+                    </Form>
+                </FormContainer>
+            </HeaderStyledContainer>
+        </HeaderStyled>
+    );
+}
 
 const HeaderStyled = styled.header`
     background-color: ${({ theme }) => theme.ref.colors['secondary-background-1']};
@@ -68,37 +102,3 @@ const Form = styled.form`
     gap: ${({ theme }) => theme.ref.spacing[12]};
     position: relative;
 `;
-
-export default function Header() {
-    return (
-        <HeaderStyled data-testid="header">
-            <HeaderStyledContainer>
-                <Link to={{ pathname: '/' }}>
-                    <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
-                </Link>
-
-                <FormContainer>
-                    <Form data-testid="header-form-search" onSubmit={(e) => e.preventDefault()}>
-                        <Button
-                            config={{ variant: 'rounded-icon-button' }}
-                            data-testid="header-form-search-btn-search"
-                            style={{
-                                position: 'absolute',
-                                left: '0.25rem',
-                                zIndex: 1,
-                            }}
-                        >
-                            <Icon config={{ color: 'white', icon: 'search', size: 24 }} />
-                        </Button>
-
-                        <Input data-testid="header-form-search-input" placeholder="Pesquisar..." type="search" />
-
-                        <Button config={{ variant: 'rounded-icon-button' }} data-testid="header-form-search-btn-filter">
-                            <Icon config={{ color: 'white', icon: 'filter', size: 24 }} />
-                        </Button>
-                    </Form>
-                </FormContainer>
-            </HeaderStyledContainer>
-        </HeaderStyled>
-    );
-}

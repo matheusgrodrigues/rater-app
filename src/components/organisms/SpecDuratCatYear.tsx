@@ -3,12 +3,6 @@ import styled from 'styled-components';
 import BulletDivider from '../atoms/BulletDivider';
 import Strong from '../atoms/Strong';
 
-const SpecDuratCatYearStyled = styled.div`
-    align-items: center;
-    display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['12']};
-`;
-
 interface SpecDuratCatYearProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     config: {
         duratLabel: string;
@@ -64,3 +58,9 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
         </SpecDuratCatYearStyled>
     );
 }
+
+const SpecDuratCatYearStyled = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
+`;
