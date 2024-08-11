@@ -41,6 +41,7 @@ const ref = {
     spacing: {
         '4': '0.25rem',
         '6': '0.38rem',
+        '8': '0.5rem',
         '12': '0.75rem',
         '16': '1rem',
         '22': '1.38rem',
@@ -59,6 +60,7 @@ const ref = {
         '48': '3rem',
     },
     colors: {
+        yellow: '#eab308',
         white: '#FFFFFF',
         'secondary-background-1': '#121212',
         'secondary-background-2': '#191919',

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import Badge from '../atoms/Badge';
 import Heading from '../atoms/Heading';
+import Icon from '../atoms/Icon';
+import Strong from '../atoms/Strong';
 
 const CardFilmeDestaqueStyled = styled.div`
     width: 100%;
@@ -23,6 +25,37 @@ const CardFilmeDestaqueContent = styled.div`
 const CardFilmeDestaqueSpec = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['24']};
+`;
+
+const CardFilmeDestaqueSpecRatingViews = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['4']};
+`;
+
+const CardFilmeDestaqueSpecRating = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['8']};
+`;
+
+const BarDivider = styled.div`
+    width: ${({ theme }) => theme.utils.pxToRem(3)};
+    height: 60%;
+    background-color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
+`;
+
+const BulletDivider = styled.div`
+    height: ${({ theme }) => theme.utils.pxToRem(6)};
+    width: ${({ theme }) => theme.utils.pxToRem(6)};
+    background-color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
+    border-radius: 100%;
+`;
+
+const CardFilmeDestaqueSpecDuratCatYear = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
 `;
 
 interface CardFilmeDestaqueProps
@@ -50,7 +83,58 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                     Deadpool & Wolverine
                 </Heading>
 
-                <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">spec</CardFilmeDestaqueSpec>
+                <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">
+                    <CardFilmeDestaqueSpecRatingViews>
+                        <CardFilmeDestaqueSpecRating>
+                            <Icon config={{ color: 'yellow', icon: 'star', size: 20 }} />
+                            <Strong config={{ fontWeight: 600, label: '8.2', color: 'white', size: 20 }} />
+                        </CardFilmeDestaqueSpecRating>
+
+                        <BarDivider />
+
+                        <Strong
+                            config={{
+                                fontWeight: 600,
+                                label: '120 mil',
+                                color: 'secondary-accessible-text-11',
+                                size: 14,
+                            }}
+                        />
+                    </CardFilmeDestaqueSpecRatingViews>
+
+                    <CardFilmeDestaqueSpecDuratCatYear>
+                        <Strong
+                            config={{
+                                fontWeight: 600,
+                                label: '2h 8m',
+                                color: 'secondary-accessible-text-11',
+                                size: 14,
+                            }}
+                        />
+
+                        <BulletDivider />
+
+                        <Strong
+                            config={{
+                                fontWeight: 600,
+                                label: 'Comedy, Action, Adventure, Superhero...',
+                                color: 'secondary-accessible-text-11',
+                                size: 14,
+                            }}
+                        />
+
+                        <BulletDivider />
+
+                        <Strong
+                            config={{
+                                fontWeight: 600,
+                                label: '2024',
+                                color: 'secondary-accessible-text-11',
+                                size: 14,
+                            }}
+                        />
+                    </CardFilmeDestaqueSpecDuratCatYear>
+                </CardFilmeDestaqueSpec>
             </CardFilmeDestaqueContent>
         </CardFilmeDestaqueStyled>
     );

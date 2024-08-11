@@ -31,11 +31,21 @@ const FireIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
     </>
 );
 
-export type IconType = 'search-icon' | 'filter-icon' | 'fire';
+const StarIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
+    <>
+        <path
+            fillRule="evenodd"
+            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+            clipRule="evenodd"
+        />
+    </>
+);
+
+export type IconType = 'search-icon' | 'filter-icon' | 'fire' | 'star';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     config: {
-        color: 'white';
+        color: 'yellow' | 'white';
         icon: IconType;
         size: 20 | 24;
     };
@@ -46,22 +56,25 @@ export default function Icon({ config, ...props }: IconProps) {
 
     const { color, icon, size } = config;
 
+    const fillIconList: IconType[] = ['star'];
+
     return (
         <svg
             {...{
                 strokeWidth: 1.5,
                 viewBox: `0 0 24 24`,
-                stroke: color === 'white' ? ref.colors.white : 'currentColor',
+                stroke: ref.colors[color] ?? 'currentColor',
                 height: utils.pxToRem(size),
                 width: utils.pxToRem(size),
                 xmlns: 'http://www.w3.org/2000/svg',
-                fill: 'none',
+                fill: fillIconList.includes(icon) ? ref.colors[color] : 'none',
             }}
             {...props}
         >
             {icon === 'search-icon' && <SearchIconPath />}
             {icon === 'filter-icon' && <FilterIconPath />}
             {icon === 'fire' && <FireIconPath />}
+            {icon === 'star' && <StarIconPath />}
         </svg>
     );
 }
