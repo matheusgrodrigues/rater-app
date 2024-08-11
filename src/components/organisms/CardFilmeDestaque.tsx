@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 import SpecDuratCatYear from './SpecDuratCatYear';
 import SpecRatingView from './SpecRatingView';
-import Heading from '../atoms/Heading';
-import Badge from '../atoms/Badge';
 import Paragraph from '../atoms/Paragraph';
+import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
+import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
 
 interface CardFilmeDestaqueProps
@@ -17,13 +17,35 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
     return (
         <CardFilmeDestaqueStyled {...props}>
             <CardFilmeDestaqueContent>
-                <Badge
-                    data-testid="card-filme-destaque-badge"
-                    config={{
-                        label: 'Em destaque',
-                        icon: 'fire',
-                    }}
-                />
+                <CardFilmeDestaquesBadgeMobile>
+                    <Badge
+                        data-testid="card-filme-destaque-badge"
+                        config={{
+                            iconColor: 'white',
+                            icon: 'fire',
+                        }}
+                    />
+
+                    <Badge
+                        data-testid="card-filme-destaque-badge"
+                        config={{
+                            iconColor: 'yellow',
+                            label: '8.2',
+                            icon: 'star',
+                        }}
+                    />
+                </CardFilmeDestaquesBadgeMobile>
+
+                <CardFilmeDestaquesBadgeDesktop>
+                    <Badge
+                        data-testid="card-filme-destaque-badge"
+                        config={{
+                            iconColor: 'white',
+                            label: 'Em destaque',
+                            icon: 'fire',
+                        }}
+                    />
+                </CardFilmeDestaquesBadgeDesktop>
 
                 <CardFilmeDestaqueTitle
                     data-testid="card-filme-destaque-title"
@@ -95,6 +117,8 @@ const CardFilmeDestaqueStyled = styled.div`
     justify-content: flex-end;
     display: flex;
     padding-bottom: ${({ theme }) => theme.ref.padding['12']};
+
+    position: relative;
 
     ${({ theme }) =>
         theme.utils.screen(
@@ -174,4 +198,20 @@ const CardFilmeDestaqueSinopseText = styled(Paragraph)`
                 font-size: ${theme.ref.fontSize['16']};
 `
         )}
+`;
+
+const CardFilmeDestaquesBadgeDesktop = styled.div`
+    display: none;
+
+    ${({ theme }) => theme.utils.screen('md', `display: block;`)}
+`;
+
+const CardFilmeDestaquesBadgeMobile = styled.div`
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['6']};
+
+    position: absolute;
+    top: 0;
+
+    ${({ theme }) => theme.utils.screen('md', `display: none;`)}
 `;

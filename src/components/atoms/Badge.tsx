@@ -4,29 +4,35 @@ import Icon, { IconType } from './Icon';
 
 interface BadgeProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     config: {
-        label: string;
+        iconColor: 'yellow' | 'white';
         icon: IconType;
+        label?: string;
     };
 }
 
 export default function Badge({ config, ...props }: BadgeProps) {
-    const { label, icon } = config;
+    const { iconColor, label, icon } = config;
 
     return (
-        <BadgeStyled {...props}>
-            <Icon strokeWidth={2} config={{ color: 'white', icon, size: 20 }} />
-            <BadgeLabel>{label}</BadgeLabel>
+        <BadgeStyled label={label} {...props}>
+            <Icon strokeWidth={2} config={{ color: iconColor, icon, size: 20 }} />
+            {label && <BadgeLabel>{label}</BadgeLabel>}
         </BadgeStyled>
     );
 }
 
-const BadgeStyled = styled.div`
-    width: 167px;
+interface BadgeStyledProps {
+    label?: string;
+}
+
+const BadgeStyled = styled.div<BadgeStyledProps>`
+    width: max-content;
     height: 36px;
 
     ${({ theme }) => theme.utils.applyTransparentBg()}
 
     border-radius: ${({ theme }) => theme.ref.borderRadius['8']};
+    padding: 0 ${({ theme }) => theme.ref.padding['8']};
     justify-content: center;
     align-items: center;
     display: flex;
