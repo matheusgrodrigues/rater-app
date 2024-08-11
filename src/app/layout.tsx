@@ -17,6 +17,8 @@ const LayoutChildContainer = styled.main`
     display: flex;
 
     ${({ theme }) => theme.utils.container()};
+
+    padding-top: 0 !important;
 `;
 
 interface RootLayoutProps {

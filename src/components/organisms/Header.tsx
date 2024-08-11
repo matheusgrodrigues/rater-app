@@ -7,8 +7,18 @@ import { Link } from 'react-router-dom';
 
 const HeaderStyled = styled.header`
     background-color: ${({ theme }) => theme.ref.colors['secondary-background-1']};
-    padding: ${({ theme }) => theme.ref.padding['24']} 0;
     width: 100%;
+    padding-top: ${({ theme }) => theme.ref.padding['24']};
+    padding-bottom: ${({ theme }) => theme.ref.padding['16']};
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `
+       max-height: ${theme.utils.pxToRem(96)};
+       padding: 0;
+        `
+        )}
 `;
 
 const HeaderStyledContainer = styled.div`
@@ -49,7 +59,7 @@ const FormContainer = styled.div`
     justify-content: center;
     flex-grow: 1;
 
-    ${({ theme }) => theme.utils.screen('md', `padding-right: ${theme.utils.pxToRem(343 / 2.3)}`)};
+    ${({ theme }) => theme.utils.screen('md', `padding-right: ${theme.utils.pxToRem(343 / 2)}`)};
 `;
 
 const Form = styled.form`
