@@ -4,6 +4,7 @@ import SpecDuratCatYear from './SpecDuratCatYear';
 import SpecRatingView from './SpecRatingView';
 import Heading from '../atoms/Heading';
 import Badge from '../atoms/Badge';
+import Paragraph from '../atoms/Paragraph';
 
 const CardFilmeDestaqueStyled = styled.div`
     width: 100%;
@@ -69,10 +70,24 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                         config={{
                             duratLabel: '2h 8m',
                             yearLabel: '2024',
-                            catLabel: 'Comedy, Action, Adventure, Superhero...',
+                            catLabel: 'Comedy, Action, Adventure, Superhero',
                         }}
                     />
                 </CardFilmeDestaqueSpec>
+
+                <Paragraph
+                    data-testid="card-filme-destaque-sinopse"
+                    config={{
+                        fontWeight: 600,
+                        color: 'secondary-accessible-text-12',
+                        size: 16,
+                    }}
+                    style={{ maxWidth: '34.675rem' }}
+                >
+                    Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
+                    Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu universo
+                    da extinção.
+                </Paragraph>
             </CardFilmeDestaqueContent>
         </CardFilmeDestaqueStyled>
     );

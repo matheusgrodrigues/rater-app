@@ -36,4 +36,9 @@ describe('Deve renderizar o CardFilmeDestaque, corretamente', () => {
             expect(spec).toBeInTheDocument();
         });
     });
+
+    it('Deve renderizar a Sinopse', () => {
+        const sinopse = screen.getByTestId('card-filme-destaque-sinopse');
+        expect(sinopse).toBeInTheDocument();
+    });
 });

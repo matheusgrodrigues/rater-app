@@ -42,6 +42,12 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
                     color: 'secondary-accessible-text-11',
                     size: 14,
                 }}
+                style={{
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    width: '16.625rem',
+                }}
             />
 
             <BulletDivider />
