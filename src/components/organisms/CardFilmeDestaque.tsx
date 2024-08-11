@@ -47,11 +47,6 @@ const CardFilmeDestaqueSpec = styled.div`
         )}
 `;
 
-const CardFilmeDestaqueSinopse = styled.div`
-    margin-bottom: ${({ theme }) => theme.ref.spacing['48']};
-    max-width: ${({ theme }) => theme.utils.pxToRem(555)};
-`;
-
 const CardFilmeDestaqueTitle = styled(Heading)`
     font-size: ${({ theme }) => theme.ref.fontSize['16']};
 
@@ -63,6 +58,29 @@ const CardFilmeDestaqueTitle = styled(Heading)`
 `
         )}
 `;
+
+const CardFilmeDestaqueSinopse = styled.div`
+    margin-bottom: ${({ theme }) => theme.ref.spacing['48']};
+    max-width: ${({ theme }) => theme.utils.pxToRem(555)};
+`;
+
+const CardFilmeDestaqueSinopseText = styled(Paragraph)`
+    font-size: ${({ theme }) => theme.ref.fontSize['12']};
+    color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
+    line-height: ${({ theme }) => theme.ref.lineHeight['19']};
+    font-weight: ${({ theme }) => theme.ref.fontWeight['500']};
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `  
+                color: ${theme.ref.colors['secondary-accessible-text-12']};
+                line-height: ${theme.ref.lineHeight['24']};
+                font-size: ${theme.ref.fontSize['16']};
+`
+        )}
+`;
+
 interface CardFilmeDestaqueProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
@@ -111,7 +129,7 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                 </CardFilmeDestaqueSpec>
 
                 <CardFilmeDestaqueSinopse>
-                    <Paragraph
+                    <CardFilmeDestaqueSinopseText
                         data-testid="card-filme-destaque-sinopse"
                         config={{
                             fontWeight: 600,
@@ -122,7 +140,7 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                         Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
                         Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
                         universo da extinção.
-                    </Paragraph>
+                    </CardFilmeDestaqueSinopseText>
                 </CardFilmeDestaqueSinopse>
 
                 <Button config={{ variant: 'transparent-button' }}>

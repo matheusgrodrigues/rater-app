@@ -79,10 +79,18 @@ const ref = {
 };
 
 const utils = {
-    screen: (bp: 'sm' | 'md' | 'lg' | 'xl' | '2xl', content: string) =>
-        `@media screen and (min-width: ${ref.breakpoint[bp]}) {
-        ${content}
-      }`,
+    screen: (bp: 'sm' | 'md' | 'lg' | 'xl' | '2xl', content: string) => {
+        const result =
+            bp === 'sm'
+                ? `@media screen and (max-width: ${ref.breakpoint[bp]}) {
+            ${content}
+          }`
+                : `@media screen and (min-width: ${ref.breakpoint[bp]}) {
+            ${content}
+          }`;
+
+        return result;
+    },
 
     container: () => `
         max-width: ${ref.breakpoint['2xl']};
