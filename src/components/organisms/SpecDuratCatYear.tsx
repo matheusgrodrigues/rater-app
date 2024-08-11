@@ -1,12 +1,7 @@
 import styled from 'styled-components';
-import Strong from '../atoms/Strong';
 
-const BulletDivider = styled.div`
-    height: ${({ theme }) => theme.utils.pxToRem(6)};
-    width: ${({ theme }) => theme.utils.pxToRem(6)};
-    background-color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
-    border-radius: 100%;
-`;
+import BulletDivider from '../atoms/BulletDivider';
+import Strong from '../atoms/Strong';
 
 const SpecDuratCatYearStyled = styled.div`
     align-items: center;
@@ -14,13 +9,23 @@ const SpecDuratCatYearStyled = styled.div`
     gap: ${({ theme }) => theme.ref.spacing['12']};
 `;
 
-export default function SpecDuratCatYear() {
+interface SpecDuratCatYearProps {
+    config: {
+        duratLabel: string;
+        yearLabel: string;
+        catLabel: string;
+    };
+}
+
+export default function SpecDuratCatYear({ config }: SpecDuratCatYearProps) {
+    const { duratLabel, yearLabel, catLabel } = config;
+
     return (
         <SpecDuratCatYearStyled>
             <Strong
                 config={{
                     fontWeight: 600,
-                    label: '2h 8m',
+                    label: duratLabel,
                     color: 'secondary-accessible-text-11',
                     size: 14,
                 }}
@@ -31,7 +36,7 @@ export default function SpecDuratCatYear() {
             <Strong
                 config={{
                     fontWeight: 600,
-                    label: 'Comedy, Action, Adventure, Superhero...',
+                    label: catLabel,
                     color: 'secondary-accessible-text-11',
                     size: 14,
                 }}
@@ -42,7 +47,7 @@ export default function SpecDuratCatYear() {
             <Strong
                 config={{
                     fontWeight: 600,
-                    label: '2024',
+                    label: yearLabel,
                     color: 'secondary-accessible-text-11',
                     size: 14,
                 }}

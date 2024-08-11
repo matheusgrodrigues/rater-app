@@ -20,6 +20,7 @@ const CardFilmeDestaqueContent = styled.div`
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['12']};
+    max-width: ${({ theme }) => theme.utils.pxToRem(560)};
 `;
 
 const CardFilmeDestaqueSpec = styled.div`
@@ -31,6 +32,8 @@ interface CardFilmeDestaqueProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) {
+    // TODO: adicionar imagem de fundo de acordo com a capa retornada pela api.
+
     return (
         <CardFilmeDestaqueStyled {...props}>
             <CardFilmeDestaqueContent>
@@ -53,8 +56,20 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                 </Heading>
 
                 <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">
-                    <SpecRatingView />
-                    <SpecDuratCatYear />
+                    <SpecRatingView
+                        config={{
+                            ratingLabel: '8.2',
+                            viewLabel: '120 mil',
+                        }}
+                    />
+
+                    <SpecDuratCatYear
+                        config={{
+                            duratLabel: '2h 8m',
+                            yearLabel: '2024',
+                            catLabel: 'Comedy, Action, Adventure, Superhero...',
+                        }}
+                    />
                 </CardFilmeDestaqueSpec>
             </CardFilmeDestaqueContent>
         </CardFilmeDestaqueStyled>

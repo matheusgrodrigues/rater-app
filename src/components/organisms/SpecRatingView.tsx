@@ -16,12 +16,20 @@ const SpecRating = styled.div`
     gap: ${({ theme }) => theme.ref.spacing['8']};
 `;
 
-export default function SpecRatingView() {
+interface SpecRatingViewProps {
+    config: {
+        ratingLabel: string;
+        viewLabel: string;
+    };
+}
+
+export default function SpecRatingView({ config }: SpecRatingViewProps) {
+    const { ratingLabel, viewLabel } = config;
     return (
         <SpecRatingViewStyled>
             <SpecRating>
                 <Icon config={{ color: 'yellow', icon: 'star', size: 20 }} />
-                <Strong config={{ fontWeight: 600, label: '8.2', color: 'white', size: 20 }} />
+                <Strong config={{ fontWeight: 600, label: ratingLabel, color: 'white', size: 20 }} />
             </SpecRating>
 
             <BarDivider />
@@ -29,7 +37,7 @@ export default function SpecRatingView() {
             <Strong
                 config={{
                     fontWeight: 600,
-                    label: '120 mil',
+                    label: viewLabel,
                     color: 'secondary-accessible-text-11',
                     size: 14,
                 }}
