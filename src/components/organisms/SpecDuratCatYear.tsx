@@ -23,6 +23,7 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
     return (
         <SpecDuratCatYearStyled {...props}>
             <Strong
+                data-testid="spec-durat"
                 config={{
                     fontWeight: 600,
                     label: duratLabel,
@@ -31,9 +32,10 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
                 }}
             />
 
-            <BulletDivider />
+            <BulletDivider data-testid="spec-bar-divider" />
 
             <Strong
+                data-testid="spec-cat"
                 config={{
                     fontWeight: 600,
                     label: catLabel,
@@ -45,6 +47,7 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
             <BulletDivider />
 
             <Strong
+                data-testid="spec-year"
                 config={{
                     fontWeight: 600,
                     label: yearLabel,
