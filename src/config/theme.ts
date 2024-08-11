@@ -39,7 +39,9 @@ const ref = {
         '40': '2.5rem',
     },
     spacing: {
+        '4': '0.25rem',
         '6': '0.38rem',
+        '8': '0.5rem',
         '12': '0.75rem',
         '16': '1rem',
         '22': '1.38rem',
@@ -56,8 +58,10 @@ const ref = {
         '16': '1rem',
         '24': '1.5rem',
         '48': '3rem',
+        '61': '3.81rem',
     },
     colors: {
+        yellow: '#eab308',
         white: '#FFFFFF',
         'secondary-background-1': '#121212',
         'secondary-background-2': '#191919',
@@ -75,10 +79,18 @@ const ref = {
 };
 
 const utils = {
-    screen: (bp: 'sm' | 'md' | 'lg' | 'xl' | '2xl', content: string) =>
-        `@media screen and (min-width: ${ref.breakpoint[bp]}) {
-        ${content}
-      }`,
+    screen: (bp: 'sm' | 'md' | 'lg' | 'xl' | '2xl', content: string) => {
+        const result =
+            bp === 'sm'
+                ? `@media screen and (max-width: ${ref.breakpoint[bp]}) {
+            ${content}
+          }`
+                : `@media screen and (min-width: ${ref.breakpoint[bp]}) {
+            ${content}
+          }`;
+
+        return result;
+    },
 
     container: () => `
         max-width: ${ref.breakpoint['2xl']};
@@ -90,6 +102,21 @@ const utils = {
     `,
 
     pxToRem: (px: number, base = 16) => `${px / base}rem`,
+
+    applyHoverTransition: () => `
+            transition: 0.3s;
+            
+            &:hover {
+                transition: 0.3s;
+                opacity: 0.8;
+            }
+        `,
+
+    applyTransparentBg: () => `
+         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+         backdrop-filter: blur(${utils.pxToRem(6)});
+         background: rgba(238, 238, 238, 0.2);
+    `,
 };
 
 declare module 'styled-components' {

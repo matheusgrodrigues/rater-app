@@ -13,42 +13,36 @@ const SectionDestaques = styled.div`
         theme.utils.screen(
             'md',
             `
+                   height: ${theme.utils.pxToRem(526)};
+
+        `
+        )}
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'lg',
+            `
+                   height: ${theme.utils.pxToRem(826)};
+
+        `
+        )}
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'lg',
+            `
                 justify-content: space-between;
                 flex-direction: row;
                 gap: ${theme.ref.spacing['12']};
         `
-        )}
-
-    background: green;
-`;
-
-const Destaque = styled.div`
-    flex-grow: 1;
-    background: blue;
-`;
-
-const DestaquesTambem = styled.div`
-    width: 100%;
-
-    ${({ theme }) =>
-        theme.utils.screen(
-            'md',
-            `
-                max-width: ${theme.utils.pxToRem(380)};
-            `
         )}
 `;
 
 function Home() {
     return (
         <SectionDestaques data-testid="section-destaques">
-            <Destaque>
-                <CardFilmeDestaque data-testid="card-filme-destaque" />
-            </Destaque>
-
-            <DestaquesTambem>
-                <CarrouselFilme data-testid="carrousel-destaques-tambem" />
-            </DestaquesTambem>
+            <CardFilmeDestaque data-testid="card-filme-destaque" />
+            <CarrouselFilme data-testid="carrousel-destaques-tambem" />
         </SectionDestaques>
     );
 }

@@ -85,15 +85,16 @@ export default function Header() {
                             style={{
                                 position: 'absolute',
                                 left: '0.25rem',
+                                zIndex: 1,
                             }}
                         >
-                            <Icon config={{ color: 'white', icon: 'search-icon', size: '24' }} />
+                            <Icon config={{ color: 'white', icon: 'search', size: 24 }} />
                         </Button>
 
                         <Input data-testid="header-form-search-input" placeholder="Pesquisar..." type="search" />
 
                         <Button config={{ variant: 'rounded-icon-button' }} data-testid="header-form-search-btn-filter">
-                            <Icon config={{ color: 'white', icon: 'filter-icon', size: '24' }} />
+                            <Icon config={{ color: 'white', icon: 'filter', size: 24 }} />
                         </Button>
                     </Form>
                 </FormContainer>
