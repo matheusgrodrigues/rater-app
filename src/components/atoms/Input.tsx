@@ -16,6 +16,8 @@ const InputStyled = styled.input`
     &::placeholder {
         color: ${({ theme }) => theme.ref.colors['secondary-interactive-5']};
     }
+
+    ${({ theme }) => theme.utils.applyHoverTransition()}
 `;
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}

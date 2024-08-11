@@ -11,6 +11,8 @@ const CardFilmeDestaqueStyled = styled.div`
     ${({ theme }) => theme.utils.screen('md', `padding: ${theme.ref.padding['48']};`)}
 `;
 
+const CardFilmeDestaqueContent = styled.div``;
+
 interface CardFilmeDestaqueProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 

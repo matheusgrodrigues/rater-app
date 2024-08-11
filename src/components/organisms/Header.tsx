@@ -85,6 +85,7 @@ export default function Header() {
                             style={{
                                 position: 'absolute',
                                 left: '0.25rem',
+                                zIndex: 1,
                             }}
                         >
                             <Icon config={{ color: 'white', icon: 'search-icon', size: '24' }} />

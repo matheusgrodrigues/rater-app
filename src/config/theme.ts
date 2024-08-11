@@ -90,6 +90,15 @@ const utils = {
     `,
 
     pxToRem: (px: number, base = 16) => `${px / base}rem`,
+
+    applyHoverTransition: () =>
+        `
+            transition: 0.3s;
+            &:hover {
+                transition: 0.3s;
+                opacity: 0.8;
+            }
+        `,
 };
 
 declare module 'styled-components' {
