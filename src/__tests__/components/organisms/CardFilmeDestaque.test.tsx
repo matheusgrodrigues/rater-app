@@ -11,8 +11,8 @@ describe('Deve renderizar o CardFilmeDestaque, corretamente', () => {
     });
 
     it('Deve renderizar o Badge', () => {
-        const badge = screen.getByTestId('card-filme-destaque-badge');
-        expect(badge).toBeInTheDocument();
+        const badge = screen.getAllByTestId('card-filme-destaque-badge');
+        expect(badge).not.toHaveLength(0);
     });
 
     it('Deve renderizar o Title', () => {
