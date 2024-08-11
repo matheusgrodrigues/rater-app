@@ -1,6 +1,6 @@
-interface CarrouselFilmeProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+interface CarrouselMovieProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export default function CarrouselFilme({ ...props }: CarrouselFilmeProps) {
+export default function CarrouselMovie({ ...props }: CarrouselMovieProps) {
     return (
         <div
             style={{

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import CardFilmeDestaque from '../../components/organisms/CardFilmeDestaque';
-import CarrouselFilme from '../../components/organisms/CarrouselFilme';
+import CardFilmeDestaque from '../../components/organisms/CardMovieHighlight';
+import CarrouselFilme from '../../components/organisms/CarrouselMovie';
 
 const SectionDestaques = styled.div`
     width: 100%;
