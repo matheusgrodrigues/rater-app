@@ -11,6 +11,15 @@ const SectionDestaques = styled.div`
 
     ${({ theme }) =>
         theme.utils.screen(
+            'md',
+            `
+                   height: ${theme.utils.pxToRem(526)};
+
+        `
+        )}
+
+    ${({ theme }) =>
+        theme.utils.screen(
             'lg',
             `
                    height: ${theme.utils.pxToRem(826)};

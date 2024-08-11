@@ -21,16 +21,35 @@ const TransparentButton = styled.button`
     backdrop-filter: blur(${({ theme }) => theme.utils.pxToRem(6)});
     background: rgba(238, 238, 238, 0.2);
     padding: ${({ theme }) => theme.ref.spacing['12']};
-    max-width: ${({ theme }) => theme.utils.pxToRem(216)};
-    height: ${({ theme }) => theme.utils.pxToRem(48)};
+    max-width: ${({ theme }) => theme.utils.pxToRem(139)};
+    height: ${({ theme }) => theme.utils.pxToRem(27)};
     width: 100%;
     justify-content: space-between;
     align-items: center;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
     cursor: pointer;
+    font-size: ${({ theme }) => theme.ref.fontSize['12']};
+    font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
 
     ${({ theme }) => theme.utils.applyHoverTransition()}
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `  
+                max-width: ${theme.utils.pxToRem(216)};
+                height: ${theme.utils.pxToRem(48)};
+                width: 100%;
+                font-size: ${theme.ref.fontSize['20']};
+
+            `
+        )}
+
+
+        & > span {
+        white-space: nowrap;
+    }
 `;
 
 interface ButtonProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {

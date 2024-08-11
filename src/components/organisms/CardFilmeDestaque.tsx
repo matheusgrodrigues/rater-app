@@ -60,8 +60,25 @@ const CardFilmeDestaqueTitle = styled(Heading)`
 `;
 
 const CardFilmeDestaqueSinopse = styled.div`
-    margin-bottom: ${({ theme }) => theme.ref.spacing['48']};
-    max-width: ${({ theme }) => theme.utils.pxToRem(555)};
+    ${({ theme }) =>
+        theme.utils.screen(
+            'sm',
+            `  
+                margin-bottom: ${theme.ref.spacing['8']};
+                max-width: ${theme.utils.pxToRem(319)};
+`
+        )}
+
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `  
+                margin-bottom: ${theme.ref.spacing['48']};
+                max-width: ${theme.utils.pxToRem(555)};
+
+
+`
+        )}
 `;
 
 const CardFilmeDestaqueSinopseText = styled(Paragraph)`
@@ -144,16 +161,7 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                 </CardFilmeDestaqueSinopse>
 
                 <Button config={{ variant: 'transparent-button' }}>
-                    <Heading
-                        data-testid="card-filme-destaque-title"
-                        config={{
-                            fontWeight: '600',
-                            fontSize: '20',
-                            color: 'white',
-                        }}
-                    >
-                        Assitir ao trailer
-                    </Heading>
+                    <span>Assitir ao trailer</span>
 
                     <Icon
                         config={{
