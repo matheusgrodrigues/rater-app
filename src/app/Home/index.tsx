@@ -18,13 +18,12 @@ const SectionDestaques = styled.div`
                 gap: ${theme.ref.spacing['12']};
         `
         )}
-
-    background: green;
 `;
 
 const Destaque = styled.div`
     flex-grow: 1;
-    background: blue;
+    border: 1px solid red;
+    height: 826px;
 `;
 
 const DestaquesTambem = styled.div`
