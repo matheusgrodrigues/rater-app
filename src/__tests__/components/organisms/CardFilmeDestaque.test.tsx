@@ -25,5 +25,15 @@ describe('Deve renderizar o CardFilmeDestaque, corretamente', () => {
             const spec = screen.getByTestId('card-filme-destaque-spec');
             expect(spec).toBeInTheDocument();
         });
+
+        it('Deve renderizar o Rating, View', () => {
+            const spec = screen.getByTestId('card-filme-destaque-spec-rating-view');
+            expect(spec).toBeInTheDocument();
+        });
+
+        it('Deve renderizar o Duration, Category, Year', () => {
+            const spec = screen.getByTestId('card-filme-destaque-spec-durat-cat-year');
+            expect(spec).toBeInTheDocument();
+        });
     });
 });

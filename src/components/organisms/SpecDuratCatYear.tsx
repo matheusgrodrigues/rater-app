@@ -9,7 +9,7 @@ const SpecDuratCatYearStyled = styled.div`
     gap: ${({ theme }) => theme.ref.spacing['12']};
 `;
 
-interface SpecDuratCatYearProps {
+interface SpecDuratCatYearProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     config: {
         duratLabel: string;
         yearLabel: string;
@@ -17,11 +17,11 @@ interface SpecDuratCatYearProps {
     };
 }
 
-export default function SpecDuratCatYear({ config }: SpecDuratCatYearProps) {
+export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearProps) {
     const { duratLabel, yearLabel, catLabel } = config;
 
     return (
-        <SpecDuratCatYearStyled>
+        <SpecDuratCatYearStyled {...props}>
             <Strong
                 config={{
                     fontWeight: 600,

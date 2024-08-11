@@ -57,6 +57,7 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
 
                 <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">
                     <SpecRatingView
+                        data-testid="card-filme-destaque-spec-rating-view"
                         config={{
                             ratingLabel: '8.2',
                             viewLabel: '120 mil',
@@ -64,6 +65,7 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                     />
 
                     <SpecDuratCatYear
+                        data-testid="card-filme-destaque-spec-durat-cat-year"
                         config={{
                             duratLabel: '2h 8m',
                             yearLabel: '2024',
