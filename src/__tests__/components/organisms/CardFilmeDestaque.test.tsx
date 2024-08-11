@@ -19,4 +19,11 @@ describe('Deve renderizar o CardFilmeDestaque, corretamente', () => {
         const title = screen.getByTestId('card-filme-destaque-title');
         expect(title).toBeInTheDocument();
     });
+
+    describe('Deve renderizar as especificações corretamente', () => {
+        it('Deve renderizar a especificação', () => {
+            const spec = screen.getByTestId('card-filme-destaque-spec');
+            expect(spec).toBeInTheDocument();
+        });
+    });
 });

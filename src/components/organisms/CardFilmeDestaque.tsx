@@ -8,16 +8,22 @@ const CardFilmeDestaqueStyled = styled.div`
     height: 100%;
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
     max-height: ${({ theme }) => theme.utils.pxToRem(826)};
-    padding: ${({ theme }) => theme.ref.padding['12']};
-
-    ${({ theme }) => theme.utils.screen('md', `padding: ${theme.ref.padding['48']};`)}
-
     flex-direction: column;
     justify-content: flex-end;
     display: flex;
+    background: blue;
 `;
 
-const CardFilmeDestaqueContent = styled.div``;
+const CardFilmeDestaqueContent = styled.div`
+    flex-direction: column;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
+`;
+
+const CardFilmeDestaqueSpec = styled.div`
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['24']};
+`;
 
 interface CardFilmeDestaqueProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
@@ -43,6 +49,8 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                 >
                     Deadpool & Wolverine
                 </Heading>
+
+                <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">spec</CardFilmeDestaqueSpec>
             </CardFilmeDestaqueContent>
         </CardFilmeDestaqueStyled>
     );

@@ -2,7 +2,14 @@ interface CarrouselFilmeProps extends React.DetailedHTMLProps<React.HTMLAttribut
 
 export default function CarrouselFilme({ ...props }: CarrouselFilmeProps) {
     return (
-        <div {...props}>
+        <div
+            style={{
+                background: 'yellow',
+                width: '100%',
+                maxWidth: '380px',
+            }}
+            {...props}
+        >
             <>CarrouselFilme</>
         </div>
     );
