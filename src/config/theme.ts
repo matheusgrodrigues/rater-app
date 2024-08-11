@@ -103,14 +103,20 @@ const utils = {
 
     pxToRem: (px: number, base = 16) => `${px / base}rem`,
 
-    applyHoverTransition: () =>
-        `
+    applyHoverTransition: () => `
             transition: 0.3s;
+            
             &:hover {
                 transition: 0.3s;
                 opacity: 0.8;
             }
         `,
+
+    applyTransparentBg: () => `
+         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+         backdrop-filter: blur(${utils.pxToRem(6)});
+         background: rgba(238, 238, 238, 0.2);
+    `,
 };
 
 declare module 'styled-components' {

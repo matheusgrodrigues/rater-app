@@ -1,5 +1,23 @@
 import styled from 'styled-components';
 
+interface ButtonProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    children: React.ReactNode;
+    config: {
+        variant: 'rounded-icon-button' | 'transparent-button';
+    };
+}
+
+export default function Button({ children, config, ...props }: ButtonProps) {
+    const { variant } = config;
+
+    return (
+        <>
+            {variant === 'rounded-icon-button' && <RoundedIconButton {...props}>{children}</RoundedIconButton>}
+            {variant === 'transparent-button' && <TransparentButton {...props}>{children}</TransparentButton>}
+        </>
+    );
+}
+
 const RoundedIconButton = styled.button`
     background-color: ${({ theme }) => theme.ref.colors['secondary-interactive-3']};
     border-radius: ${({ theme }) => theme.ref.borderRadius['99']};
@@ -18,8 +36,9 @@ const RoundedIconButton = styled.button`
 const TransparentButton = styled.button`
     border-radius: ${({ theme }) => theme.ref.borderRadius['12']};
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(${({ theme }) => theme.utils.pxToRem(6)});
-    background: rgba(238, 238, 238, 0.2);
+
+    ${({ theme }) => theme.utils.applyTransparentBg()}
+
     padding: ${({ theme }) => theme.ref.spacing['12']};
     max-width: ${({ theme }) => theme.utils.pxToRem(139)};
     height: ${({ theme }) => theme.utils.pxToRem(27)};
@@ -51,21 +70,3 @@ const TransparentButton = styled.button`
         white-space: nowrap;
     }
 `;
-
-interface ButtonProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-    children: React.ReactNode;
-    config: {
-        variant: 'rounded-icon-button' | 'transparent-button';
-    };
-}
-
-export default function Button({ children, config, ...props }: ButtonProps) {
-    const { variant } = config;
-
-    return (
-        <>
-            {variant === 'rounded-icon-button' && <RoundedIconButton {...props}>{children}</RoundedIconButton>}
-            {variant === 'transparent-button' && <TransparentButton {...props}>{children}</TransparentButton>}
-        </>
-    );
-}
