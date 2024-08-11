@@ -108,6 +108,14 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
     );
 }
 
+/*
+// TODO: este aparentemente é o hover, adicionar animação quando passar hover sob a imagem.
+
+ background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
+
+*/
+
 const CardMovieHighlightStyled = styled.div`
     width: 100%;
     height: 100%;
@@ -121,7 +129,8 @@ const CardMovieHighlightStyled = styled.div`
     justify-content: flex-end;
     display: flex;
     position: relative;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%),
         url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
 
     background-origin: border-box;
