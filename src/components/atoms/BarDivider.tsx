@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const BarDividerStyled = styled.div`
@@ -6,6 +7,8 @@ const BarDividerStyled = styled.div`
     background-color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
 `;
 
-export default function BarDivider() {
-    return <BarDividerStyled />;
+interface BarDividerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+export default function BarDivider({ ...props }: BarDividerProps) {
+    return <BarDividerStyled {...props} />;
 }

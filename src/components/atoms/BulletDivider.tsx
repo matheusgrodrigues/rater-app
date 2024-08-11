@@ -7,6 +7,8 @@ const BulletDividerStyled = styled.div`
     border-radius: 100%;
 `;
 
-export default function BulletDivider() {
-    return <BulletDividerStyled />;
+interface BulletDividerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+export default function BulletDivider({ ...props }: BulletDividerProps) {
+    return <BulletDividerStyled {...props} />;
 }
