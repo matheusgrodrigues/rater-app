@@ -6,26 +6,41 @@ import CarrouselMovie from '../../components/organisms/CarrouselMovie';
 
 function Home() {
     return (
-        <SectionHighlight data-testid="section-destaques">
-            <CardMovieHighlight data-testid="card-filme-destaque" />
+        <>
+            <SectionHighlight data-testid="section-highlight">
+                <CardMovieHighlight data-testid="card-movie-highlight" />
 
-            <SectionHighligsToo>
+                <SectionHighligsToo>
+                    <HeadingWithBar
+                        data-testid="title-highlighs-too"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Destaques também
+                    </HeadingWithBar>
+
+                    <CarrouselHighligsToo>
+                        <CarrouselMovie enableVerticalOnDesktop data-testid="carrousel-highlights-too" />
+                    </CarrouselHighligsToo>
+                </SectionHighligsToo>
+            </SectionHighlight>
+
+            <SectionLatestReleases data-testid="section-latest-releases">
                 <HeadingWithBar
-                    data-testid="title-highlighs-too"
+                    data-testid="title-latest-releases"
                     config={{
                         fontWeight: '600',
                         fontSize: '16',
                         color: 'secondary-accessible-text-12',
                     }}
                 >
-                    Destaques também
+                    Ultimos Lançamentos
                 </HeadingWithBar>
-
-                <CarrouselMovieContainer>
-                    <CarrouselMovie data-testid="carrousel-movie" />
-                </CarrouselMovieContainer>
-            </SectionHighligsToo>
-        </SectionHighlight>
+            </SectionLatestReleases>
+        </>
     );
 }
 
@@ -73,6 +88,27 @@ const SectionHighligsToo = styled.div`
     ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
 `;
 
-const CarrouselMovieContainer = styled.div`
+const CarrouselHighligsToo = styled.div`
+    display: flex;
+`;
+
+const SectionLatestReleases = styled.div`
+    width: 100%;
+    height: 100%;
+
+    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
+
+    padding: ${({ theme }) => theme.ref.padding['24']} 0;
+
+    ${({ theme }) => theme.utils.screen('lg', `padding: 0;`)}
+
+    flex-direction: column;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['24']};
+
+    ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
+`;
+
+const CarrouselLatestReleases = styled.div`
     display: flex;
 `;

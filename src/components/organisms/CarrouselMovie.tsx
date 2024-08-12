@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
@@ -23,7 +23,11 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-export default function CarrouselMovie() {
+interface CarrouselMovieProps extends SwiperProps {
+    enableVerticalOnDesktop?: boolean;
+}
+
+export default function CarrouselMovie({ enableVerticalOnDesktop, ...props }: CarrouselMovieProps) {
     return (
         <Swiper
             data-testid="carrousel-movie"
@@ -32,9 +36,10 @@ export default function CarrouselMovie() {
             style={{ maxHeight: '49.125rem' }}
             breakpoints={{
                 1024: {
-                    direction: 'vertical',
+                    direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
                 },
             }}
+            {...props}
         >
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
