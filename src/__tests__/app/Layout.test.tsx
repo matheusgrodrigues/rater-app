@@ -1,3 +1,4 @@
+import React from 'react';
 import RootLayout from '../../app/layout';
 import { render, screen } from '../../core/utils/test-utils/testing-library';
 

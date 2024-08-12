@@ -6,7 +6,7 @@ import Icon from '../../../components/atoms/Icon';
 it('Deve renderizar o Button', () => {
     render(
         <Button data-testid="atom-button" config={{ variant: 'rounded-icon-button' }}>
-            <Icon config={{ color: 'white', icon: 'search-icon', size: '24' }} />
+            <Icon config={{ color: 'white', icon: 'search', size: 24 }} />
         </Button>
     );
 
