@@ -58,4 +58,26 @@ describe('Deve renderizar a Home corretamente', () => {
             expect(arrow).toBeInTheDocument();
         });
     });
+
+    describe('Deve renderizar a seção Recommended, corretamente', () => {
+        it('Deve renderizar a seção Destaques', () => {
+            const section = screen.getByTestId('section-recommended');
+            expect(section).toBeInTheDocument();
+        });
+
+        it('Deve renderizar o titulo', () => {
+            const title = screen.getByTestId('title-recommended');
+            expect(title).toBeInTheDocument();
+        });
+
+        it('Deve renderizar a arrow-prev', () => {
+            const arrow = screen.getByTestId('section-recommended');
+            expect(arrow).toBeInTheDocument();
+        });
+
+        it('Deve renderizar a arrow-next', () => {
+            const arrow = screen.getByTestId('section-recommended');
+            expect(arrow).toBeInTheDocument();
+        });
+    });
 });
