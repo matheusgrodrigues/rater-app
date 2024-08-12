@@ -22,23 +22,27 @@ function Home() {
                         Destaques também
                     </HeadingWithBar>
 
-                    <CarrouselHighligsToo>
+                    <div>
                         <CarrouselMovie enableVerticalOnDesktop data-testid="carrousel-highlights-too" />
-                    </CarrouselHighligsToo>
+                    </div>
                 </SectionHighligsToo>
             </SectionHighlight>
 
             <SectionLatestReleases data-testid="section-latest-releases">
                 <HeadingWithBar
-                    data-testid="title-latest-releases"
+                    data-testid="title-highlighs-too"
                     config={{
                         fontWeight: '600',
                         fontSize: '16',
                         color: 'secondary-accessible-text-12',
                     }}
                 >
-                    Ultimos Lançamentos
+                    Destaques também
                 </HeadingWithBar>
+
+                <div>
+                    <CarrouselMovie data-testid="carrousel-latest-releases" />
+                </div>
             </SectionLatestReleases>
         </>
     );
@@ -54,9 +58,6 @@ const SectionHighlight = styled.div`
 
     padding: 0 ${({ theme }) => theme.ref.padding['12']};
 
-    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(526)};`)}
-    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(826)};`)}
-
     ${({ theme }) =>
         theme.utils.screen(
             'lg',
@@ -65,7 +66,7 @@ const SectionHighlight = styled.div`
                 flex-direction: row;
                 gap: ${theme.ref.spacing['12']};
 
-                 ${theme.utils.screen('lg', `${theme.utils.container()};`)}
+                 ${theme.utils.screen('lg', `${theme.utils.container()}`)}
 
         `
         )}
@@ -88,27 +89,12 @@ const SectionHighligsToo = styled.div`
     ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
 `;
 
-const CarrouselHighligsToo = styled.div`
-    display: flex;
-`;
-
 const SectionLatestReleases = styled.div`
-    width: 100%;
-    height: 100%;
-
-    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
-
-    padding: ${({ theme }) => theme.ref.padding['24']} 0;
-
-    ${({ theme }) => theme.utils.screen('lg', `padding: 0;`)}
-
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['24']};
 
-    ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
-`;
+    ${({ theme }) => theme.utils.container()}
 
-const CarrouselLatestReleases = styled.div`
-    display: flex;
+    padding-top:0 !important;
 `;
