@@ -62,13 +62,15 @@ const SectionHighligsToo = styled.div`
 
     ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
 
-    padding: ${({ theme }) => theme.ref.padding['12']} 0;
+    padding: ${({ theme }) => theme.ref.padding['24']} 0;
 
     ${({ theme }) => theme.utils.screen('lg', `padding: 0;`)}
 
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['24']};
+
+    ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
 `;
 
 const CarrouselMovieContainer = styled.div`
