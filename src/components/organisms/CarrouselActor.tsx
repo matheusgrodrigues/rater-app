@@ -26,9 +26,7 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-interface CarrouselMovieProps extends SwiperProps {
-    enableVerticalOnDesktop?: boolean;
-}
+interface CarrouselMovieProps extends SwiperProps {}
 
 export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
     slideNext: () => void;
@@ -36,10 +34,7 @@ export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
 }
 
 // TODO: este Carrousel poderia ser transformado em um componente abstrato com o Next/Prev
-const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
-    { enableVerticalOnDesktop, ...props },
-    ref
-) => {
+const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = ({ ...props }, ref) => {
     const nextButtonRef = useRef<NextButtonRef>(null);
     const prevButtonRef = useRef<PrevButtonRef>(null);
 
@@ -53,17 +48,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
     );
 
     return (
-        <Swiper
-            slidesPerView={'auto'}
-            spaceBetween={12}
-            style={{ maxHeight: '49.125rem', position: 'relative' }}
-            breakpoints={{
-                1024: {
-                    direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
-                },
-            }}
-            {...props}
-        >
+        <Swiper slidesPerView={'auto'} spaceBetween={12} style={{ position: 'relative' }} {...props}>
             <NextButton ref={nextButtonRef} />
             <PrevButton ref={prevButtonRef} />
 
