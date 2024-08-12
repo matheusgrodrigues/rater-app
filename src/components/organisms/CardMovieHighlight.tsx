@@ -17,7 +17,7 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
     return (
         <CardMovieHighlightStyled {...props}>
             <CardMovieHighlightContent>
-                <CardMovieHighlightsBadgeMobile>
+                <CardMovieHighlightBadgeMobile>
                     <Badge
                         data-testid="card-movie-higlight-badge"
                         config={{
@@ -34,9 +34,9 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
                             icon: 'star',
                         }}
                     />
-                </CardMovieHighlightsBadgeMobile>
+                </CardMovieHighlightBadgeMobile>
 
-                <CardMovieHighlightsBadgeDesktop>
+                <CardMovieHighlightBadgeDesktop>
                     <Badge
                         data-testid="card-movie-higlight-badge"
                         config={{
@@ -45,7 +45,7 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
                             icon: 'fire',
                         }}
                     />
-                </CardMovieHighlightsBadgeDesktop>
+                </CardMovieHighlightBadgeDesktop>
 
                 <CardMovieHighlightTitle
                     data-testid="card-movie-higlight-title"
@@ -213,13 +213,13 @@ const CardMovieHighlightSinopseText = styled(Paragraph)`
         )}
 `;
 
-const CardMovieHighlightsBadgeDesktop = styled.div`
+const CardMovieHighlightBadgeDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.utils.screen('md', `display: block;`)}
 `;
 
-const CardMovieHighlightsBadgeMobile = styled.div`
+const CardMovieHighlightBadgeMobile = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['6']};
 
