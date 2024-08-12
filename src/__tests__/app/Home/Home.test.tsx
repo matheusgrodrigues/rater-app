@@ -7,6 +7,7 @@ interface SwiperMockProps {
 jest.mock('swiper/react', () => ({
     Swiper: ({ children }: SwiperMockProps) => <div data-testid="carrousel-movie">{children}</div>,
     SwiperSlide: ({ children }: SwiperMockProps) => <div>{children}</div>,
+    useSwiper: jest.fn(),
 }));
 
 /*
@@ -45,6 +46,16 @@ describe('Deve renderizar a Home corretamente', () => {
         it('Deve renderizar o titulo', () => {
             const title = screen.getByTestId('title-latest-releases');
             expect(title).toBeInTheDocument();
+        });
+
+        it('Deve renderizar a arrow-prev', () => {
+            const arrow = screen.getByTestId('section-latest-releases-prev');
+            expect(arrow).toBeInTheDocument();
+        });
+
+        it('Deve renderizar a arrow-next', () => {
+            const arrow = screen.getByTestId('section-latest-releases-next');
+            expect(arrow).toBeInTheDocument();
         });
     });
 });

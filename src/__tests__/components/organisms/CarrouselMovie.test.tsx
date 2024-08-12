@@ -9,6 +9,7 @@ interface SwiperMockProps {
 jest.mock('swiper/react', () => ({
     Swiper: ({ children }: SwiperMockProps) => <div data-testid="carrousel-movie">{children}</div>,
     SwiperSlide: ({ children }: SwiperMockProps) => <div data-testid="carrousel-movie-item">{children}</div>,
+    useSwiper: jest.fn(),
 }));
 
 describe('Deve renderizar o CarrouselMovie corretamente', () => {

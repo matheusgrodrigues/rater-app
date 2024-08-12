@@ -1,10 +1,16 @@
+import { useRef } from 'react';
+
 import styled from 'styled-components';
 
 import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
-import CarrouselMovie from '../../components/organisms/CarrouselMovie';
+import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import Button from '../../components/atoms/Button';
+import Icon from '../../components/atoms/Icon';
 
 function Home() {
+    const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
+
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
@@ -29,19 +35,53 @@ function Home() {
             </SectionHighlight>
 
             <SectionLatestReleases data-testid="section-latest-releases">
-                <HeadingWithBar
-                    data-testid="title-latest-releases"
-                    config={{
-                        fontWeight: '600',
-                        fontSize: '16',
-                        color: 'secondary-accessible-text-12',
-                    }}
-                >
-                    Ultimos lançamentos
-                </HeadingWithBar>
+                <TitleCarrouselContainer>
+                    <HeadingWithBar
+                        data-testid="title-latest-releases"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Ultimos lançamentos
+                    </HeadingWithBar>
+
+                    <ButtonNextPrev>
+                        <Button
+                            data-testid="section-latest-releases-next"
+                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            config={{ variant: 'rounded-icon-button' }}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-left',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="section-latest-releases-prev"
+                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </ButtonNextPrev>
+                </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie />
+                    <CarrouselMovie ref={carrouselLatestReleaseRef} />
                 </div>
             </SectionLatestReleases>
         </>
@@ -97,4 +137,18 @@ const SectionLatestReleases = styled.div`
     ${({ theme }) => theme.utils.container()}
 
     padding-top:0 !important;
+`;
+
+const TitleCarrouselContainer = styled.div`
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+`;
+
+const ButtonNextPrev = styled.div`
+    align-items: center;
+    display: none;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
+
+    ${({ theme }) => theme.utils.screen('md', `display: flex;`)}
 `;
