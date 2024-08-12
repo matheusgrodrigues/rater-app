@@ -5,47 +5,13 @@ import { Swiper, SwiperProps, SwiperRef, SwiperSlide, useSwiper } from 'swiper/r
 
 import 'swiper/swiper.min.css';
 
+import NextButton, { NextButtonRef } from '../atoms/NextButton';
+import PrevButton, { PrevButtonRef } from '../atoms/PrevButton';
 import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
 import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
-
-interface NextButtonRef {
-    next: () => void;
-}
-
-const NextButton = forwardRef<NextButtonRef, object>((props, ref) => {
-    const swiper = useSwiper();
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            next: () => swiper.slideNext(),
-        }),
-        [swiper]
-    );
-
-    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
-});
-
-interface PrevButtonRef {
-    prev: () => void;
-}
-
-const PrevButton = forwardRef<PrevButtonRef, object>((props, ref) => {
-    const swiper = useSwiper();
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            prev: () => swiper.slidePrev(),
-        }),
-        [swiper]
-    );
-
-    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
-});
 
 const fake_data = [
     { key: 1, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
