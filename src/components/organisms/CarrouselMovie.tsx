@@ -43,7 +43,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
         ref,
         () => ({
             slideNext: () => baseCarrouselRef.current?.slideNext(),
-            slidePrev: () => baseCarrouselRef.current?.slidePrev,
+            slidePrev: () => baseCarrouselRef.current?.slidePrev(),
         }),
         []
     );
@@ -58,8 +58,8 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                     direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
                 },
             }}
-            {...props}
             ref={baseCarrouselRef}
+            {...props}
         >
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>

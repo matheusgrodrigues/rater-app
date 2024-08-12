@@ -53,8 +53,8 @@ function Home() {
 
                     <ButtonNextPrev>
                         <Button
-                            data-testid="section-latest-releases-next"
-                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            data-testid="section-latest-releases-prev"
+                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -69,8 +69,8 @@ function Home() {
 
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
-                            data-testid="section-latest-releases-prev"
-                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            data-testid="section-latest-releases-next"
+                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -104,8 +104,8 @@ function Home() {
 
                     <ButtonNextPrev>
                         <Button
-                            data-testid="section-recommended-next"
-                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            data-testid="section-recommended-prev"
+                            onClick={() => carrouselRecommended.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -120,8 +120,8 @@ function Home() {
 
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
-                            data-testid="section-recommended-prev"
-                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            data-testid="section-recommended-next"
+                            onClick={() => carrouselRecommended.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -155,8 +155,8 @@ function Home() {
 
                     <ButtonNextPrev>
                         <Button
-                            data-testid="section-celebrities-next"
-                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            data-testid="section-celebrities-prev"
+                            onClick={() => carrouselActor.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -171,8 +171,8 @@ function Home() {
 
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
-                            data-testid="section-celebrities-prev"
-                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            data-testid="section-celebrities-next"
+                            onClick={() => carrouselActor.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon

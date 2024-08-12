@@ -1,11 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import styled from 'styled-components';
-import { SwiperProps, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
+import { BaseCarrouselRef, NextButton, NextButtonRef, PrevButton, PrevButtonRef } from '../base/BaseCarrousel';
 
 import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
@@ -32,25 +32,28 @@ interface CarrouselActorProps extends SwiperProps {}
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (props, ref) => {
-    const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
+    const prevButtonRef = useRef<PrevButtonRef>(null);
+    const nextButtonRef = useRef<NextButtonRef>(null);
 
     useImperativeHandle(
         ref,
         () => ({
-            slideNext: () => baseCarrouselRef.current?.slideNext(),
-            slidePrev: () => baseCarrouselRef.current?.slidePrev,
+            slideNext: () => nextButtonRef.current?.next(),
+            slidePrev: () => prevButtonRef.current?.prev(),
         }),
         []
     );
 
     return (
-        <BaseCarrousel
+        <Swiper
             slidesPerView={'auto'}
             spaceBetween={12}
             style={{ maxHeight: '49.125rem', position: 'relative' }}
             {...props}
-            ref={baseCarrouselRef}
         >
+            <PrevButton ref={prevButtonRef} />
+            <NextButton ref={nextButtonRef} />
+
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
                     <CardActor>
@@ -87,7 +90,7 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                     </CardActor>
                 </SwiperSlideOverride>
             ))}
-        </BaseCarrousel>
+        </Swiper>
     );
 };
 
