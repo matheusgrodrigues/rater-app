@@ -3,14 +3,17 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 
 import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
-import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
+import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
 function Home() {
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
+    const carrouselActor = useRef<CarrouselActorRef>(null);
 
     return (
         <>
@@ -184,7 +187,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie ref={carrouselRecommended} />
+                    <CarrouselActor ref={carrouselActor} />
                 </div>
             </SectionCarrousel>
         </>

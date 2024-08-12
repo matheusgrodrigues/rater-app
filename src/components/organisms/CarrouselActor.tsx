@@ -1,16 +1,17 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import styled from 'styled-components';
-import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
+import { SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
+
+import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
 
 import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
 import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
-import { NextButton, NextButtonRef, PrevButton, PrevButtonRef } from '../base/BaseCarrousel';
 
 const fake_data = [
     { key: 1, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
@@ -26,35 +27,37 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-interface CarrouselMovieProps extends SwiperProps {}
+interface CarrouselActorProps extends SwiperProps {
+    enableVerticalOnDesktop?: boolean;
+}
 
-export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
+export interface CarrouselActorRef extends Omit<SwiperRef, 'swiper'> {
     slideNext: () => void;
     slidePrev: () => void;
 }
 
-// TODO: este Carrousel poderia ser transformado em um componente abstrato com o Next/Prev
-const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = ({ ...props }, ref) => {
-    const nextButtonRef = useRef<NextButtonRef>(null);
-    const prevButtonRef = useRef<PrevButtonRef>(null);
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            slideNext: () => nextButtonRef.current?.next(),
-            slidePrev: () => prevButtonRef.current?.prev(),
-        }),
-        []
-    );
+const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (
+    { enableVerticalOnDesktop, ...props },
+    ref
+) => {
+    const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     return (
-        <Swiper slidesPerView={'auto'} spaceBetween={12} style={{ position: 'relative' }} {...props}>
-            <NextButton ref={nextButtonRef} />
-            <PrevButton ref={prevButtonRef} />
-
+        <BaseCarrousel
+            slidesPerView={'auto'}
+            spaceBetween={12}
+            style={{ maxHeight: '49.125rem', position: 'relative' }}
+            breakpoints={{
+                1024: {
+                    direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
+                },
+            }}
+            {...props}
+            ref={baseCarrouselRef}
+        >
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
-                    <CardMovie>
+                    <CardActor>
                         <BadgeOverride
                             config={{
                                 iconColor: 'yellow',
@@ -85,14 +88,14 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                                 }}
                             />
                         </ButtonOverride>
-                    </CardMovie>
+                    </CardActor>
                 </SwiperSlideOverride>
             ))}
-        </Swiper>
+        </BaseCarrousel>
     );
 };
 
-export default forwardRef(CarrouselMovie);
+export default forwardRef(CarrouselActor);
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(284)};
@@ -102,7 +105,7 @@ const SwiperSlideOverride = styled(SwiperSlide)`
         theme.utils.screen('md', `width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(253)};`)}
 `;
 
-const CardMovie = styled.div`
+const CardActor = styled.div`
     height: 100%;
     width: 100%;
     position: relative;
