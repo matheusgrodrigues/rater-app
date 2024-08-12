@@ -1,7 +1,7 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import styled from 'styled-components';
-import { SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
+import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
@@ -33,6 +33,15 @@ export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (props, ref) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            slideNext: () => baseCarrouselRef.current?.slideNext(),
+            slidePrev: () => baseCarrouselRef.current?.slidePrev,
+        }),
+        []
+    );
 
     return (
         <BaseCarrousel

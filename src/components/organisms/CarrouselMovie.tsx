@@ -1,7 +1,7 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import styled from 'styled-components';
-import { SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
+import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
@@ -38,6 +38,15 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
     ref
 ) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            slideNext: () => baseCarrouselRef.current?.slideNext(),
+            slidePrev: () => baseCarrouselRef.current?.slidePrev,
+        }),
+        []
+    );
 
     return (
         <BaseCarrousel
