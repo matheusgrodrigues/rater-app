@@ -30,7 +30,6 @@ interface CarrouselMovieProps extends SwiperProps {
 export default function CarrouselMovie({ enableVerticalOnDesktop, ...props }: CarrouselMovieProps) {
     return (
         <Swiper
-            data-testid="carrousel-movie"
             slidesPerView={'auto'}
             spaceBetween={12}
             style={{ maxHeight: '49.125rem' }}

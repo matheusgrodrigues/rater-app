@@ -23,25 +23,25 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <CarrouselMovie enableVerticalOnDesktop data-testid="carrousel-highlights-too" />
+                        <CarrouselMovie enableVerticalOnDesktop />
                     </div>
                 </SectionHighligsToo>
             </SectionHighlight>
 
             <SectionLatestReleases data-testid="section-latest-releases">
                 <HeadingWithBar
-                    data-testid="title-highlighs-too"
+                    data-testid="title-latest-releases"
                     config={{
                         fontWeight: '600',
                         fontSize: '16',
                         color: 'secondary-accessible-text-12',
                     }}
                 >
-                    Destaques também
+                    Ultimos lançamentos
                 </HeadingWithBar>
 
                 <div>
-                    <CarrouselMovie data-testid="carrousel-latest-releases" />
+                    <CarrouselMovie />
                 </div>
             </SectionLatestReleases>
         </>
