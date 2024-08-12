@@ -3,14 +3,17 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 
 import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
-import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
+import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
 function Home() {
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
+    const carrouselActor = useRef<CarrouselActorRef>(null);
 
     return (
         <>
@@ -50,8 +53,8 @@ function Home() {
 
                     <ButtonNextPrev>
                         <Button
-                            data-testid="section-latest-releases-next"
-                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            data-testid="section-latest-releases-prev"
+                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -66,8 +69,8 @@ function Home() {
 
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
-                            data-testid="section-latest-releases-prev"
-                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            data-testid="section-latest-releases-next"
+                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -101,8 +104,8 @@ function Home() {
 
                     <ButtonNextPrev>
                         <Button
-                            data-testid="section-recommended-next"
-                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            data-testid="section-recommended-prev"
+                            onClick={() => carrouselRecommended.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -117,8 +120,8 @@ function Home() {
 
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
-                            data-testid="section-recommended-prev"
-                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            data-testid="section-recommended-next"
+                            onClick={() => carrouselRecommended.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -134,6 +137,57 @@ function Home() {
 
                 <div>
                     <CarrouselMovie ref={carrouselRecommended} />
+                </div>
+            </SectionCarrousel>
+
+            <SectionCarrousel data-testid="section-celebrities">
+                <TitleCarrouselContainer>
+                    <HeadingWithBar
+                        data-testid="title-celebrities"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Celebridades
+                    </HeadingWithBar>
+
+                    <ButtonNextPrev>
+                        <Button
+                            data-testid="section-celebrities-prev"
+                            onClick={() => carrouselActor.current?.slidePrev()}
+                            config={{ variant: 'rounded-icon-button' }}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-left',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="section-celebrities-next"
+                            onClick={() => carrouselActor.current?.slideNext()}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </ButtonNextPrev>
+                </TitleCarrouselContainer>
+
+                <div>
+                    <CarrouselActor ref={carrouselActor} />
                 </div>
             </SectionCarrousel>
         </>

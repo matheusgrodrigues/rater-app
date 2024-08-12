@@ -135,7 +135,7 @@ const CardMovieHighlightStyled = styled.div`
     position: relative;
 
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%),
-        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
+        url('https://image.tmdb.org/t/p/w1280/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
 
     background-origin: border-box;
     background-repeat: no-repeat;

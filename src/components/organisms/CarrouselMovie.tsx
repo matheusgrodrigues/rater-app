@@ -1,9 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import styled from 'styled-components';
-import { Swiper, SwiperProps, SwiperRef, SwiperSlide, useSwiper } from 'swiper/react';
+import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
+
+import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
 
 import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
@@ -11,83 +13,39 @@ import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
 
-interface NextButtonRef {
-    next: () => void;
-}
-
-const NextButton = forwardRef<NextButtonRef, object>((props, ref) => {
-    const swiper = useSwiper();
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            next: () => swiper.slideNext(),
-        }),
-        [swiper]
-    );
-
-    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
-});
-
-interface PrevButtonRef {
-    prev: () => void;
-}
-
-const PrevButton = forwardRef<PrevButtonRef, object>((props, ref) => {
-    const swiper = useSwiper();
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            prev: () => swiper.slidePrev(),
-        }),
-        [swiper]
-    );
-
-    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
-});
-
 const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 8, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 9, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 10, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
+    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
 ];
 
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
 }
 
-export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
-    slideNext: () => void;
-    slidePrev: () => void;
-}
+export interface CarrouselMovieRef extends BaseCarrouselRef {}
 
 const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
     { enableVerticalOnDesktop, ...props },
     ref
 ) => {
-    const nextButtonRef = useRef<NextButtonRef>(null);
-    const prevButtonRef = useRef<PrevButtonRef>(null);
+    const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
         ref,
         () => ({
-            slideNext: () => nextButtonRef.current?.next(),
-            slidePrev: () => prevButtonRef.current?.prev(),
+            slideNext: () => baseCarrouselRef.current?.slideNext(),
+            slidePrev: () => baseCarrouselRef.current?.slidePrev(),
         }),
         []
     );
 
     return (
-        <Swiper
+        <BaseCarrousel
             slidesPerView={'auto'}
             spaceBetween={12}
             style={{ maxHeight: '49.125rem', position: 'relative' }}
@@ -96,11 +54,9 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                     direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
                 },
             }}
+            ref={baseCarrouselRef}
             {...props}
         >
-            <NextButton ref={nextButtonRef} />
-            <PrevButton ref={prevButtonRef} />
-
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
                     <CardMovie>
@@ -137,7 +93,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                     </CardMovie>
                 </SwiperSlideOverride>
             ))}
-        </Swiper>
+        </BaseCarrousel>
     );
 };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface StrongConfig {
-    fontWeight: 600;
+    fontWeight: 400 | 600;
     label: string;
     color: 'white' | 'secondary-accessible-text-11';
-    size: 14 | 20;
+    size: 12 | 14 | 20;
 }
 
 interface StrongProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
