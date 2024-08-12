@@ -1,22 +1,7 @@
 import styled from 'styled-components';
 
-interface HeadingConfig {
-    fontWeight: '700' | '600';
-    fontSize: '40' | '20' | '16';
-    color: 'white';
-}
-
-interface HeadingStyledProps {
-    config: Omit<HeadingConfig, 'variant'>;
-}
-
-const Heading1 = styled.h1<HeadingStyledProps>`
-    font-size: ${({ config, theme }) => theme.ref.fontSize[config.fontSize]};
-    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
-    color: ${({ config, theme }) => theme.ref.colors[config.color]};
-`;
-
-interface HeadingProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
+export interface HeadingProps
+    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
     children: React.ReactNode;
     config: HeadingConfig;
 }
@@ -28,3 +13,19 @@ export default function Heading({ children, config, ...props }: HeadingProps) {
         </Heading1>
     );
 }
+
+interface HeadingConfig {
+    fontWeight: '700' | '600';
+    fontSize: '40' | '20' | '16' | '12';
+    color: 'secondary-accessible-text-12' | 'white';
+}
+
+interface HeadingStyledProps {
+    config: Omit<HeadingConfig, 'variant'>;
+}
+
+const Heading1 = styled.h1<HeadingStyledProps>`
+    font-size: ${({ config, theme }) => theme.ref.fontSize[config.fontSize]};
+    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
+    color: ${({ config, theme }) => theme.ref.colors[config.color]};
+`;

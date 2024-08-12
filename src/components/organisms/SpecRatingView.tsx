@@ -5,18 +5,6 @@ import Strong from '../atoms/Strong';
 import Icon from '../atoms/Icon';
 import React from 'react';
 
-const SpecRatingViewStyled = styled.div`
-    align-items: center;
-    display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['4']};
-`;
-
-const SpecRating = styled.div`
-    align-items: center;
-    display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['8']};
-`;
-
 interface SpecRatingViewProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     config: {
         ratingLabel: string;
@@ -36,7 +24,13 @@ export default function SpecRatingView({ config, ...props }: SpecRatingViewProps
                 />
             </SpecRating>
 
-            <BarDivider data-testid="spec-bar-divider" />
+            <BarDivider
+                data-testid="spec-bar-divider"
+                config={{
+                    height: 18,
+                    width: 2,
+                }}
+            />
 
             <Strong
                 data-testid="spec-view"
@@ -50,3 +44,15 @@ export default function SpecRatingView({ config, ...props }: SpecRatingViewProps
         </SpecRatingViewStyled>
     );
 }
+
+const SpecRatingViewStyled = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['4']};
+`;
+
+const SpecRating = styled.div`
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['8']};
+`;

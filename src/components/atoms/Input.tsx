@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+
+export default function Input({ ...props }: InputProps) {
+    return <InputStyled {...props} />;
+}
+
 const InputStyled = styled.input`
     height: ${({ theme }) => theme.utils.pxToRem(48)};
     max-width: ${({ theme }) => theme.utils.pxToRem(283)};
@@ -19,9 +25,3 @@ const InputStyled = styled.input`
 
     ${({ theme }) => theme.utils.applyHoverTransition()}
 `;
-
-interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
-
-export default function Input({ ...props }: InputProps) {
-    return <InputStyled {...props} />;
-}

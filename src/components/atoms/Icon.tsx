@@ -1,5 +1,44 @@
 import { useTheme } from 'styled-components';
 
+export type IconType = 'play-right' | 'search' | 'filter' | 'fire' | 'star';
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+    config: {
+        color: 'yellow' | 'white';
+        icon: IconType;
+        size: 14 | 20 | 24;
+    };
+}
+
+export default function Icon({ config, ...props }: IconProps) {
+    const { utils, ref } = useTheme();
+
+    const { color, icon, size } = config;
+
+    const fillIconList: IconType[] = ['play-right', 'star'];
+
+    return (
+        <svg
+            {...{
+                strokeWidth: 1.5,
+                viewBox: `0 0 24 24`,
+                stroke: ref.colors[color] ?? 'currentColor',
+                height: utils.pxToRem(size),
+                width: utils.pxToRem(size),
+                xmlns: 'http://www.w3.org/2000/svg',
+                fill: fillIconList.includes(icon) ? ref.colors[color] : 'none',
+            }}
+            {...props}
+        >
+            {icon === 'play-right' && <PlayRightIconPath />}
+            {icon === 'search' && <SearchIconPath />}
+            {icon === 'filter' && <FilterIconPath />}
+            {icon === 'fire' && <FireIconPath />}
+            {icon === 'star' && <StarIconPath />}
+        </svg>
+    );
+}
+
 const SearchIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
     <path
         strokeLinejoin="round"
@@ -50,42 +89,3 @@ const PlayRightIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
         />
     </>
 );
-
-export type IconType = 'play-right' | 'search' | 'filter' | 'fire' | 'star';
-
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-    config: {
-        color: 'yellow' | 'white';
-        icon: IconType;
-        size: 20 | 24;
-    };
-}
-
-export default function Icon({ config, ...props }: IconProps) {
-    const { utils, ref } = useTheme();
-
-    const { color, icon, size } = config;
-
-    const fillIconList: IconType[] = ['play-right', 'star'];
-
-    return (
-        <svg
-            {...{
-                strokeWidth: 1.5,
-                viewBox: `0 0 24 24`,
-                stroke: ref.colors[color] ?? 'currentColor',
-                height: utils.pxToRem(size),
-                width: utils.pxToRem(size),
-                xmlns: 'http://www.w3.org/2000/svg',
-                fill: fillIconList.includes(icon) ? ref.colors[color] : 'none',
-            }}
-            {...props}
-        >
-            {icon === 'play-right' && <PlayRightIconPath />}
-            {icon === 'search' && <SearchIconPath />}
-            {icon === 'filter' && <FilterIconPath />}
-            {icon === 'fire' && <FireIconPath />}
-            {icon === 'star' && <StarIconPath />}
-        </svg>
-    );
-}

@@ -4,7 +4,7 @@ import Heading from '../../../components/atoms/Heading';
 
 it('Deve renderizar o atom Title', () => {
     render(
-        <Heading data-testid="atom-heading" config={{ variant: 'h1', color: 'white' }}>
+        <Heading data-testid="atom-heading" config={{ fontWeight: '600', fontSize: '16', color: 'white' }}>
             text
         </Heading>
     );

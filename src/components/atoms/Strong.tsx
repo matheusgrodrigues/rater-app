@@ -8,17 +8,6 @@ interface StrongConfig {
     size: 14 | 20;
 }
 
-interface StrongStyledProps {
-    config: Omit<StrongConfig, 'label'>;
-}
-
-const StrongStyled = styled.strong<StrongStyledProps>`
-    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
-
-    font-size: ${({ config, theme }) => theme.ref.fontSize[config.size]};
-    color: ${({ config, theme }) => theme.ref.colors[config.color]};
-`;
-
 interface StrongProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
     config: StrongConfig;
 }
@@ -39,3 +28,14 @@ export default function Strong({ config, ...props }: StrongProps) {
         </StrongStyled>
     );
 }
+
+interface StrongStyledProps {
+    config: Omit<StrongConfig, 'label'>;
+}
+
+const StrongStyled = styled.strong<StrongStyledProps>`
+    font-weight: ${({ config, theme }) => theme.ref.fontWeight[config.fontWeight]};
+
+    font-size: ${({ config, theme }) => theme.ref.fontSize[config.size]};
+    color: ${({ config, theme }) => theme.ref.colors[config.color]};
+`;

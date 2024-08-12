@@ -8,18 +8,18 @@ import Button from '../atoms/Button';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
 
-interface CardFilmeDestaqueProps
+interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) {
+export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps) {
     // TODO: adicionar imagem de fundo de acordo com a capa retornada pela api.
 
     return (
-        <CardFilmeDestaqueStyled {...props}>
-            <CardFilmeDestaqueContent>
-                <CardFilmeDestaquesBadgeMobile>
+        <CardMovieHighlightStyled {...props}>
+            <CardMovieHighlightContent>
+                <CardMovieHighlightBadgeMobile>
                     <Badge
-                        data-testid="card-filme-destaque-badge"
+                        data-testid="card-movie-higlight-badge"
                         config={{
                             iconColor: 'white',
                             icon: 'fire',
@@ -27,28 +27,28 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                     />
 
                     <Badge
-                        data-testid="card-filme-destaque-badge"
+                        data-testid="card-movie-higlight-badge"
                         config={{
                             iconColor: 'yellow',
                             label: '8.2',
                             icon: 'star',
                         }}
                     />
-                </CardFilmeDestaquesBadgeMobile>
+                </CardMovieHighlightBadgeMobile>
 
-                <CardFilmeDestaquesBadgeDesktop>
+                <CardMovieHighlightBadgeDesktop>
                     <Badge
-                        data-testid="card-filme-destaque-badge"
+                        data-testid="card-movie-higlight-badge"
                         config={{
                             iconColor: 'white',
                             label: 'Em destaque',
                             icon: 'fire',
                         }}
                     />
-                </CardFilmeDestaquesBadgeDesktop>
+                </CardMovieHighlightBadgeDesktop>
 
-                <CardFilmeDestaqueTitle
-                    data-testid="card-filme-destaque-title"
+                <CardMovieHighlightTitle
+                    data-testid="card-movie-higlight-title"
                     config={{
                         fontWeight: '700',
                         fontSize: '40',
@@ -56,11 +56,11 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                     }}
                 >
                     Deadpool & Wolverine
-                </CardFilmeDestaqueTitle>
+                </CardMovieHighlightTitle>
 
-                <CardFilmeDestaqueSpec data-testid="card-filme-destaque-spec">
+                <CardMovieHighlightSpec data-testid="card-movie-higlight-spec">
                     <SpecRatingView
-                        data-testid="card-filme-destaque-spec-rating-view"
+                        data-testid="card-movie-higlight-spec-rating-view"
                         config={{
                             ratingLabel: '8.2',
                             viewLabel: '120 mil',
@@ -68,18 +68,18 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                     />
 
                     <SpecDuratCatYear
-                        data-testid="card-filme-destaque-spec-durat-cat-year"
+                        data-testid="card-movie-higlight-spec-durat-cat-year"
                         config={{
                             duratLabel: '2h 8m',
                             yearLabel: '2024',
                             catLabel: 'Comedy, Action, Adventure, Superhero',
                         }}
                     />
-                </CardFilmeDestaqueSpec>
+                </CardMovieHighlightSpec>
 
-                <CardFilmeDestaqueSinopse>
-                    <CardFilmeDestaqueSinopseText
-                        data-testid="card-filme-destaque-sinopse"
+                <CardMovieHighlightSinopse>
+                    <CardMovieHighlightSinopseText
+                        data-testid="card-movie-higlight-sinopse"
                         config={{
                             fontWeight: 600,
                             color: 'secondary-accessible-text-12',
@@ -89,8 +89,8 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                         Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
                         Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
                         universo da extinção.
-                    </CardFilmeDestaqueSinopseText>
-                </CardFilmeDestaqueSinopse>
+                    </CardMovieHighlightSinopseText>
+                </CardMovieHighlightSinopse>
 
                 <Button config={{ variant: 'transparent-button' }}>
                     <span>Assitir ao trailer</span>
@@ -103,40 +103,57 @@ export default function CardFilmeDestaque({ ...props }: CardFilmeDestaqueProps) 
                         }}
                     />
                 </Button>
-            </CardFilmeDestaqueContent>
-        </CardFilmeDestaqueStyled>
+            </CardMovieHighlightContent>
+        </CardMovieHighlightStyled>
     );
 }
 
-const CardFilmeDestaqueStyled = styled.div`
+/*
+// TODO: este aparentemente é o hover, adicionar animação quando passar hover sob a imagem.
+
+ background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
+
+*/
+
+const CardMovieHighlightStyled = styled.div`
     width: 100%;
     height: 100%;
+
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
-    max-height: ${({ theme }) => theme.utils.pxToRem(826)};
+
+    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(826)};`)}
+
+    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(826)};`)}
+
+    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    padding: ${({ theme }) => theme.ref.padding['12']};
+
     flex-direction: column;
     justify-content: flex-end;
     display: flex;
-    padding-bottom: ${({ theme }) => theme.ref.padding['12']};
-
     position: relative;
 
-    ${({ theme }) =>
-        theme.utils.screen(
-            'md',
-            `
-        padding-bottom: ${theme.ref.padding['61']};
-        `
-        )}
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%),
+        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
+
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+
+    ${({ theme }) => theme.utils.screen('lg', `padding: ${theme.ref.padding['24']};`)}
+    ${({ theme }) => theme.utils.screen('2xl', `padding: ${theme.ref.padding['48']};`)}
 `;
 
-const CardFilmeDestaqueContent = styled.div`
+const CardMovieHighlightContent = styled.div`
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['12']};
     max-width: ${({ theme }) => theme.utils.pxToRem(560)};
 `;
 
-const CardFilmeDestaqueSpec = styled.div`
+const CardMovieHighlightSpec = styled.div`
     display: none;
 
     ${({ theme }) =>
@@ -149,7 +166,7 @@ const CardFilmeDestaqueSpec = styled.div`
         )}
 `;
 
-const CardFilmeDestaqueTitle = styled(Heading)`
+const CardMovieHighlightTitle = styled(Heading)`
     font-size: ${({ theme }) => theme.ref.fontSize['16']};
 
     ${({ theme }) =>
@@ -161,7 +178,7 @@ const CardFilmeDestaqueTitle = styled(Heading)`
         )}
 `;
 
-const CardFilmeDestaqueSinopse = styled.div`
+const CardMovieHighlightSinopse = styled.div`
     ${({ theme }) =>
         theme.utils.screen(
             'sm',
@@ -177,13 +194,11 @@ const CardFilmeDestaqueSinopse = styled.div`
             `  
                 margin-bottom: ${theme.ref.spacing['48']};
                 max-width: ${theme.utils.pxToRem(555)};
-
-
 `
         )}
 `;
 
-const CardFilmeDestaqueSinopseText = styled(Paragraph)`
+const CardMovieHighlightSinopseText = styled(Paragraph)`
     font-size: ${({ theme }) => theme.ref.fontSize['12']};
     color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
     line-height: ${({ theme }) => theme.ref.lineHeight['19']};
@@ -192,26 +207,25 @@ const CardFilmeDestaqueSinopseText = styled(Paragraph)`
     ${({ theme }) =>
         theme.utils.screen(
             'md',
-            `  
-                color: ${theme.ref.colors['secondary-accessible-text-12']};
+            `   color: ${theme.ref.colors['secondary-accessible-text-12']};
                 line-height: ${theme.ref.lineHeight['24']};
                 font-size: ${theme.ref.fontSize['16']};
 `
         )}
 `;
 
-const CardFilmeDestaquesBadgeDesktop = styled.div`
+const CardMovieHighlightBadgeDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.utils.screen('md', `display: block;`)}
 `;
 
-const CardFilmeDestaquesBadgeMobile = styled.div`
+const CardMovieHighlightBadgeMobile = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['6']};
 
     position: absolute;
-    top: 0;
+    top: ${({ theme }) => theme.utils.pxToRem(12)};
 
     ${({ theme }) => theme.utils.screen('md', `display: none;`)}
 `;

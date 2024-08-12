@@ -15,7 +15,7 @@ export default function Badge({ config, ...props }: BadgeProps) {
 
     return (
         <BadgeStyled label={label} {...props}>
-            <Icon strokeWidth={2} config={{ color: iconColor, icon, size: 20 }} />
+            <IconOverride strokeWidth={2} config={{ color: iconColor, icon, size: 20 }} />
             {label && <BadgeLabel>{label}</BadgeLabel>}
         </BadgeStyled>
     );
@@ -27,7 +27,9 @@ interface BadgeStyledProps {
 
 const BadgeStyled = styled.div<BadgeStyledProps>`
     width: max-content;
-    height: 36px;
+    height: 22px;
+
+    ${({ theme }) => theme.utils.screen('md', ` height: ${theme.utils.pxToRem(36)};`)}
 
     ${({ theme }) => theme.utils.applyTransparentBg()}
 
@@ -41,5 +43,14 @@ const BadgeStyled = styled.div<BadgeStyledProps>`
 
 const BadgeLabel = styled.label`
     font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
-    font-size: ${({ theme }) => theme.ref.fontSize['20']};
+    font-size: ${({ theme }) => theme.ref.fontSize['14']};
+
+    ${({ theme }) => theme.utils.screen('md', ` font-size: ${theme.ref.fontSize['20']};`)}
+`;
+
+const IconOverride = styled(Icon)`
+    width: ${({ theme }) => theme.utils.pxToRem(14)};
+    height: ${({ theme }) => theme.utils.pxToRem(14)};
+
+    ${({ theme }) => theme.utils.screen('md', `width: ${theme.utils.pxToRem(20)}; height: ${theme.utils.pxToRem(20)};`)}
 `;
