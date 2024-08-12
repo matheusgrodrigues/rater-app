@@ -8,23 +8,17 @@ import 'swiper/swiper.min.css';
 import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
 
 import Heading from '../atoms/Heading';
-import Button from '../atoms/Button';
 import Image from '../atoms/Image';
-import Badge from '../atoms/Badge';
-import Icon from '../atoms/Icon';
+import Strong from '../atoms/Strong';
 
 const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 8, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 9, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 10, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
-    { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
+    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
 ];
 
 interface CarrouselActorProps extends SwiperProps {}
@@ -54,13 +48,6 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
                     <CardActor>
-                        <BadgeOverride
-                            config={{
-                                iconColor: 'yellow',
-                                label: '7.8',
-                                icon: 'star',
-                            }}
-                        />
                         <ImageOverride src={data.src} />
 
                         <HeadingOverride
@@ -70,20 +57,16 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                                 color: 'white',
                             }}
                         >
-                            Deadpool & Wolverine
-                        </HeadingOverride>
-
-                        <ButtonOverride config={{ variant: 'transparent-button' }}>
-                            <span>Assitir ao trailer</span>
-
-                            <Icon
+                            Ryan Reynolds
+                            <StrongAgeOverride
                                 config={{
-                                    color: 'white',
-                                    icon: 'play-right',
-                                    size: 20,
+                                    color: 'secondary-accessible-text-11',
+                                    fontWeight: 400,
+                                    label: '47',
+                                    size: 12,
                                 }}
                             />
-                        </ButtonOverride>
+                        </HeadingOverride>
                     </CardActor>
                 </SwiperSlideOverride>
             ))}
@@ -94,11 +77,11 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
 export default forwardRef(CarrouselActor);
 
 const SwiperSlideOverride = styled(SwiperSlide)`
-    height: ${({ theme }) => theme.utils.pxToRem(284)};
+    height: ${({ theme }) => theme.utils.pxToRem(200)};
     width: ${({ theme }) => theme.utils.pxToRem(166)};
 
     ${({ theme }) =>
-        theme.utils.screen('md', `width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(253)};`)}
+        theme.utils.screen('md', `width: ${theme.utils.pxToRem(268)}; height: ${theme.utils.pxToRem(253)};`)}
 `;
 
 const CardActor = styled.div`
@@ -111,30 +94,21 @@ const ImageOverride = styled(Image)`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 `;
 
-const BadgeOverride = styled(Badge)`
-    position: absolute;
-
-    top: ${({ theme }) => theme.ref.spacing['12']};
-    left: ${({ theme }) => theme.ref.spacing['12']};
-`;
-
-const ButtonOverride = styled(Button)`
-    position: absolute;
-
-    bottom: ${({ theme }) => theme.ref.spacing['12']};
-    left: ${({ theme }) => theme.ref.spacing['12']};
-`;
-
 const HeadingOverride = styled(Heading)`
+    font-size: ${({ theme }) => theme.ref.fontSize['12']};
+    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['20']};`)}
+
+    font-weight: ${({ theme }) => theme.ref.fontWeight['700']};
+
     position: absolute;
-
-    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['24']};`)}
-
     left: ${({ theme }) => theme.ref.spacing['12']};
+    bottom: ${({ theme }) => theme.ref.spacing['12']};
 
-    bottom: ${({ theme }) => theme.ref.spacing['48']};
-    ${({ theme }) => theme.utils.screen('md', `bottom: ${theme.utils.pxToRem(71)};`)}
+    align-items: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['4']};
+`;
 
-    font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
-    ${({ theme }) => theme.utils.screen('md', `font-weight: ${theme.ref.fontWeight['700']};`)}
+const StrongAgeOverride = styled(Strong)`
+    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
 `;
