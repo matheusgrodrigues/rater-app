@@ -10,6 +10,7 @@ import Icon from '../../components/atoms/Icon';
 
 function Home() {
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
+    const carrouselRecommended = useRef<CarrouselMovieRef>(null);
 
     return (
         <>
@@ -34,7 +35,7 @@ function Home() {
                 </SectionHighligsToo>
             </SectionHighlight>
 
-            <SectionLatestReleases data-testid="section-latest-releases">
+            <SectionCarrousel data-testid="section-latest-releases">
                 <TitleCarrouselContainer>
                     <HeadingWithBar
                         data-testid="title-latest-releases"
@@ -83,7 +84,58 @@ function Home() {
                 <div>
                     <CarrouselMovie ref={carrouselLatestReleaseRef} />
                 </div>
-            </SectionLatestReleases>
+            </SectionCarrousel>
+
+            <SectionCarrousel data-testid="section-recommended">
+                <TitleCarrouselContainer>
+                    <HeadingWithBar
+                        data-testid="title-recommended"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Recomendados
+                    </HeadingWithBar>
+
+                    <ButtonNextPrev>
+                        <Button
+                            data-testid="section-recommended-next"
+                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            config={{ variant: 'rounded-icon-button' }}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-left',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="section-recommended-prev"
+                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </ButtonNextPrev>
+                </TitleCarrouselContainer>
+
+                <div>
+                    <CarrouselMovie ref={carrouselRecommended} />
+                </div>
+            </SectionCarrousel>
         </>
     );
 }
@@ -129,7 +181,7 @@ const SectionHighligsToo = styled.div`
     ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
 `;
 
-const SectionLatestReleases = styled.div`
+const SectionCarrousel = styled.div`
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['24']};
