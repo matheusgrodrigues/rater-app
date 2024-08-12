@@ -7,7 +7,7 @@ export default function Image({ ...props }: ImageProps) {
     return <ImageStyled {...props} />;
 }
 
-const ImageStyled = styled.img<ImageProps>`
+const ImageStyled = styled.div<ImageProps>`
     width: 100%;
     height: 100%;
 

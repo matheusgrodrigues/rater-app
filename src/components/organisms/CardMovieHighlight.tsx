@@ -121,7 +121,11 @@ const CardMovieHighlightStyled = styled.div`
     height: 100%;
 
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
-    max-height: ${({ theme }) => theme.utils.pxToRem(826)};
+
+    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(826)};`)}
+
+    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(826)};`)}
+
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
     padding: ${({ theme }) => theme.ref.padding['12']};
 

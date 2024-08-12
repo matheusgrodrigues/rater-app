@@ -16,7 +16,7 @@ export default function Heading({ children, config, ...props }: HeadingProps) {
 
 interface HeadingConfig {
     fontWeight: '700' | '600';
-    fontSize: '40' | '20' | '16';
+    fontSize: '40' | '20' | '16' | '12';
     color: 'secondary-accessible-text-12' | 'white';
 }
 
