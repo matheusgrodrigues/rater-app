@@ -3,6 +3,7 @@ module.exports = {
         configure: {
             moduleNameMapper: {
                 'swiper/react': 'swiper/types/index.d.ts',
+                'swiper/shared': 'swiper/types/shared.d.ts',
                 'swiper/modules': 'swiper/types/modules/index.d.ts',
                 'swiper/css': 'swiper/swiper.min.css',
             },

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
-import Carrousel from '../../components/organisms/CarrouselMovie';
+import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+import CarrouselMovie from '../../components/organisms/CarrouselMovie';
 
 function Home() {
     return (
@@ -9,7 +10,20 @@ function Home() {
             <CardMovieHighlight data-testid="card-filme-destaque" />
 
             <SectionHighligsToo>
-                <Carrousel data-testid="carrousel-destaques-tambem" />
+                <HeadingWithBar
+                    data-testid="title-highlighs-too"
+                    config={{
+                        fontWeight: '600',
+                        fontSize: '16',
+                        color: 'secondary-accessible-text-12',
+                    }}
+                >
+                    Destaques também
+                </HeadingWithBar>
+
+                <CarrouselMovieContainer>
+                    <CarrouselMovie data-testid="carrousel-movie" />
+                </CarrouselMovieContainer>
             </SectionHighligsToo>
         </SectionHighlight>
     );
@@ -44,8 +58,19 @@ const SectionHighlight = styled.div`
 
 const SectionHighligsToo = styled.div`
     width: 100%;
+    height: 100%;
 
-    ${({ theme }) => theme.utils.screen('md', `max-width: ${theme.utils.pxToRem(380)};`)}
+    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
 
     padding: ${({ theme }) => theme.ref.padding['12']} 0;
+
+    ${({ theme }) => theme.utils.screen('lg', `padding: 0;`)}
+
+    flex-direction: column;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['24']};
+`;
+
+const CarrouselMovieContainer = styled.div`
+    display: flex;
 `;

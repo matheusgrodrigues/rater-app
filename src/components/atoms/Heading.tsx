@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-interface HeadingProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
+export interface HeadingProps
+    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
     children: React.ReactNode;
     config: HeadingConfig;
 }
@@ -16,7 +17,7 @@ export default function Heading({ children, config, ...props }: HeadingProps) {
 interface HeadingConfig {
     fontWeight: '700' | '600';
     fontSize: '40' | '20' | '16';
-    color: 'white';
+    color: 'secondary-accessible-text-12' | 'white';
 }
 
 interface HeadingStyledProps {

@@ -1,14 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface BarDividerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
-
-export default function BarDivider({ ...props }: BarDividerProps) {
-    return <BarDividerStyled {...props} />;
+interface BarDividerConfig {
+    config: {
+        height: 18 | 20 | 29;
+        width: 2 | 4;
+    };
 }
 
-const BarDividerStyled = styled.div`
-    width: ${({ theme }) => theme.utils.pxToRem(3)};
-    height: 60%;
+interface BarDividerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+
+export default function BarDivider({ config, ...props }: BarDividerProps & BarDividerConfig) {
+    const { height, width } = config;
+
+    return (
+        <BarDividerStyled
+            config={{
+                height,
+                width,
+            }}
+            {...props}
+        />
+    );
+}
+
+interface BarDividerStyledProps extends BarDividerConfig {}
+
+const BarDividerStyled = styled.div<BarDividerStyledProps>`
+    width: ${({ theme, config }) => theme.utils.pxToRem(config.width)};
+    height: ${({ theme, config }) => theme.utils.pxToRem(config.height)};
     background-color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
 `;

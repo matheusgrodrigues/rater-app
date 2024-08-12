@@ -24,7 +24,13 @@ export default function SpecRatingView({ config, ...props }: SpecRatingViewProps
                 />
             </SpecRating>
 
-            <BarDivider data-testid="spec-bar-divider" />
+            <BarDivider
+                data-testid="spec-bar-divider"
+                config={{
+                    height: 18,
+                    width: 2,
+                }}
+            />
 
             <Strong
                 data-testid="spec-view"
