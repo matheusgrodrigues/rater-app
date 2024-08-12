@@ -5,9 +5,10 @@ import CarrouselMovie from '../../../components/organisms/CarrouselMovie';
 interface SwiperMockProps {
     children: React.ReactNode;
 }
+
 jest.mock('swiper/react', () => ({
     Swiper: ({ children }: SwiperMockProps) => <div data-testid="carrousel-movie">{children}</div>,
-    SwiperSlide: ({ children }: SwiperMockProps) => <div>{children}</div>,
+    SwiperSlide: ({ children }: SwiperMockProps) => <div data-testid="carrousel-movie-item">{children}</div>,
 }));
 
 describe('Deve renderizar o CarrouselMovie corretamente', () => {
@@ -17,5 +18,10 @@ describe('Deve renderizar o CarrouselMovie corretamente', () => {
         const carrouselMovie = screen.getByTestId('carrousel-movie');
 
         expect(carrouselMovie).toBeInTheDocument();
+    });
+
+    it('Deve renderizar pelo menos 1 filme', () => {
+        const carrouselMovieItem = screen.getAllByTestId('carrousel-movie-item');
+        expect(carrouselMovieItem).not.toHaveLength(0);
     });
 });

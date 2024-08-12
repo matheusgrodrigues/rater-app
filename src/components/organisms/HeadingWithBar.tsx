@@ -15,7 +15,7 @@ export default function HeadingWithBar({ children, ...props }: HeadingWithBarPro
                     width: 4,
                 }}
             />
-            <HeadingOverride data-testid="heading-divider" {...props}>
+            <HeadingOverride data-testid="heading" {...props}>
                 {children}
             </HeadingOverride>
         </HeadingWithBarContainer>

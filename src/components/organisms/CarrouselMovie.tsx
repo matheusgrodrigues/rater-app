@@ -23,13 +23,6 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-/*
-  sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
-        '2xl': '1440px'
-*/
 export default function CarrouselMovie() {
     return (
         <Swiper
@@ -53,7 +46,7 @@ export default function CarrouselMovie() {
                                 icon: 'star',
                             }}
                         />
-                        <ImageOverride src="https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22" />
+                        <ImageOverride src={data.src} />
 
                         <HeadingOverride
                             config={{

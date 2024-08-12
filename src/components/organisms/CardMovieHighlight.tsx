@@ -194,8 +194,6 @@ const CardMovieHighlightSinopse = styled.div`
             `  
                 margin-bottom: ${theme.ref.spacing['48']};
                 max-width: ${theme.utils.pxToRem(555)};
-
-
 `
         )}
 `;
@@ -209,8 +207,7 @@ const CardMovieHighlightSinopseText = styled(Paragraph)`
     ${({ theme }) =>
         theme.utils.screen(
             'md',
-            `  
-                color: ${theme.ref.colors['secondary-accessible-text-12']};
+            `   color: ${theme.ref.colors['secondary-accessible-text-12']};
                 line-height: ${theme.ref.lineHeight['24']};
                 font-size: ${theme.ref.fontSize['16']};
 `
