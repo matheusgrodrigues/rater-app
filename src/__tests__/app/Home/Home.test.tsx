@@ -16,7 +16,7 @@ describe('Deve renderizar a Home corretamente', () => {
         });
 
         it('Deve renderizar o Carrousel Destaques Tambem', () => {
-            const carrouselDestaquesTambem = screen.getByTestId('carrousel-destaques-tambem');
+            const carrouselDestaquesTambem = screen.getByTestId('carrousel-movie');
             expect(carrouselDestaquesTambem).toBeInTheDocument();
         });
     });

@@ -5,7 +5,7 @@ import CarrouselFilme from '../../../components/organisms/CarrouselMovie';
 describe('Deve renderizar o CarrouselMovie corretamente', () => {
     beforeEach(() => render(<CarrouselFilme data-testid="carrousel-movie" />));
 
-    it('Deve estar na tela', () => {
+    it('Deve renderizar o Carrousel', () => {
         const carrouselMovie = screen.getByTestId('carrousel-movie');
 
         expect(carrouselMovie).toBeInTheDocument();
