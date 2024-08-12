@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components';
 
-export type IconType = 'play-right' | 'search' | 'filter' | 'fire' | 'star';
+export type IconType = 'chevron-right' | 'chevron-left' | 'play-right' | 'search' | 'filter' | 'fire' | 'star';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     config: {
@@ -30,6 +30,8 @@ export default function Icon({ config, ...props }: IconProps) {
             }}
             {...props}
         >
+            {icon === 'chevron-right' && <ChevronRightIconPath />}
+            {icon === 'chevron-left' && <ChevronLeftIconPath />}
             {icon === 'play-right' && <PlayRightIconPath />}
             {icon === 'search' && <SearchIconPath />}
             {icon === 'filter' && <FilterIconPath />}
@@ -71,21 +73,25 @@ const FireIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
 );
 
 const StarIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
-    <>
-        <path
-            fillRule="evenodd"
-            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-            clipRule="evenodd"
-        />
-    </>
+    <path
+        fillRule="evenodd"
+        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+        clipRule="evenodd"
+    />
 );
 
 const PlayRightIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
-    <>
-        <path
-            fillRule="evenodd"
-            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-            clipRule="evenodd"
-        />
-    </>
+    <path
+        fillRule="evenodd"
+        d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+        clipRule="evenodd"
+    />
+);
+
+const ChevronRightIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
+    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+);
+
+const ChevronLeftIconPath: React.FC<React.SVGProps<SVGPathElement>> = () => (
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
 );

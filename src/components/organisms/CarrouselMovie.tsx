@@ -1,5 +1,7 @@
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperProps, SwiperRef, SwiperSlide, useSwiper } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
@@ -8,6 +10,42 @@ import Button from '../atoms/Button';
 import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
+
+interface NextButtonRef {
+    next: () => void;
+}
+
+const NextButton = forwardRef<NextButtonRef, object>((props, ref) => {
+    const swiper = useSwiper();
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            next: () => swiper.slideNext(),
+        }),
+        [swiper]
+    );
+
+    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
+});
+
+interface PrevButtonRef {
+    prev: () => void;
+}
+
+const PrevButton = forwardRef<PrevButtonRef, object>((props, ref) => {
+    const swiper = useSwiper();
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            prev: () => swiper.slidePrev(),
+        }),
+        [swiper]
+    );
+
+    return <button style={{ display: 'none' }} onClick={() => swiper.slideNext()}></button>;
+});
 
 const fake_data = [
     { key: 1, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
@@ -23,19 +61,46 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-export default function CarrouselMovie() {
+interface CarrouselMovieProps extends SwiperProps {
+    enableVerticalOnDesktop?: boolean;
+}
+
+export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
+    slideNext: () => void;
+    slidePrev: () => void;
+}
+
+const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
+    { enableVerticalOnDesktop, ...props },
+    ref
+) => {
+    const nextButtonRef = useRef<NextButtonRef>(null);
+    const prevButtonRef = useRef<PrevButtonRef>(null);
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            slideNext: () => nextButtonRef.current?.next(),
+            slidePrev: () => prevButtonRef.current?.prev(),
+        }),
+        []
+    );
+
     return (
         <Swiper
-            data-testid="carrousel-movie"
             slidesPerView={'auto'}
             spaceBetween={12}
-            style={{ maxHeight: '49.125rem' }}
+            style={{ maxHeight: '49.125rem', position: 'relative' }}
             breakpoints={{
                 1024: {
-                    direction: 'vertical',
+                    direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
                 },
             }}
+            {...props}
         >
+            <NextButton ref={nextButtonRef} />
+            <PrevButton ref={prevButtonRef} />
+
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
                     <CardMovie>
@@ -74,7 +139,9 @@ export default function CarrouselMovie() {
             ))}
         </Swiper>
     );
-}
+};
+
+export default forwardRef(CarrouselMovie);
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(284)};
