@@ -6,7 +6,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
     config: {
         color: 'yellow' | 'white';
         icon: IconType;
-        size: 20 | 24;
+        size: 14 | 20 | 24;
     };
 }
 
