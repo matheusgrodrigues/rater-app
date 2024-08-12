@@ -31,10 +31,7 @@ interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
 }
 
-export interface CarrouselMovieRef extends Omit<SwiperRef, 'swiper'> {
-    slideNext: () => void;
-    slidePrev: () => void;
-}
+export interface CarrouselMovieRef extends BaseCarrouselRef {}
 
 const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
     { enableVerticalOnDesktop, ...props },

@@ -27,19 +27,11 @@ const fake_data = [
     { key: 11, src: 'https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22' },
 ];
 
-interface CarrouselActorProps extends SwiperProps {
-    enableVerticalOnDesktop?: boolean;
-}
+interface CarrouselActorProps extends SwiperProps {}
 
-export interface CarrouselActorRef extends Omit<SwiperRef, 'swiper'> {
-    slideNext: () => void;
-    slidePrev: () => void;
-}
+export interface CarrouselActorRef extends BaseCarrouselRef {}
 
-const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (
-    { enableVerticalOnDesktop, ...props },
-    ref
-) => {
+const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (props, ref) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     return (
@@ -47,11 +39,6 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
             slidesPerView={'auto'}
             spaceBetween={12}
             style={{ maxHeight: '49.125rem', position: 'relative' }}
-            breakpoints={{
-                1024: {
-                    direction: enableVerticalOnDesktop ? 'vertical' : 'horizontal',
-                },
-            }}
             {...props}
             ref={baseCarrouselRef}
         >
