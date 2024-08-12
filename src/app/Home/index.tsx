@@ -136,6 +136,57 @@ function Home() {
                     <CarrouselMovie ref={carrouselRecommended} />
                 </div>
             </SectionCarrousel>
+
+            <SectionCarrousel data-testid="section-celebrities">
+                <TitleCarrouselContainer>
+                    <HeadingWithBar
+                        data-testid="title-celebrities"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Celebridades
+                    </HeadingWithBar>
+
+                    <ButtonNextPrev>
+                        <Button
+                            data-testid="section-celebrities-next"
+                            onClick={() => carrouselLatestReleaseRef.current?.slideNext()}
+                            config={{ variant: 'rounded-icon-button' }}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-left',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="section-celebrities-prev"
+                            onClick={() => carrouselLatestReleaseRef.current?.slidePrev()}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </ButtonNextPrev>
+                </TitleCarrouselContainer>
+
+                <div>
+                    <CarrouselMovie ref={carrouselRecommended} />
+                </div>
+            </SectionCarrousel>
         </>
     );
 }
