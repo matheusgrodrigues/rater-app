@@ -1,6 +1,6 @@
 import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
-import CarrouselFilme from '../../../components/organisms/Carrousel';
+import CarrouselFilme from '../../../components/organisms/CarrouselMovie';
 
 describe('Deve renderizar o CarrouselMovie corretamente', () => {
     beforeEach(() => render(<CarrouselFilme data-testid="carrousel-movie" />));

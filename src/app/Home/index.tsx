@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 
 import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
-import Carrousel from '../../components/organisms/Carrousel';
+import Carrousel from '../../components/organisms/CarrouselMovie';
 
 function Home() {
     return (
-        <SectionHighlightsToo data-testid="section-destaques">
+        <SectionHighlight data-testid="section-destaques">
             <CardMovieHighlight data-testid="card-filme-destaque" />
 
-            <CarrouselHighligsToo>
+            <SectionHighligsToo>
                 <Carrousel data-testid="carrousel-destaques-tambem" />
-            </CarrouselHighligsToo>
-        </SectionHighlightsToo>
+            </SectionHighligsToo>
+        </SectionHighlight>
     );
 }
 
 export default Home;
 
-const SectionHighlightsToo = styled.div`
+const SectionHighlight = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -42,7 +42,7 @@ const SectionHighlightsToo = styled.div`
         )}
 `;
 
-const CarrouselHighligsToo = styled.div`
+const SectionHighligsToo = styled.div`
     width: 100%;
 
     ${({ theme }) => theme.utils.screen('md', `max-width: ${theme.utils.pxToRem(380)};`)}
