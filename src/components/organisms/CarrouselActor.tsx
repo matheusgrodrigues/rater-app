@@ -1,11 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import styled from 'styled-components';
-import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
+import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import { BaseCarrouselRef, NextButton, NextButtonRef, PrevButton, PrevButtonRef } from '../base/BaseCarrousel';
+import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
 
 import Heading from '../atoms/Heading';
 import Button from '../atoms/Button';
@@ -32,28 +32,25 @@ interface CarrouselActorProps extends SwiperProps {}
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (props, ref) => {
-    const prevButtonRef = useRef<PrevButtonRef>(null);
-    const nextButtonRef = useRef<NextButtonRef>(null);
+    const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
         ref,
         () => ({
-            slideNext: () => nextButtonRef.current?.next(),
-            slidePrev: () => prevButtonRef.current?.prev(),
+            slideNext: () => baseCarrouselRef.current?.slideNext(),
+            slidePrev: () => baseCarrouselRef.current?.slidePrev(),
         }),
         []
     );
 
     return (
-        <Swiper
+        <BaseCarrousel
             slidesPerView={'auto'}
             spaceBetween={12}
             style={{ maxHeight: '49.125rem', position: 'relative' }}
+            ref={baseCarrouselRef}
             {...props}
         >
-            <PrevButton ref={prevButtonRef} />
-            <NextButton ref={nextButtonRef} />
-
             {fake_data.map((data) => (
                 <SwiperSlideOverride key={data.key}>
                     <CardActor>
@@ -90,7 +87,7 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                     </CardActor>
                 </SwiperSlideOverride>
             ))}
-        </Swiper>
+        </BaseCarrousel>
     );
 };
 
