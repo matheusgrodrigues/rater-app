@@ -76,6 +76,10 @@ const FilterSettings = forwardRef<FilterSettingsRef, FilterSettingsProps>(({ ...
 export default forwardRef(Filter);
 
 const FilterStyled = styled.div`
+    width: 100%;
+
+    ${({ theme }) => theme.utils.screen('md', 'width: auto;')}
+
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['12']};
@@ -86,7 +90,11 @@ const FilterStyled = styled.div`
 
 const FilterListStyled = styled.div`
     height: ${({ theme }) => theme.utils.pxToRem(251)};
-    width: ${({ theme }) => theme.utils.pxToRem(377)};
+    width: 100%;
+    max-width: ${({ theme }) => theme.utils.pxToRem(377)};
+
+    ${({ theme }) => theme.utils.screen('md', `min-width: ${theme.utils.pxToRem(377)};`)}
+
     background-color: ${({ theme }) => theme.ref.colors['secondary-background-2']};
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
     padding: ${({ theme }) => theme.ref.padding['12']};
@@ -94,7 +102,11 @@ const FilterListStyled = styled.div`
 
 const FilterSettingsStyled = styled.div`
     height: ${({ theme }) => theme.utils.pxToRem(251)};
-    width: ${({ theme }) => theme.utils.pxToRem(377)};
+    width: 100%;
+    max-width: ${({ theme }) => theme.utils.pxToRem(377)};
+
+    ${({ theme }) => theme.utils.screen('md', `min-width: ${theme.utils.pxToRem(377)};`)}
+
     background-color: ${({ theme }) => theme.ref.colors['secondary-background-2']};
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
     padding: ${({ theme }) => theme.ref.padding['12']};
