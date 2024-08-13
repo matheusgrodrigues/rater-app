@@ -29,6 +29,7 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
                     <Heading config={{ fontSize: '12', fontWeight: '500', color: 'secondary-accessible-text-12' }}>
                         Resultados
                     </Heading>
+
                     <CardMovieContainer>
                         {fake_data.map((data) => (
                             <CardMovieList key={data.id}>
