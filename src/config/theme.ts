@@ -3,6 +3,7 @@ import { DefaultTheme } from 'styled-components';
 const ref = {
     borderRadius: {
         '8': '0.5rem',
+        '9': '0.56rem',
         '12': '0.75rem',
         '24': '1.5rem',
         '99': '6.18rem',
