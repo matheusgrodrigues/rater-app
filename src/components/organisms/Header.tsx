@@ -36,7 +36,7 @@ export default function Header() {
 
                         <Input data-testid="header-form-search-input" placeholder="Pesquisar..." type="search" />
 
-                        <FilterButton ref={filterButtonRef} />
+                        <FilterButton data-testid="header-form-search-btn-filter" ref={filterButtonRef} />
                     </Form>
 
                     <Filter ref={filterRef} />

@@ -6,7 +6,11 @@ export interface FilterRef {}
 interface FilterProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const Filter: React.ForwardRefRenderFunction<FilterRef, FilterProps> = (props, ref) => {
-    return <FilterStyled {...props}>Filter</FilterStyled>;
+    return (
+        <FilterStyled data-testid="organism-filter" {...props}>
+            Filter
+        </FilterStyled>
+    );
 };
 
 export default forwardRef(Filter);
