@@ -13,16 +13,6 @@ import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
 
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-];
-
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
 }
@@ -99,6 +89,16 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
 
 export default forwardRef(CarrouselMovie);
 
+const fake_data = [
+    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+];
+
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(284)};
     width: ${({ theme }) => theme.utils.pxToRem(166)};
@@ -111,10 +111,34 @@ const CardMovie = styled.div`
     height: 100%;
     width: 100%;
     position: relative;
+
+    overflow: hidden;
+
+    transition: transform 0.3s ease-out;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -140%;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
+        transition: bottom 0.3s ease-in;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &:hover {
+        &::before {
+            bottom: 0;
+        }
+    }
 `;
 
 const ImageOverride = styled(Image)`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    z-index: 2;
 `;
 
 const BadgeOverride = styled(Badge)`
@@ -122,6 +146,8 @@ const BadgeOverride = styled(Badge)`
 
     top: ${({ theme }) => theme.ref.spacing['12']};
     left: ${({ theme }) => theme.ref.spacing['12']};
+
+    z-index: 2;
 `;
 
 const ButtonOverride = styled(Button)`
@@ -129,6 +155,8 @@ const ButtonOverride = styled(Button)`
 
     bottom: ${({ theme }) => theme.ref.spacing['12']};
     left: ${({ theme }) => theme.ref.spacing['12']};
+
+    z-index: 2;
 `;
 
 const HeadingOverride = styled(Heading)`
@@ -143,4 +171,6 @@ const HeadingOverride = styled(Heading)`
 
     font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
     ${({ theme }) => theme.utils.screen('md', `font-weight: ${theme.ref.fontWeight['700']};`)}
+
+    z-index: 2;
 `;

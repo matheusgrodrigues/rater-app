@@ -11,16 +11,6 @@ import Heading from '../atoms/Heading';
 import Image from '../atoms/Image';
 import Strong from '../atoms/Strong';
 
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-];
-
 interface CarrouselActorProps extends SwiperProps {}
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
@@ -76,6 +66,16 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
 
 export default forwardRef(CarrouselActor);
 
+const fake_data = [
+    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+];
+
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(200)};
     width: ${({ theme }) => theme.utils.pxToRem(166)};
@@ -88,10 +88,36 @@ const CardActor = styled.div`
     height: 100%;
     width: 100%;
     position: relative;
+
+    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+
+    overflow: hidden;
+
+    transition: transform 0.3s ease-out;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -140%;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
+        transition: bottom 0.3s ease-in;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &:hover {
+        &::before {
+            bottom: 0;
+        }
+    }
 `;
 
 const ImageOverride = styled(Image)`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    z-index: 2;
 `;
 
 const HeadingOverride = styled(Heading)`
@@ -107,8 +133,12 @@ const HeadingOverride = styled(Heading)`
     align-items: center;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['4']};
+
+    z-index: 2;
 `;
 
 const StrongAgeOverride = styled(Strong)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
+
+    z-index: 2;
 `;

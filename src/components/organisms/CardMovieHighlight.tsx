@@ -92,7 +92,7 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
                     </CardMovieHighlightSinopseText>
                 </CardMovieHighlightSinopse>
 
-                <Button config={{ variant: 'transparent-button' }}>
+                <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
                     <span>Assitir ao trailer</span>
 
                     <Icon
@@ -108,14 +108,6 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
     );
 }
 
-/*
-// TODO: este aparentemente é o hover, adicionar animação quando passar hover sob a imagem.
-
- background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
-
-*/
-
 const CardMovieHighlightStyled = styled.div`
     width: 100%;
     height: 100%;
@@ -123,14 +115,11 @@ const CardMovieHighlightStyled = styled.div`
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
 
     ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(826)};`)}
-
     ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(826)};`)}
 
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
-    padding: ${({ theme }) => theme.ref.padding['12']};
 
     flex-direction: column;
-    justify-content: flex-end;
     display: flex;
     position: relative;
 
@@ -142,75 +131,91 @@ const CardMovieHighlightStyled = styled.div`
     background-position: top;
     background-size: cover;
 
-    ${({ theme }) => theme.utils.screen('lg', `padding: ${theme.ref.padding['24']};`)}
-    ${({ theme }) => theme.utils.screen('2xl', `padding: ${theme.ref.padding['48']};`)}
+    overflow: hidden;
 `;
 
 const CardMovieHighlightContent = styled.div`
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
     flex-direction: column;
     display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['12']};
-    max-width: ${({ theme }) => theme.utils.pxToRem(560)};
-`;
 
-const CardMovieHighlightSpec = styled.div`
-    display: none;
+    min-height: ${({ theme }) => theme.utils.pxToRem(284)};
+
+    gap: ${({ theme }) => theme.ref.spacing['12']};
+
+    padding: ${({ theme }) => theme.ref.padding['12']};
+
+    ${({ theme }) => theme.utils.screen('md', `padding: ${theme.ref.padding['48']};`)}
 
     ${({ theme }) =>
         theme.utils.screen(
             'md',
             `
-      display: flex;
-     gap: ${theme.ref.spacing['24']};
-    `
+                transition: transform 0.3s ease-out;
+
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -70%;
+                    left: 0;
+                    width: 100%;
+                    height: 70%;
+                    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
+                    transition: bottom 0.3s ease-in-out;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+
+                &:hover {
+                    transform: translateY(-20px);
+                    transition: transform 0.3s ease-in;
+
+                    &::before {
+                        bottom: -20%;
+                    }
+                }        
+        `
         )}
+`;
+
+const CardMovieHighlightSpec = styled.div`
+    display: none;
+
+    ${({ theme }) => theme.utils.screen('md', `display: flex; gap: ${theme.ref.spacing['24']};`)}
 `;
 
 const CardMovieHighlightTitle = styled(Heading)`
     font-size: ${({ theme }) => theme.ref.fontSize['16']};
 
-    ${({ theme }) =>
-        theme.utils.screen(
-            'md',
-            `  
- font-size: ${theme.ref.fontSize['40']};
-`
-        )}
+    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['40']};`)}
 `;
 
 const CardMovieHighlightSinopse = styled.div`
-    ${({ theme }) =>
-        theme.utils.screen(
-            'sm',
-            `  
-                margin-bottom: ${theme.ref.spacing['8']};
-                max-width: ${theme.utils.pxToRem(319)};
-`
-        )}
+    max-width: ${({ theme }) => theme.utils.pxToRem(560)};
 
     ${({ theme }) =>
-        theme.utils.screen(
-            'md',
-            `  
-                margin-bottom: ${theme.ref.spacing['48']};
-                max-width: ${theme.utils.pxToRem(555)};
-`
-        )}
+        theme.utils.screen('sm', `margin-bottom: ${theme.ref.spacing['8']}; max-width: ${theme.utils.pxToRem(319)};`)}
+
+    ${({ theme }) =>
+        theme.utils.screen('md', `margin-bottom: ${theme.ref.spacing['48']}; max-width: ${theme.utils.pxToRem(555)};`)}
+
+    z-index: 2;
 `;
 
 const CardMovieHighlightSinopseText = styled(Paragraph)`
-    font-size: ${({ theme }) => theme.ref.fontSize['12']};
-    color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
     line-height: ${({ theme }) => theme.ref.lineHeight['19']};
     font-weight: ${({ theme }) => theme.ref.fontWeight['500']};
+    font-size: ${({ theme }) => theme.ref.fontSize['12']};
+    color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
 
     ${({ theme }) =>
         theme.utils.screen(
             'md',
-            `   color: ${theme.ref.colors['secondary-accessible-text-12']};
-                line-height: ${theme.ref.lineHeight['24']};
-                font-size: ${theme.ref.fontSize['16']};
-`
+            `color: ${theme.ref.colors['secondary-accessible-text-12']}; line-height: ${theme.ref.lineHeight['24']}; font-size: ${theme.ref.fontSize['16']};`
         )}
 `;
 

@@ -1,21 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import Icon, { IconType } from './Icon';
+import Icon, { IconSize, IconType } from './Icon';
 
 interface BadgeProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     config: {
         iconColor: 'yellow' | 'white';
         icon: IconType;
+        iconSize?: IconSize;
         label?: string;
     };
 }
 
 export default function Badge({ config, ...props }: BadgeProps) {
-    const { iconColor, label, icon } = config;
+    const { iconColor, label, iconSize, icon } = config;
 
     return (
         <BadgeStyled label={label} {...props}>
-            <IconOverride strokeWidth={2} config={{ color: iconColor, icon, size: 20 }} />
+            <IconOverride strokeWidth={2} config={{ color: iconColor, icon, size: iconSize ?? 20 }} />
             {label && <BadgeLabel>{label}</BadgeLabel>}
         </BadgeStyled>
     );

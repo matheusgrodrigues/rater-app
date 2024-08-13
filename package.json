@@ -19,8 +19,8 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "prettier:write && test && react-scripts build",
-        "test": "jest",
+        "build": "npm run prettier:write && npm run test && react-scripts build",
+        "test": "jest --detectOpenHandles",
         "test:watch": "jest --watch",
         "eject": "react-scripts eject",
         "prettier:write": "npx prettier --write 'src/*/**'"
@@ -44,6 +44,7 @@
         ]
     },
     "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@babel/preset-env": "^7.25.3",
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.24.7",

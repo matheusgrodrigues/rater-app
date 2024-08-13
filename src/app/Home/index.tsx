@@ -204,6 +204,8 @@ const SectionHighlight = styled.div`
 
     padding: 0 ${({ theme }) => theme.ref.padding['12']};
 
+    ${({ theme }) => theme.utils.screen('md', `padding-top: 0 !important;`)}
+
     ${({ theme }) =>
         theme.utils.screen(
             'lg',
