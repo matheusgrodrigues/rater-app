@@ -1,29 +1,30 @@
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 
 import styled from 'styled-components';
 
-import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
+import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
 import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
-import { useLoaderData } from 'react-router';
+import { Await, useLoaderData } from 'react-router';
+import { LoaderHomeData } from './loader';
 
 function Home() {
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
 
-    const highlightMovies = useLoaderData();
+    const { highlightMovies } = useLoaderData() as LoaderHomeData;
 
     console.log(highlightMovies);
 
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
-                <CardMovieHighlight data-testid="card-movie-highlight" />
+                <CardMovieHighlightLoader />
 
                 <SectionHighligsToo>
                     <HeadingWithBar

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import SpecDuratCatYear from './SpecDuratCatYear';
-import SpecRatingView from './SpecRatingView';
-import Paragraph from '../atoms/Paragraph';
-import Heading from '../atoms/Heading';
-import Button from '../atoms/Button';
-import Badge from '../atoms/Badge';
-import Icon from '../atoms/Icon';
+import SpecDuratCatYear from '../SpecDuratCatYear';
+import SpecRatingView from '../SpecRatingView';
+import Paragraph from '../../atoms/Paragraph';
+import Heading from '../../atoms/Heading';
+import Button from '../../atoms/Button';
+import Badge from '../../atoms/Badge';
+import Icon from '../../atoms/Icon';
 
 interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
@@ -114,8 +114,8 @@ const CardMovieHighlightStyled = styled.div`
 
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
 
-    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(826)};`)}
-    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(826)};`)}
+    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(836)};`)}
+    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(836)};`)}
 
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
