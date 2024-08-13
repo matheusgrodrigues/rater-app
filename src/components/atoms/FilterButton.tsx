@@ -1,18 +1,17 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 import Icon from './Icon';
 
 export interface FilterButtonRef {
     setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-interface FilterButtonProps
-    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {}
+interface FilterButtonProps extends Omit<ButtonProps, 'children' | 'config' | 'ref'> {}
 
 const FilterButton: React.ForwardRefRenderFunction<FilterButtonRef, FilterButtonProps> = (props, ref) => {
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
 
     useImperativeHandle(
         ref,
@@ -23,7 +22,7 @@ const FilterButton: React.ForwardRefRenderFunction<FilterButtonRef, FilterButton
     );
 
     return (
-        <ButtonOverride config={{ variant: 'rounded-icon-button' }} data-testid="header-form-search-btn-filter">
+        <ButtonOverride config={{ variant: 'rounded-icon-button' }} {...props}>
             {count > 0 && (
                 <Counter>
                     <span>{count}</span>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-interface ButtonProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface ButtonProps
+    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     children: React.ReactNode;
     config: {
         variant: 'rounded-icon-button' | 'transparent-button';
