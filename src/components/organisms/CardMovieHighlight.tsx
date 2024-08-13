@@ -219,18 +219,6 @@ const CardMovieHighlightSinopseText = styled(Paragraph)`
         )}
 `;
 
-const CardMovieHighlightBade = styled.div`
-    gap: ${({ theme }) => theme.ref.spacing['12']};
-
-    padding-top: ${({ theme }) => theme.ref.padding['12']};
-    padding-left: ${({ theme }) => theme.ref.padding['12']};
-
-    z-index: 2;
-
-    ${({ theme }) =>
-        theme.utils.screen('md', `padding-top: ${theme.ref.padding['48']}; padding-left: ${theme.ref.padding['48']};`)}
-`;
-
 const CardMovieHighlightBadgeDesktop = styled.div`
     display: none;
 

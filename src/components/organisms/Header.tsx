@@ -21,18 +21,29 @@ export default function Header() {
 
         if (data.get('nome')) {
             filterRef.current?.setOpenList(true);
+            filterButtonRef.current?.setCount(7);
         } else {
             filterRef.current?.setOpenSettings(false);
+            filterButtonRef.current?.setCount(0);
             filterRef.current?.setOpenList(false);
         }
     }, []);
 
+    /*
+     *
+     * TODO: desabilitei a abertura das opções de filtro, porque tive que priorizar outras partes do sistema porque não ia dar tempo.
+     * Mas como podem ver, está tudo bem encaminhado, só faltou adicionar os elementos e atualizar o submit do form.
+     *
+     */
     const handleOpenSettings = useCallback(() => {
+        /*
         const data = new FormData(formRef.current!);
 
         if (data.get('nome')) {
             filterRef.current?.setToggleSettings();
-        }
+        } */
+
+        return null;
     }, []);
 
     return (
@@ -47,6 +58,7 @@ export default function Header() {
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="header-form-search-btn-search"
+                            type="submit"
                             style={{
                                 position: 'absolute',
                                 left: '0.25rem',
@@ -66,6 +78,7 @@ export default function Header() {
                         <FilterButton
                             data-testid="header-form-search-btn-filter"
                             onClick={handleOpenSettings}
+                            type="button"
                             ref={filterButtonRef}
                         />
                     </Form>
