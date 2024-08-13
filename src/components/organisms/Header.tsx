@@ -49,6 +49,15 @@ export default function Header() {
         return null;
     }, []);
 
+    const handleClear = useCallback(() => {
+        const data = new FormData(formRef.current!);
+
+        if (!data.get('nome')) {
+            filterButtonRef.current?.setCount(0);
+            filterRef.current?.setOpenList(false);
+        }
+    }, []);
+
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>
@@ -74,8 +83,9 @@ export default function Header() {
                         <Input
                             data-testid="header-form-search-input"
                             placeholder="Pesquisar..."
-                            type="search"
+                            type="text"
                             name="nome"
+                            onKeyUp={handleClear}
                         />
 
                         <FilterButton
