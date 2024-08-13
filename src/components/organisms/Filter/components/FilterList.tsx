@@ -29,38 +29,39 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
                     <Heading config={{ fontSize: '12', fontWeight: '500', color: 'secondary-accessible-text-12' }}>
                         Resultados
                     </Heading>
+                    <CardMovieContainer>
+                        {fake_data.map((data) => (
+                            <CardMovieList key={data.id}>
+                                <CardMovie>
+                                    <Image data-testid="atom-image" src={data.src} />
+                                </CardMovie>
 
-                    {fake_data.map((data) => (
-                        <CardMovieContainer key={data.id}>
-                            <CardMovie>
-                                <Image data-testid="atom-image" src={data.src} />
-                            </CardMovie>
+                                <CardMovieSpec>
+                                    <CardMovieSpecHeader>
+                                        <Heading
+                                            config={{
+                                                fontSize: '12',
+                                                fontWeight: '500',
+                                                color: 'secondary-accessible-text-12',
+                                            }}
+                                        >
+                                            {data.title}
+                                        </Heading>
 
-                            <CardMovieSpec>
-                                <CardMovieSpecHeader>
-                                    <Heading
-                                        config={{
-                                            fontSize: '12',
-                                            fontWeight: '500',
-                                            color: 'secondary-accessible-text-12',
-                                        }}
-                                    >
-                                        {data.title}
-                                    </Heading>
-
-                                    <CardMovieBadgeOverride
-                                        data-testid="card-movie-badge"
-                                        config={{
-                                            iconSize: 14,
-                                            iconColor: 'yellow',
-                                            label: `${data.rating}`,
-                                            icon: 'star',
-                                        }}
-                                    />
-                                </CardMovieSpecHeader>
-                            </CardMovieSpec>
-                        </CardMovieContainer>
-                    ))}
+                                        <CardMovieBadgeOverride
+                                            data-testid="card-movie-badge"
+                                            config={{
+                                                iconSize: 14,
+                                                iconColor: 'yellow',
+                                                label: `${data.rating}`,
+                                                icon: 'star',
+                                            }}
+                                        />
+                                    </CardMovieSpecHeader>
+                                </CardMovieSpec>
+                            </CardMovieList>
+                        ))}
+                    </CardMovieContainer>
                 </FilterListStyled>
             )}
         </>
@@ -130,6 +131,11 @@ const FilterListStyled = styled.div`
 `;
 
 const CardMovieContainer = styled.div`
+    max-height: ${({ theme }) => theme.utils.pxToRem(251)};
+    overflow-y: auto;
+`;
+
+const CardMovieList = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
 
