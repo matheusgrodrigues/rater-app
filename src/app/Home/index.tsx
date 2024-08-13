@@ -9,11 +9,16 @@ import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
+import { useLoaderData } from 'react-router';
 
 function Home() {
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
+
+    const highlightMovies = useLoaderData();
+
+    console.log(highlightMovies);
 
     return (
         <>

@@ -10,13 +10,20 @@ import RootLayout from './app/layout';
 import App from './app/Home';
 
 import { defaultTheme } from './config/theme';
+import MovieService from './services/MovieService';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route errorElement={<GlobalError />} element={<RootLayout />} path="/">
-            <Route>
-                <Route element={<App />} index />
-            </Route>
+            <Route
+                element={<App />}
+                loader={async ({ request }) => {
+                    const highlightMovies = await MovieService.getHighlightMovies();
+
+                    return highlightMovies;
+                }}
+                index
+            />
         </Route>
     )
 );
