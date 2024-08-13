@@ -12,10 +12,28 @@ import Filter, { FilterRef } from './Filter';
 export default function Header() {
     const filterButtonRef = useRef<FilterButtonRef>(null);
     const filterRef = useRef<FilterRef>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
-    const handleOpenSettings = useCallback((state: boolean) => filterRef.current?.setOpenSettings(state), []);
-    const handleToggleFilter = useCallback((state: boolean) => filterRef.current?.setToggleFilter(), []);
-    const handleOpenList = useCallback((state: boolean) => filterRef.current?.setOpenList(state), []);
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback((e) => {
+        e.preventDefault();
+
+        const data = new FormData(e.currentTarget);
+
+        if (data.get('nome')) {
+            filterRef.current?.setOpenList(true);
+        } else {
+            filterRef.current?.setOpenSettings(false);
+            filterRef.current?.setOpenList(false);
+        }
+    }, []);
+
+    const handleOpenSettings = useCallback(() => {
+        const data = new FormData(formRef.current!);
+
+        if (data.get('nome')) {
+            filterRef.current?.setToggleSettings();
+        }
+    }, []);
 
     return (
         <HeaderStyled data-testid="header">
@@ -25,11 +43,10 @@ export default function Header() {
                 </Link>
 
                 <FormContainer>
-                    <Form data-testid="header-form-search" onSubmit={(e) => e.preventDefault()}>
+                    <Form data-testid="header-form-search" onSubmit={handleSubmit} ref={formRef}>
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="header-form-search-btn-search"
-                            onClick={() => handleToggleFilter(true)}
                             style={{
                                 position: 'absolute',
                                 left: '0.25rem',
@@ -39,9 +56,18 @@ export default function Header() {
                             <Icon config={{ color: 'white', icon: 'search', size: 24 }} />
                         </Button>
 
-                        <Input data-testid="header-form-search-input" placeholder="Pesquisar..." type="search" />
+                        <Input
+                            data-testid="header-form-search-input"
+                            placeholder="Pesquisar..."
+                            type="search"
+                            name="nome"
+                        />
 
-                        <FilterButton data-testid="header-form-search-btn-filter" ref={filterButtonRef} />
+                        <FilterButton
+                            data-testid="header-form-search-btn-filter"
+                            onClick={handleOpenSettings}
+                            ref={filterButtonRef}
+                        />
                     </Form>
 
                     <Filter data-testid="header-form-filter" ref={filterRef} />
