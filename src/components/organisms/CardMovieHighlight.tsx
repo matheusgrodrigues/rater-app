@@ -92,7 +92,7 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
                     </CardMovieHighlightSinopseText>
                 </CardMovieHighlightSinopse>
 
-                <Button config={{ variant: 'transparent-button' }}>
+                <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
                     <span>Assitir ao trailer</span>
 
                     <Icon
@@ -107,14 +107,6 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
         </CardMovieHighlightStyled>
     );
 }
-
-/*
-// TODO: este aparentemente é o hover, adicionar animação quando passar hover sob a imagem.
-
- background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('https://image.tmdb.org/t/p/original/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
-
-*/
 
 const CardMovieHighlightStyled = styled.div`
     width: 100%;
@@ -149,37 +141,45 @@ const CardMovieHighlightContent = styled.div`
     flex-direction: column;
     display: flex;
 
+    min-height: ${({ theme }) => theme.utils.pxToRem(284)};
+
     gap: ${({ theme }) => theme.ref.spacing['12']};
 
     padding: ${({ theme }) => theme.ref.padding['12']};
 
-    ${({ theme }) => theme.utils.screen('lg', `padding: ${theme.ref.padding['24']};`)}
-    ${({ theme }) => theme.utils.screen('2xl', `padding: ${theme.ref.padding['48']};`)}
+    ${({ theme }) => theme.utils.screen('md', `padding: ${theme.ref.padding['48']};`)}
 
-    transition: transform 0.3s ease-out;
+    ${({ theme }) =>
+        theme.utils.screen(
+            'md',
+            `
+                transition: transform 0.3s ease-out;
 
-    position: relative;
+                position: relative;
 
-    &::before {
-        content: '';
-        position: absolute;
-        bottom: -70%;
-        left: 0;
-        width: 100%;
-        height: 70%;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
-        transition: bottom 0.3s ease-in-out;
-        pointer-events: none;
-    }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -70%;
+                    left: 0;
+                    width: 100%;
+                    height: 70%;
+                    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
+                    transition: bottom 0.3s ease-in-out;
+                    pointer-events: none;
+                    z-index: 1;
+                }
 
-    &:hover {
-        transform: translateY(-20px);
-        transition: transform 0.3s ease-in;
+                &:hover {
+                    transform: translateY(-20px);
+                    transition: transform 0.3s ease-in;
 
-        &::before {
-            bottom: -20%;
-        }
-    }
+                    &::before {
+                        bottom: -20%;
+                    }
+                }        
+        `
+        )}
 `;
 
 const CardMovieHighlightSpec = styled.div`
@@ -202,6 +202,8 @@ const CardMovieHighlightSinopse = styled.div`
 
     ${({ theme }) =>
         theme.utils.screen('md', `margin-bottom: ${theme.ref.spacing['48']}; max-width: ${theme.utils.pxToRem(555)};`)}
+
+    z-index: 2;
 `;
 
 const CardMovieHighlightSinopseText = styled(Paragraph)`
@@ -215,6 +217,18 @@ const CardMovieHighlightSinopseText = styled(Paragraph)`
             'md',
             `color: ${theme.ref.colors['secondary-accessible-text-12']}; line-height: ${theme.ref.lineHeight['24']}; font-size: ${theme.ref.fontSize['16']};`
         )}
+`;
+
+const CardMovieHighlightBade = styled.div`
+    gap: ${({ theme }) => theme.ref.spacing['12']};
+
+    padding-top: ${({ theme }) => theme.ref.padding['12']};
+    padding-left: ${({ theme }) => theme.ref.padding['12']};
+
+    z-index: 2;
+
+    ${({ theme }) =>
+        theme.utils.screen('md', `padding-top: ${theme.ref.padding['48']}; padding-left: ${theme.ref.padding['48']};`)}
 `;
 
 const CardMovieHighlightBadgeDesktop = styled.div`

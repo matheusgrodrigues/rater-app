@@ -126,6 +126,7 @@ const CardMovie = styled.div`
         background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
         transition: bottom 0.3s ease-in;
         pointer-events: none;
+        z-index: 1;
     }
 
     &:hover {
@@ -137,6 +138,7 @@ const CardMovie = styled.div`
 
 const ImageOverride = styled(Image)`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    z-index: 2;
 `;
 
 const BadgeOverride = styled(Badge)`
@@ -144,6 +146,8 @@ const BadgeOverride = styled(Badge)`
 
     top: ${({ theme }) => theme.ref.spacing['12']};
     left: ${({ theme }) => theme.ref.spacing['12']};
+
+    z-index: 2;
 `;
 
 const ButtonOverride = styled(Button)`
@@ -151,6 +155,8 @@ const ButtonOverride = styled(Button)`
 
     bottom: ${({ theme }) => theme.ref.spacing['12']};
     left: ${({ theme }) => theme.ref.spacing['12']};
+
+    z-index: 2;
 `;
 
 const HeadingOverride = styled(Heading)`
@@ -165,4 +171,6 @@ const HeadingOverride = styled(Heading)`
 
     font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
     ${({ theme }) => theme.utils.screen('md', `font-weight: ${theme.ref.fontWeight['700']};`)}
+
+    z-index: 2;
 `;

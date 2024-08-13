@@ -105,6 +105,7 @@ const CardActor = styled.div`
         background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
         transition: bottom 0.3s ease-in;
         pointer-events: none;
+        z-index: 1;
     }
 
     &:hover {
@@ -116,6 +117,7 @@ const CardActor = styled.div`
 
 const ImageOverride = styled(Image)`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
+    z-index: 2;
 `;
 
 const HeadingOverride = styled(Heading)`
@@ -131,8 +133,12 @@ const HeadingOverride = styled(Heading)`
     align-items: center;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['4']};
+
+    z-index: 2;
 `;
 
 const StrongAgeOverride = styled(Strong)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
+
+    z-index: 2;
 `;
