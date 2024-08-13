@@ -1,6 +1,5 @@
-import React from 'react';
-import { render, screen, waitFor } from '../../../core/utils/test-utils/testing-library';
-import Filter, { FilterRef } from '../../../components/organisms/Filter';
+import { render, screen } from '../../../core/utils/test-utils/testing-library';
+import Filter from '../../../components/organisms/Filter/Filter';
 
 describe('Deve renderizar o Filter corretamente', () => {
     it('Deve renderizar o Filter', async () => {

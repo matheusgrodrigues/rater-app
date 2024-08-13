@@ -1,7 +1,7 @@
 import { screen, render, fireEvent } from '../../../core/utils/test-utils/testing-library';
 
 import Header from '../../../components/organisms/Header';
-import Filter from '../../../components/organisms/Filter';
+import Filter from '../../../components/organisms/Filter/Filter';
 
 describe('Deve renderizar o header, corretamente', () => {
     beforeEach(() => render(<Header />));

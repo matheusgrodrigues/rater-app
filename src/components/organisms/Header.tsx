@@ -7,7 +7,7 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import Icon from '../atoms/Icon';
 
-import Filter, { FilterRef } from './Filter';
+import Filter, { FilterRef } from './Filter/Filter';
 
 export default function Header() {
     const filterButtonRef = useRef<FilterButtonRef>(null);
@@ -23,7 +23,7 @@ export default function Header() {
             filterRef.current?.setOpenList(true);
             filterButtonRef.current?.setCount(7);
         } else {
-            filterRef.current?.setOpenSettings(false);
+            // filterRef.current?.setOpenSettings(false);
             filterButtonRef.current?.setCount(0);
             filterRef.current?.setOpenList(false);
         }
@@ -33,6 +33,9 @@ export default function Header() {
      *
      * TODO: desabilitei a abertura das opções de filtro, porque tive que priorizar outras partes do sistema porque não ia dar tempo.
      * Mas como podem ver, está tudo bem encaminhado, só faltou adicionar os elementos e atualizar o submit do form.
+     * Para ver funcionando, descomente as linhas relacionadas ao 'Settings' e remova o 'return null' porque é um método 'void'.
+     *
+     * TODO: após finalizar os components do Settings, remover os comentários.
      *
      */
     const handleOpenSettings = useCallback(() => {
