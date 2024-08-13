@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components';
 
-import FilterList, { FilterListRef } from './FilterList';
-import FilterSettings, { FilterSettingsRef } from './FilterSettings';
+import FilterList, { FilterListRef } from './components/FilterList';
+import FilterSettings, { FilterSettingsRef } from './components/FilterSettings';
 
 export interface FilterRef {
     setToggleSettings: () => void;

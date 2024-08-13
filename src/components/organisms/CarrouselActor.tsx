@@ -11,16 +11,6 @@ import Heading from '../atoms/Heading';
 import Image from '../atoms/Image';
 import Strong from '../atoms/Strong';
 
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-];
-
 interface CarrouselActorProps extends SwiperProps {}
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
@@ -75,6 +65,16 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
 };
 
 export default forwardRef(CarrouselActor);
+
+const fake_data = [
+    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
+];
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(200)};

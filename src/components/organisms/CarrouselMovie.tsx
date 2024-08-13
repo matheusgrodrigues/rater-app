@@ -13,16 +13,6 @@ import Image from '../atoms/Image';
 import Badge from '../atoms/Badge';
 import Icon from '../atoms/Icon';
 
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-];
-
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
 }
@@ -98,6 +88,16 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
 };
 
 export default forwardRef(CarrouselMovie);
+
+const fake_data = [
+    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
+];
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(284)};

@@ -1,9 +1,9 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import styled from 'styled-components';
 
-import Heading from '../../atoms/Heading';
-import Image from '../../atoms/Image';
-import Badge from '../../atoms/Badge';
+import Heading from '../../../atoms/Heading';
+import Image from '../../../atoms/Image';
+import Badge from '../../../atoms/Badge';
 
 export interface FilterListRef {
     setOpenList: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,38 +30,37 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
                         Resultados
                     </Heading>
 
-                    <CardMovieContainer>
-                        <CardMovie>
-                            <Image
-                                data-testid="atom-image"
-                                src="https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22"
-                            />
-                        </CardMovie>
+                    {fake_data.map((data) => (
+                        <CardMovieContainer key={data.id}>
+                            <CardMovie>
+                                <Image data-testid="atom-image" src={data.src} />
+                            </CardMovie>
 
-                        <CardMovieSpec>
-                            <CardMovieSpecHeader>
-                                <Heading
-                                    config={{
-                                        fontSize: '12',
-                                        fontWeight: '500',
-                                        color: 'secondary-accessible-text-12',
-                                    }}
-                                >
-                                    Iron Man
-                                </Heading>
+                            <CardMovieSpec>
+                                <CardMovieSpecHeader>
+                                    <Heading
+                                        config={{
+                                            fontSize: '12',
+                                            fontWeight: '500',
+                                            color: 'secondary-accessible-text-12',
+                                        }}
+                                    >
+                                        {data.title}
+                                    </Heading>
 
-                                <CardMovieBadgeOverride
-                                    data-testid="card-movie-badge"
-                                    config={{
-                                        iconSize: 14,
-                                        iconColor: 'yellow',
-                                        label: '7.9',
-                                        icon: 'star',
-                                    }}
-                                />
-                            </CardMovieSpecHeader>
-                        </CardMovieSpec>
-                    </CardMovieContainer>
+                                    <CardMovieBadgeOverride
+                                        data-testid="card-movie-badge"
+                                        config={{
+                                            iconSize: 14,
+                                            iconColor: 'yellow',
+                                            label: `${data.rating}`,
+                                            icon: 'star',
+                                        }}
+                                    />
+                                </CardMovieSpecHeader>
+                            </CardMovieSpec>
+                        </CardMovieContainer>
+                    ))}
                 </FilterListStyled>
             )}
         </>
@@ -69,6 +68,51 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
 });
 
 export default FilterList;
+
+const fake_data = [
+    {
+        id: 1,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 2,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 3,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 4,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 5,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 6,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+    {
+        id: 7,
+        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
+        title: 'Iron Man',
+        rating: 7.2,
+    },
+];
 
 const FilterListStyled = styled.div`
     height: ${({ theme }) => theme.utils.pxToRem(251)};
