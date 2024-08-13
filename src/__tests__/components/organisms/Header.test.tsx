@@ -1,6 +1,7 @@
-import { screen, render } from '../../../core/utils/test-utils/testing-library';
+import { screen, render, fireEvent } from '../../../core/utils/test-utils/testing-library';
 
 import Header from '../../../components/organisms/Header';
+import Filter from '../../../components/organisms/Filter';
 
 describe('Deve renderizar o header, corretamente', () => {
     beforeEach(() => render(<Header />));
@@ -39,5 +40,17 @@ describe('Deve renderizar o header, corretamente', () => {
             expect(formSearch).toBeInTheDocument();
             expect(btnFilter).toBeInTheDocument();
         });
+    });
+
+    it('Deve abrir o filtro ao clicar no botão pesquisar', () => {
+        render(<Filter />);
+
+        const button = screen.getByTestId('header-form-search-btn-search');
+
+        fireEvent.click(button);
+
+        const filter = screen.getByTestId('header-form-filter');
+
+        expect(filter).toBeInTheDocument();
     });
 });

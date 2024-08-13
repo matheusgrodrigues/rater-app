@@ -1,11 +1,17 @@
-import { render, screen } from '../../../core/utils/test-utils/testing-library';
+import React from 'react';
+import { render, screen, waitFor } from '../../../core/utils/test-utils/testing-library';
+import Filter, { FilterRef } from '../../../components/organisms/Filter';
 
-import Filter from '../../../components/organisms/Filter';
+describe('Deve renderizar o Filter corretamente', () => {
+    it('Deve renderizar o Filter', async () => {
+        const ref = React.createRef<FilterRef>();
 
-describe('Deve renderizar o Filter, corretamente', () => {
-    beforeEach(() => render(<Filter />));
-    it('Deve renderizar o Filter', () => {
-        const filter = screen.getByTestId('organism-filter');
-        expect(filter).toBeInTheDocument();
+        render(<Filter data-testid="organism-filter" ref={ref} />);
+
+        ref.current?.setToggleFilter();
+
+        await waitFor(() => {
+            expect(screen.getByTestId('organism-filter')).toBeInTheDocument();
+        });
     });
 });

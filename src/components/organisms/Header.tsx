@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,6 +13,10 @@ export default function Header() {
     const filterButtonRef = useRef<FilterButtonRef>(null);
     const filterRef = useRef<FilterRef>(null);
 
+    const handleOpenSettings = useCallback((state: boolean) => filterRef.current?.setOpenSettings(state), []);
+    const handleToggleFilter = useCallback((state: boolean) => filterRef.current?.setToggleFilter(), []);
+    const handleOpenList = useCallback((state: boolean) => filterRef.current?.setOpenList(state), []);
+
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>
@@ -25,6 +29,7 @@ export default function Header() {
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="header-form-search-btn-search"
+                            onClick={() => handleToggleFilter(true)}
                             style={{
                                 position: 'absolute',
                                 left: '0.25rem',
@@ -39,7 +44,7 @@ export default function Header() {
                         <FilterButton data-testid="header-form-search-btn-filter" ref={filterButtonRef} />
                     </Form>
 
-                    <Filter ref={filterRef} />
+                    <Filter data-testid="header-form-filter" ref={filterRef} />
                 </FormContainer>
             </HeaderStyledContainer>
         </HeaderStyled>
