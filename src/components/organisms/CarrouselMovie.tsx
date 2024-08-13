@@ -111,6 +111,28 @@ const CardMovie = styled.div`
     height: 100%;
     width: 100%;
     position: relative;
+
+    overflow: hidden;
+
+    transition: transform 0.3s ease-out;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -140%;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%);
+        transition: bottom 0.3s ease-in;
+        pointer-events: none;
+    }
+
+    &:hover {
+        &::before {
+            bottom: 0;
+        }
+    }
 `;
 
 const ImageOverride = styled(Image)`
