@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default function CardMovieHighlightLoader() {
-    return <CardMovieHighlightStyled>Loading...</CardMovieHighlightStyled>;
+    return <CardMovieHighlightStyled>Carregando...</CardMovieHighlightStyled>;
 }
 
 const CardMovieHighlightStyled = styled.div`

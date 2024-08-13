@@ -1,5 +1,5 @@
 import { Suspense, useRef } from 'react';
-
+import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
 
 import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
@@ -9,7 +9,7 @@ import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
-import { Await, useLoaderData } from 'react-router';
+
 import { LoaderHomeData } from './loader';
 
 function Home() {
@@ -24,7 +24,11 @@ function Home() {
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
-                <CardMovieHighlightLoader />
+                <Suspense fallback={<CardMovieHighlightLoader />}>
+                    <Await resolve={highlightMovies}>
+                        {(resolvedHighlightMovie) => <CardMovieHighlight data-testid="card-movie-highlight" />}
+                    </Await>
+                </Suspense>
 
                 <SectionHighligsToo>
                     <HeadingWithBar
