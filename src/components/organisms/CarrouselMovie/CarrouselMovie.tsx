@@ -15,6 +15,7 @@ import Icon from '../../atoms/Icon';
 
 import { MovieSchema } from '../../../schemas/MovieSchema';
 import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
+import { formatVoteAverage } from '../../../core/utils/format';
 
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
@@ -58,7 +59,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                             <BadgeOverride
                                 config={{
                                     iconColor: 'yellow',
-                                    label: '7.8',
+                                    label: formatVoteAverage(`${movie.vote_average}`),
                                     icon: 'star',
                                 }}
                             />
@@ -73,7 +74,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                                     color: 'white',
                                 }}
                             >
-                                Deadpool & Wolverine
+                                {movie.title}
                             </HeadingOverride>
 
                             <ButtonOverride config={{ variant: 'transparent-button' }}>
