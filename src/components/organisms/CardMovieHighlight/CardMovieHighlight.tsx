@@ -8,14 +8,16 @@ import Button from '../../atoms/Button';
 import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
+import { MovieSchema } from '../../../schemas/MovieSchema';
+
 interface CardMovieHighlightProps
-    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+    extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+    highlightMovies: MovieSchema | undefined;
+}
 
-export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps) {
-    // TODO: adicionar imagem de fundo de acordo com a capa retornada pela api.
-
+export default function CardMovieHighlight({ highlightMovies, ...props }: CardMovieHighlightProps) {
     return (
-        <CardMovieHighlightStyled {...props}>
+        <CardMovieHighlightStyled movie={highlightMovies} {...props}>
             <CardMovieHighlightContent>
                 <CardMovieHighlightBadgeMobile>
                     <Badge
@@ -108,7 +110,11 @@ export default function CardMovieHighlight({ ...props }: CardMovieHighlightProps
     );
 }
 
-const CardMovieHighlightStyled = styled.div`
+interface CardMovieHighlightStyledProps {
+    movie: MovieSchema | undefined;
+}
+
+const CardMovieHighlightStyled = styled.div<CardMovieHighlightStyledProps>`
     width: 100%;
     height: 100%;
 
@@ -120,11 +126,12 @@ const CardMovieHighlightStyled = styled.div`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
     flex-direction: column;
+
     display: flex;
     position: relative;
 
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 17.12%, rgba(0, 0, 0, 0.7) 100%),
-        url('https://image.tmdb.org/t/p/w1280/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22');
+        url('${process.env.REACT_APP_TMDB_IMAGE_URL}/original/${({ movie }) => movie?.backdrop_path}');
 
     background-origin: border-box;
     background-repeat: no-repeat;

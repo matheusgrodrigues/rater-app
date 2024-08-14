@@ -26,7 +26,16 @@ function Home() {
             <SectionHighlight data-testid="section-highlight">
                 <Suspense fallback={<CardMovieHighlightLoader />}>
                     <Await resolve={highlightMovies}>
-                        {(resolvedHighlightMovie) => <CardMovieHighlight data-testid="card-movie-highlight" />}
+                        {(resolvedHighlightMovie) => (
+                            <CardMovieHighlight
+                                highlightMovies={
+                                    resolvedHighlightMovie.results && resolvedHighlightMovie.results[0]
+                                        ? resolvedHighlightMovie.results[0]
+                                        : undefined
+                                }
+                                data-testid="card-movie-highlight"
+                            />
+                        )}
                     </Await>
                 </Suspense>
 
