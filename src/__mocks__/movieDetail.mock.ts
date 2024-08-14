@@ -1,4 +1,6 @@
-const movieDetailMock = {
+import { MovieDetailSchema } from '../schemas/MovieSchema';
+
+const movieDetailMock: MovieDetailSchema = {
     adult: false,
     backdrop_path: '/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg',
     belongs_to_collection: {
