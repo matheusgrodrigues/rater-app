@@ -1,12 +1,20 @@
-import useHighlightMovieStore, { useMovieHightlightDetailStore } from '../store';
-import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
+import {
+    useMovieHightlightDetailStore,
+    useHighlightMovieStore,
+    useLatestReleaseStore,
+    useRecommendedStore,
+} from '../store';
+
 import MovieService from '../../services/MovieService';
+
+import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 
 export interface LoaderHomeData {
     highlightMovies: Promise<MovieResponseSchema>;
     highlightMovieDetail: Promise<MovieDetailSchema>;
     movieDetail: Promise<MovieDetailSchema>;
     latestReleases: Promise<MovieResponseSchema>;
+    recommended: Promise<MovieResponseSchema>;
 }
 
 export const highlightMovieLoader = async () => {
@@ -41,13 +49,28 @@ export const highlightMovieDetailLoader = async () => {
 };
 
 export const latestReleasesLoader = async () => {
-    const { movies, setMovies } = useHighlightMovieStore.getState();
+    const { latestRelease, setLatestRelease } = useLatestReleaseStore.getState();
 
-    if (movies) {
-        return movies;
+    if (latestRelease) {
+        return latestRelease;
     } else {
         const data = await MovieService.getLastReleases();
-        setMovies(data);
+
+        setLatestRelease(data);
+
+        return data;
+    }
+};
+
+export const recommendedLoader = async () => {
+    const { recommended, setRecommended } = useRecommendedStore.getState();
+
+    if (recommended) {
+        return recommended;
+    } else {
+        const data = await MovieService.getLastReleases();
+
+        setRecommended(data);
 
         return data;
     }

@@ -13,7 +13,7 @@ import Icon from '../../components/atoms/Icon';
 import { LoaderHomeData } from './loader';
 
 function Home() {
-    const { highlightMovies, highlightMovieDetail, latestReleases } = useLoaderData() as LoaderHomeData;
+    const { highlightMovies, highlightMovieDetail, latestReleases, recommended } = useLoaderData() as LoaderHomeData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
@@ -170,7 +170,7 @@ function Home() {
 
                 <div>
                     <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
-                        <Await resolve={highlightMovies}>
+                        <Await resolve={recommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
                                     movies={resolvedRecommended.results ?? undefined}

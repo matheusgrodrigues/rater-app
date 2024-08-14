@@ -2,7 +2,26 @@ import { create } from 'zustand';
 
 import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
 
-// TODO: ler a doc para ver como centralizar todos os varios estados globais em apenas um para facilitar a manutenção e evitar renderizações desnecessarias.
+// TODO: ler a doc para ver como centralizar todos os varios estados globais em apenas um.
+interface recommendedStore {
+    recommended: MovieResponseSchema | null;
+    setRecommended: (movies: MovieResponseSchema) => void;
+}
+
+export const useRecommendedStore = create<recommendedStore>((set) => ({
+    recommended: null,
+    setRecommended: (recommended) => set({ recommended }),
+}));
+
+interface latestReleaseStore {
+    latestRelease: MovieResponseSchema | null;
+    setLatestRelease: (latestRelease: MovieResponseSchema) => void;
+}
+
+export const useLatestReleaseStore = create<latestReleaseStore>((set) => ({
+    latestRelease: null,
+    setLatestRelease: (latestRelease) => set({ latestRelease }),
+}));
 
 interface MovieHighlightDetailStore {
     movieHighlightDetail: MovieDetailSchema | null;
@@ -16,7 +35,7 @@ export const useMovieHightlightDetailStore = create<MovieHighlightDetailStore>((
 
 interface MovieDetailStore {
     movieDetail: MovieDetailSchema | null;
-    setMovieDetail: (movies: MovieDetailSchema) => void;
+    setMovieDetail: (movieDetail: MovieDetailSchema) => void;
 }
 
 export const useMovieDetailStore = create<MovieDetailStore>((set) => ({
@@ -29,9 +48,7 @@ interface MovieHighlightStore {
     setMovies: (movies: MovieResponseSchema) => void;
 }
 
-const useHighlightMovieStore = create<MovieHighlightStore>((set) => ({
+export const useHighlightMovieStore = create<MovieHighlightStore>((set) => ({
     movies: null,
     setMovies: (movies) => set({ movies }),
 }));
-
-export default useHighlightMovieStore;

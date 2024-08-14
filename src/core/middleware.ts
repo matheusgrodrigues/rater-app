@@ -1,6 +1,6 @@
 interface RequestProps {
-    method: string;
     url: string;
+    method?: string;
     body?: string;
 }
 
@@ -12,7 +12,7 @@ const Middleware = {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN_AUTH}`,
                 },
-                method,
+                method: method ?? 'GET',
                 body,
             });
 
