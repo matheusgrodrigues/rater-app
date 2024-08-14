@@ -22,10 +22,6 @@ export default function Header() {
         if (data.get('nome')) {
             filterRef.current?.setOpenList(true);
             filterButtonRef.current?.setCount(7);
-        } else {
-            // filterRef.current?.setOpenSettings(false);
-            filterButtonRef.current?.setCount(0);
-            filterRef.current?.setOpenList(false);
         }
     }, []);
 
@@ -47,6 +43,15 @@ export default function Header() {
         } */
 
         return null;
+    }, []);
+
+    const handleClear = useCallback(() => {
+        const data = new FormData(formRef.current!);
+
+        if (!data.get('nome')) {
+            filterButtonRef.current?.setCount(0);
+            filterRef.current?.setOpenList(false);
+        }
     }, []);
 
     return (
@@ -74,8 +79,9 @@ export default function Header() {
                         <Input
                             data-testid="header-form-search-input"
                             placeholder="Pesquisar..."
-                            type="search"
+                            type="text"
                             name="nome"
+                            onKeyUp={handleClear}
                         />
 
                         <FilterButton

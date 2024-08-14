@@ -5,22 +5,26 @@ import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
+import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
 
-import Heading from '../atoms/Heading';
-import Button from '../atoms/Button';
-import Image from '../atoms/Image';
-import Badge from '../atoms/Badge';
-import Icon from '../atoms/Icon';
+import Heading from '../../atoms/Heading';
+import Button from '../../atoms/Button';
+import Image from '../../atoms/Image';
+import Badge from '../../atoms/Badge';
+import Icon from '../../atoms/Icon';
+
+import { MovieSchema } from '../../../schemas/MovieSchema';
+import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
 
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
+    movies: MovieSchema[] | undefined;
 }
 
 export interface CarrouselMovieRef extends BaseCarrouselRef {}
 
 const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
-    { enableVerticalOnDesktop, ...props },
+    { enableVerticalOnDesktop, movies, ...props },
     ref
 ) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
@@ -47,57 +51,53 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {fake_data.map((data) => (
-                <SwiperSlideOverride key={data.key}>
-                    <CardMovie>
-                        <BadgeOverride
-                            config={{
-                                iconColor: 'yellow',
-                                label: '7.8',
-                                icon: 'star',
-                            }}
-                        />
-                        <ImageOverride src={data.src} />
-
-                        <HeadingOverride
-                            config={{
-                                fontWeight: '700',
-                                fontSize: '12',
-                                color: 'white',
-                            }}
-                        >
-                            Deadpool & Wolverine
-                        </HeadingOverride>
-
-                        <ButtonOverride config={{ variant: 'transparent-button' }}>
-                            <span>Assitir ao trailer</span>
-
-                            <Icon
+            {movies && movies.length > 0 ? (
+                movies.slice(1, movies.length).map((movie) => (
+                    <SwiperSlideOverride key={movie.id}>
+                        <CardMovie>
+                            <BadgeOverride
                                 config={{
-                                    color: 'white',
-                                    icon: 'play-right',
-                                    size: 20,
+                                    iconColor: 'yellow',
+                                    label: '7.8',
+                                    icon: 'star',
                                 }}
                             />
-                        </ButtonOverride>
-                    </CardMovie>
-                </SwiperSlideOverride>
-            ))}
+                            <ImageOverride
+                                src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${movie.backdrop_path}`}
+                            />
+
+                            <HeadingOverride
+                                config={{
+                                    fontWeight: '700',
+                                    fontSize: '12',
+                                    color: 'white',
+                                }}
+                            >
+                                Deadpool & Wolverine
+                            </HeadingOverride>
+
+                            <ButtonOverride config={{ variant: 'transparent-button' }}>
+                                <span>Assitir ao trailer</span>
+
+                                <Icon
+                                    config={{
+                                        color: 'white',
+                                        icon: 'play-right',
+                                        size: 20,
+                                    }}
+                                />
+                            </ButtonOverride>
+                        </CardMovie>
+                    </SwiperSlideOverride>
+                ))
+            ) : (
+                <CarrouselCardMovieLoader>Nenhum registro encontrado</CarrouselCardMovieLoader>
+            )}
         </BaseCarrousel>
     );
 };
 
 export default forwardRef(CarrouselMovie);
-
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w780/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg' },
-];
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(284)};

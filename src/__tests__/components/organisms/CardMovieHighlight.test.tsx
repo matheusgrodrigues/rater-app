@@ -2,8 +2,10 @@ import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import CardMovieHighlight from '../../../components/organisms/CardMovieHighlight';
 
+import movieDetailMock from '../../../__mocks__/movieDetail.mock';
+
 describe('Deve renderizar o CardMovieHighlight, corretamente', () => {
-    beforeEach(() => render(<CardMovieHighlight data-testid="card-movie-higlight" />));
+    beforeEach(() => render(<CardMovieHighlight data-testid="card-movie-higlight" highlightMovie={movieDetailMock} />));
 
     it('Deve renderizar o CardMovieHighlight', () => {
         const card = screen.getByTestId('card-movie-higlight');

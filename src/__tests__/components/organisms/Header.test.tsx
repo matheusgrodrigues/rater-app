@@ -3,8 +3,16 @@ import { screen, render, fireEvent } from '../../../core/utils/test-utils/testin
 import Header from '../../../components/organisms/Header';
 import Filter from '../../../components/organisms/Filter/Filter';
 
+import { MemoryRouter } from 'react-router';
+
 describe('Deve renderizar o header, corretamente', () => {
-    beforeEach(() => render(<Header />));
+    beforeEach(() =>
+        render(
+            <MemoryRouter>
+                <Header />
+            </MemoryRouter>
+        )
+    );
 
     it('Deve renderizar header com a logo', () => {
         const header = screen.getByTestId('header');

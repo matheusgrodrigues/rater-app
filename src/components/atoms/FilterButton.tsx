@@ -11,7 +11,7 @@ export interface FilterButtonRef {
 interface FilterButtonProps extends Omit<ButtonProps, 'children' | 'config' | 'ref'> {}
 
 const FilterButton: React.ForwardRefRenderFunction<FilterButtonRef, FilterButtonProps> = (props, ref) => {
-    const [count, setCount] = useState(7);
+    const [count, setCount] = useState(0);
 
     useImperativeHandle(
         ref,

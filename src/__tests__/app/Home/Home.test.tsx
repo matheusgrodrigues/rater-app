@@ -1,5 +1,7 @@
+import { createMemoryRouter, RouteObject, RouterProvider } from 'react-router-dom';
 import Home from '../../../app/Home';
-import { render, screen } from '../../../core/utils/test-utils/testing-library';
+import { act, render, screen, waitFor } from '../../../core/utils/test-utils/testing-library';
+import fetchMock from 'jest-fetch-mock';
 
 interface SwiperMockProps {
     children: React.ReactNode;
@@ -18,89 +20,134 @@ jest.mock('swiper/react', () => ({
  *
  */
 
+const routes: RouteObject[] = [
+    {
+        path: '/',
+        element: <Home />,
+        loader: () => ({
+            highlightMovies: Promise.resolve({ results: [] }),
+        }),
+    },
+];
+
 describe('Deve renderizar a Home corretamente', () => {
-    beforeEach(() => render(<Home />));
+    beforeEach(async () => {
+        fetchMock.mockResponseOnce(JSON.stringify({ results: [] }));
+        const router = createMemoryRouter(routes, { initialEntries: ['/'] });
+
+        await act(async () => render(<RouterProvider router={router} />));
+    });
 
     describe('Deve renderizar a seção Destaques, corretamente', () => {
-        it('Deve renderizar a seção Destaques', () => {
-            const sectionDestaques = screen.getByTestId('section-highlight');
-            expect(sectionDestaques).toBeInTheDocument();
+        it('Deve renderizar a seção Destaques', async () => {
+            await waitFor(() => {
+                const sectionDestaques = screen.getByTestId('section-highlight');
+                expect(sectionDestaques).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar o titulo', () => {
-            const title = screen.getByTestId('title-highlighs-too');
-            expect(title).toBeInTheDocument();
+        it('Deve renderizar o titulo', async () => {
+            await waitFor(() => {
+                const title = screen.getByTestId('title-highlighs-too');
+                expect(title).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar o CardFilmeDestaque', () => {
-            const cardDestaque = screen.getByTestId('card-movie-highlight');
-            expect(cardDestaque).toBeInTheDocument();
+        it('Deve renderizar o CardFilmeDestaque', async () => {
+            await waitFor(() => {
+                const cardDestaque = screen.getByTestId('card-movie-highlight');
+                expect(cardDestaque).toBeInTheDocument();
+            });
         });
     });
 
     describe('Deve renderizar a seção Latest Releases, corretamente', () => {
-        it('Deve renderizar a seção Destaques', () => {
-            const section = screen.getByTestId('section-latest-releases');
-            expect(section).toBeInTheDocument();
+        it('Deve renderizar a seção Destaques', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-latest-releases');
+                expect(section).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar o titulo', () => {
-            const title = screen.getByTestId('title-latest-releases');
-            expect(title).toBeInTheDocument();
+        it('Deve renderizar o titulo', async () => {
+            await waitFor(() => {
+                const title = screen.getByTestId('title-latest-releases');
+                expect(title).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-prev', () => {
-            const arrow = screen.getByTestId('section-latest-releases-prev');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-prev', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-latest-releases-prev');
+                expect(arrow).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-next', () => {
-            const arrow = screen.getByTestId('section-latest-releases-next');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-next', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-latest-releases-next');
+                expect(arrow).toBeInTheDocument();
+            });
         });
     });
 
     describe('Deve renderizar a seção Recommended, corretamente', () => {
-        it('Deve renderizar a seção Destaques', () => {
-            const section = screen.getByTestId('section-recommended');
-            expect(section).toBeInTheDocument();
+        it('Deve renderizar a seção Destaques', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-recommended');
+                expect(section).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar o titulo', () => {
-            const title = screen.getByTestId('title-recommended');
-            expect(title).toBeInTheDocument();
+        it('Deve renderizar o titulo', async () => {
+            await waitFor(() => {
+                const title = screen.getByTestId('title-recommended');
+                expect(title).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-prev', () => {
-            const arrow = screen.getByTestId('section-recommended');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-prev', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-recommended');
+                expect(arrow).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-next', () => {
-            const arrow = screen.getByTestId('section-recommended');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-next', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-recommended');
+                expect(arrow).toBeInTheDocument();
+            });
         });
     });
 
     describe('Deve renderizar a seção Celebrities, corretamente', () => {
-        it('Deve renderizar a seção Destaques', () => {
-            const section = screen.getByTestId('section-celebrities');
-            expect(section).toBeInTheDocument();
+        it('Deve renderizar a seção Destaques', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-celebrities');
+                expect(section).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar o titulo', () => {
-            const title = screen.getByTestId('title-celebrities');
-            expect(title).toBeInTheDocument();
+        it('Deve renderizar o titulo', async () => {
+            await waitFor(() => {
+                const title = screen.getByTestId('title-celebrities');
+                expect(title).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-prev', () => {
-            const arrow = screen.getByTestId('section-celebrities');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-prev', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-celebrities');
+                expect(arrow).toBeInTheDocument();
+            });
         });
 
-        it('Deve renderizar a arrow-next', () => {
-            const arrow = screen.getByTestId('section-celebrities');
-            expect(arrow).toBeInTheDocument();
+        it('Deve renderizar a arrow-next', async () => {
+            await waitFor(() => {
+                const arrow = screen.getByTestId('section-celebrities');
+                expect(arrow).toBeInTheDocument();
+            });
         });
     });
 });
