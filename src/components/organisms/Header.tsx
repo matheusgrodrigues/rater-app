@@ -9,21 +9,53 @@ import Icon from '../atoms/Icon';
 
 import Filter, { FilterRef } from './Filter/Filter';
 
+import { useFilteredMovieStore } from '../../app/store';
+
+import MovieService from '../../services/MovieService';
+import { MovieSchema } from '../../schemas/MovieSchema';
+
 export default function Header() {
+    const { filteredMovies, setFilteredMovies } = useFilteredMovieStore();
+
     const filterButtonRef = useRef<FilterButtonRef>(null);
     const filterRef = useRef<FilterRef>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback((e) => {
-        e.preventDefault();
+    const fetchAndUpdateFilterStore = useCallback(
+        async (query: string) => {
+            try {
+                const data = await MovieService.filterByQuery(query);
+                setFilteredMovies(data.results);
+                return data.results;
+            } catch {}
+        },
+        [setFilteredMovies]
+    );
 
-        const data = new FormData(e.currentTarget);
+    const getFilterData = useCallback(
+        async (query: string): Promise<MovieSchema[] | undefined> => filteredMovies ?? fetchAndUpdateFilterStore(query),
+        [fetchAndUpdateFilterStore, filteredMovies]
+    );
 
-        if (data.get('nome')) {
-            filterRef.current?.setOpenList(true);
-            filterButtonRef.current?.setCount(7);
-        }
-    }, []);
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
+        async (e) => {
+            e.preventDefault();
+
+            const data = new FormData(e.currentTarget);
+            const query = data.get('query');
+
+            if (query) {
+                // filterRef.current?.setOpenList(true);
+                // filterButtonRef.current?.setCount(7);
+                try {
+                    const data = await getFilterData(`${query}`);
+
+                    console.log(data?.length);
+                } catch {}
+            }
+        },
+        [getFilterData]
+    );
 
     /*
      *
@@ -80,7 +112,7 @@ export default function Header() {
                             data-testid="header-form-search-input"
                             placeholder="Pesquisar..."
                             type="text"
-                            name="nome"
+                            name="query"
                             onKeyUp={handleClear}
                         />
 

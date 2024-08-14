@@ -2,17 +2,17 @@ import { Suspense, useRef } from 'react';
 import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
 
+import Button from '../../components/atoms/Button';
+import Icon from '../../components/atoms/Icon';
+
 import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
+import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
-import Button from '../../components/atoms/Button';
-import Icon from '../../components/atoms/Icon';
-
 import { LoaderHomeData } from './loader';
 import { LoaderActorData } from '../Actor/loader';
-import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 
 function Home() {
     const { highlightMovies, highlightMovieDetail, latestReleases, recommended, actors } =

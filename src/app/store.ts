@@ -1,9 +1,19 @@
 import { create } from 'zustand';
 
-import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
+import { MovieDetailSchema, MovieResponseSchema, MovieSchema } from '../schemas/MovieSchema';
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
 // TODO: ler a doc para ver como centralizar todos os varios estados globais em apenas um.
+interface FilteredMovieStore {
+    filteredMovies: MovieSchema[] | undefined;
+    setFilteredMovies: (filteredMovie: MovieSchema[] | undefined) => void;
+}
+
+export const useFilteredMovieStore = create<FilteredMovieStore>((set) => ({
+    filteredMovies: undefined,
+    setFilteredMovies: (filteredMovies) => set({ filteredMovies }),
+}));
+
 interface ActorsStore {
     actors: ActorResponseSchema | undefined;
     setActor: (actor: ActorResponseSchema) => void;
