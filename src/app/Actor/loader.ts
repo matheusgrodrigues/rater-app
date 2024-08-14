@@ -1,4 +1,4 @@
-import { useActorsStore } from '../store';
+import useRatterStore from '../store';
 
 import { ActorResponseSchema } from '../../schemas/ActorSchema';
 
@@ -9,7 +9,7 @@ export interface LoaderActorData {
 }
 
 export const getActorLoader = async () => {
-    const { actors, setActor } = useActorsStore.getState();
+    const { actors, setActor } = useRatterStore.getState();
 
     if (actors) {
         return actors;

@@ -1,9 +1,4 @@
-import {
-    useMovieHightlightDetailStore,
-    useHighlightMovieStore,
-    useLatestReleaseStore,
-    useRecommendedStore,
-} from '../store';
+import useRatterStore from '../store';
 
 import MovieService from '../../services/MovieService';
 
@@ -17,20 +12,20 @@ export interface LoaderHomeData {
 }
 
 export const highlightMovieLoader = async () => {
-    const { movies, setMovies } = useHighlightMovieStore.getState();
+    const { hightlightMovies, setHighlightMovies } = useRatterStore.getState();
 
-    if (movies) {
-        return movies;
+    if (hightlightMovies) {
+        return hightlightMovies;
     } else {
         const data = await MovieService.getHighlights();
-        setMovies(data);
+        setHighlightMovies(data);
 
         return data;
     }
 };
 
 export const highlightMovieDetailLoader = async () => {
-    const { movieHighlightDetail, setMovieHighlightDetail } = useMovieHightlightDetailStore.getState();
+    const { movieHighlightDetail, setMovieHighlightDetail } = useRatterStore.getState();
 
     try {
         const highlightMovies = await highlightMovieLoader();
@@ -48,7 +43,7 @@ export const highlightMovieDetailLoader = async () => {
 };
 
 export const latestReleasesLoader = async () => {
-    const { latestRelease, setLatestRelease } = useLatestReleaseStore.getState();
+    const { latestRelease, setLatestRelease } = useRatterStore.getState();
 
     if (latestRelease) {
         return latestRelease;
@@ -62,7 +57,7 @@ export const latestReleasesLoader = async () => {
 };
 
 export const recommendedLoader = async () => {
-    const { recommended, setRecommended } = useRecommendedStore.getState();
+    const { recommended, setRecommended } = useRatterStore.getState();
 
     if (recommended) {
         return recommended;
