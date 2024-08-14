@@ -18,94 +18,95 @@ interface CardMovieHighlightProps
 export default function CardMovieHighlight({ highlightMovies, ...props }: CardMovieHighlightProps) {
     return (
         <CardMovieHighlightStyled movie={highlightMovies} {...props}>
-            <CardMovieHighlightContent>
-                <CardMovieHighlightBadgeMobile>
-                    <Badge
-                        data-testid="card-movie-higlight-badge"
-                        config={{
-                            iconColor: 'white',
-                            icon: 'fire',
-                        }}
-                    />
+            {highlightMovies ? (
+                <CardMovieHighlightContent>
+                    <CardMovieHighlightBadgeMobile>
+                        <Badge
+                            data-testid="card-movie-higlight-badge"
+                            config={{
+                                iconColor: 'white',
+                                icon: 'fire',
+                            }}
+                        />
 
-                    <Badge
-                        data-testid="card-movie-higlight-badge"
+                        <Badge
+                            data-testid="card-movie-higlight-badge"
+                            config={{
+                                iconColor: 'yellow',
+                                label: '8.2',
+                                icon: 'star',
+                            }}
+                        />
+                    </CardMovieHighlightBadgeMobile>
+                    <CardMovieHighlightBadgeDesktop>
+                        <Badge
+                            data-testid="card-movie-higlight-badge"
+                            config={{
+                                iconColor: 'white',
+                                label: 'Em destaque',
+                                icon: 'fire',
+                            }}
+                        />
+                    </CardMovieHighlightBadgeDesktop>
+                    <CardMovieHighlightTitle
+                        data-testid="card-movie-higlight-title"
                         config={{
-                            iconColor: 'yellow',
-                            label: '8.2',
-                            icon: 'star',
-                        }}
-                    />
-                </CardMovieHighlightBadgeMobile>
-
-                <CardMovieHighlightBadgeDesktop>
-                    <Badge
-                        data-testid="card-movie-higlight-badge"
-                        config={{
-                            iconColor: 'white',
-                            label: 'Em destaque',
-                            icon: 'fire',
-                        }}
-                    />
-                </CardMovieHighlightBadgeDesktop>
-
-                <CardMovieHighlightTitle
-                    data-testid="card-movie-higlight-title"
-                    config={{
-                        fontWeight: '700',
-                        fontSize: '40',
-                        color: 'white',
-                    }}
-                >
-                    Deadpool & Wolverine
-                </CardMovieHighlightTitle>
-
-                <CardMovieHighlightSpec data-testid="card-movie-higlight-spec">
-                    <SpecRatingView
-                        data-testid="card-movie-higlight-spec-rating-view"
-                        config={{
-                            ratingLabel: '8.2',
-                            viewLabel: '120 mil',
-                        }}
-                    />
-
-                    <SpecDuratCatYear
-                        data-testid="card-movie-higlight-spec-durat-cat-year"
-                        config={{
-                            duratLabel: '2h 8m',
-                            yearLabel: '2024',
-                            catLabel: 'Comedy, Action, Adventure, Superhero',
-                        }}
-                    />
-                </CardMovieHighlightSpec>
-
-                <CardMovieHighlightSinopse>
-                    <CardMovieHighlightSinopseText
-                        data-testid="card-movie-higlight-sinopse"
-                        config={{
-                            fontWeight: 600,
-                            color: 'secondary-accessible-text-12',
-                            size: 16,
+                            fontWeight: '700',
+                            fontSize: '40',
+                            color: 'white',
                         }}
                     >
-                        Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
-                        Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
-                        universo da extinção.
-                    </CardMovieHighlightSinopseText>
-                </CardMovieHighlightSinopse>
+                        Deadpool & Wolverine
+                    </CardMovieHighlightTitle>
+                    <CardMovieHighlightSpec data-testid="card-movie-higlight-spec">
+                        <SpecRatingView
+                            data-testid="card-movie-higlight-spec-rating-view"
+                            config={{
+                                ratingLabel: '8.2',
+                                viewLabel: '120 mil',
+                            }}
+                        />
 
-                <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
-                    <span>Assitir ao trailer</span>
+                        <SpecDuratCatYear
+                            data-testid="card-movie-higlight-spec-durat-cat-year"
+                            config={{
+                                duratLabel: '2h 8m',
+                                yearLabel: '2024',
+                                catLabel: 'Comedy, Action, Adventure, Superhero',
+                            }}
+                        />
+                    </CardMovieHighlightSpec>
+                    <CardMovieHighlightSinopse>
+                        <CardMovieHighlightSinopseText
+                            data-testid="card-movie-higlight-sinopse"
+                            config={{
+                                fontWeight: 600,
+                                color: 'secondary-accessible-text-12',
+                                size: 16,
+                            }}
+                        >
+                            Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
+                            Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
+                            universo da extinção.
+                        </CardMovieHighlightSinopseText>
+                    </CardMovieHighlightSinopse>
+                    <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
+                        <span>Assitir ao trailer</span>
 
-                    <Icon
-                        config={{
-                            color: 'white',
-                            icon: 'play-right',
-                            size: 20,
-                        }}
-                    />
-                </Button>
-            </CardMovieHighlightContent>
+                        <Icon
+                            config={{
+                                color: 'white',
+                                icon: 'play-right',
+                                size: 20,
+                            }}
+                        />
+                    </Button>
+                </CardMovieHighlightContent>
+            ) : (
+                <Paragraph config={{ fontWeight: 400, color: 'secondary-accessible-text-12', size: 16 }}>
+                    Nenhum Registro encontrado
+                </Paragraph>
+            )}
         </CardMovieHighlightStyled>
     );
 }
@@ -126,6 +127,10 @@ const CardMovieHighlightStyled = styled.div<CardMovieHighlightStyledProps>`
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
     flex-direction: column;
+
+    ${({ movie, theme }) =>
+        !movie &&
+        `justify-content: center; align-items: center; border: ${theme.utils.pxToRem(1)} solid ${theme.ref.colors['secondary-borders-6']};`}
 
     display: flex;
     position: relative;

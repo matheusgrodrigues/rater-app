@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ParagraphConfig {
-    fontWeight: 600;
+    fontWeight: 400 | 600;
     color: 'secondary-accessible-text-12';
     size: 16;
 }

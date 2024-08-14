@@ -3,7 +3,7 @@ import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
 
 import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
-import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
@@ -52,7 +52,7 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <Suspense fallback={<CardMovieHighlightLoader />}>
+                        <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
                             <Await resolve={highlightMovies}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
@@ -113,7 +113,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CardMovieHighlightLoader />}>
+                    <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
                         <Await resolve={highlightMovies}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
@@ -173,7 +173,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CardMovieHighlightLoader />}>
+                    <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
                         <Await resolve={highlightMovies}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie

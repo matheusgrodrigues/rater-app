@@ -2,7 +2,7 @@ import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import CarrouselMovie from '../../../components/organisms/CarrouselMovie';
 
-import moviesMock from '../../../__mocks__/Movies.mock';
+import moviesMock from '../../../__mocks__/movies.mock';
 
 interface SwiperMockProps {
     children: React.ReactNode;

@@ -5,15 +5,16 @@ import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
+import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
 
-import Heading from '../atoms/Heading';
-import Button from '../atoms/Button';
-import Image from '../atoms/Image';
-import Badge from '../atoms/Badge';
-import Icon from '../atoms/Icon';
+import Heading from '../../atoms/Heading';
+import Button from '../../atoms/Button';
+import Image from '../../atoms/Image';
+import Badge from '../../atoms/Badge';
+import Icon from '../../atoms/Icon';
 
-import { MovieSchema } from '../../schemas/MovieSchema';
+import { MovieSchema } from '../../../schemas/MovieSchema';
+import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
 
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
@@ -50,8 +51,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {movies &&
-                movies.length > 0 &&
+            {movies && movies.length > 0 ? (
                 movies.slice(1, movies.length).map((movie) => (
                     <SwiperSlideOverride key={movie.id}>
                         <CardMovie>
@@ -89,7 +89,10 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                             </ButtonOverride>
                         </CardMovie>
                     </SwiperSlideOverride>
-                ))}
+                ))
+            ) : (
+                <CarrouselCardMovieLoader>Nenhum registro encontrado</CarrouselCardMovieLoader>
+            )}
         </BaseCarrousel>
     );
 };
@@ -170,20 +173,4 @@ const HeadingOverride = styled(Heading)`
     ${({ theme }) => theme.utils.screen('md', `font-weight: ${theme.ref.fontWeight['700']};`)}
 
     z-index: 2;
-`;
-
-const CardMovieLoader = styled.div`
-    height: ${({ theme }) => theme.utils.pxToRem(284)};
-    width: ${({ theme }) => theme.utils.pxToRem(166)};
-
-    ${({ theme }) =>
-        theme.utils.screen('md', `width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(253)};`)}
-
-    border: ${({ theme }) => theme.utils.pxToRem(1)} solid ${({ theme }) => theme.ref.colors['secondary-borders-6']};
-
-    justify-content: center;
-    align-items: center;
-    display: flex;
-
-    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 `;
