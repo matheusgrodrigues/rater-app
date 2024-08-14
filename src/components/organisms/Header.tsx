@@ -118,8 +118,6 @@ export default function Header() {
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>
-                <button onClick={() => fetchAndUpdateFilterStore('homem de ferro')}>FetchStore</button>
-
                 <Link to={{ pathname: '/' }}>
                     <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
                 </Link>
