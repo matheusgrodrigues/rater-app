@@ -26,6 +26,7 @@ const routes: RouteObject[] = [
         element: <Home />,
         loader: () => ({
             highlightMovies: Promise.resolve({ results: [] }),
+            latestReleases: Promise.resolve({ results: [] }),
         }),
     },
 ];

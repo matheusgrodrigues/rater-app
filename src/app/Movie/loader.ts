@@ -8,7 +8,7 @@ export const movieDetailLoader = async (movie_id: number) => {
     if (movieDetail) {
         return movieDetail;
     } else {
-        const data = await MovieService.getMovieById(movie_id);
+        const data = await MovieService.getById(movie_id);
         setMovieDetail(data);
 
         return data;

@@ -4,30 +4,31 @@ import MovieService from '../../services/MovieService';
 
 export interface LoaderHomeData {
     highlightMovies: Promise<MovieResponseSchema>;
-    movieHighlightDetail: Promise<MovieDetailSchema>;
+    highlightMovieDetail: Promise<MovieDetailSchema>;
     movieDetail: Promise<MovieDetailSchema>;
+    latestReleases: Promise<MovieResponseSchema>;
 }
 
-export const movieHighlightLoader = async () => {
+export const highlightMovieLoader = async () => {
     const { movies, setMovies } = useHighlightMovieStore.getState();
 
     if (movies) {
         return movies;
     } else {
-        const data = await MovieService.getHighlightMovies();
+        const data = await MovieService.getHighlights();
         setMovies(data);
 
         return data;
     }
 };
 
-export const movieHighlightDetailLoader = async () => {
+export const highlightMovieDetailLoader = async () => {
     const { movieHighlightDetail, setMovieHighlightDetail } = useMovieHightlightDetailStore.getState();
 
     try {
-        const highlightMovies = await movieHighlightLoader();
+        const highlightMovies = await highlightMovieLoader();
 
-        const data = await MovieService.getMovieById(highlightMovies.results[0].id);
+        const data = await MovieService.getById(highlightMovies.results[0].id);
 
         if (movieHighlightDetail) {
             return movieHighlightDetail;
@@ -37,4 +38,17 @@ export const movieHighlightDetailLoader = async () => {
             return data;
         }
     } catch {}
+};
+
+export const latestReleasesLoader = async () => {
+    const { movies, setMovies } = useHighlightMovieStore.getState();
+
+    if (movies) {
+        return movies;
+    } else {
+        const data = await MovieService.getLastReleases();
+        setMovies(data);
+
+        return data;
+    }
 };
