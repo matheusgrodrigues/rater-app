@@ -1,16 +1,23 @@
-import { useRef } from 'react';
-
+import { Suspense, useRef } from 'react';
+import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
-
-import CardMovieHighlight from '../../components/organisms/CardMovieHighlight';
-import CarrouselMovie, { CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
-import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
-import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
+import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
+import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
+import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
+import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+
+import { LoaderHomeData } from './loader';
+import { LoaderActorData } from '../Actor/loader';
+
 function Home() {
+    const { highlightMovies, highlightMovieDetail, latestReleases, recommended, actors } =
+        useLoaderData() as LoaderHomeData & LoaderActorData;
+
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
@@ -18,7 +25,16 @@ function Home() {
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
-                <CardMovieHighlight data-testid="card-movie-highlight" />
+                <Suspense fallback={<CardMovieHighlightLoader />}>
+                    <Await resolve={highlightMovieDetail}>
+                        {(resolvedmovieHighlightMovie) => (
+                            <CardMovieHighlight
+                                highlightMovie={resolvedmovieHighlightMovie ?? undefined}
+                                data-testid="card-movie-highlight"
+                            />
+                        )}
+                    </Await>
+                </Suspense>
 
                 <SectionHighligsToo>
                     <HeadingWithBar
@@ -33,7 +49,16 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <CarrouselMovie enableVerticalOnDesktop />
+                        <Suspense fallback={<CarrouselCardMovieLoader />}>
+                            <Await resolve={highlightMovies}>
+                                {(resolvedHighlightsToo) => (
+                                    <CarrouselMovie
+                                        enableVerticalOnDesktop
+                                        movies={resolvedHighlightsToo.results ?? undefined}
+                                    />
+                                )}
+                            </Await>
+                        </Suspense>
                     </div>
                 </SectionHighligsToo>
             </SectionHighlight>
@@ -85,7 +110,16 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie ref={carrouselLatestReleaseRef} />
+                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                        <Await resolve={latestReleases}>
+                            {(resolvedLatestReleases) => (
+                                <CarrouselMovie
+                                    movies={resolvedLatestReleases.results ?? undefined}
+                                    ref={carrouselLatestReleaseRef}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
 
@@ -136,7 +170,16 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie ref={carrouselRecommended} />
+                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                        <Await resolve={recommended}>
+                            {(resolvedRecommended) => (
+                                <CarrouselMovie
+                                    movies={resolvedRecommended.results ?? undefined}
+                                    ref={carrouselRecommended}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
 
@@ -187,7 +230,13 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselActor ref={carrouselActor} />
+                    <Suspense fallback={<CardActorLoader />}>
+                        <Await resolve={actors}>
+                            {(resolvedActors) => (
+                                <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActor} />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
         </>
@@ -203,6 +252,8 @@ const SectionHighlight = styled.div`
     display: flex;
 
     padding: 0 ${({ theme }) => theme.ref.padding['12']};
+
+    ${({ theme }) => theme.utils.screen('md', `padding-top: 0 !important;`)}
 
     ${({ theme }) =>
         theme.utils.screen(

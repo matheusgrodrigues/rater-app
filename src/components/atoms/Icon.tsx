@@ -2,11 +2,13 @@ import { useTheme } from 'styled-components';
 
 export type IconType = 'chevron-right' | 'chevron-left' | 'play-right' | 'search' | 'filter' | 'fire' | 'star';
 
+export type IconSize = 14 | 20 | 24;
+
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     config: {
         color: 'yellow' | 'white';
         icon: IconType;
-        size: 14 | 20 | 24;
+        size: IconSize;
     };
 }
 
