@@ -11,15 +11,16 @@ import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
 import { LoaderHomeData } from './loader';
+import { LoaderActorData } from '../Actor/loader';
+import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 
 function Home() {
-    const { highlightMovies, highlightMovieDetail, latestReleases, recommended } = useLoaderData() as LoaderHomeData;
+    const { highlightMovies, highlightMovieDetail, latestReleases, recommended, actors } =
+        useLoaderData() as LoaderHomeData & LoaderActorData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
-
-    console.log(latestReleases);
 
     return (
         <>
@@ -48,7 +49,7 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
+                        <Suspense fallback={<CarrouselCardMovieLoader />}>
                             <Await resolve={highlightMovies}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
@@ -109,7 +110,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
+                    <Suspense fallback={<CarrouselCardMovieLoader />}>
                         <Await resolve={latestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
@@ -169,7 +170,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader>Carregando...</CarrouselCardMovieLoader>}>
+                    <Suspense fallback={<CarrouselCardMovieLoader />}>
                         <Await resolve={recommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
@@ -229,7 +230,13 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselActor ref={carrouselActor} />
+                    <Suspense fallback={<CardActorLoader />}>
+                        <Await resolve={actors}>
+                            {(resolvedActors) => (
+                                <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActor} />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
         </>

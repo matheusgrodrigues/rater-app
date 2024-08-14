@@ -5,17 +5,25 @@ import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
+import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
 
-import Heading from '../atoms/Heading';
-import Image from '../atoms/Image';
-import Strong from '../atoms/Strong';
+import Heading from '../../atoms/Heading';
+import Strong from '../../atoms/Strong';
+import Image from '../../atoms/Image';
 
-interface CarrouselActorProps extends SwiperProps {}
+import { ActorSchema } from '../../../schemas/ActorSchema';
+import CardActorLoader from './CardActorLoader';
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
-const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (props, ref) => {
+interface CarrouselActorProps extends SwiperProps {
+    actors: ActorSchema[];
+}
+
+const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (
+    { actors, ...props },
+    ref
+) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
@@ -35,46 +43,40 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {fake_data.map((data) => (
-                <SwiperSlideOverride key={data.key}>
-                    <CardActor>
-                        <ImageOverride src={data.src} />
+            {actors && actors.length > 0 ? (
+                actors.map((actor) => (
+                    <SwiperSlideOverride key={actor.id}>
+                        <CardActor>
+                            <ImageOverride src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`} />
 
-                        <HeadingOverride
-                            config={{
-                                fontWeight: '700',
-                                fontSize: '12',
-                                color: 'white',
-                            }}
-                        >
-                            Ryan Reynolds
-                            <StrongAgeOverride
+                            <HeadingOverride
                                 config={{
-                                    color: 'secondary-accessible-text-11',
-                                    fontWeight: 400,
-                                    label: '47',
-                                    size: 12,
+                                    fontWeight: '700',
+                                    fontSize: '12',
+                                    color: 'white',
                                 }}
-                            />
-                        </HeadingOverride>
-                    </CardActor>
-                </SwiperSlideOverride>
-            ))}
+                            >
+                                {actor.name}
+                                <StrongAgeOverride
+                                    config={{
+                                        color: 'secondary-accessible-text-11',
+                                        fontWeight: 400,
+                                        label: '47',
+                                        size: 12,
+                                    }}
+                                />
+                            </HeadingOverride>
+                        </CardActor>
+                    </SwiperSlideOverride>
+                ))
+            ) : (
+                <CardActorLoader>Nenhum registro encontrado.</CardActorLoader>
+            )}
         </BaseCarrousel>
     );
 };
 
 export default forwardRef(CarrouselActor);
-
-const fake_data = [
-    { key: 1, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 2, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 3, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 4, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 5, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 6, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-    { key: 7, src: 'https://image.tmdb.org/t/p/w300//2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg' },
-];
 
 const SwiperSlideOverride = styled(SwiperSlide)`
     height: ${({ theme }) => theme.utils.pxToRem(200)};
@@ -141,20 +143,4 @@ const StrongAgeOverride = styled(Strong)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
 
     z-index: 2;
-`;
-
-const CardActorLoader = styled.div`
-    height: ${({ theme }) => theme.utils.pxToRem(200)};
-    width: ${({ theme }) => theme.utils.pxToRem(166)};
-
-    ${({ theme }) =>
-        theme.utils.screen('md', `width: ${theme.utils.pxToRem(268)}; height: ${theme.utils.pxToRem(253)};`)}
-
-    border: ${({ theme }) => theme.utils.pxToRem(1)} solid ${({ theme }) => theme.ref.colors['secondary-borders-6']};
-
-    justify-content: center;
-    align-items: center;
-    display: flex;
-
-    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 `;

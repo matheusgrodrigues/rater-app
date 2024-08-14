@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 interface CarrouselCardMovieLoaderProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export default function CarrouselCardMovieLoader({ children, ...props }: CarrouselCardMovieLoaderProps) {
-    return <CardMovieLoader>{children}</CardMovieLoader>;
+    return <CardMovieLoader>{children ?? 'Carregando...'}</CardMovieLoader>;
 }
 
 const CardMovieLoader = styled.div`

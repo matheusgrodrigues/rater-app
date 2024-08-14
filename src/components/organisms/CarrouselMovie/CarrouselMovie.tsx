@@ -18,12 +18,12 @@ import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
 import { formatVoteAverage } from '../../../core/utils/format';
 import { MovieSchema } from '../../../schemas/MovieSchema';
 
+export interface CarrouselMovieRef extends BaseCarrouselRef {}
+
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;
     movies: MovieSchema[] | undefined;
 }
-
-export interface CarrouselMovieRef extends BaseCarrouselRef {}
 
 const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, CarrouselMovieProps> = (
     { enableVerticalOnDesktop, movies, ...props },

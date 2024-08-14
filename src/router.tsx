@@ -1,15 +1,29 @@
 import { createRoutesFromElements, createBrowserRouter, Route, defer } from 'react-router-dom';
 
-import GlobalError from './app/global-error';
-import RootLayout from './app/layout';
-import Home from './app/Home';
-
 import {
     highlightMovieDetailLoader,
     highlightMovieLoader,
     latestReleasesLoader,
     recommendedLoader,
+    LoaderHomeData,
 } from './app/Home/loader';
+
+import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+
+import GlobalError from './app/global-error';
+import RootLayout from './app/layout';
+import Home from './app/Home';
+
+const loaderHomeData = {
+    highlightMovieDetail: highlightMovieDetailLoader(),
+    highlightMovies: highlightMovieLoader(),
+    latestReleases: latestReleasesLoader(),
+    recommended: recommendedLoader(),
+} as LoaderHomeData;
+
+const loaderActorData = {
+    actors: getActorLoader(),
+} as LoaderActorData;
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,10 +32,8 @@ const router = createBrowserRouter(
                 element={<Home />}
                 loader={() =>
                     defer({
-                        highlightMovieDetail: highlightMovieDetailLoader(),
-                        highlightMovies: highlightMovieLoader(),
-                        latestReleases: latestReleasesLoader(),
-                        recommended: recommendedLoader(),
+                        ...loaderHomeData,
+                        ...loaderActorData,
                     })
                 }
                 index
