@@ -9,7 +9,13 @@ import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
 import { MovieDetailSchema } from '../../../schemas/MovieSchema';
-import { preparePopularity, prepareReleaseDate, prepareVoteAverage } from '../../../core/utils/helpers';
+import {
+    formatGenre,
+    formatPopularity,
+    formatReleaseDate,
+    formatRuntime,
+    formatVoteAverage,
+} from '../../../core/utils/format';
 
 interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -34,7 +40,7 @@ export default function CardMovieHighlight({ highlightMovie, ...props }: CardMov
                             data-testid="card-movie-higlight-badge"
                             config={{
                                 iconColor: 'yellow',
-                                label: prepareVoteAverage(`${highlightMovie.vote_average}`),
+                                label: formatVoteAverage(`${highlightMovie.vote_average}`),
                                 icon: 'star',
                             }}
                         />
@@ -63,17 +69,17 @@ export default function CardMovieHighlight({ highlightMovie, ...props }: CardMov
                         <SpecRatingView
                             data-testid="card-movie-higlight-spec-rating-view"
                             config={{
-                                ratingLabel: prepareVoteAverage(`${highlightMovie.vote_average}`),
-                                viewLabel: preparePopularity(highlightMovie.popularity),
+                                ratingLabel: formatVoteAverage(`${highlightMovie.vote_average}`),
+                                viewLabel: formatPopularity(highlightMovie.popularity),
                             }}
                         />
 
                         <SpecDuratCatYear
                             data-testid="card-movie-higlight-spec-durat-cat-year"
                             config={{
-                                duratLabel: '2h 8m',
-                                yearLabel: prepareReleaseDate(highlightMovie.release_date),
-                                catLabel: 'Comedy, Action, Adventure, Superhero',
+                                duratLabel: formatRuntime(highlightMovie.runtime),
+                                yearLabel: formatReleaseDate(highlightMovie.release_date),
+                                catLabel: formatGenre(highlightMovie.genres),
                             }}
                         />
                     </CardMovieHighlightSpec>

@@ -22,6 +22,11 @@ export interface MovieResponseSchema {
     total_results: number;
 }
 
+export type MovieDetailGenre = {
+    id: number;
+    name: string;
+};
+
 export interface MovieDetailSchema {
     adult: boolean;
     backdrop_path: string;
@@ -32,12 +37,7 @@ export interface MovieDetailSchema {
         backdrop_path: string;
     };
     budget: number;
-    genres: [
-        {
-            id: number;
-            name: string;
-        },
-    ];
+    genres: MovieDetailGenre[];
     homepage: string;
     id: number;
     imdb_id: string;
