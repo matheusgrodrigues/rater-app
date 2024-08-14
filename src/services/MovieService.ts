@@ -26,7 +26,7 @@ const MovieService = {
     getLastReleases: async (): Promise<MovieResponseSchema> => {
         const req = await Middleware.request({
             method: 'GET',
-            url: `${process.env.REACT_APP_TMDB_API_URL}/movie/now_playing?language=pt-US&page=1`,
+            url: `${process.env.REACT_APP_TMDB_API_URL}/trending/movie/week?language=pt-US&page=1`,
         });
 
         const resp = await req.json();
