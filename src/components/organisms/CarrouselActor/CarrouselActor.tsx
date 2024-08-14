@@ -5,11 +5,11 @@ import { SwiperProps, SwiperSlide } from 'swiper/react';
 
 import 'swiper/swiper.min.css';
 
-import BaseCarrousel, { BaseCarrouselRef } from '../base/BaseCarrousel';
+import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
 
-import Heading from '../atoms/Heading';
-import Image from '../atoms/Image';
-import Strong from '../atoms/Strong';
+import Heading from '../../atoms/Heading';
+import Image from '../../atoms/Image';
+import Strong from '../../atoms/Strong';
 
 interface CarrouselActorProps extends SwiperProps {}
 
