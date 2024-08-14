@@ -1,6 +1,6 @@
 import { MovieSchema } from '../schemas/MovieSchema';
 
-const moviesMock: MovieSchema[] = [
+const movieHightlightsToo: MovieSchema[] = [
     {
         adult: false,
         backdrop_path: '/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg',
@@ -70,4 +70,4 @@ const moviesMock: MovieSchema[] = [
     },
 ];
 
-export default moviesMock;
+export default movieHightlightsToo;

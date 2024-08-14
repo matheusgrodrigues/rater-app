@@ -8,18 +8,18 @@ import Button from '../../atoms/Button';
 import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
-import { MovieSchema } from '../../../schemas/MovieSchema';
+import { MovieDetailSchema } from '../../../schemas/MovieSchema';
 import { preparePopularity, prepareReleaseDate, prepareVoteAverage } from '../../../core/utils/helpers';
 
 interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    highlightMovies: MovieSchema | undefined;
+    highlightMovie: MovieDetailSchema | undefined;
 }
 
-export default function CardMovieHighlight({ highlightMovies, ...props }: CardMovieHighlightProps) {
+export default function CardMovieHighlight({ highlightMovie, ...props }: CardMovieHighlightProps) {
     return (
-        <CardMovieHighlightStyled movie={highlightMovies} {...props}>
-            {highlightMovies ? (
+        <CardMovieHighlightStyled movie={highlightMovie} {...props}>
+            {highlightMovie ? (
                 <CardMovieHighlightContent>
                     <CardMovieHighlightBadgeMobile>
                         <Badge
@@ -34,7 +34,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             data-testid="card-movie-higlight-badge"
                             config={{
                                 iconColor: 'yellow',
-                                label: prepareVoteAverage(`${highlightMovies.vote_average}`),
+                                label: prepareVoteAverage(`${highlightMovie.vote_average}`),
                                 icon: 'star',
                             }}
                         />
@@ -57,14 +57,14 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             color: 'white',
                         }}
                     >
-                        {highlightMovies.title}
+                        {highlightMovie.title}
                     </CardMovieHighlightTitle>
                     <CardMovieHighlightSpec data-testid="card-movie-higlight-spec">
                         <SpecRatingView
                             data-testid="card-movie-higlight-spec-rating-view"
                             config={{
-                                ratingLabel: prepareVoteAverage(`${highlightMovies.vote_average}`),
-                                viewLabel: preparePopularity(highlightMovies.popularity),
+                                ratingLabel: prepareVoteAverage(`${highlightMovie.vote_average}`),
+                                viewLabel: preparePopularity(highlightMovie.popularity),
                             }}
                         />
 
@@ -72,7 +72,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             data-testid="card-movie-higlight-spec-durat-cat-year"
                             config={{
                                 duratLabel: '2h 8m',
-                                yearLabel: prepareReleaseDate(highlightMovies.release_date),
+                                yearLabel: prepareReleaseDate(highlightMovie.release_date),
                                 catLabel: 'Comedy, Action, Adventure, Superhero',
                             }}
                         />
@@ -86,7 +86,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                                 size: 16,
                             }}
                         >
-                            {highlightMovies.overview}
+                            {highlightMovie.overview}
                         </CardMovieHighlightSinopseText>
                     </CardMovieHighlightSinopse>
                     <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
@@ -111,7 +111,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
 }
 
 interface CardMovieHighlightStyledProps {
-    movie: MovieSchema | undefined;
+    movie: MovieDetailSchema | undefined;
 }
 
 const CardMovieHighlightStyled = styled.div<CardMovieHighlightStyledProps>`

@@ -1,9 +1,11 @@
-import useHighlightMovieStore from '../store';
-import { MovieResponseSchema } from '../../schemas/MovieSchema';
+import useHighlightMovieStore, { useMovieHightlightDetailStore } from '../store';
+import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 import MovieService from '../../services/MovieService';
 
 export interface LoaderHomeData {
     highlightMovies: Promise<MovieResponseSchema>;
+    movieHighlightDetail: Promise<MovieDetailSchema>;
+    movieDetail: Promise<MovieDetailSchema>;
 }
 
 export const movieHighlightLoader = async () => {
@@ -17,4 +19,22 @@ export const movieHighlightLoader = async () => {
 
         return data;
     }
+};
+
+export const movieHighlightDetailLoader = async () => {
+    const { movieHighlightDetail, setMovieHighlightDetail } = useMovieHightlightDetailStore.getState();
+
+    try {
+        const highlightMovies = await movieHighlightLoader();
+
+        const data = await MovieService.getMovieById(highlightMovies.results[0].id);
+
+        if (movieHighlightDetail) {
+            return movieHighlightDetail;
+        } else {
+            setMovieHighlightDetail(data);
+
+            return data;
+        }
+    } catch {}
 };

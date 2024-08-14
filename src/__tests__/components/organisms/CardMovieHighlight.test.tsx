@@ -2,7 +2,7 @@ import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import CardMovieHighlight from '../../../components/organisms/CardMovieHighlight';
 
-import moviesMock from '../../../__mocks__/movies.mock';
+import moviesMock from '../../../__mocks__/movieHightsToo.mock';
 
 describe('Deve renderizar o CardMovieHighlight, corretamente', () => {
     beforeEach(() => render(<CardMovieHighlight data-testid="card-movie-higlight" highlightMovies={moviesMock[0]} />));

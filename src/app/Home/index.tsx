@@ -13,24 +13,22 @@ import Icon from '../../components/atoms/Icon';
 import { LoaderHomeData } from './loader';
 
 function Home() {
-    const { highlightMovies } = useLoaderData() as LoaderHomeData;
+    const { highlightMovies, movieHighlightDetail } = useLoaderData() as LoaderHomeData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
 
+    console.log(movieHighlightDetail);
+
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
                 <Suspense fallback={<CardMovieHighlightLoader />}>
-                    <Await resolve={highlightMovies}>
-                        {(resolvedHighlightMovie) => (
+                    <Await resolve={movieHighlightDetail}>
+                        {(resolvedmovieHighlightMovie) => (
                             <CardMovieHighlight
-                                highlightMovies={
-                                    resolvedHighlightMovie.results && resolvedHighlightMovie.results[0]
-                                        ? resolvedHighlightMovie.results[0]
-                                        : undefined
-                                }
+                                highlightMovie={resolvedmovieHighlightMovie ?? undefined}
                                 data-testid="card-movie-highlight"
                             />
                         )}

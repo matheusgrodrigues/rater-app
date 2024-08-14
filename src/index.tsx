@@ -11,7 +11,7 @@ import Home from './app/Home';
 
 import { defaultTheme } from './config/theme';
 
-import { movieHighlightLoader } from './app/Home/loader';
+import { movieHighlightDetailLoader, movieHighlightLoader } from './app/Home/loader';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +20,7 @@ const router = createBrowserRouter(
                 element={<Home />}
                 loader={() =>
                     defer({
+                        movieHighlightDetail: movieHighlightDetailLoader(),
                         highlightMovies: movieHighlightLoader(),
                     })
                 }
