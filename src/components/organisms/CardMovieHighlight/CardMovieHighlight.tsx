@@ -9,6 +9,7 @@ import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
 import { MovieSchema } from '../../../schemas/MovieSchema';
+import { preparePopularity, prepareReleaseDate, prepareVoteAverage } from '../../../core/utils/helpers';
 
 interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -33,7 +34,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             data-testid="card-movie-higlight-badge"
                             config={{
                                 iconColor: 'yellow',
-                                label: '8.2',
+                                label: prepareVoteAverage(`${highlightMovies.vote_average}`),
                                 icon: 'star',
                             }}
                         />
@@ -56,14 +57,14 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             color: 'white',
                         }}
                     >
-                        Deadpool & Wolverine
+                        {highlightMovies.title}
                     </CardMovieHighlightTitle>
                     <CardMovieHighlightSpec data-testid="card-movie-higlight-spec">
                         <SpecRatingView
                             data-testid="card-movie-higlight-spec-rating-view"
                             config={{
-                                ratingLabel: '8.2',
-                                viewLabel: '120 mil',
+                                ratingLabel: prepareVoteAverage(`${highlightMovies.vote_average}`),
+                                viewLabel: preparePopularity(highlightMovies.popularity),
                             }}
                         />
 
@@ -71,7 +72,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                             data-testid="card-movie-higlight-spec-durat-cat-year"
                             config={{
                                 duratLabel: '2h 8m',
-                                yearLabel: '2024',
+                                yearLabel: prepareReleaseDate(highlightMovies.release_date),
                                 catLabel: 'Comedy, Action, Adventure, Superhero',
                             }}
                         />
@@ -85,9 +86,7 @@ export default function CardMovieHighlight({ highlightMovies, ...props }: CardMo
                                 size: 16,
                             }}
                         >
-                            Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
-                            Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
-                            universo da extinção.
+                            {highlightMovies.overview}
                         </CardMovieHighlightSinopseText>
                     </CardMovieHighlightSinopse>
                     <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
