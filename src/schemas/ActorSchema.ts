@@ -14,6 +14,10 @@ type KnownFor = {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    name?: string;
+    original_name?: string;
+    first_air_date?: string;
+    origin_country?: string[];
 };
 
 export interface ActorSchema {
@@ -25,7 +29,7 @@ export interface ActorSchema {
     original_name: string;
     popularity: number;
     profile_path: string;
-    known_for: Array<KnownFor>;
+    known_for: KnownFor[];
 }
 
 export interface ActorResponseSchema {

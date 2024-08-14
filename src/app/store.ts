@@ -4,14 +4,14 @@ import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
 // TODO: ler a doc para ver como centralizar todos os varios estados globais em apenas um.
-interface ActorStore {
-    actor: ActorResponseSchema | undefined;
+interface ActorsStore {
+    actors: ActorResponseSchema | undefined;
     setActor: (actor: ActorResponseSchema) => void;
 }
 
-export const useActorStore = create<ActorStore>((set) => ({
-    actor: undefined,
-    setActor: (actor) => set({ actor }),
+export const useActorsStore = create<ActorsStore>((set) => ({
+    actors: undefined,
+    setActor: (actors) => set({ actors }),
 }));
 
 interface RecommendedStore {

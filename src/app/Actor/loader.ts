@@ -1,18 +1,18 @@
-import { useActorStore } from '../store';
+import { useActorsStore } from '../store';
 
 import { ActorResponseSchema } from '../../schemas/ActorSchema';
 
 import ActorService from '../../services/ActorService';
 
 export interface LoaderActorData {
-    actor: Promise<ActorResponseSchema>;
+    actors: Promise<ActorResponseSchema>;
 }
 
 export const getActorLoader = async () => {
-    const { actor, setActor } = useActorStore.getState();
+    const { actors, setActor } = useActorsStore.getState();
 
-    if (actor) {
-        return actor;
+    if (actors) {
+        return actors;
     } else {
         const data = await ActorService.getAll();
         setActor(data);
