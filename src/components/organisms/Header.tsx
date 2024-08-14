@@ -33,7 +33,10 @@ export default function Header() {
                 }
 
                 return data.results;
-            } catch {}
+            } catch {
+            } finally {
+                filterRef.current?.setLoading(false);
+            }
         },
         [setFilteredMovies, filteredMovies]
     );
@@ -61,8 +64,6 @@ export default function Header() {
             const query = data.get('query');
 
             if (query) {
-                // filterRef.current?.setOpenList(true);
-                // filterButtonRef.current?.setCount(7);
                 try {
                     const encodeQuery = encodeURIComponent(`${query}`);
 
@@ -71,20 +72,29 @@ export default function Header() {
                     const filterQueryOnStore = filterMovies(encodeQuery, data!);
 
                     if (filterQueryOnStore.length > 0) {
-                        // TODO: aqui, já possui o registro na estore, setar a lista novamente sem buscar.
+                        filterRef.current?.setOpenList(true);
+                        filterRef.current?.setList(filterQueryOnStore);
+                        filterButtonRef.current?.setCount(filterQueryOnStore.length);
                     } else {
+                        filterRef.current?.setLoading(true);
+
                         const filterAndUpdateStore = await fetchAndUpdateFilterStore(encodeQuery);
                         const filterAgain = filterMovies(encodeQuery, filterAndUpdateStore!);
 
                         if (filterAgain.length > 0) {
-                            // TODO: aqui buscou novamente da api, setar a lista novamente aqui.
+                            filterRef.current?.setList(filterAgain);
+                            filterButtonRef.current?.setCount(filterAgain.length);
                         }
                     }
                 } catch {}
             }
         },
-        [fetchAndUpdateFilterStore, getFilterData]
+        [fetchAndUpdateFilterStore, getFilterData, filterMovies]
     );
+
+    const handleClose = useCallback(() => {
+        filterRef.current?.setOpenList(false);
+    }, []);
 
     /*
      *
@@ -94,6 +104,7 @@ export default function Header() {
      *
      * TODO: após finalizar os components do Settings, remover os comentários.
      *
+     * Por enquanto deixei para fechar a lista ao clicar no botão do filtro.
      */
     const handleOpenSettings = useCallback(() => {
         /*
@@ -103,17 +114,17 @@ export default function Header() {
             filterRef.current?.setToggleSettings();
         } */
 
-        return null;
-    }, []);
+        handleClose();
 
-    const handleClear = useCallback(() => {
-        const data = new FormData(formRef.current!);
+        filterButtonRef.current?.setCount(0);
+    }, [handleClose]);
 
-        if (!data.get('nome')) {
-            filterButtonRef.current?.setCount(0);
-            filterRef.current?.setOpenList(false);
+    const handleOpenListOnFocus = useCallback(() => {
+        if (filteredMovies) {
+            filterRef.current?.setOpenList(true);
+            filterButtonRef.current?.setCount(filteredMovies.length);
         }
-    }, []);
+    }, [filteredMovies]);
 
     return (
         <HeaderStyled data-testid="header">
@@ -142,7 +153,7 @@ export default function Header() {
                             placeholder="Pesquisar..."
                             type="text"
                             name="query"
-                            onKeyUp={handleClear}
+                            onFocus={handleOpenListOnFocus}
                         />
 
                         <FilterButton
