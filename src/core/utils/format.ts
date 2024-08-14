@@ -1,19 +1,40 @@
 import { MovieDetailGenre } from '../../schemas/MovieSchema';
 
-export const formatVoteAverage = (vote: string) => vote.slice(0, 3);
+export const formatVoteAverage = (vote: string) => {
+    let result = '';
 
-export const formatPopularity = (popularity: number) => {
-    const formatPopularity = popularity.toLocaleString('pt-BR', { maximumSignificantDigits: 3 }).split('.')[0];
+    if (vote) {
+        result = vote.slice(0, 3);
+    }
 
-    return `${formatPopularity} mil`;
+    return result;
 };
 
-export const formatReleaseDate = (release_date: string) => release_date.split('-')[0];
+export const formatPopularity = (popularity: number) => {
+    let result = '';
+
+    if (popularity) {
+        const formatPopularity = popularity.toLocaleString('pt-BR', { maximumSignificantDigits: 3 }).split('.')[0];
+        result = `${formatPopularity} mil`;
+    }
+
+    return result;
+};
+
+export const formatReleaseDate = (release_date: string) => {
+    let result = '';
+
+    if (release_date) {
+        result = release_date.split('-')[0];
+    }
+
+    return result;
+};
 
 export const formatGenre = (genres: MovieDetailGenre[]) => {
     let result = '';
 
-    if (genres.length > 0) {
+    if (genres && genres.length > 0) {
         const getGenreName = genres.map((genre) => genre.name);
 
         result = getGenreName.join(', ');
