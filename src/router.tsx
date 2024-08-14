@@ -8,8 +8,22 @@ import {
     highlightMovieDetailLoader,
     highlightMovieLoader,
     latestReleasesLoader,
+    LoaderHomeData,
     recommendedLoader,
 } from './app/Home/loader';
+
+import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+
+const loaderHomeData = {
+    highlightMovieDetail: highlightMovieDetailLoader(),
+    highlightMovies: highlightMovieLoader(),
+    latestReleases: latestReleasesLoader(),
+    recommended: recommendedLoader(),
+} as LoaderHomeData;
+
+const loaderActorData = {
+    actor: getActorLoader(),
+} as LoaderActorData;
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,10 +32,8 @@ const router = createBrowserRouter(
                 element={<Home />}
                 loader={() =>
                     defer({
-                        highlightMovieDetail: highlightMovieDetailLoader(),
-                        highlightMovies: highlightMovieLoader(),
-                        latestReleases: latestReleasesLoader(),
-                        recommended: recommendedLoader(),
+                        ...loaderHomeData,
+                        ...loaderActorData,
                     })
                 }
                 index

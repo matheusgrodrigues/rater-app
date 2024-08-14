@@ -27,3 +27,10 @@ export interface ActorSchema {
     profile_path: string;
     known_for: Array<KnownFor>;
 }
+
+export interface ActorResponseSchema {
+    page: number;
+    results: ActorSchema[];
+    total_pages: number;
+    total_results: number;
+}
