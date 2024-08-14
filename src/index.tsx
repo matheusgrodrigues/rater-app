@@ -7,7 +7,7 @@ import './index.css';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
-import App from './app/Home';
+import Home from './app/Home';
 
 import { defaultTheme } from './config/theme';
 
@@ -17,10 +17,10 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <Route errorElement={<GlobalError />} element={<RootLayout />} path="/">
             <Route
-                element={<App />}
+                element={<Home />}
                 loader={() =>
                     defer({
-                        highlightMovie: movieHighlightLoader(),
+                        highlightMovies: movieHighlightLoader(),
                     })
                 }
                 index

@@ -1,7 +1,6 @@
-import MovieService from '../../services/MovieService';
-import { MovieResponseSchema } from '../../schemas/MovieSchema';
-
 import useHighlightMovieStore from '../store';
+import { MovieResponseSchema } from '../../schemas/MovieSchema';
+import MovieService from '../../services/MovieService';
 
 export interface LoaderHomeData {
     highlightMovies: Promise<MovieResponseSchema>;
