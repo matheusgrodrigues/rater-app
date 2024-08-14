@@ -25,17 +25,33 @@ export default function Header() {
         async (query: string) => {
             try {
                 const data = await MovieService.filterByQuery(query);
-                setFilteredMovies(data.results);
+
+                if (filteredMovies) {
+                    setFilteredMovies([...filteredMovies, ...data.results]);
+                } else {
+                    setFilteredMovies(data.results);
+                }
+
                 return data.results;
             } catch {}
         },
-        [setFilteredMovies]
+        [setFilteredMovies, filteredMovies]
     );
 
     const getFilterData = useCallback(
         async (query: string): Promise<MovieSchema[] | undefined> => filteredMovies ?? fetchAndUpdateFilterStore(query),
         [fetchAndUpdateFilterStore, filteredMovies]
     );
+
+    const filterMovies = useCallback((query: string, movies: MovieSchema[]) => {
+        const normalizedQuery = query.toLowerCase().trim();
+
+        return movies.filter((movie) => {
+            const result = movie.title ? movie.title.toLowerCase() : '';
+
+            return result.includes(normalizedQuery);
+        });
+    }, []);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
         async (e) => {
@@ -48,13 +64,26 @@ export default function Header() {
                 // filterRef.current?.setOpenList(true);
                 // filterButtonRef.current?.setCount(7);
                 try {
-                    const data = await getFilterData(`${query}`);
+                    const encodeQuery = encodeURIComponent(`${query}`);
 
-                    console.log(data?.length);
+                    const data = await getFilterData(encodeQuery);
+
+                    const filterQueryOnStore = filterMovies(encodeQuery, data!);
+
+                    if (filterQueryOnStore.length > 0) {
+                        // TODO: aqui, já possui o registro na estore, setar a lista novamente sem buscar.
+                    } else {
+                        const filterAndUpdateStore = await fetchAndUpdateFilterStore(encodeQuery);
+                        const filterAgain = filterMovies(encodeQuery, filterAndUpdateStore!);
+
+                        if (filterAgain.length > 0) {
+                            // TODO: aqui buscou novamente da api, setar a lista novamente aqui.
+                        }
+                    }
                 } catch {}
             }
         },
-        [getFilterData]
+        [fetchAndUpdateFilterStore, getFilterData]
     );
 
     /*
@@ -89,6 +118,8 @@ export default function Header() {
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>
+                <button onClick={() => fetchAndUpdateFilterStore('homem de ferro')}>FetchStore</button>
+
                 <Link to={{ pathname: '/' }}>
                     <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
                 </Link>
