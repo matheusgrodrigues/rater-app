@@ -13,9 +13,10 @@ import Image from '../../atoms/Image';
 import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
-import { MovieSchema } from '../../../schemas/MovieSchema';
 import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
+
 import { formatVoteAverage } from '../../../core/utils/format';
+import { MovieSchema } from '../../../schemas/MovieSchema';
 
 interface CarrouselMovieProps extends SwiperProps {
     enableVerticalOnDesktop?: boolean;

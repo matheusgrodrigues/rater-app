@@ -2,6 +2,7 @@ import { createMemoryRouter, RouteObject, RouterProvider } from 'react-router-do
 import Home from '../../../app/Home';
 import { act, render, screen, waitFor } from '../../../core/utils/test-utils/testing-library';
 import fetchMock from 'jest-fetch-mock';
+import { LoaderHomeData } from '../../../app/Home/loader';
 
 interface SwiperMockProps {
     children: React.ReactNode;
@@ -26,7 +27,9 @@ const routes: RouteObject[] = [
         element: <Home />,
         loader: () => ({
             highlightMovies: Promise.resolve({ results: [] }),
+            highlightMovieDetail: Promise.resolve({ results: [] }),
             latestReleases: Promise.resolve({ results: [] }),
+            recommended: Promise.resolve({ results: [] }),
         }),
     },
 ];

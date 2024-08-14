@@ -12,7 +12,6 @@ import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchem
 export interface LoaderHomeData {
     highlightMovies: Promise<MovieResponseSchema>;
     highlightMovieDetail: Promise<MovieDetailSchema>;
-    movieDetail: Promise<MovieDetailSchema>;
     latestReleases: Promise<MovieResponseSchema>;
     recommended: Promise<MovieResponseSchema>;
 }
