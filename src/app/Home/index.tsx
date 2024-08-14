@@ -52,7 +52,16 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <CarrouselMovie enableVerticalOnDesktop />
+                        <Suspense fallback={<CardMovieHighlightLoader />}>
+                            <Await resolve={highlightMovies}>
+                                {(resolvedHighlightsToo) => (
+                                    <CarrouselMovie
+                                        enableVerticalOnDesktop
+                                        movies={resolvedHighlightsToo.results ?? undefined}
+                                    />
+                                )}
+                            </Await>
+                        </Suspense>
                     </div>
                 </SectionHighligsToo>
             </SectionHighlight>
@@ -104,7 +113,16 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie ref={carrouselLatestReleaseRef} />
+                    <Suspense fallback={<CardMovieHighlightLoader />}>
+                        <Await resolve={highlightMovies}>
+                            {(resolvedLatestReleases) => (
+                                <CarrouselMovie
+                                    movies={resolvedLatestReleases.results ?? undefined}
+                                    ref={carrouselLatestReleaseRef}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
 
@@ -155,7 +173,16 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <CarrouselMovie ref={carrouselRecommended} />
+                    <Suspense fallback={<CardMovieHighlightLoader />}>
+                        <Await resolve={highlightMovies}>
+                            {(resolvedRecommended) => (
+                                <CarrouselMovie
+                                    movies={resolvedRecommended.results ?? undefined}
+                                    ref={carrouselRecommended}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </div>
             </SectionCarrousel>
 
