@@ -2,6 +2,8 @@ import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import CarrouselMovie from '../../../components/organisms/CarrouselMovie';
 
+import moviesMock from '../../../__mocks__/Movies.mock';
+
 interface SwiperMockProps {
     children: React.ReactNode;
 }
@@ -13,7 +15,7 @@ jest.mock('swiper/react', () => ({
 }));
 
 describe('Deve renderizar o CarrouselMovie corretamente', () => {
-    beforeEach(() => render(<CarrouselMovie data-testid="carrousel-movie" />));
+    beforeEach(() => render(<CarrouselMovie data-testid="carrousel-movie" movies={moviesMock} />));
 
     it('Deve renderizar o Carrousel', () => {
         const carrouselMovie = screen.getByTestId('carrousel-movie');
