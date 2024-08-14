@@ -14,7 +14,7 @@ export const movieHighlightLoader = async () => {
     if (movies) {
         return movies;
     } else {
-        const data = await MovieService.getHighlightMovies();
+        const data = await MovieService.getHighlights();
         setMovies(data);
 
         return data;
@@ -27,7 +27,7 @@ export const movieHighlightDetailLoader = async () => {
     try {
         const highlightMovies = await movieHighlightLoader();
 
-        const data = await MovieService.getMovieById(highlightMovies.results[0].id);
+        const data = await MovieService.getById(highlightMovies.results[0].id);
 
         if (movieHighlightDetail) {
             return movieHighlightDetail;
