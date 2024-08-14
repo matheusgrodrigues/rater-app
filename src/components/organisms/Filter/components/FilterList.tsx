@@ -5,19 +5,29 @@ import Heading from '../../../atoms/Heading';
 import Image from '../../../atoms/Image';
 import Badge from '../../../atoms/Badge';
 
+import { MovieSchema } from '../../../../schemas/MovieSchema';
+
+import { formatVoteAverage } from '../../../../core/utils/format';
+
 export interface FilterListRef {
     setOpenList: React.Dispatch<React.SetStateAction<boolean>>;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    setList: React.Dispatch<React.SetStateAction<MovieSchema[]>>;
 }
 
 interface FilterListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
+    const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [list, setList] = useState<MovieSchema[]>([]);
 
     useImperativeHandle(
         ref,
         () => ({
             setOpenList: setIsOpen,
+            setLoading,
+            setList,
         }),
         []
     );
@@ -27,41 +37,49 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
             {isOpen && (
                 <FilterListStyled {...props}>
                     <Heading config={{ fontSize: '12', fontWeight: '500', color: 'secondary-accessible-text-12' }}>
-                        Resultados
+                        {list.length > 0 && 'Resultados'}
                     </Heading>
 
                     <CardMovieContainer>
-                        {fake_data.map((data) => (
-                            <CardMovieList key={data.id}>
-                                <CardMovie>
-                                    <Image data-testid="atom-image" src={data.src} />
-                                </CardMovie>
-
-                                <CardMovieSpec>
-                                    <CardMovieSpecHeader>
-                                        <Heading
-                                            config={{
-                                                fontSize: '12',
-                                                fontWeight: '500',
-                                                color: 'secondary-accessible-text-12',
-                                            }}
-                                        >
-                                            {data.title}
-                                        </Heading>
-
-                                        <CardMovieBadgeOverride
-                                            data-testid="card-movie-badge"
-                                            config={{
-                                                iconSize: 14,
-                                                iconColor: 'yellow',
-                                                label: `${data.rating}`,
-                                                icon: 'star',
-                                            }}
+                        {loading ? (
+                            <CardMovieLoader>Carregando...</CardMovieLoader>
+                        ) : (
+                            list.length > 0 &&
+                            list.map((movie) => (
+                                <CardMovieList key={movie.id}>
+                                    <CardMovie>
+                                        <Image
+                                            data-testid="atom-image"
+                                            src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w300/${movie.poster_path}`}
                                         />
-                                    </CardMovieSpecHeader>
-                                </CardMovieSpec>
-                            </CardMovieList>
-                        ))}
+                                    </CardMovie>
+
+                                    <CardMovieSpec>
+                                        <CardMovieSpecHeader>
+                                            <Heading
+                                                config={{
+                                                    fontSize: '12',
+                                                    fontWeight: '500',
+                                                    color: 'secondary-accessible-text-12',
+                                                }}
+                                            >
+                                                {movie.title}
+                                            </Heading>
+
+                                            <CardMovieBadgeOverride
+                                                data-testid="card-movie-badge"
+                                                config={{
+                                                    iconSize: 14,
+                                                    iconColor: 'yellow',
+                                                    label: formatVoteAverage(`${movie.vote_average}`),
+                                                    icon: 'star',
+                                                }}
+                                            />
+                                        </CardMovieSpecHeader>
+                                    </CardMovieSpec>
+                                </CardMovieList>
+                            ))
+                        )}
                     </CardMovieContainer>
                 </FilterListStyled>
             )}
@@ -70,51 +88,6 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
 });
 
 export default FilterList;
-
-const fake_data = [
-    {
-        id: 1,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 2,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 3,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 4,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 5,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 6,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-    {
-        id: 7,
-        src: 'https://image.tmdb.org/t/p/w300/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg%22',
-        title: 'Iron Man',
-        rating: 7.2,
-    },
-];
 
 const FilterListStyled = styled.div`
     height: ${({ theme }) => theme.utils.pxToRem(251)};
@@ -136,6 +109,15 @@ const CardMovieContainer = styled.div`
     overflow-y: auto;
 `;
 
+const CardMovieLoader = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: ${({ theme }) => theme.utils.pxToRem(251 / 1.5)};
+    z-index: 1;
+`;
+
 const CardMovieList = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
@@ -144,6 +126,8 @@ const CardMovieList = styled.div`
     padding: ${({ theme }) => theme.ref.padding['4']};
 
     transition: background 0.3s ease-out;
+
+    z-index: 2;
 
     &:hover {
         transition: background 0.3s ease-in;

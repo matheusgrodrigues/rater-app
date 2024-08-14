@@ -9,20 +9,91 @@ import Icon from '../atoms/Icon';
 
 import Filter, { FilterRef } from './Filter/Filter';
 
+import { useFilteredMovieStore } from '../../app/store';
+
+import MovieService from '../../services/MovieService';
+import { MovieSchema } from '../../schemas/MovieSchema';
+
 export default function Header() {
+    const { filteredMovies, setFilteredMovies } = useFilteredMovieStore();
+
     const filterButtonRef = useRef<FilterButtonRef>(null);
     const filterRef = useRef<FilterRef>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback((e) => {
-        e.preventDefault();
+    const fetchAndUpdateFilterStore = useCallback(
+        async (query: string) => {
+            try {
+                const data = await MovieService.filterByQuery(query);
 
-        const data = new FormData(e.currentTarget);
+                if (filteredMovies) {
+                    setFilteredMovies([...filteredMovies, ...data.results]);
+                } else {
+                    setFilteredMovies(data.results);
+                }
 
-        if (data.get('nome')) {
-            filterRef.current?.setOpenList(true);
-            filterButtonRef.current?.setCount(7);
-        }
+                return data.results;
+            } catch {
+            } finally {
+                filterRef.current?.setLoading(false);
+            }
+        },
+        [setFilteredMovies, filteredMovies]
+    );
+
+    const getFilterData = useCallback(
+        async (query: string): Promise<MovieSchema[] | undefined> => filteredMovies ?? fetchAndUpdateFilterStore(query),
+        [fetchAndUpdateFilterStore, filteredMovies]
+    );
+
+    const filterMovies = useCallback((query: string, movies: MovieSchema[]) => {
+        const normalizedQuery = query.toLowerCase().trim();
+
+        return movies.filter((movie) => {
+            const result = movie.title ? movie.title.toLowerCase() : '';
+
+            return result.includes(normalizedQuery);
+        });
+    }, []);
+
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
+        async (e) => {
+            e.preventDefault();
+
+            const data = new FormData(e.currentTarget);
+            const query = data.get('query');
+
+            if (query) {
+                try {
+                    const encodeQuery = encodeURIComponent(`${query}`);
+
+                    const data = await getFilterData(encodeQuery);
+
+                    const filterQueryOnStore = filterMovies(encodeQuery, data!);
+
+                    if (filterQueryOnStore.length > 0) {
+                        filterRef.current?.setOpenList(true);
+                        filterRef.current?.setList(filterQueryOnStore);
+                        filterButtonRef.current?.setCount(filterQueryOnStore.length);
+                    } else {
+                        filterRef.current?.setLoading(true);
+
+                        const filterAndUpdateStore = await fetchAndUpdateFilterStore(encodeQuery);
+                        const filterAgain = filterMovies(encodeQuery, filterAndUpdateStore!);
+
+                        if (filterAgain.length > 0) {
+                            filterRef.current?.setList(filterAgain);
+                            filterButtonRef.current?.setCount(filterAgain.length);
+                        }
+                    }
+                } catch {}
+            }
+        },
+        [fetchAndUpdateFilterStore, getFilterData, filterMovies]
+    );
+
+    const handleClose = useCallback(() => {
+        filterRef.current?.setOpenList(false);
     }, []);
 
     /*
@@ -33,6 +104,7 @@ export default function Header() {
      *
      * TODO: após finalizar os components do Settings, remover os comentários.
      *
+     * Por enquanto deixei para fechar a lista ao clicar no botão do filtro.
      */
     const handleOpenSettings = useCallback(() => {
         /*
@@ -42,17 +114,17 @@ export default function Header() {
             filterRef.current?.setToggleSettings();
         } */
 
-        return null;
-    }, []);
+        handleClose();
 
-    const handleClear = useCallback(() => {
-        const data = new FormData(formRef.current!);
+        filterButtonRef.current?.setCount(0);
+    }, [handleClose]);
 
-        if (!data.get('nome')) {
-            filterButtonRef.current?.setCount(0);
-            filterRef.current?.setOpenList(false);
+    const handleOpenListOnFocus = useCallback(() => {
+        if (filteredMovies) {
+            filterRef.current?.setOpenList(true);
+            filterButtonRef.current?.setCount(filteredMovies.length);
         }
-    }, []);
+    }, [filteredMovies]);
 
     return (
         <HeaderStyled data-testid="header">
@@ -80,8 +152,8 @@ export default function Header() {
                             data-testid="header-form-search-input"
                             placeholder="Pesquisar..."
                             type="text"
-                            name="nome"
-                            onKeyUp={handleClear}
+                            name="query"
+                            onFocus={handleOpenListOnFocus}
                         />
 
                         <FilterButton

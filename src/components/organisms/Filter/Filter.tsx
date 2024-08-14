@@ -4,10 +4,14 @@ import styled from 'styled-components';
 import FilterList, { FilterListRef } from './components/FilterList';
 import FilterSettings, { FilterSettingsRef } from './components/FilterSettings';
 
+import { MovieSchema } from '../../../schemas/MovieSchema';
+
 export interface FilterRef {
     setToggleSettings: () => void;
     setOpenSettings: (state: boolean) => void;
     setOpenList: (state: boolean) => void;
+    setLoading: (state: boolean) => void;
+    setList: (movieList: MovieSchema[]) => void;
 }
 
 interface FilterProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
@@ -22,6 +26,8 @@ const Filter: React.ForwardRefRenderFunction<FilterRef, FilterProps> = (props, r
             setToggleSettings: () => filterSettingsRef.current?.setToggleSettings(),
             setOpenSettings: (state) => filterSettingsRef.current?.setIsOpen(state),
             setOpenList: (state) => filterListRef.current?.setOpenList(state),
+            setLoading: (state) => filterListRef.current?.setLoading(state),
+            setList: (movieList) => filterListRef.current?.setList(movieList),
         }),
         []
     );
