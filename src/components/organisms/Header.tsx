@@ -8,7 +8,6 @@ import Input from '../atoms/Input';
 import Icon from '../atoms/Icon';
 
 import Filter, { FilterRef } from './Filter/Filter';
-import useBearStore from '../../app/store';
 
 export default function Header() {
     const filterButtonRef = useRef<FilterButtonRef>(null);
@@ -54,10 +53,6 @@ export default function Header() {
             filterRef.current?.setOpenList(false);
         }
     }, []);
-
-    const movies = useBearStore((state) => state.bears);
-
-    console.log(movies);
 
     return (
         <HeaderStyled data-testid="header">

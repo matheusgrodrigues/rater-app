@@ -13,11 +13,11 @@ import Icon from '../../components/atoms/Icon';
 import { LoaderHomeData } from './loader';
 
 function Home() {
+    const { highlightMovies } = useLoaderData() as LoaderHomeData;
+
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
-
-    const { highlightMovies } = useLoaderData() as LoaderHomeData;
 
     console.log(highlightMovies);
 

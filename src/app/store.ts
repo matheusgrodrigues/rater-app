@@ -1,10 +1,15 @@
 import { create } from 'zustand';
-import { combine } from 'zustand/middleware';
 
-const useBearStore = create(
-    combine({ bears: 0 }, (set) => ({
-        increase: (by: number) => set((state) => ({ bears: state.bears + by })),
-    }))
-);
+import { MovieResponseSchema } from '../schemas/MovieSchema';
 
-export default useBearStore;
+interface MovieHighlightStore {
+    movies: MovieResponseSchema | null;
+    setMovies: (movies: MovieResponseSchema) => void;
+}
+
+const useHighlightMovieStore = create<MovieHighlightStore>((set) => ({
+    movies: null,
+    setMovies: (movies) => set({ movies }),
+}));
+
+export default useHighlightMovieStore;

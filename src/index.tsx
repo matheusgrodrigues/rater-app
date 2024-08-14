@@ -18,11 +18,11 @@ const router = createBrowserRouter(
         <Route errorElement={<GlobalError />} element={<RootLayout />} path="/">
             <Route
                 element={<App />}
-                loader={() => {
-                    const highlightMovies = movieHighlightLoader();
-
-                    return defer({ highlightMovies });
-                }}
+                loader={() =>
+                    defer({
+                        highlightMovie: movieHighlightLoader(),
+                    })
+                }
                 index
             />
         </Route>
