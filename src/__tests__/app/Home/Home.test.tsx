@@ -30,6 +30,7 @@ const routes: RouteObject[] = [
             highlightMovieDetail: Promise.resolve({ results: [] }),
             latestReleases: Promise.resolve({ results: [] }),
             recommended: Promise.resolve({ results: [] }),
+            actors: Promise.resolve({ results: [] }),
         }),
     },
 ];

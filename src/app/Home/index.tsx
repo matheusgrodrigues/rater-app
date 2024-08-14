@@ -22,8 +22,6 @@ function Home() {
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
     const carrouselActor = useRef<CarrouselActorRef>(null);
 
-    console.log(actors);
-
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
