@@ -13,6 +13,7 @@
 ### Processos
 
 -  [Planejamento](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/processos/PLANEJAMENTO.md)
+-  [Considerações Finais](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/processos/CONSIDERACOES-FINAIS.md)
 
 ### ⚡ Instalação
 
