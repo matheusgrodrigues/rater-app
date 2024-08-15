@@ -15,7 +15,11 @@ export default function CardTrailer({ highlightMovie, ...props }: CardTrailerPro
         <CardTrailerStyled movie={highlightMovie} {...props}>
             {highlightMovie ? (
                 <CardTrailerContent>
-                    <ButtonOverride config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
+                    <ButtonOverride
+                        data-testid="btn-assistir-ao-trailer"
+                        config={{ variant: 'transparent-button' }}
+                        style={{ zIndex: 2 }}
+                    >
                         <span>Assitir ao trailer</span>
 
                         <Icon

@@ -2,13 +2,15 @@ import { Suspense } from 'react';
 import { Await } from 'react-router';
 import styled from 'styled-components';
 
-import CardTrailerLoader from '../../components/organisms/CardTrailer/CardMovieHightlightLoader';
-import CardTrailer from '../../components/organisms/CardTrailer/CardMovieHighlight';
+import CardTrailerLoader from '../../components/organisms/CardTrailer/CardTrailerLoader';
+import CardTrailer from '../../components/organisms/CardTrailer/CardTrailer';
 
 import useRatterStore from '../store';
+import CarrouselCategory from '../../components/organisms/CarrouselCategory';
+import CarrouselCardCategoryLoader from '../../components/organisms/CarrouselCategory/CarrouselCardCategoryLoader';
 
 export default function Movie() {
-    const { movieHighlightDetail } = useRatterStore();
+    const { movieHighlightDetail, hightlightMovies } = useRatterStore();
 
     return (
         <>
@@ -21,6 +23,20 @@ export default function Movie() {
                     </Await>
                 </Suspense>
             </SectionTrailer>
+
+            <SectionCarrousel data-testid="section-category">
+                <div>
+                    <Suspense fallback={<CarrouselCardCategoryLoader />}>
+                        <Await resolve={hightlightMovies}>
+                            {(resolvedHightlightMovies) => (
+                                <CarrouselCategory
+                                    movies={resolvedHightlightMovies ? resolvedHightlightMovies.results : undefined}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
+                </div>
+            </SectionCarrousel>
         </>
     );
 }
@@ -31,7 +47,7 @@ const SectionTrailer = styled.div`
     flex-direction: column;
     display: flex;
 
-    padding: 0 ${({ theme }) => theme.ref.padding['12']};
+    padding: ${({ theme }) => theme.ref.padding['12']};
 
     ${({ theme }) => theme.utils.screen('md', `padding-top: 0 !important;`)}
 
@@ -47,4 +63,14 @@ const SectionTrailer = styled.div`
 
         `
         )}
+`;
+
+const SectionCarrousel = styled.div`
+    flex-direction: column;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['24']};
+
+    ${({ theme }) => theme.utils.container()}
+
+    padding-top:0 !important;
 `;

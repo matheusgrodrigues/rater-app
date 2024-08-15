@@ -1,9 +1,9 @@
+import { MemoryRouter } from 'react-router';
+
 import { screen, render, fireEvent } from '../../../core/utils/test-utils/testing-library';
 
 import Header from '../../../components/organisms/Header';
 import Filter from '../../../components/organisms/Filter/Filter';
-
-import { MemoryRouter } from 'react-router';
 
 describe('Deve renderizar o header, corretamente', () => {
     beforeEach(() =>
@@ -51,7 +51,11 @@ describe('Deve renderizar o header, corretamente', () => {
     });
 
     it('Deve abrir o filtro ao clicar no botão pesquisar', () => {
-        render(<Filter />);
+        render(
+            <MemoryRouter>
+                <Filter />
+            </MemoryRouter>
+        );
 
         const button = screen.getByTestId('header-form-search-btn-search');
 
