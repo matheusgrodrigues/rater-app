@@ -20,7 +20,7 @@ function Home() {
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommended = useRef<CarrouselMovieRef>(null);
-    const carrouselActor = useRef<CarrouselActorRef>(null);
+    const carrouselActorRef = useRef<CarrouselActorRef>(null);
 
     return (
         <>
@@ -199,7 +199,7 @@ function Home() {
                     <ButtonNextPrev>
                         <Button
                             data-testid="section-celebrities-prev"
-                            onClick={() => carrouselActor.current?.slidePrev()}
+                            onClick={() => carrouselActorRef.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -215,7 +215,7 @@ function Home() {
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="section-celebrities-next"
-                            onClick={() => carrouselActor.current?.slideNext()}
+                            onClick={() => carrouselActorRef.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -233,7 +233,7 @@ function Home() {
                     <Suspense fallback={<CardActorLoader />}>
                         <Await resolve={actors}>
                             {(resolvedActors) => (
-                                <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActor} />
+                                <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActorRef} />
                             )}
                         </Await>
                     </Suspense>
