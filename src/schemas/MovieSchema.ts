@@ -1,3 +1,5 @@
+import { ActorSchema } from './ActorSchema';
+
 export interface MovieSchema {
     adult: false;
     backdrop_path: string;
@@ -72,4 +74,9 @@ export interface MovieDetailSchema {
     video: boolean;
     vote_average: number;
     vote_count: number;
+}
+
+export interface MovieDetailCast {
+    id: number;
+    cast: Array<ActorSchema>;
 }

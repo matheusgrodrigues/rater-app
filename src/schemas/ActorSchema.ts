@@ -30,6 +30,10 @@ export interface ActorSchema {
     popularity: number;
     profile_path: string;
     known_for: KnownFor[];
+    cast_id?: number;
+    character?: number;
+    credit_id?: string;
+    order?: number;
 }
 
 export interface ActorResponseSchema {

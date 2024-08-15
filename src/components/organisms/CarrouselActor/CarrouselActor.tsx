@@ -20,6 +20,7 @@ export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 interface CarrouselActorProps extends SwiperProps {
     actors: ActorSchema[];
+    isCast?: boolean;
 }
 
 const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (
@@ -72,12 +73,13 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                                     />
                                 </div>
 
-                                {/* TODO: validar para somente aparecer no filmeDetail */}
-                                <ParagraphOverride
-                                    config={{ fontWeight: 400, color: 'secondary-accessible-text-11', size: 12 }}
-                                >
-                                    Wade Wilson
-                                </ParagraphOverride>
+                                {actor.character && (
+                                    <ParagraphOverride
+                                        config={{ fontWeight: 400, color: 'secondary-accessible-text-11', size: 12 }}
+                                    >
+                                        Wade Wilson
+                                    </ParagraphOverride>
+                                )}
                             </HeadingOverride>
                         </CardActor>
                     </SwiperSlideOverride>
