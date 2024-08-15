@@ -1,6 +1,6 @@
 import { MovieDetailGenre } from '../../schemas/MovieSchema';
 
-export const formatVoteAverage = (vote: string) => {
+export const formatVoteAverage = (vote?: string) => {
     let result = '';
 
     if (vote) {
@@ -10,7 +10,7 @@ export const formatVoteAverage = (vote: string) => {
     return result;
 };
 
-export const formatPopularity = (popularity: number) => {
+export const formatPopularity = (popularity?: number) => {
     let result = '';
 
     if (popularity) {
@@ -21,7 +21,7 @@ export const formatPopularity = (popularity: number) => {
     return result;
 };
 
-export const formatReleaseDate = (release_date: string) => {
+export const formatReleaseDate = (release_date?: string) => {
     let result = '';
 
     if (release_date) {
@@ -31,7 +31,7 @@ export const formatReleaseDate = (release_date: string) => {
     return result;
 };
 
-export const formatGenre = (genres: MovieDetailGenre[]) => {
+export const formatGenre = (genres?: MovieDetailGenre[]) => {
     let result = '';
 
     if (genres && genres.length > 0) {
@@ -43,9 +43,25 @@ export const formatGenre = (genres: MovieDetailGenre[]) => {
     return result;
 };
 
-export const formatRuntime = (runtime: number) => {
-    const hours = Math.floor(runtime / 60);
-    const mins = runtime % 60;
+export const formatRuntime = (runtime?: number) => {
+    let result = '';
 
-    return `${hours}h ${mins}m`;
+    if (runtime) {
+        const hours = Math.floor(runtime / 60);
+        const mins = runtime % 60;
+
+        result = `${hours}h ${mins}m`;
+    }
+
+    return result;
+};
+
+export const formatYear = (year?: string) => {
+    let result = '';
+
+    if (year) {
+        result = year.split('-')[0];
+    }
+
+    return result;
 };

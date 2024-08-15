@@ -17,7 +17,7 @@ O projeto consiste em 3 telas principais e algumas funcionalidades, são elas:
 
 -  **Slides**
 
-   -  Carrousel exibindo 5 components de filme por padrão, com o protão next/prev.
+   -  Carrousel exibindo 5 components de filme por padrão, com o botão next/prev.
 
 -  **Página do Ator**
    -  Nesta página, irá exibir apenas os filmes e séries que tem relação com o ator e algumas breves informações sobre.

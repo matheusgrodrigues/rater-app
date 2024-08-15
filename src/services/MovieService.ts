@@ -1,6 +1,6 @@
 import Middleware from '../core/middleware';
 
-import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
 
 const api_url = process.env.REACT_APP_TMDB_API_URL;
 
@@ -45,6 +45,26 @@ const MovieService = {
         console.log(`${api_url}/search/movie?language=pt-BR&page=1&${query}`);
         const req = await Middleware.request({
             url: `${api_url}/search/movie?language=pt-BR&page=1&query=${query}`,
+        });
+
+        const resp = await req.json();
+
+        return resp;
+    },
+
+    getCastByMovieId: async (movie_id: number): Promise<MovieDetailCast> => {
+        const req = await Middleware.request({
+            url: `${api_url}/movie/${movie_id}/credits?language=pt-BR&page=1`,
+        });
+
+        const resp = await req.json();
+
+        return resp;
+    },
+
+    getSimilarByMovieId: async (movie_id: number): Promise<MovieResponseSchema> => {
+        const req = await Middleware.request({
+            url: `${api_url}/movie/${movie_id}/similar?language=pt-BR&page=1`,
         });
 
         const resp = await req.json();

@@ -1,7 +1,10 @@
+import { MemoryRouter } from 'react-router';
+
 import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
-import CarrouselActor from '../../../components/organisms/CarrouselActor';
 import { actorMock } from '../../../__mocks__/actor.mock';
+
+import CarrouselActor from '../../../components/organisms/CarrouselActor';
 
 interface SwiperMockProps {
     children: React.ReactNode;
@@ -14,7 +17,13 @@ jest.mock('swiper/react', () => ({
 }));
 
 describe('Deve renderizar o CarrouselActor corretamente', () => {
-    beforeEach(() => render(<CarrouselActor data-testid="carrousel-actor" actors={actorMock.results} />));
+    beforeEach(() =>
+        render(
+            <MemoryRouter>
+                <CarrouselActor data-testid="carrousel-actor" actors={actorMock.results} />
+            </MemoryRouter>
+        )
+    );
 
     it('Deve renderizar o Carrousel', () => {
         const carrouselActor = screen.getByTestId('carrousel-actor');

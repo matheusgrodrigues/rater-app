@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 import { SwiperProps, SwiperSlide } from 'swiper/react';
@@ -13,17 +14,21 @@ import Image from '../../atoms/Image';
 
 import { ActorSchema } from '../../../schemas/ActorSchema';
 import CardActorLoader from './CardActorLoader';
+import Paragraph from '../../atoms/Paragraph';
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 interface CarrouselActorProps extends SwiperProps {
     actors: ActorSchema[];
+    isCast?: boolean;
 }
 
 const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, CarrouselActorProps> = (
     { actors, ...props },
     ref
 ) => {
+    const navigate = useNavigate();
+
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
@@ -45,7 +50,7 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
         >
             {actors && actors.length > 0 ? (
                 actors.map((actor) => (
-                    <SwiperSlideOverride key={actor.id}>
+                    <SwiperSlideOverride onClick={() => navigate(`/actor/${actor.id}`)} key={actor.id}>
                         <CardActor>
                             <ImageOverride src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`} />
 
@@ -56,15 +61,25 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                                     color: 'white',
                                 }}
                             >
-                                {actor.name}
-                                <StrongAgeOverride
-                                    config={{
-                                        color: 'secondary-accessible-text-11',
-                                        fontWeight: 400,
-                                        label: '47',
-                                        size: 12,
-                                    }}
-                                />
+                                <div>
+                                    {actor.name}
+                                    <StrongAgeOverride
+                                        config={{
+                                            color: 'secondary-accessible-text-11',
+                                            fontWeight: 400,
+                                            label: '47',
+                                            size: 12,
+                                        }}
+                                    />
+                                </div>
+
+                                {actor.character && (
+                                    <ParagraphOverride
+                                        config={{ fontWeight: 400, color: 'secondary-accessible-text-11', size: 12 }}
+                                    >
+                                        Wade Wilson
+                                    </ParagraphOverride>
+                                )}
                             </HeadingOverride>
                         </CardActor>
                     </SwiperSlideOverride>
@@ -84,6 +99,8 @@ const SwiperSlideOverride = styled(SwiperSlide)`
 
     ${({ theme }) =>
         theme.utils.screen('md', `width: ${theme.utils.pxToRem(268)}; height: ${theme.utils.pxToRem(253)};`)}
+
+    cursor: pointer;
 `;
 
 const CardActor = styled.div`
@@ -132,7 +149,7 @@ const HeadingOverride = styled(Heading)`
     left: ${({ theme }) => theme.ref.spacing['12']};
     bottom: ${({ theme }) => theme.ref.spacing['12']};
 
-    align-items: center;
+    flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['4']};
 
@@ -143,4 +160,8 @@ const StrongAgeOverride = styled(Strong)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
 
     z-index: 2;
+`;
+
+const ParagraphOverride = styled(Paragraph)`
+    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['20']};`)}
 `;
