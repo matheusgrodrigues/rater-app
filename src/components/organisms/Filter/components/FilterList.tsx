@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
 
 import Heading from '../../../atoms/Heading';
 import Image from '../../../atoms/Image';
@@ -21,6 +22,8 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [list, setList] = useState<MovieSchema[]>([]);
+
+    const navigate = useNavigate();
 
     useImperativeHandle(
         ref,
@@ -46,7 +49,7 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
                         ) : (
                             list.length > 0 &&
                             list.map((movie) => (
-                                <CardMovieList key={movie.id}>
+                                <CardMovieList onClick={() => navigate(`/movie/${movie.id}`)} key={movie.id}>
                                     <CardMovie>
                                         <Image
                                             data-testid="atom-image"
@@ -133,6 +136,8 @@ const CardMovieList = styled.div`
         transition: background 0.3s ease-in;
         background-color: ${({ theme }) => theme.ref.colors['secondary-interactive-3']};
     }
+
+    cursor: pointer;
 `;
 
 const CardMovie = styled.div`

@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 import { SwiperProps, SwiperSlide } from 'swiper/react';
@@ -24,6 +25,8 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
     { actors, ...props },
     ref
 ) => {
+    const navigate = useNavigate();
+
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
@@ -45,7 +48,7 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
         >
             {actors && actors.length > 0 ? (
                 actors.map((actor) => (
-                    <SwiperSlideOverride key={actor.id}>
+                    <SwiperSlideOverride onClick={() => navigate(`/actor/${actor.id}`)} key={actor.id}>
                         <CardActor>
                             <ImageOverride src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`} />
 
@@ -84,6 +87,8 @@ const SwiperSlideOverride = styled(SwiperSlide)`
 
     ${({ theme }) =>
         theme.utils.screen('md', `width: ${theme.utils.pxToRem(268)}; height: ${theme.utils.pxToRem(253)};`)}
+
+    cursor: pointer;
 `;
 
 const CardActor = styled.div`

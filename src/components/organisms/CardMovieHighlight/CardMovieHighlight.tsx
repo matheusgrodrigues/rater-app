@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
 
 import SpecDuratCatYear from '../SpecDuratCatYear';
 import SpecRatingView from '../SpecRatingView';
@@ -9,12 +10,13 @@ import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
 import { MovieDetailSchema } from '../../../schemas/MovieSchema';
+
 import {
-    formatGenre,
-    formatPopularity,
     formatReleaseDate,
-    formatRuntime,
     formatVoteAverage,
+    formatPopularity,
+    formatRuntime,
+    formatGenre,
 } from '../../../core/utils/format';
 
 interface CardMovieHighlightProps
@@ -23,6 +25,8 @@ interface CardMovieHighlightProps
 }
 
 export default function CardMovieHighlight({ highlightMovie, ...props }: CardMovieHighlightProps) {
+    const navigate = useNavigate();
+
     return (
         <CardMovieHighlightStyled movie={highlightMovie} {...props}>
             {highlightMovie ? (
@@ -95,7 +99,11 @@ export default function CardMovieHighlight({ highlightMovie, ...props }: CardMov
                             {highlightMovie.overview}
                         </CardMovieHighlightSinopseText>
                     </CardMovieHighlightSinopse>
-                    <Button config={{ variant: 'transparent-button' }} style={{ zIndex: 2 }}>
+                    <Button
+                        config={{ variant: 'transparent-button' }}
+                        style={{ zIndex: 2 }}
+                        onClick={() => navigate(`/movie/${highlightMovie.id}`)}
+                    >
                         <span>Assitir ao trailer</span>
 
                         <Icon

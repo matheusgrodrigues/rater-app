@@ -38,6 +38,9 @@ const router = createBrowserRouter(
                 }
                 index
             />
+
+            <Route element={<>Detalhes do Filme</>} path="movie/:id" />
+            <Route element={<>Detalhes do Ator</>} path="actor/:id" />
         </Route>
     )
 );

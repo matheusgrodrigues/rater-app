@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 import { SwiperProps, SwiperSlide } from 'swiper/react';
@@ -15,8 +16,9 @@ import Icon from '../../atoms/Icon';
 
 import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
 
-import { formatVoteAverage } from '../../../core/utils/format';
 import { MovieSchema } from '../../../schemas/MovieSchema';
+
+import { formatVoteAverage } from '../../../core/utils/format';
 
 export interface CarrouselMovieRef extends BaseCarrouselRef {}
 
@@ -29,6 +31,8 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
     { enableVerticalOnDesktop, movies, ...props },
     ref
 ) => {
+    const navigate = useNavigate();
+
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
@@ -78,7 +82,10 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                                 {movie.title}
                             </HeadingOverride>
 
-                            <ButtonOverride config={{ variant: 'transparent-button' }}>
+                            <ButtonOverride
+                                config={{ variant: 'transparent-button' }}
+                                onClick={() => navigate(`/movie/${movie.id}`)}
+                            >
                                 <span>Assitir ao trailer</span>
 
                                 <Icon
