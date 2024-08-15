@@ -7,13 +7,13 @@ import Icon from '../../atoms/Icon';
 import { MovieDetailSchema } from '../../../schemas/MovieSchema';
 
 interface CardTrailerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    highlightMovie: MovieDetailSchema | undefined;
+    movieDetail: MovieDetailSchema | undefined;
 }
 
-export default function CardTrailer({ highlightMovie, ...props }: CardTrailerProps) {
+export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps) {
     return (
-        <CardTrailerStyled movie={highlightMovie} {...props}>
-            {highlightMovie ? (
+        <CardTrailerStyled movie={movieDetail} {...props}>
+            {movieDetail ? (
                 <CardTrailerContent>
                     <ButtonOverride
                         data-testid="btn-assistir-ao-trailer"

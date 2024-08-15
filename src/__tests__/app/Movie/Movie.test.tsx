@@ -21,6 +21,7 @@ const routes: RouteObject[] = [
         loader: () => ({
             highlightMovies: Promise.resolve({ results: [] }),
             highlightMovieDetail: Promise.resolve({ results: [] }),
+            movieDetail: Promise.resolve({}),
             actors: Promise.resolve({ results: [] }),
         }),
     },

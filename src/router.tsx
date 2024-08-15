@@ -9,6 +9,7 @@ import {
 } from './app/Home/loader';
 
 import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+import { movieDetailLoader } from './app/Movie/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
@@ -40,8 +41,15 @@ const router = createBrowserRouter(
                 }
                 index
             />
-
-            <Route element={<Movie />} path="movie/:id" />
+            <Route
+                element={<Movie />}
+                loader={({ params }) =>
+                    defer({
+                        movieDetail: movieDetailLoader(Number(params.id)),
+                    })
+                }
+                path="movie/:id"
+            />
             <Route element={<Actor />} path="actor/:id" />
         </Route>
     )

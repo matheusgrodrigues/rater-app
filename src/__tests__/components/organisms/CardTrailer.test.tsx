@@ -10,7 +10,7 @@ describe('Deve renderizar o CardTrailer, corretamente', () => {
     beforeEach(() =>
         render(
             <MemoryRouter>
-                <CardTrailer highlightMovie={movieDetailMock} />
+                <CardTrailer movieDetail={movieDetailMock} />
             </MemoryRouter>
         )
     );

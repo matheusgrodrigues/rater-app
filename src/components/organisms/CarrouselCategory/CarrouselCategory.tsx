@@ -9,16 +9,16 @@ import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
 import CardCategoryLoader from './CarrouselCardCategoryLoader';
 import BadgeCategory from '../../atoms/BadgeCategory';
 
-import { MovieSchema } from '../../../schemas/MovieSchema';
+import { MovieDetailGenre, MovieSchema } from '../../../schemas/MovieSchema';
 
 export interface CarrouselCategoryRef extends BaseCarrouselRef {}
 
 interface CarrouselCategoryProps extends SwiperProps {
-    movies: MovieSchema[] | undefined;
+    genres: MovieDetailGenre[] | undefined;
 }
 
 const CarrouselCategory: React.ForwardRefRenderFunction<CarrouselCategoryRef, CarrouselCategoryProps> = (
-    { movies, ...props },
+    { genres, ...props },
     ref
 ) => {
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
@@ -40,15 +40,13 @@ const CarrouselCategory: React.ForwardRefRenderFunction<CarrouselCategoryRef, Ca
             ref={baseCarrouselRef}
             {...props}
         >
-            {movies && movies.length > 0 ? (
-                movies.map((movie) => (
-                    <SwiperSlideOverride key={movie.id}>
-                        <BadgeCategory>Comédia de amigos</BadgeCategory>
+            {genres &&
+                genres.length > 0 &&
+                genres.map((genre) => (
+                    <SwiperSlideOverride key={genre.id}>
+                        <BadgeCategory>{genre.name}</BadgeCategory>
                     </SwiperSlideOverride>
-                ))
-            ) : (
-                <CardCategoryLoader>Nenhum registro encontrado</CardCategoryLoader>
-            )}
+                ))}
         </BaseCarrousel>
     );
 };
