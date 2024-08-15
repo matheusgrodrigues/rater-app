@@ -14,6 +14,7 @@ import Image from '../../atoms/Image';
 
 import { ActorSchema } from '../../../schemas/ActorSchema';
 import CardActorLoader from './CardActorLoader';
+import Paragraph from '../../atoms/Paragraph';
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
@@ -59,15 +60,24 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                                     color: 'white',
                                 }}
                             >
-                                {actor.name}
-                                <StrongAgeOverride
-                                    config={{
-                                        color: 'secondary-accessible-text-11',
-                                        fontWeight: 400,
-                                        label: '47',
-                                        size: 12,
-                                    }}
-                                />
+                                <div>
+                                    {actor.name}
+                                    <StrongAgeOverride
+                                        config={{
+                                            color: 'secondary-accessible-text-11',
+                                            fontWeight: 400,
+                                            label: '47',
+                                            size: 12,
+                                        }}
+                                    />
+                                </div>
+
+                                {/* TODO: validar para somente aparecer no filmeDetail */}
+                                <ParagraphOverride
+                                    config={{ fontWeight: 400, color: 'secondary-accessible-text-11', size: 12 }}
+                                >
+                                    Wade Wilson
+                                </ParagraphOverride>
                             </HeadingOverride>
                         </CardActor>
                     </SwiperSlideOverride>
@@ -137,7 +147,7 @@ const HeadingOverride = styled(Heading)`
     left: ${({ theme }) => theme.ref.spacing['12']};
     bottom: ${({ theme }) => theme.ref.spacing['12']};
 
-    align-items: center;
+    flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['4']};
 
@@ -148,4 +158,8 @@ const StrongAgeOverride = styled(Strong)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['14']};`)}
 
     z-index: 2;
+`;
+
+const ParagraphOverride = styled(Paragraph)`
+    ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['20']};`)}
 `;
