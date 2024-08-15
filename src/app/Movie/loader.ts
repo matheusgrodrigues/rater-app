@@ -1,11 +1,12 @@
 import useRatterStore from '../store';
 
-import { MovieDetailSchema } from '../../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema } from '../../schemas/MovieSchema';
 
 import MovieService from '../../services/MovieService';
 
 export interface LoaderMovieData {
     movieDetail: Promise<MovieDetailSchema>;
+    movieDetailCast: Promise<MovieDetailCast>;
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
@@ -16,6 +17,20 @@ export const movieDetailLoader = async (movie_id: number) => {
     } else {
         const data = await MovieService.getById(movie_id);
         setMovieDetail(data);
+
+        return data;
+    }
+};
+
+export const movieDetailCastLoader = async (movie_id: number) => {
+    const { movieDetailCast, setMovieDetailCast } = useRatterStore.getState();
+
+    if (movieDetailCast) {
+        return movieDetailCast;
+    } else {
+        const data = await MovieService.getCastByMovieId(movie_id);
+
+        setMovieDetailCast(data);
 
         return data;
     }

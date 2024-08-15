@@ -29,7 +29,7 @@ import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organ
 import { MovieDetailSchema } from '../../schemas/MovieSchema';
 
 export default function Movie() {
-    const { hightlightMovies, movieDetail, recommended, actors } = useRatterStore();
+    const { movieDetailCast, movieDetail, recommended, actors } = useRatterStore();
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
@@ -193,10 +193,10 @@ export default function Movie() {
 
                 <div>
                     <Suspense fallback={<CardActorLoader />}>
-                        <Await resolve={actors}>
-                            {(resolvedActors) => (
+                        <Await resolve={movieDetailCast}>
+                            {(resolvedMovieDetailCast) => (
                                 <CarrouselActor
-                                    actors={resolvedActors ? resolvedActors.results : undefined}
+                                    actors={resolvedMovieDetailCast ? resolvedMovieDetailCast.cast : undefined}
                                     ref={carrouselActorRef}
                                 />
                             )}

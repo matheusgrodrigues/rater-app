@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { MovieDetailSchema, MovieResponseSchema, MovieSchema } from '../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema, MovieSchema } from '../schemas/MovieSchema';
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
 interface RatterStoreProps {
@@ -10,6 +10,7 @@ interface RatterStoreProps {
     latestRelease: MovieResponseSchema | undefined;
     recommended: MovieResponseSchema | undefined;
     movieDetail: MovieDetailSchema | undefined;
+    movieDetailCast: MovieDetailCast | undefined;
     actors: ActorResponseSchema | undefined;
 
     setMovieHighlightDetail: (movies: MovieDetailSchema) => void;
@@ -18,6 +19,7 @@ interface RatterStoreProps {
     setLatestRelease: (latestRelease: MovieResponseSchema) => void;
     setRecommended: (movies: MovieResponseSchema) => void;
     setMovieDetail: (movieDetail: MovieDetailSchema) => void;
+    setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
     setActor: (actor: ActorResponseSchema) => void;
 }
 
@@ -28,6 +30,7 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     latestRelease: undefined,
     recommended: undefined,
     movieDetail: undefined,
+    movieDetailCast: undefined,
     actors: undefined,
 
     setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
@@ -36,6 +39,7 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     setLatestRelease: (latestRelease) => set({ latestRelease }),
     setRecommended: (recommended) => set({ recommended }),
     setMovieDetail: (movieDetail) => set({ movieDetail }),
+    setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
     setActor: (actors) => set({ actors }),
 }));
 
