@@ -1,5 +1,10 @@
+import { Suspense } from 'react';
+import { Await } from 'react-router';
 import styled from 'styled-components';
+
+import CardTrailerLoader from '../../components/organisms/CardTrailer/CardMovieHightlightLoader';
 import CardTrailer from '../../components/organisms/CardTrailer/CardMovieHighlight';
+
 import useRatterStore from '../store';
 
 export default function Movie() {
@@ -8,7 +13,13 @@ export default function Movie() {
     return (
         <>
             <SectionTrailer data-testid="section-trailer">
-                <CardTrailer highlightMovie={movieHighlightDetail} />
+                <Suspense fallback={<CardTrailerLoader />}>
+                    <Await resolve={movieHighlightDetail}>
+                        {(resolvedMovieHightlightDetail) => (
+                            <CardTrailer highlightMovie={resolvedMovieHightlightDetail} />
+                        )}
+                    </Await>
+                </Suspense>
             </SectionTrailer>
         </>
     );

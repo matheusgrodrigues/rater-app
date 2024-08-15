@@ -8,10 +8,10 @@ const CardTrailerStyled = styled.div`
     width: 100%;
     height: 100%;
 
-    min-height: ${({ theme }) => theme.utils.pxToRem(284)};
+    min-height: ${({ theme }) => theme.utils.pxToRem(200)};
 
-    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(836)};`)}
-    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(836)};`)}
+    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(476)};`)}
+    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(476)};`)}
 
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
