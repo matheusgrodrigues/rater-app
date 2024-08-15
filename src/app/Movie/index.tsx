@@ -72,22 +72,30 @@ export default function Movie() {
                                             color: 'white',
                                         }}
                                     >
-                                        {resolvedMovieDetail.title}
+                                        {resolvedMovieDetail ? resolvedMovieDetail.title : ''}
                                     </SectionDescriptionSideDescTitle>
 
                                     <SpecRatingViewOverride
                                         data-testid="card-movie-higlight-spec-rating-view"
                                         config={{
-                                            ratingLabel: formatVoteAverage(`${movieDetail!.vote_average}`),
-                                            viewLabel: formatPopularity(movieDetail!.popularity),
+                                            ratingLabel: formatVoteAverage(
+                                                `${resolvedMovieDetail ? resolvedMovieDetail.vote_average : ''}`
+                                            ),
+                                            viewLabel: formatPopularity(
+                                                resolvedMovieDetail ? resolvedMovieDetail.popularity : undefined
+                                            ),
                                         }}
                                     />
                                 </SectionDescriptionSideDescTitleContainer>
                                 <SpecDuratCatYearOverride
                                     data-testid="card-movie-higlight-spec-durat-cat-year"
                                     config={{
-                                        duratLabel: formatRuntime(movieDetail!.runtime),
-                                        yearLabel: formatReleaseDate(movieDetail!.release_date),
+                                        duratLabel: formatRuntime(
+                                            resolvedMovieDetail ? resolvedMovieDetail.runtime : undefined
+                                        ),
+                                        yearLabel: formatReleaseDate(
+                                            resolvedMovieDetail ? resolvedMovieDetail.release_date : ''
+                                        ),
                                     }}
                                 />
                                 <SectionDescriptionSideDescSinopse>
@@ -99,7 +107,7 @@ export default function Movie() {
                                             size: 16,
                                         }}
                                     >
-                                        {movieDetail?.overview}
+                                        {resolvedMovieDetail ? resolvedMovieDetail.overview : ''}
                                     </SectionDescriptionSideDescSinopseText>
                                 </SectionDescriptionSideDescSinopse>
                             </SectionDescriptionSideDescContent>
