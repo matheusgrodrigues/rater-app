@@ -18,10 +18,9 @@
 -  Responsive/Mobile First
 -  Fetch API
 -  GitFlow
+-  HeroIcons
 -  Prettier/Eslint
 -  [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/)
--  [Zod](https://zod.dev/)
--  [React Hook Form](https://react-hook-form.com/)
 -  [Styled Components](https://styled-components.com/)
 -  [Zustand](https://zustand-demo.pmnd.rs/)
 -  [TMDB API](https://developer.themoviedb.org/reference/genre-movie-list)
@@ -34,9 +33,10 @@
 
 ## Estrutura de Arquivos e Pastas
 
-| !                                                     |
+| Pastas Fechadas                                       | Pastas Abertas                                              |
 | ----------------------------------------------------- | ----------------------------------------------------------- |
 | ![Pastas Fechadas](/docs/images/estrutura-pastas.png) | ![Pastas Abertas](/docs/images/estrutura-pastas-aberta.png) |
+| []()                                                  | []()                                                        |
 
 Utilizei Clean Architecture para organizar os arquivos e pastas, separando as responsabilidades, e organizando de uma forma totalmente escalavel e fácil de prestar manutenção pelos membros da equipe. Abaixo um resumo dos arquivos e pastas do projeto.
 
