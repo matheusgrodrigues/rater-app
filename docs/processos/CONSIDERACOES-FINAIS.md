@@ -8,7 +8,7 @@ Mesmo não conseguindo terminar 100% do desafio (devido a alguns imprevistos pes
 
 -  Busquei aplicar TDD em todos os componentes, nem que seja o minimo, mas cada arquivo possui o seu arquivo equivalente de testes.
 -  O sistema foi pensado em performance para evitar buscas desnecessarias.
--  Apliquei Clean Code e Clean Architecure nos arquivos.
+-  Apliquei Clean Code e Clean Architecture nos arquivos.
 -  Componentes limpos e com suas responsabilidades unicas.
 -  Conceitos de DDD e separação clara de responsabilidades.
 

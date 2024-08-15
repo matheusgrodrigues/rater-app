@@ -7,15 +7,15 @@ Abaixo, um resumo das etapas, e prints de como me organizei para este teste.
 -  [Especificação dos Requisitos](#especificacao-dos-requisitos)
 -  [Projeto](#projeto)
 -  [Testes](#testes)
--  [Impentação](#implantação)
+-  [Implentação](#implantação)
 
 ## Processos
 
-Eu utilizei algumas técnicas e aprendizados de outras experiências e projetos ao qual eu trabalhei, e adaptei para o cenário do teste.
+Para me preparar para o teste, busquei simular um ambiente de trabalho real em equipe, com ciclos de sprints, testes, e organização das tarefas.
 
 ## Analise dos Requisitos
 
-Primeiramente analisei os requisitos do teste, e os critérios de avaliação que são esperados para este teste e criei uma documentação resumida em um projeto no JIRA.
+Primeiramente analisei os requisitos do teste, e os critérios de avaliação, e criei uma documentação resumida em um projeto no JIRA.
 
 ## Especificacao dos Requisitos
 

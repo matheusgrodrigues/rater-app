@@ -15,6 +15,8 @@
 -  [Planejamento](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/processos/PLANEJAMENTO.md)
 -  [Considerações Finais](https://github.com/matheusgrodrigues/rater-app/blob/feature/matheus.gomes/RA-74-Atualizar-Readme-do-projeto/docs/processos/CONSIDERACOES-FINAIS.md)
 
+---
+
 ### ⚡ Instalação
 
 1. Clone o repositório para sua máquina local usando o seguinte comando:
@@ -37,7 +39,7 @@
 
 > **Obs**: você precisará criar uma conta no [**TMDB**](https://developer.themoviedb.org/docs/getting-started) e gerar um `token de api` para conseguir fazer requisições na api deles ou se preferir, navegue pelo [**Ratter App**](https://rater-app.vercel.app/) da produção.
 
-5. Inicie um servidor local para visualizar o portfólio.
+5. Inicie um servidor local para visualizar o ratter app.
 
    > yarn start ou npm run start
 
