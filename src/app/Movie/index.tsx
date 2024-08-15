@@ -1,8 +1,7 @@
 import { Suspense, useRef } from 'react';
-import { Await } from 'react-router';
+import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
 
-import useRatterStore from '../store';
 import { MovieDetailSchema } from '../../schemas/MovieSchema';
 import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
 
@@ -20,9 +19,10 @@ import Icon from '../../components/atoms/Icon';
 
 import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
+import { LoaderMovieData } from './loader';
 
 export default function Movie() {
-    const { movieDetailSimilar, movieDetailCast, movieDetail } = useRatterStore();
+    const { movieDetailSimilar, movieDetailCast, movieDetail } = useLoaderData() as LoaderMovieData;
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
