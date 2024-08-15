@@ -33,8 +33,9 @@ Após especificada as tarefas com BDD, organizei as tarefas em suas respectivas 
 
 Busquei aplicar a técnica de testes TDD (Test Driven Development) de forma bem resumida, sem me aprofundar muito, nos componentes, e telas do projeto, para certificar que está cumprindo o requisito, e também para facilitar manutenções futuras.
 
-![Rater App](/docs/images/testes-fechado.png "Testes Pasta Fechada")
-![Rater App](/docs/images/testes-aberto.png "Testes Pasta Aberta")
+| Pastas Fechadas                                     | Pastas Abertas Vindas                             |
+| --------------------------------------------------- | ------------------------------------------------- |
+| ![Pastas Fechadas](/docs/images/testes-fechado.png) | ![Pastas Abertas](/docs/images/testes-aberto.png) |
 
 ## Implantação
 
