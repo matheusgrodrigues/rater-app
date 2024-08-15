@@ -2,13 +2,14 @@ import { forwardRef, useImperativeHandle, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 
+import Paragraph from '../../../atoms/Paragraph';
 import Heading from '../../../atoms/Heading';
 import Image from '../../../atoms/Image';
 import Badge from '../../../atoms/Badge';
 
 import { MovieSchema } from '../../../../schemas/MovieSchema';
 
-import { formatVoteAverage } from '../../../../core/utils/format';
+import { formatVoteAverage, formatYear } from '../../../../core/utils/format';
 
 export interface FilterListRef {
     setOpenList: React.Dispatch<React.SetStateAction<boolean>>;
@@ -79,6 +80,16 @@ const FilterList = forwardRef<FilterListRef, FilterListProps>((props, ref) => {
                                                 }}
                                             />
                                         </CardMovieSpecHeader>
+
+                                        <Paragraph
+                                            config={{
+                                                fontWeight: 500,
+                                                color: 'secondary-accessible-text-11',
+                                                size: 13,
+                                            }}
+                                        >
+                                            {formatYear(movie.release_date)}
+                                        </Paragraph>
                                     </CardMovieSpec>
                                 </CardMovieList>
                             ))
@@ -129,7 +140,6 @@ const CardMovieList = styled.div`
     padding: ${({ theme }) => theme.ref.padding['4']};
 
     transition: background 0.3s ease-out;
-
     z-index: 2;
 
     &:hover {

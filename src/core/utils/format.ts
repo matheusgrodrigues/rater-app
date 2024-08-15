@@ -49,3 +49,13 @@ export const formatRuntime = (runtime: number) => {
 
     return `${hours}h ${mins}m`;
 };
+
+export const formatYear = (year: string) => {
+    let result = '';
+
+    if (year) {
+        result = year.split('-')[0];
+    }
+
+    return result;
+};
