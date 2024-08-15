@@ -2,7 +2,7 @@ import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import CarrouselCategory from '../../../components/organisms/CarrouselCategory';
 
-import moviesMock from '../../../__mocks__/movieHightsToo.mock';
+import movieDetailMock from '../../../__mocks__/movieDetail.mock';
 
 interface SwiperMockProps {
     children: React.ReactNode;
@@ -15,7 +15,7 @@ jest.mock('swiper/react', () => ({
 }));
 
 describe('Deve renderizar o CarrouselCategory corretamente', () => {
-    beforeEach(() => render(<CarrouselCategory data-testid="carrousel-movie" movies={moviesMock} />));
+    beforeEach(() => render(<CarrouselCategory data-testid="carrousel-movie" genres={movieDetailMock.genres} />));
 
     it('Deve renderizar o Carrousel', () => {
         const CarrouselCategory = screen.getByTestId('carrousel-movie');
