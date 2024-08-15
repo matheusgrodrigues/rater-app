@@ -28,8 +28,8 @@
 -  [React Testing Library](https://testing-library.com/)
 -  [Figma](https://figma.com/)
 -  [Git/Github](https://github.com/matheusgrodrigues/rater-app)
--  [React Date Range Picker](https://projects.wojtekmaj.pl/react-daterange-picker/)
--  [React Calendar](https://projects.wojtekmaj.pl/react-calendar/)
+-  [React Date Range Picker](https://projects.wojtekmaj.pl/react-daterange-picker/) - PENDENTE
+-  [React Calendar](https://projects.wojtekmaj.pl/react-calendar/) - PENDENTE
 
 ## Estrutura de Arquivos e Pastas
 
