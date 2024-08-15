@@ -7,7 +7,7 @@ interface SpecDuratCatYearProps extends React.DetailedHTMLProps<React.HTMLAttrib
     config: {
         duratLabel: string;
         yearLabel: string;
-        catLabel: string;
+        catLabel?: string;
     };
 }
 
@@ -28,23 +28,27 @@ export default function SpecDuratCatYear({ config, ...props }: SpecDuratCatYearP
 
             <BulletDivider data-testid="spec-bar-divider" />
 
-            <Strong
-                data-testid="spec-cat"
-                config={{
-                    fontWeight: 600,
-                    label: catLabel,
-                    color: 'secondary-accessible-text-11',
-                    size: 14,
-                }}
-                style={{
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    width: '16.625rem',
-                }}
-            />
+            {catLabel && (
+                <>
+                    <Strong
+                        data-testid="spec-cat"
+                        config={{
+                            fontWeight: 600,
+                            label: catLabel,
+                            color: 'secondary-accessible-text-11',
+                            size: 14,
+                        }}
+                        style={{
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            width: '16.625rem',
+                        }}
+                    />
 
-            <BulletDivider />
+                    <BulletDivider />
+                </>
+            )}
 
             <Strong
                 data-testid="spec-year"
