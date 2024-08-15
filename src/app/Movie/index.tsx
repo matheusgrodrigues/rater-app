@@ -8,17 +8,9 @@ import CardTrailer from '../../components/organisms/CardTrailer/CardTrailer';
 import useRatterStore from '../store';
 import CarrouselCategory from '../../components/organisms/CarrouselCategory';
 import CarrouselCardCategoryLoader from '../../components/organisms/CarrouselCategory/CarrouselCardCategoryLoader';
-import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 import Paragraph from '../../components/atoms/Paragraph';
 import Heading from '../../components/atoms/Heading';
-import Badge from '../../components/atoms/Badge';
-import {
-    formatGenre,
-    formatPopularity,
-    formatReleaseDate,
-    formatRuntime,
-    formatVoteAverage,
-} from '../../core/utils/format';
+import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 
@@ -52,7 +44,7 @@ export default function Movie() {
             </SectionCarrousel>
 
             <SectionDescription data-testid="section-description">
-                <SectionDescriptionSideDescContent>
+                <SectionDescriptionSideDescContent data-testid="section-description-side-description">
                     <SectionDescriptionSideDescTitleContainer>
                         <SectionDescriptionSideDescTitle
                             data-testid="card-movie-higlight-title"
@@ -65,7 +57,7 @@ export default function Movie() {
                             Deadpool & Wolverine
                         </SectionDescriptionSideDescTitle>
 
-                        <SpecRatingViewOverryde
+                        <SpecRatingViewOverride
                             data-testid="card-movie-higlight-spec-rating-view"
                             config={{
                                 ratingLabel: formatVoteAverage(`8.2`),
@@ -73,7 +65,7 @@ export default function Movie() {
                             }}
                         />
                     </SectionDescriptionSideDescTitleContainer>
-                    <SpecDuratCatYearOverryde
+                    <SpecDuratCatYearOverride
                         data-testid="card-movie-higlight-spec-durat-cat-year"
                         config={{
                             duratLabel: formatRuntime(30000),
@@ -96,7 +88,7 @@ export default function Movie() {
                     </SectionDescriptionSideDescSinopse>
                 </SectionDescriptionSideDescContent>
 
-                <SectionDescriptionSideStaff>
+                <SectionDescriptionSideStaff data-testid="section-description-side-staff">
                     <StaffItem>
                         <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
                             Direção
@@ -204,7 +196,7 @@ const SectionDescriptionSideDescTitleContainer = styled.div`
     align-items: center;
 `;
 
-const SpecDuratCatYearOverryde = styled(SpecDuratCatYear)`
+const SpecDuratCatYearOverride = styled(SpecDuratCatYear)`
     font-weight: ${({ theme }) => theme.ref.fontWeight['500']};
 
     & > strong {
@@ -212,7 +204,7 @@ const SpecDuratCatYearOverryde = styled(SpecDuratCatYear)`
     }
 `;
 
-const SpecRatingViewOverryde = styled(SpecRatingView)`
+const SpecRatingViewOverride = styled(SpecRatingView)`
     & > strong:nth-child(1) {
         font-size: ${({ theme }) => theme.ref.fontSize['16']};
         ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['20']};`)};

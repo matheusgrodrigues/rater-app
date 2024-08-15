@@ -48,4 +48,30 @@ describe('Deve renderizar a Pagina do Filme corretamente', () => {
             expect(section).toBeInTheDocument();
         });
     });
+
+    describe('Deve renderizar a seção description, corretamente', () => {
+        it('Dever renderizar a seção description', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-description');
+
+                expect(section).toBeInTheDocument();
+            });
+        });
+
+        it('Dever renderizar o side descrition', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-description-side-description');
+
+                expect(section).toBeInTheDocument();
+            });
+        });
+
+        it('Dever renderizar o side staff', async () => {
+            await waitFor(() => {
+                const section = screen.getByTestId('section-description-side-staff');
+
+                expect(section).toBeInTheDocument();
+            });
+        });
+    });
 });
