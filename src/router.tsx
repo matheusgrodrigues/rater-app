@@ -9,13 +9,13 @@ import {
 } from './app/Home/loader';
 
 import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+import { movieDetailLoader } from './app/Movie/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
 import Movie from './app/Movie';
 import Actor from './app/Actor/Actor';
 import Home from './app/Home';
-import { LoaderMovieData, movieDetailLoader } from './app/Movie/loader';
 
 const loaderHomeData = {
     highlightMovieDetail: highlightMovieDetailLoader(),
@@ -41,7 +41,6 @@ const router = createBrowserRouter(
                 }
                 index
             />
-
             <Route
                 element={<Movie />}
                 loader={({ params }) =>

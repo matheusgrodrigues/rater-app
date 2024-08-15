@@ -42,10 +42,10 @@ export default function Movie() {
             <SectionCarrousel data-testid="section-category">
                 <div>
                     <Suspense fallback={<CarrouselCategoryLoader />}>
-                        <Await resolve={hightlightMovies}>
-                            {(resolvedHightlightMovies) => (
+                        <Await resolve={movieDetail}>
+                            {(resolvedMovieDetail) => (
                                 <CarrouselCategory
-                                    movies={resolvedHightlightMovies ? resolvedHightlightMovies.results : undefined}
+                                    genres={resolvedMovieDetail ? resolvedMovieDetail.genres : undefined}
                                 />
                             )}
                         </Await>
