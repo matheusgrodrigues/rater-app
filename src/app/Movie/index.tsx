@@ -108,6 +108,7 @@ export default function Movie() {
                     </Await>
                 </Suspense>
 
+                {/* TODO: não consegui encontrar esta informação na api do TMDB, e para não perder muito tempo, deixei estatica por enquanto. */}
                 <SectionDescriptionSideStaff data-testid="section-description-side-staff">
                     <StaffItem>
                         <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
