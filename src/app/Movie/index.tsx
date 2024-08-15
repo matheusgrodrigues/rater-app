@@ -22,7 +22,7 @@ import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage }
 import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
 
 export default function Movie() {
-    const { movieHighlightDetail, hightlightMovies, recommended, actors } = useRatterStore();
+    const { hightlightMovies, movieDetail, recommended, actors } = useRatterStore();
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
@@ -31,7 +31,7 @@ export default function Movie() {
         <>
             <SectionTrailer data-testid="section-trailer">
                 <Suspense fallback={<CardTrailerLoader />}>
-                    <Await resolve={movieHighlightDetail}>
+                    <Await resolve={movieDetail}>
                         {(resolvedMovieHightlightDetail) => (
                             <CardTrailer highlightMovie={resolvedMovieHightlightDetail} />
                         )}

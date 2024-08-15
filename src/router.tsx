@@ -15,6 +15,7 @@ import RootLayout from './app/layout';
 import Movie from './app/Movie';
 import Actor from './app/Actor/Actor';
 import Home from './app/Home';
+import { LoaderMovieData, movieDetailLoader } from './app/Movie/loader';
 
 const loaderHomeData = {
     highlightMovieDetail: highlightMovieDetailLoader(),
@@ -41,7 +42,15 @@ const router = createBrowserRouter(
                 index
             />
 
-            <Route element={<Movie />} path="movie/:id" />
+            <Route
+                element={<Movie />}
+                loader={({ params }) =>
+                    defer({
+                        movieDetail: movieDetailLoader(Number(params.id)),
+                    })
+                }
+                path="movie/:id"
+            />
             <Route element={<Actor />} path="actor/:id" />
         </Route>
     )
