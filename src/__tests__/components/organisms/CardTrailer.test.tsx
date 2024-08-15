@@ -1,6 +1,6 @@
 import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
-import CardTrailer from '../../../components/organisms/CardTrailer/CardMovieHighlight';
+import CardTrailer from '../../../components/organisms/CardTrailer/CardTrailer';
 
 import movieDetailMock from '../../../__mocks__/movieDetail.mock';
 

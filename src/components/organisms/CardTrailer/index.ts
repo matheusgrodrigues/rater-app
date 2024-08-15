@@ -1,6 +1,6 @@
-import CardMovieHighlightLoader from './CardMovieHightlightLoader';
-import CardMovieHighlight from './CardMovieHighlight';
+import CardTrailerLoader from './CardTrailerLoader';
+import CardTrailer from './CardTrailer';
 
-export { CardMovieHighlightLoader };
+export { CardTrailerLoader };
 
-export default CardMovieHighlight;
+export default CardTrailer;
