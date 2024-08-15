@@ -3,12 +3,15 @@ import { Await } from 'react-router';
 import styled from 'styled-components';
 
 import useRatterStore from '../store';
+import { MovieDetailSchema } from '../../schemas/MovieSchema';
+import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
 
 import CarrouselCategory, { CarrouselCategoryLoader } from '../../components/organisms/CarrouselCategory';
 import CardTrailer, { CardTrailerLoader } from '../../components/organisms/CardTrailer';
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
 
 import Paragraph from '../../components/atoms/Paragraph';
 import Heading from '../../components/atoms/Heading';
@@ -18,18 +21,8 @@ import Icon from '../../components/atoms/Icon';
 import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 
-import {
-    formatGenre,
-    formatPopularity,
-    formatReleaseDate,
-    formatRuntime,
-    formatVoteAverage,
-} from '../../core/utils/format';
-import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
-import { MovieDetailSchema } from '../../schemas/MovieSchema';
-
 export default function Movie() {
-    const { movieDetailCast, movieDetail, recommended, actors } = useRatterStore();
+    const { movieDetailSimilar, movieDetailCast, movieDetail, recommended } = useRatterStore();
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
@@ -253,7 +246,7 @@ export default function Movie() {
 
                 <div>
                     <Suspense fallback={<CarrouselCardMovieLoader />}>
-                        <Await resolve={recommended}>
+                        <Await resolve={movieDetailSimilar}>
                             {(resolvedSimilar) => (
                                 <CarrouselMovie
                                     movies={resolvedSimilar ? resolvedSimilar.results : undefined}

@@ -61,6 +61,16 @@ const MovieService = {
 
         return resp;
     },
+
+    getSimilarByMovieId: async (movie_id: number): Promise<MovieResponseSchema> => {
+        const req = await Middleware.request({
+            url: `${api_url}/movie/${movie_id}/similar?language=pt-BR&page=1`,
+        });
+
+        const resp = await req.json();
+
+        return resp;
+    },
 };
 
 export default MovieService;

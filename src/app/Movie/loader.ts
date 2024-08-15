@@ -1,12 +1,13 @@
 import useRatterStore from '../store';
 
-import { MovieDetailCast, MovieDetailSchema } from '../../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 
 import MovieService from '../../services/MovieService';
 
 export interface LoaderMovieData {
-    movieDetail: Promise<MovieDetailSchema>;
+    movieDetailSimilar: Promise<MovieResponseSchema>;
     movieDetailCast: Promise<MovieDetailCast>;
+    movieDetail: Promise<MovieDetailSchema>;
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
@@ -23,14 +24,28 @@ export const movieDetailLoader = async (movie_id: number) => {
 };
 
 export const movieDetailCastLoader = async (movie_id: number) => {
-    const { movieDetailCast, setMovieDetailCast } = useRatterStore.getState();
+    const { movieDetailCast, movieDetail, setMovieDetailCast } = useRatterStore.getState();
 
-    if (movieDetailCast) {
+    if (movieDetailCast && movieDetail && movieDetail.id === movie_id) {
         return movieDetailCast;
     } else {
         const data = await MovieService.getCastByMovieId(movie_id);
 
         setMovieDetailCast(data);
+
+        return data;
+    }
+};
+
+export const movieDetailSimilarLoader = async (movie_id: number) => {
+    const { movieDetailSimilar, movieDetail, setMovieDetailSimilar } = useRatterStore.getState();
+
+    if (movieDetailSimilar && movieDetail && movieDetail.id === movie_id) {
+        return movieDetailSimilar;
+    } else {
+        const data = await MovieService.getSimilarByMovieId(movie_id);
+
+        setMovieDetailSimilar(data);
 
         return data;
     }
