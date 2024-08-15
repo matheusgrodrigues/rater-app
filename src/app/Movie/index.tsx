@@ -18,8 +18,15 @@ import Icon from '../../components/atoms/Icon';
 import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 
-import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
+import {
+    formatGenre,
+    formatPopularity,
+    formatReleaseDate,
+    formatRuntime,
+    formatVoteAverage,
+} from '../../core/utils/format';
 import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
+import { MovieDetailSchema } from '../../schemas/MovieSchema';
 
 export default function Movie() {
     const { hightlightMovies, movieDetail, recommended, actors } = useRatterStore();
@@ -32,9 +39,7 @@ export default function Movie() {
             <SectionTrailer data-testid="section-trailer">
                 <Suspense fallback={<CardTrailerLoader />}>
                     <Await resolve={movieDetail}>
-                        {(resolvedMovieHightlightDetail) => (
-                            <CardTrailer highlightMovie={resolvedMovieHightlightDetail} />
-                        )}
+                        {(resolvedMovieDetail: MovieDetailSchema) => <CardTrailer movieDetail={resolvedMovieDetail} />}
                     </Await>
                 </Suspense>
             </SectionTrailer>
@@ -43,7 +48,7 @@ export default function Movie() {
                 <div>
                     <Suspense fallback={<CarrouselCategoryLoader />}>
                         <Await resolve={movieDetail}>
-                            {(resolvedMovieDetail) => (
+                            {(resolvedMovieDetail: MovieDetailSchema) => (
                                 <CarrouselCategory
                                     genres={resolvedMovieDetail ? resolvedMovieDetail.genres : undefined}
                                 />
@@ -54,49 +59,53 @@ export default function Movie() {
             </SectionCarrousel>
 
             <SectionDescription data-testid="section-description">
-                <SectionDescriptionSideDescContent data-testid="section-description-side-description">
-                    <SectionDescriptionSideDescTitleContainer>
-                        <SectionDescriptionSideDescTitle
-                            data-testid="card-movie-higlight-title"
-                            config={{
-                                fontWeight: '700',
-                                fontSize: '40',
-                                color: 'white',
-                            }}
-                        >
-                            Deadpool & Wolverine
-                        </SectionDescriptionSideDescTitle>
+                <Suspense fallback={<></>}>
+                    <Await resolve={movieDetail}>
+                        {(resolvedMovieDetail: MovieDetailSchema) => (
+                            <SectionDescriptionSideDescContent data-testid="section-description-side-description">
+                                <SectionDescriptionSideDescTitleContainer>
+                                    <SectionDescriptionSideDescTitle
+                                        data-testid="card-movie-higlight-title"
+                                        config={{
+                                            fontWeight: '700',
+                                            fontSize: '40',
+                                            color: 'white',
+                                        }}
+                                    >
+                                        {resolvedMovieDetail.title}
+                                    </SectionDescriptionSideDescTitle>
 
-                        <SpecRatingViewOverride
-                            data-testid="card-movie-higlight-spec-rating-view"
-                            config={{
-                                ratingLabel: formatVoteAverage(`8.2`),
-                                viewLabel: formatPopularity(12000),
-                            }}
-                        />
-                    </SectionDescriptionSideDescTitleContainer>
-                    <SpecDuratCatYearOverride
-                        data-testid="card-movie-higlight-spec-durat-cat-year"
-                        config={{
-                            duratLabel: formatRuntime(30000),
-                            yearLabel: formatReleaseDate('2024-05-23'),
-                        }}
-                    />
-                    <SectionDescriptionSideDescSinopse>
-                        <SectionDescriptionSideDescSinopseText
-                            data-testid="card-movie-higlight-sinopse"
-                            config={{
-                                fontWeight: 600,
-                                color: 'secondary-accessible-text-12',
-                                size: 16,
-                            }}
-                        >
-                            Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
-                            Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
-                            universo da extinção.
-                        </SectionDescriptionSideDescSinopseText>
-                    </SectionDescriptionSideDescSinopse>
-                </SectionDescriptionSideDescContent>
+                                    <SpecRatingViewOverride
+                                        data-testid="card-movie-higlight-spec-rating-view"
+                                        config={{
+                                            ratingLabel: formatVoteAverage(`${movieDetail!.vote_average}`),
+                                            viewLabel: formatPopularity(movieDetail!.popularity),
+                                        }}
+                                    />
+                                </SectionDescriptionSideDescTitleContainer>
+                                <SpecDuratCatYearOverride
+                                    data-testid="card-movie-higlight-spec-durat-cat-year"
+                                    config={{
+                                        duratLabel: formatRuntime(movieDetail!.runtime),
+                                        yearLabel: formatReleaseDate(movieDetail!.release_date),
+                                    }}
+                                />
+                                <SectionDescriptionSideDescSinopse>
+                                    <SectionDescriptionSideDescSinopseText
+                                        data-testid="card-movie-higlight-sinopse"
+                                        config={{
+                                            fontWeight: 600,
+                                            color: 'secondary-accessible-text-12',
+                                            size: 16,
+                                        }}
+                                    >
+                                        {movieDetail?.overview}
+                                    </SectionDescriptionSideDescSinopseText>
+                                </SectionDescriptionSideDescSinopse>
+                            </SectionDescriptionSideDescContent>
+                        )}
+                    </Await>
+                </Suspense>
 
                 <SectionDescriptionSideStaff data-testid="section-description-side-staff">
                     <StaffItem>
