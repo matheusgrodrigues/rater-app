@@ -19,10 +19,12 @@ import CardActorLoader from '../../components/organisms/CarrouselActor/CardActor
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 
 import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
+import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
 
 export default function Movie() {
-    const { movieHighlightDetail, hightlightMovies, actors } = useRatterStore();
+    const { movieHighlightDetail, hightlightMovies, recommended, actors } = useRatterStore();
 
+    const carrouselRecommendedRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
 
     return (
@@ -185,6 +187,66 @@ export default function Movie() {
                     </Suspense>
                 </div>
             </SectionCarrousel>
+
+            <SectionCarrousel data-testid="section-recommended">
+                <TitleCarrouselContainer>
+                    <HeadingWithBar
+                        data-testid="title-recommended"
+                        config={{
+                            fontWeight: '600',
+                            fontSize: '16',
+                            color: 'secondary-accessible-text-12',
+                        }}
+                    >
+                        Semelhantes
+                    </HeadingWithBar>
+
+                    <ButtonNextPrev>
+                        <Button
+                            data-testid="section-recommended-prev"
+                            onClick={() => carrouselRecommendedRef.current?.slidePrev()}
+                            config={{ variant: 'rounded-icon-button' }}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-left',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+
+                        <Button
+                            config={{ variant: 'rounded-icon-button' }}
+                            data-testid="section-recommended-next"
+                            onClick={() => carrouselRecommendedRef.current?.slideNext()}
+                            style={{ background: 'none', position: 'relative', top: '0.5rem' }}
+                        >
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'chevron-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </ButtonNextPrev>
+                </TitleCarrouselContainer>
+
+                <div>
+                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                        <Await resolve={recommended}>
+                            {(resolvedRecommended) => (
+                                <CarrouselMovie
+                                    movies={resolvedRecommended.results ?? undefined}
+                                    ref={carrouselRecommendedRef}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
+                </div>
+            </SectionCarrousel>
         </>
     );
 }
@@ -230,8 +292,10 @@ const SectionDescription = styled.div`
     flex-direction: column;
     display: flex;
     padding: 0 ${({ theme }) => theme.ref.padding['12']};
+    padding-bottom: ${({ theme }) => theme.ref.spacing['24']};
 
-    ${({ theme }) => theme.utils.screen('md', `padding-top: 0 !important;`)}
+    ${({ theme }) =>
+        theme.utils.screen('md', `padding-top: 0 !important; padding-bottom: ${theme.ref.spacing['48']} !important;`)}
 
     ${({ theme }) =>
         theme.utils.screen(
@@ -254,6 +318,8 @@ const SectionDescriptionSideDescContent = styled.div`
     position: relative;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['12']};
+
+    padding-left: ${({ theme }) => theme.ref.spacing['4']};
 
     ${({ theme }) => theme.utils.screen('md', `padding-top: ${theme.ref.spacing['12']};`)}
 `;
@@ -314,7 +380,9 @@ const SectionDescriptionSideStaff = styled.div`
     gap: ${({ theme }) => theme.ref.spacing['24']};
     padding-top: ${({ theme }) => theme.ref.spacing['24']};
 
-    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
+    padding-left: ${({ theme }) => theme.ref.spacing['4']};
+
+    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)}; padding-left: 0;`)}
 `;
 
 const StaffItem = styled.div`

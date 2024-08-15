@@ -83,4 +83,12 @@ describe('Deve renderizar a Pagina do Filme corretamente', () => {
             expect(section).toBeInTheDocument();
         });
     });
+
+    it('Dever renderizar a seção filmes semelhantes', async () => {
+        await waitFor(() => {
+            const section = screen.getByTestId('section-filmes-semelhantes');
+
+            expect(section).toBeInTheDocument();
+        });
+    });
 });
