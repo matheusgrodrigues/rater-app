@@ -24,7 +24,7 @@ import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organ
 export default function Movie() {
     const { movieHighlightDetail, hightlightMovies, recommended, actors } = useRatterStore();
 
-    const carrouselRecommendedRef = useRef<CarrouselActorRef>(null);
+    const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
 
     return (
@@ -188,7 +188,7 @@ export default function Movie() {
                 </div>
             </SectionCarrousel>
 
-            <SectionCarrousel data-testid="section-recommended">
+            <SectionCarrousel data-testid="section-filmes-semelhantes">
                 <TitleCarrouselContainer>
                     <HeadingWithBar
                         data-testid="title-recommended"
@@ -204,7 +204,7 @@ export default function Movie() {
                     <ButtonNextPrev>
                         <Button
                             data-testid="section-recommended-prev"
-                            onClick={() => carrouselRecommendedRef.current?.slidePrev()}
+                            onClick={() => carrouselSimilarRef.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -220,7 +220,7 @@ export default function Movie() {
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="section-recommended-next"
-                            onClick={() => carrouselRecommendedRef.current?.slideNext()}
+                            onClick={() => carrouselSimilarRef.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -237,10 +237,10 @@ export default function Movie() {
                 <div>
                     <Suspense fallback={<CarrouselCardMovieLoader />}>
                         <Await resolve={recommended}>
-                            {(resolvedRecommended) => (
+                            {(resolvedSimilar) => (
                                 <CarrouselMovie
-                                    movies={resolvedRecommended.results ?? undefined}
-                                    ref={carrouselRecommendedRef}
+                                    movies={resolvedSimilar ? resolvedSimilar.results : undefined}
+                                    ref={carrouselSimilarRef}
                                 />
                             )}
                         </Await>
