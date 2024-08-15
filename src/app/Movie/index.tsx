@@ -22,7 +22,7 @@ import CardActorLoader from '../../components/organisms/CarrouselActor/CardActor
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 
 export default function Movie() {
-    const { movieDetailSimilar, movieDetailCast, movieDetail, recommended } = useRatterStore();
+    const { movieDetailSimilar, movieDetailCast, movieDetail } = useRatterStore();
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
