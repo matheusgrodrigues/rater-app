@@ -2,6 +2,13 @@
 
 Abaixo, um resumo das etapas, e prints de como me organizei para este teste.
 
+-  [Processos](#processos)
+-  [Analise dos Requisitos](#analise-dos-requisitos)
+-  [Especificação dos Requisitos](#especificacao-dos-requisitos)
+-  [Projeto](#projeto)
+-  [Testes](#testes)
+-  [Impentação](#implantação)
+
 ## Processos
 
 Eu utilizei algumas técnicas e aprendizados de outras experiências e projetos ao qual eu trabalhei, e adaptei para o cenário do teste.
