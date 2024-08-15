@@ -9,13 +9,13 @@ import Icon from '../atoms/Icon';
 
 import Filter, { FilterRef } from './Filter/Filter';
 
-import { useFilteredMovieStore } from '../../app/store';
+import useRatterStore from '../../app/store';
 
 import MovieService from '../../services/MovieService';
 import { MovieSchema } from '../../schemas/MovieSchema';
 
 export default function Header() {
-    const { filteredMovies, setFilteredMovies } = useFilteredMovieStore();
+    const { filteredMovies, setFilteredMovies } = useRatterStore();
 
     const filterButtonRef = useRef<FilterButtonRef>(null);
     const filterRef = useRef<FilterRef>(null);
@@ -94,6 +94,7 @@ export default function Header() {
 
     const handleClose = useCallback(() => {
         filterRef.current?.setOpenList(false);
+        filterRef.current?.setList([]);
     }, []);
 
     /*
@@ -115,14 +116,12 @@ export default function Header() {
         } */
 
         handleClose();
-
-        filterButtonRef.current?.setCount(0);
     }, [handleClose]);
 
     const handleOpenListOnFocus = useCallback(() => {
         if (filteredMovies) {
             filterRef.current?.setOpenList(true);
-            filterButtonRef.current?.setCount(filteredMovies.length);
+            filterRef.current?.setList(filteredMovies);
         }
     }, [filteredMovies]);
 

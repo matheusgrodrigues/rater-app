@@ -1,4 +1,4 @@
-import { useMovieDetailStore } from '../store';
+import useRatterStore from '../store';
 
 import { MovieDetailSchema } from '../../schemas/MovieSchema';
 
@@ -9,7 +9,7 @@ export interface MovieLoaderData {
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
-    const { movieDetail, setMovieDetail } = useMovieDetailStore.getState();
+    const { movieDetail, setMovieDetail } = useRatterStore.getState();
 
     if (movieDetail) {
         return movieDetail;
