@@ -19,7 +19,7 @@ function Home() {
         useLoaderData() as LoaderHomeData & LoaderActorData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
-    const carrouselRecommended = useRef<CarrouselMovieRef>(null);
+    const carrouselRecommendedRef = useRef<CarrouselMovieRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
 
     return (
@@ -139,7 +139,7 @@ function Home() {
                     <ButtonNextPrev>
                         <Button
                             data-testid="section-recommended-prev"
-                            onClick={() => carrouselRecommended.current?.slidePrev()}
+                            onClick={() => carrouselRecommendedRef.current?.slidePrev()}
                             config={{ variant: 'rounded-icon-button' }}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
@@ -155,7 +155,7 @@ function Home() {
                         <Button
                             config={{ variant: 'rounded-icon-button' }}
                             data-testid="section-recommended-next"
-                            onClick={() => carrouselRecommended.current?.slideNext()}
+                            onClick={() => carrouselRecommendedRef.current?.slideNext()}
                             style={{ background: 'none', position: 'relative', top: '0.5rem' }}
                         >
                             <Icon
@@ -175,7 +175,7 @@ function Home() {
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
                                     movies={resolvedRecommended.results ?? undefined}
-                                    ref={carrouselRecommended}
+                                    ref={carrouselRecommendedRef}
                                 />
                             )}
                         </Await>
