@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface ParagraphConfig {
     fontWeight: 400 | 500 | 600;
     color: 'secondary-accessible-text-12' | 'secondary-accessible-text-11';
-    size: 13 | 16;
+    size: 12 | 13 | 16;
 }
 
 interface ParagraphProps

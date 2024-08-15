@@ -21,6 +21,7 @@ const routes: RouteObject[] = [
         loader: () => ({
             highlightMovies: Promise.resolve({ results: [] }),
             highlightMovieDetail: Promise.resolve({ results: [] }),
+            actors: Promise.resolve({ results: [] }),
         }),
     },
 ];
@@ -72,6 +73,14 @@ describe('Deve renderizar a Pagina do Filme corretamente', () => {
 
                 expect(section).toBeInTheDocument();
             });
+        });
+    });
+
+    it('Dever renderizar a seção elenco principal', async () => {
+        await waitFor(() => {
+            const section = screen.getByTestId('section-elenco-principal');
+
+            expect(section).toBeInTheDocument();
         });
     });
 });
