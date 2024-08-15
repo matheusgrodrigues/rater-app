@@ -40,7 +40,7 @@
 
 Utilizei Clean Architecture para organizar os arquivos e pastas, separando as responsabilidades, e organizando de uma forma totalmente escalavel e fácil de prestar manutenção pelos membros da equipe. Abaixo um resumo dos arquivos e pastas do projeto.
 
-> **Obs:** no momento em que estiver lendo esta documentação, as pastas e arquivos podem ter crescidos ou sido movidos conforme o projeto andou, porém a organização é a mesma.
+> **Obs:** no momento em que estiver lendo esta documentação, as pastas e a quantidade de arquivos podem ter crescido ou sido movidos conforme o projeto andou, porém a organização é a mesma.
 
 -  **docs**: Documentações do projeto (este que você está lendo).
 -  **public**: Pasta de assets e imagens do projeto (não precisei usar).
