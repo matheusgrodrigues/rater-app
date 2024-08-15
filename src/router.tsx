@@ -12,6 +12,8 @@ import { getActorLoader, LoaderActorData } from './app/Actor/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
+import Movie from './app/Movie';
+import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
 const loaderHomeData = {
@@ -39,8 +41,8 @@ const router = createBrowserRouter(
                 index
             />
 
-            <Route element={<>Detalhes do Filme</>} path="movie/:id" />
-            <Route element={<>Detalhes do Ator</>} path="actor/:id" />
+            <Route element={<Movie />} path="movie/:id" />
+            <Route element={<Actor />} path="actor/:id" />
         </Route>
     )
 );
