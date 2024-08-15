@@ -21,7 +21,6 @@ import {
 } from '../../core/utils/format';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
-import { MovieDetailSchema } from '../../schemas/MovieSchema';
 
 export default function Movie() {
     const { movieHighlightDetail, hightlightMovies } = useRatterStore();
@@ -53,66 +52,78 @@ export default function Movie() {
             </SectionCarrousel>
 
             <SectionDescription data-testid="section-description">
-                <SectionDescSideDescStyled>
-                    <SectionDescSideDescContent>
-                        <SectionDescSideDescTitleContainer>
-                            <SectionDescSideDescTitle
-                                data-testid="card-movie-higlight-title"
-                                config={{
-                                    fontWeight: '700',
-                                    fontSize: '40',
-                                    color: 'white',
-                                }}
-                            >
-                                Deadpool & Wolverine
-                            </SectionDescSideDescTitle>
-
-                            <SpecRatingViewOverryde
-                                data-testid="card-movie-higlight-spec-rating-view"
-                                config={{
-                                    ratingLabel: formatVoteAverage(`8.2`),
-                                    viewLabel: formatPopularity(12000),
-                                }}
-                            />
-                        </SectionDescSideDescTitleContainer>
-
-                        <SpecDuratCatYearOverryde
-                            data-testid="card-movie-higlight-spec-durat-cat-year"
+                <SectionDescriptionSideDescContent>
+                    <SectionDescriptionSideDescTitleContainer>
+                        <SectionDescriptionSideDescTitle
+                            data-testid="card-movie-higlight-title"
                             config={{
-                                duratLabel: formatRuntime(30000),
-                                yearLabel: formatReleaseDate('2024-05-23'),
+                                fontWeight: '700',
+                                fontSize: '40',
+                                color: 'white',
+                            }}
+                        >
+                            Deadpool & Wolverine
+                        </SectionDescriptionSideDescTitle>
+
+                        <SpecRatingViewOverryde
+                            data-testid="card-movie-higlight-spec-rating-view"
+                            config={{
+                                ratingLabel: formatVoteAverage(`8.2`),
+                                viewLabel: formatPopularity(12000),
                             }}
                         />
-
-                        <SectionDescSideDescSinopse>
-                            <SectionDescSideDescSinopseText
-                                data-testid="card-movie-higlight-sinopse"
-                                config={{
-                                    fontWeight: 600,
-                                    color: 'secondary-accessible-text-12',
-                                    size: 16,
-                                }}
-                            >
-                                Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao
-                                Universo Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para
-                                salvar seu universo da extinção.
-                            </SectionDescSideDescSinopseText>
-                        </SectionDescSideDescSinopse>
-                    </SectionDescSideDescContent>
-                </SectionDescSideDescStyled>
-
-                <SectionDescSideStaff>
-                    <HeadingWithBar
-                        data-testid="title-highlighs-too"
+                    </SectionDescriptionSideDescTitleContainer>
+                    <SpecDuratCatYearOverryde
+                        data-testid="card-movie-higlight-spec-durat-cat-year"
                         config={{
-                            fontWeight: '600',
-                            fontSize: '16',
-                            color: 'secondary-accessible-text-12',
+                            duratLabel: formatRuntime(30000),
+                            yearLabel: formatReleaseDate('2024-05-23'),
                         }}
-                    >
-                        Destaques também
-                    </HeadingWithBar>
-                </SectionDescSideStaff>
+                    />
+                    <SectionDescriptionSideDescSinopse>
+                        <SectionDescriptionSideDescSinopseText
+                            data-testid="card-movie-higlight-sinopse"
+                            config={{
+                                fontWeight: 600,
+                                color: 'secondary-accessible-text-12',
+                                size: 16,
+                            }}
+                        >
+                            Deadpool recebe uma oferta da Autoridade de Variância Temporal para se juntar ao Universo
+                            Cinematográfico Marvel, mas em vez disso recruta uma variante do Wolverine para salvar seu
+                            universo da extinção.
+                        </SectionDescriptionSideDescSinopseText>
+                    </SectionDescriptionSideDescSinopse>
+                </SectionDescriptionSideDescContent>
+
+                <SectionDescriptionSideStaff>
+                    <StaffItem>
+                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
+                            Direção
+                        </Heading>
+                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
+                            Shawn Levy
+                        </Paragraph>
+                    </StaffItem>
+
+                    <StaffItem>
+                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
+                            Direção
+                        </Heading>
+                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
+                            Shawn Levy
+                        </Paragraph>
+                    </StaffItem>
+
+                    <StaffItem>
+                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
+                            Direção
+                        </Heading>
+                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
+                            Shawn Levy
+                        </Paragraph>
+                    </StaffItem>
+                </SectionDescriptionSideStaff>
             </SectionDescription>
         </>
     );
@@ -175,27 +186,19 @@ const SectionDescription = styled.div`
         )}
 `;
 
-const SectionDescSideDescStyled = styled.div`
+const SectionDescriptionSideDescContent = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    display: flex;
     position: relative;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
 
     ${({ theme }) => theme.utils.screen('md', `padding-top: ${theme.ref.spacing['12']};`)}
 `;
 
-const SectionDescSideDescContent = styled.div`
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['12']};
-`;
-
-const SectionDescSideDescTitleContainer = styled.div`
+const SectionDescriptionSideDescTitleContainer = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['12']};
     align-items: center;
@@ -221,22 +224,19 @@ const SpecRatingViewOverryde = styled(SpecRatingView)`
     }
 `;
 
-const SectionDescSideDescTitle = styled(Heading)`
+const SectionDescriptionSideDescTitle = styled(Heading)`
     font-size: ${({ theme }) => theme.ref.fontSize['16']};
 
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['40']};`)}
 `;
 
-const SectionDescSideDescSinopse = styled.div`
+const SectionDescriptionSideDescSinopse = styled.div`
     max-width: ${({ theme }) => theme.utils.pxToRem(568)};
-
-    ${({ theme }) =>
-        theme.utils.screen('md', `margin-bottom: ${theme.ref.spacing['48']}; max-width: ${theme.utils.pxToRem(868)};`)}
 
     z-index: 2;
 `;
 
-const SectionDescSideDescSinopseText = styled(Paragraph)`
+const SectionDescriptionSideDescSinopseText = styled(Paragraph)`
     line-height: ${({ theme }) => theme.ref.lineHeight['19']};
     font-weight: ${({ theme }) => theme.ref.fontWeight['500']};
     font-size: ${({ theme }) => theme.ref.fontSize['14']};
@@ -246,12 +246,38 @@ const SectionDescSideDescSinopseText = styled(Paragraph)`
         theme.utils.screen('md', `font-size: ${theme.ref.fontSize['20']}; line-height: ${theme.ref.lineHeight['28']};`)}
 `;
 
-const SectionDescSideStaff = styled.div`
+const SectionDescriptionSideStaff = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['24']};
+    padding-top: ${({ theme }) => theme.ref.spacing['24']};
 
     ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
+`;
+
+const StaffItem = styled.div`
+    font-size: ${({ theme }) => theme.ref.fontSize['16']};
+    font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    padding-left: ${({ theme }) => theme.ref.spacing['12']};
+
+    &::before {
+        content: '';
+        height: 93%;
+        width: ${({ theme }) => theme.utils.pxToRem(4)};
+        border-radius: ${({ theme }) => theme.ref.borderRadius['9']};
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: ${({ theme }) => theme.ref.colors['secondary-accessible-text-11']};
+    }
+
+    & > p {
+        font-weight: ${({ theme }) => theme.ref.fontWeight['400']};
+    }
 `;
