@@ -125,8 +125,17 @@ export default function Header() {
         }
     }, [filteredMovies]);
 
+    const { cacheMovies } = useRatterStore();
+
     return (
         <HeaderStyled data-testid="header">
+            <button
+                onClick={() => {
+                    console.log(cacheMovies);
+                }}
+            >
+                Ver Store CacheMovies
+            </button>
             <HeaderStyledContainer>
                 <Link to={{ pathname: '/' }}>
                     <Logo data-testid="header-logo" src="/logo.svg" alt="Rater App - Logo" />
