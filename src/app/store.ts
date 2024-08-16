@@ -11,7 +11,6 @@ import {
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
 interface RatterStoreProps {
-    movieHighlightDetail: MovieDetailSchema | undefined;
     movieDetailSimilar: MovieResponseSchema | undefined;
     hightlightMovies: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
@@ -22,7 +21,6 @@ interface RatterStoreProps {
     cacheMovies: MovieCacheSchema[] | [];
     actors: ActorResponseSchema | undefined;
 
-    setMovieHighlightDetail: (movies: MovieDetailSchema) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
     setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
@@ -35,7 +33,6 @@ interface RatterStoreProps {
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
-    movieHighlightDetail: undefined,
     movieDetailSimilar: undefined,
     hightlightMovies: undefined,
     movieDetailCast: undefined,
@@ -46,7 +43,6 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     cacheMovies: [],
     actors: undefined,
 
-    setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
     setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),
