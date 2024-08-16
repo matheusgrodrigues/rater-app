@@ -10,8 +10,13 @@ import {
 
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
+interface CacheMovieState {
+    movie_id: number;
+    cast: MovieDetailCast[];
+}
+
 interface RatterStoreProps {
-    movieHighlightDetail: MovieDetailSchema | undefined;
+    hightlightMovieDetail: MovieDetailSchema | undefined;
     movieDetailSimilar: MovieResponseSchema | undefined;
     hightlightMovies: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
@@ -19,10 +24,12 @@ interface RatterStoreProps {
     latestRelease: MovieResponseSchema | undefined;
     movieDetail: MovieDetailSchema | undefined;
     recommended: MovieResponseSchema | undefined;
-    cacheMovies: MovieCacheSchema[] | [];
     actors: ActorResponseSchema | undefined;
 
-    setMovieHighlightDetail: (movies: MovieDetailSchema) => void;
+    cacheCastMovie: CacheMovieState[] | [];
+    cacheMovies: MovieCacheSchema[] | [];
+
+    setHighlightMovieDetail: (hightlighMovieDetail: MovieDetailSchema) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
     setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
@@ -30,12 +37,14 @@ interface RatterStoreProps {
     setLatestRelease: (latestRelease: MovieResponseSchema) => void;
     setRecommended: (movies: MovieResponseSchema) => void;
     setMovieDetail: (movieDetail: MovieDetailSchema) => void;
-    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
     setActor: (actor: ActorResponseSchema) => void;
+
+    setCacheCastMovie: (cacheCastMovie: CacheMovieState[]) => void;
+    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
-    movieHighlightDetail: undefined,
+    hightlightMovieDetail: undefined,
     movieDetailSimilar: undefined,
     hightlightMovies: undefined,
     movieDetailCast: undefined,
@@ -43,10 +52,12 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     latestRelease: undefined,
     recommended: undefined,
     movieDetail: undefined,
-    cacheMovies: [],
     actors: undefined,
 
-    setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
+    cacheCastMovie: [],
+    cacheMovies: [],
+
+    setHighlightMovieDetail: (hightlightMovieDetail) => set({ hightlightMovieDetail }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
     setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),
@@ -56,6 +67,8 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     setMovieDetail: (movieDetail) => set({ movieDetail }),
     setCacheMovies: (cacheMovies) => set({ cacheMovies }),
     setActor: (actors) => set({ actors }),
+
+    setCacheCastMovie: (cacheCastMovie) => set({ cacheCastMovie }),
 }));
 
 export default useRatterStore;
