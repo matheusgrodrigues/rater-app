@@ -80,3 +80,7 @@ export interface MovieDetailCast {
     id: number;
     cast: Array<ActorSchema>;
 }
+
+type UnionMovieSchemas = MovieSchema & MovieDetailSchema;
+
+export interface MovieCacheSchema extends UnionMovieSchemas {}
