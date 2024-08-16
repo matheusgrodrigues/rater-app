@@ -15,8 +15,8 @@ import { LoaderHomeData } from './loader';
 import { LoaderActorData } from '../Actor/loader';
 
 function Home() {
-    const { highlightMovies, highlightMovieDetail, latestReleases, recommended, actors } =
-        useLoaderData() as LoaderHomeData & LoaderActorData;
+    const { highlightMovies, latestReleases, recommended, actors } = useLoaderData() as LoaderHomeData &
+        LoaderActorData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommendedRef = useRef<CarrouselMovieRef>(null);
@@ -26,10 +26,12 @@ function Home() {
         <>
             <SectionHighlight data-testid="section-highlight">
                 <Suspense fallback={<CardMovieHighlightLoader />}>
-                    <Await resolve={highlightMovieDetail}>
+                    <Await resolve={highlightMovies}>
                         {(resolvedmovieHighlightMovie) => (
                             <CardMovieHighlight
-                                highlightMovie={resolvedmovieHighlightMovie ?? undefined}
+                                highlightMovie={
+                                    resolvedmovieHighlightMovie ? resolvedmovieHighlightMovie.results[0] : undefined
+                                }
                                 data-testid="card-movie-highlight"
                             />
                         )}

@@ -1,6 +1,6 @@
 import useRatterStore from '../store';
 
-import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema, MovieCacheSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 
 import MovieService from '../../services/MovieService';
 
@@ -11,35 +11,20 @@ export interface LoaderMovieData {
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
-    const { movieDetail, setMovieDetail } = useRatterStore.getState();
+    const { cacheMovies, setCacheMovies } = useRatterStore.getState();
 
-    // TODO: esta função verifica em todas as stores se já existe o filme carregado, para não precisar buscar novamente da api.
-    // Porém, no inicio eu defini o Schema especifico para MovieDetail, e as outras stores estão utilizando MovieSchema.
-    // Precisará comparar para ajustar os tipos e unificar para implementar esta melhoria de performance.
-    // * Porém não deu tempo. *
+    const getMovieFromCache = () => cacheMovies.filter((movie) => movie.id === movie_id);
 
-    /*
-    const loadedMovies = () => {
-        const hightlight = hightlightMovies ? hightlightMovies.results : [];
-        const latest = latestRelease ? latestRelease.results : [];
-        const filtered = filteredMovies ? filteredMovies : [];
-
-        const concatMovies = filtered.concat(hightlight).concat(latest);
-
-        const result = concatMovies.filter((movie) => movie.id === movie_id);
-
-        return result;
-    };
-
-    */
-
-    if (movieDetail && movieDetail.id === movie_id) {
-        // Exemplo: if (loadedMovies.length > 0) setMovieDetail(loadedMovies()[0])
-
-        return movieDetail;
+    if (getMovieFromCache().length > 0) {
+        return getMovieFromCache()[0] as unknown as MovieDetailSchema;
     } else {
         const data = await MovieService.getById(movie_id);
-        setMovieDetail(data);
+
+        if (!(getMovieFromCache().length > 0)) {
+            let newCacheRegister: MovieCacheSchema[] = cacheMovies;
+            newCacheRegister.push(data as MovieCacheSchema);
+            setCacheMovies(newCacheRegister);
+        }
 
         return data;
     }
@@ -47,6 +32,18 @@ export const movieDetailLoader = async (movie_id: number) => {
 
 export const movieDetailCastLoader = async (movie_id: number) => {
     const { movieDetailCast, movieDetail, setMovieDetailCast } = useRatterStore.getState();
+
+    /*
+    // TODO: criar uma um estado global neste formato para salvar os casts dos filmes, para evitar buscas desnecessarias.
+    // Depois, criar as validações de busca e armazenamento.
+    // Após concluido, remover os comentários.
+    
+        cacheCastMovie: [{
+            movie_id: number;
+            cast: MovieDetailCast[]
+        }]
+
+    */
 
     if (movieDetailCast && movieDetail && movieDetail.id === movie_id) {
         return movieDetailCast;
@@ -61,6 +58,19 @@ export const movieDetailCastLoader = async (movie_id: number) => {
 
 export const movieDetailSimilarLoader = async (movie_id: number) => {
     const { movieDetailSimilar, movieDetail, setMovieDetailSimilar } = useRatterStore.getState();
+
+    /*
+    // TODO: criar uma um estado global neste formato para salvar os filmes similares, para evitar buscas desnecessarias.
+    // Depois, criar as validações de busca e armazenamento. 
+    // Após concluido, remover os comentários.
+    // 
+
+        cacheMovieSimilar: [{
+            movie_id: number;
+            similar: MovieCacheSchema[]
+        }]
+
+    */
 
     if (movieDetailSimilar && movieDetail && movieDetail.id === movie_id) {
         return movieDetailSimilar;
