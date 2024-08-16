@@ -31,11 +31,12 @@ export const movieDetailLoader = async (movie_id: number) => {
 };
 
 export const movieDetailCastLoader = async (movie_id: number) => {
-    const { movieDetailCast, movieDetail } = useRatterStore.getState();
+    const { movieDetailCast, movieDetail, setMovieDetailCast } = useRatterStore.getState();
 
     /*
-    // TODO: criar uma um estado global neste formato para salvar os casts dos filmes, para evitar buscar desnecessarias
+    // TODO: criar uma um estado global neste formato para salvar os casts dos filmes, para evitar buscas desnecessarias.
     // Depois, criar as validações de busca e armazenamento.
+    // Após concluido, remover os comentários.
     
         cacheCastMovie: [{
             movie_id: number;
@@ -49,18 +50,20 @@ export const movieDetailCastLoader = async (movie_id: number) => {
     } else {
         const data = await MovieService.getCastByMovieId(movie_id);
 
-        //   setMovieDetailCast(data);
+        setMovieDetailCast(data);
 
         return data;
     }
 };
 
 export const movieDetailSimilarLoader = async (movie_id: number) => {
-    const { movieDetailSimilar, movieDetail } = useRatterStore.getState();
+    const { movieDetailSimilar, movieDetail, setMovieDetailSimilar } = useRatterStore.getState();
 
     /*
-    // TODO: criar uma um estado global neste formato para salvar os filmes similares, para evitar buscar desnecessarias.
-    // Depois, criar as validações de busca e armazenamento.
+    // TODO: criar uma um estado global neste formato para salvar os filmes similares, para evitar buscas desnecessarias.
+    // Depois, criar as validações de busca e armazenamento. 
+    // Após concluido, remover os comentários.
+    // 
 
         cacheMovieSimilar: [{
             movie_id: number;
@@ -74,7 +77,7 @@ export const movieDetailSimilarLoader = async (movie_id: number) => {
     } else {
         const data = await MovieService.getSimilarByMovieId(movie_id);
 
-        //  setMovieDetailSimilar(data);
+        setMovieDetailSimilar(data);
 
         return data;
     }
