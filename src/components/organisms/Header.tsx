@@ -131,7 +131,7 @@ export default function Header() {
         <HeaderStyled data-testid="header">
             <button
                 onClick={() => {
-                    console.log(cacheCastMovie);
+                    console.log(cacheMovies);
                 }}
             >
                 Ver Store CacheMovies

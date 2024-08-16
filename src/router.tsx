@@ -1,6 +1,12 @@
 import { createRoutesFromElements, createBrowserRouter, Route, defer } from 'react-router-dom';
 
-import { highlightMovieLoader, latestReleasesLoader, recommendedLoader, LoaderHomeData } from './app/Home/loader';
+import {
+    highlightMovieLoader,
+    latestReleasesLoader,
+    recommendedLoader,
+    LoaderHomeData,
+    highlightMovieDetailLoader,
+} from './app/Home/loader';
 
 import { getActorLoader, LoaderActorData } from './app/Actor/loader';
 import {
@@ -17,6 +23,7 @@ import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
 const loaderHomeData: LoaderHomeData = {
+    hightlightMovieDetail: highlightMovieDetailLoader(),
     highlightMovies: highlightMovieLoader(),
     latestReleases: latestReleasesLoader(),
     recommended: recommendedLoader(),

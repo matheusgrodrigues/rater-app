@@ -16,6 +16,7 @@ interface CacheMovieState {
 }
 
 interface RatterStoreProps {
+    hightlightMovieDetail: MovieDetailSchema | undefined;
     movieDetailSimilar: MovieResponseSchema | undefined;
     hightlightMovies: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
@@ -28,6 +29,7 @@ interface RatterStoreProps {
     cacheCastMovie: CacheMovieState[] | [];
     cacheMovies: MovieCacheSchema[] | [];
 
+    setHighlightMovieDetail: (hightlighMovieDetail: MovieDetailSchema) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
     setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
@@ -42,6 +44,7 @@ interface RatterStoreProps {
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
+    hightlightMovieDetail: undefined,
     movieDetailSimilar: undefined,
     hightlightMovies: undefined,
     movieDetailCast: undefined,
@@ -54,6 +57,7 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     cacheCastMovie: [],
     cacheMovies: [],
 
+    setHighlightMovieDetail: (hightlightMovieDetail) => set({ hightlightMovieDetail }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
     setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),

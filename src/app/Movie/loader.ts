@@ -1,7 +1,5 @@
 import useRatterStore from '../store';
-
 import { MovieDetailCast, MovieDetailSchema, MovieCacheSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
-
 import MovieService from '../../services/MovieService';
 import { setStoreCacheMovie } from '../lib/cache';
 
