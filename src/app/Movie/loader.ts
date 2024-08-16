@@ -1,6 +1,6 @@
 import useRatterStore from '../store';
 
-import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
+import { MovieDetailCast, MovieDetailSchema, MovieCacheSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 
 import MovieService from '../../services/MovieService';
 
@@ -11,7 +11,7 @@ export interface LoaderMovieData {
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
-    const { movieDetail, setMovieDetail } = useRatterStore.getState();
+    const { movieDetail, setMovieDetail, cacheMovies, setCacheMovies } = useRatterStore.getState();
 
     // TODO: esta função verifica em todas as stores se já existe o filme carregado, para não precisar buscar novamente da api.
     // Porém, no inicio eu defini o Schema especifico para MovieDetail, e as outras stores estão utilizando MovieSchema.
@@ -33,13 +33,29 @@ export const movieDetailLoader = async (movie_id: number) => {
 
     */
 
-    if (movieDetail && movieDetail.id === movie_id) {
-        // Exemplo: if (loadedMovies.length > 0) setMovieDetail(loadedMovies()[0])
+    const loadedMovies = () => {
+        const result = cacheMovies.filter((movie) => movie.id === movie_id);
 
-        return movieDetail;
+        //    cacheMovies.forEach((movie) => console.log(movie));
+
+        //   console.log(result.length > 0);
+        return result;
+    };
+
+    // console.log('loadedMovies()', loadedMovies(), 'cacheData', cacheMovies);
+
+    if (loadedMovies().length > 0) {
+        console.log('exite');
+
+        return loadedMovies()[0] as unknown as MovieDetailSchema;
     } else {
         const data = await MovieService.getById(movie_id);
-        setMovieDetail(data);
+
+        console.log('não exite');
+
+        !(loadedMovies().length > 0) && setCacheMovies([...cacheMovies, ...[data]] as unknown as MovieCacheSchema[]);
+
+        //  setMovieDetail(data);
 
         return data;
     }

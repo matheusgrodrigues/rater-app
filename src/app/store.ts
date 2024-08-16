@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 
-import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema, MovieSchema } from '../schemas/MovieSchema';
+import {
+    MovieDetailCast,
+    MovieDetailSchema,
+    MovieCacheSchema,
+    MovieResponseSchema,
+    MovieSchema,
+} from '../schemas/MovieSchema';
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
 interface RatterStoreProps {
@@ -13,6 +19,7 @@ interface RatterStoreProps {
     movieDetail: MovieDetailSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
     movieDetailSimilar: MovieResponseSchema | undefined;
+    cacheMovies: MovieCacheSchema[] | [];
 
     setMovieHighlightDetail: (movies: MovieDetailSchema) => void;
     setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
@@ -23,6 +30,7 @@ interface RatterStoreProps {
     setMovieDetail: (movieDetail: MovieDetailSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
+    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
@@ -35,6 +43,7 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     movieDetail: undefined,
     movieDetailCast: undefined,
     movieDetailSimilar: undefined,
+    cacheMovies: [],
 
     setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
     setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),
@@ -45,6 +54,7 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     setMovieDetail: (movieDetail) => set({ movieDetail }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
+    setCacheMovies: (cacheMovies) => set({ cacheMovies }),
 }));
 
 export default useRatterStore;
