@@ -6,10 +6,9 @@ import { SwiperProps, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 
 import BaseCarrousel, { BaseCarrouselRef } from '../../base/BaseCarrousel';
-import CardCategoryLoader from './CarrouselCardCategoryLoader';
 import BadgeCategory from '../../atoms/BadgeCategory';
 
-import { MovieDetailGenre, MovieSchema } from '../../../schemas/MovieSchema';
+import { MovieDetailGenre } from '../../../schemas/MovieSchema';
 
 export interface CarrouselCategoryRef extends BaseCarrouselRef {}
 
