@@ -30,7 +30,8 @@ export const movieDetailLoader = async (movie_id: number) => {
 };
 
 export const movieDetailCastLoader = async (movie_id: number) => {
-    const { movieDetailCast, movieDetail, setMovieDetailCast } = useRatterStore.getState();
+    const { movieDetailCast, movieDetail, cacheCastMovie, setMovieDetailCast, setCacheCastMovie } =
+        useRatterStore.getState();
 
     /*
     // TODO: criar um estado global neste formato para salvar os casts dos filmes, para evitar buscas desnecessarias.
@@ -43,16 +44,23 @@ export const movieDetailCastLoader = async (movie_id: number) => {
         }]
 
     */
+    const getCastFromCache = () => cacheCastMovie.filter((cast) => cast.movie_id === movie_id);
 
-    if (movieDetailCast && movieDetail && movieDetail.id === movie_id) {
-        return movieDetailCast;
-    } else {
-        const data = await MovieService.getCastByMovieId(movie_id);
+    // if (getCastFromCache().length > 0) {
+    //  return getCastFromCache()[0].cast;
 
-        setMovieDetailCast(data);
+    //}
+    //else {
+    const data = await MovieService.getCastByMovieId(movie_id);
 
-        return data;
-    }
+    //   if (!(getCastFromCache().length > 0)) {
+    // TODO: criar metodo para armazenar e gerenciar os cache do cast, e setar aqui o objeto correto
+    // {movie_id, cast[]}
+    //   setStoreCacheCastMovie({ cacheCastMovie, setCacheCastMovie }, data as MovieDetailCast);
+    //  }
+
+    return data;
+    //}
 };
 
 export const movieDetailSimilarLoader = async (movie_id: number) => {

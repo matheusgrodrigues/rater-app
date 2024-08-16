@@ -125,13 +125,13 @@ export default function Header() {
         }
     }, [filteredMovies]);
 
-    const { cacheMovies } = useRatterStore();
+    const { cacheMovies, cacheCastMovie } = useRatterStore();
 
     return (
         <HeaderStyled data-testid="header">
             <button
                 onClick={() => {
-                    console.log(cacheMovies);
+                    console.log(cacheCastMovie);
                 }}
             >
                 Ver Store CacheMovies

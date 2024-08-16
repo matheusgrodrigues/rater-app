@@ -10,6 +10,11 @@ import {
 
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
+interface CacheMovieState {
+    movie_id: number;
+    cast: MovieDetailCast[];
+}
+
 interface RatterStoreProps {
     movieDetailSimilar: MovieResponseSchema | undefined;
     hightlightMovies: MovieResponseSchema | undefined;
@@ -18,8 +23,10 @@ interface RatterStoreProps {
     latestRelease: MovieResponseSchema | undefined;
     movieDetail: MovieDetailSchema | undefined;
     recommended: MovieResponseSchema | undefined;
-    cacheMovies: MovieCacheSchema[] | [];
     actors: ActorResponseSchema | undefined;
+
+    cacheCastMovie: CacheMovieState[] | [];
+    cacheMovies: MovieCacheSchema[] | [];
 
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
     setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
@@ -28,8 +35,10 @@ interface RatterStoreProps {
     setLatestRelease: (latestRelease: MovieResponseSchema) => void;
     setRecommended: (movies: MovieResponseSchema) => void;
     setMovieDetail: (movieDetail: MovieDetailSchema) => void;
-    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
     setActor: (actor: ActorResponseSchema) => void;
+
+    setCacheCastMovie: (cacheCastMovie: CacheMovieState[]) => void;
+    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
@@ -40,8 +49,10 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     latestRelease: undefined,
     recommended: undefined,
     movieDetail: undefined,
-    cacheMovies: [],
     actors: undefined,
+
+    cacheCastMovie: [],
+    cacheMovies: [],
 
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
@@ -52,6 +63,8 @@ const useRatterStore = create<RatterStoreProps>((set) => ({
     setMovieDetail: (movieDetail) => set({ movieDetail }),
     setCacheMovies: (cacheMovies) => set({ cacheMovies }),
     setActor: (actors) => set({ actors }),
+
+    setCacheCastMovie: (cacheCastMovie) => set({ cacheCastMovie }),
 }));
 
 export default useRatterStore;
