@@ -7,7 +7,10 @@ import Icon from '../../components/atoms/Icon';
 
 import CardMovieHighlight, { CardMovieHighlightSkeleton } from '../../components/organisms/CardMovieHighlight';
 import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
-import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
+import CarrouselMovie, {
+    CarrouselCardMovieSkeleton,
+    CarrouselMovieRef,
+} from '../../components/organisms/CarrouselMovie';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 
@@ -49,7 +52,7 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <Suspense fallback={<CarrouselCardMovieLoader />}>
+                        <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                             <Await resolve={highlightMovies}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
@@ -59,6 +62,11 @@ function Home() {
                                 )}
                             </Await>
                         </Suspense>
+                        {/* 
+                        <CarrouselCardMovieSkeleton />
+                     
+                       
+                     */}
                     </div>
                 </SectionHighligsToo>
             </SectionHighlight>
@@ -110,7 +118,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                         <Await resolve={latestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
@@ -170,7 +178,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                         <Await resolve={recommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie

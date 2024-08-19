@@ -10,7 +10,7 @@ import CardTrailer, { CardTrailerLoader } from '../../components/organisms/CardT
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
-import CarrouselMovie, { CarrouselCardMovieLoader } from '../../components/organisms/CarrouselMovie';
+import CarrouselMovie, { CarrouselCardMovieSkeleton } from '../../components/organisms/CarrouselMovie';
 
 import Paragraph from '../../components/atoms/Paragraph';
 import Heading from '../../components/atoms/Heading';
@@ -246,7 +246,7 @@ export default function Movie() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                         <Await resolve={movieDetailSimilar}>
                             {(resolvedSimilar) => (
                                 <CarrouselMovie
