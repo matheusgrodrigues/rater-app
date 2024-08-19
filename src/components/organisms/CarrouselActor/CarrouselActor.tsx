@@ -48,8 +48,8 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
         >
             {actors && actors.length > 0 ? (
                 actors.map((actor) => (
-                    <SwiperSlideOverride>
-                        <Link to={`actor/${actor.id}`} key={actor.id}>
+                    <SwiperSlideOverride key={actor.id}>
+                        <Link to={`actor/${actor.id}`}>
                             <CardActor>
                                 <ImageOverride
                                     src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`}

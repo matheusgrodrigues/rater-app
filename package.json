@@ -61,6 +61,7 @@
         "jest-fetch-mock": "^3.0.3",
         "jest-transform-css": "^6.0.1",
         "prettier": "3.3.3",
+        "react-loading-skeleton": "^3.4.0",
         "styled-components": "^6.1.12",
         "swiper": "^9.4.1",
         "ts-jest": "^29.2.4",
@@ -92,7 +93,8 @@
             "^swiper/react$": "<rootDir>/node_modules/swiper/types/index.d.ts",
             "^swiper/shared$": "<rootDir>/node_modules/swiper/types/shared.d.ts",
             "^swiper/modules$": "<rootDir>/node_modules/swiper/types/modules/index.d.ts",
-            "swiper/css": "<rootDir>/node_modules/swiper/swiper.min.css"
+            "swiper/css": "<rootDir>/node_modules/swiper/swiper.min.css",
+            "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         },
         "transformIgnorePatterns": [
             "/node_modules/(?!swiper|ssr-window|dom7)"
