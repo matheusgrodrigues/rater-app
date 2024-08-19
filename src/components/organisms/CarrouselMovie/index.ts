@@ -1,7 +1,7 @@
-import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
+import CarrouselCardMovieSkeleton from './CarrouselCardMovieSkeleton';
 import CarrouselMovie, { CarrouselMovieRef } from './CarrouselMovie';
 
-export { CarrouselCardMovieLoader };
+export { CarrouselCardMovieSkeleton };
 
 export type { CarrouselMovieRef };
 

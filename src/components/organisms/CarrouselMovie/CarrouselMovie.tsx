@@ -14,8 +14,6 @@ import Image from '../../atoms/Image';
 import Badge from '../../atoms/Badge';
 import Icon from '../../atoms/Icon';
 
-import CarrouselCardMovieLoader from './CarrouselCardMovieLoader';
-
 import { MovieSchema } from '../../../schemas/MovieSchema';
 
 import { formatVoteAverage } from '../../../core/utils/format';
@@ -57,7 +55,8 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {movies && movies.length > 0 ? (
+            {movies &&
+                movies.length > 0 &&
                 movies.slice(1, movies.length).map((movie) => (
                     <SwiperSlideOverride key={movie.id}>
                         <CardMovie>
@@ -98,10 +97,7 @@ const CarrouselMovie: React.ForwardRefRenderFunction<CarrouselMovieRef, Carrouse
                             </ButtonOverride>
                         </CardMovie>
                     </SwiperSlideOverride>
-                ))
-            ) : (
-                <CarrouselCardMovieLoader>Nenhum registro encontrado</CarrouselCardMovieLoader>
-            )}
+                ))}
         </BaseCarrousel>
     );
 };
