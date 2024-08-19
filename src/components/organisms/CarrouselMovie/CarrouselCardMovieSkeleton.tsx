@@ -3,10 +3,12 @@ import Skeleton from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export default function CarrouselCardMovieSkeleton() {
+interface CarrouselCardMovieSkeletonProps extends CarrouselCardMovieSkeletonCardProps {}
+
+export default function CarrouselCardMovieSkeleton({ inline }: CarrouselCardMovieSkeletonProps) {
     return (
-        <CarrouselCardMovieSkeletonContainer>
-            <CarrouselCardMovieSkeletonCard>
+        <CarrouselCardMovieSkeletonContainer inline={inline}>
+            <CarrouselCardMovieSkeletonCard inline={inline}>
                 {[1, 2, 3, 4, 5, 6, 7].map((skeleton) => (
                     <Skeleton
                         highlightColor="#232323"
@@ -25,7 +27,9 @@ export default function CarrouselCardMovieSkeleton() {
     );
 }
 
-const CarrouselCardMovieSkeletonContainer = styled.div`
+interface CarrouselCardMovieSkeletonContainerProps extends CarrouselCardMovieSkeletonCardProps {}
+
+const CarrouselCardMovieSkeletonContainer = styled.div<CarrouselCardMovieSkeletonContainerProps>`
     width: 100%;
     height: 100%;
     position: relative;
@@ -33,9 +37,15 @@ const CarrouselCardMovieSkeletonContainer = styled.div`
 
     ${({ theme }) =>
         theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(786)};`)}
+
+    ${({ theme, inline }) => inline && `max-width: ${theme.ref.breakpoint['2xl']} !important; height: auto !important;`}
 `;
 
-const CarrouselCardMovieSkeletonCard = styled.div`
+interface CarrouselCardMovieSkeletonCardProps {
+    inline?: boolean;
+}
+
+const CarrouselCardMovieSkeletonCard = styled.div<CarrouselCardMovieSkeletonCardProps>`
     height: ${({ theme }) => theme.utils.pxToRem(284)};
     width: ${({ theme }) => theme.utils.pxToRem(166)};
 
@@ -46,5 +56,14 @@ const CarrouselCardMovieSkeletonCard = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
 
-    ${({ theme }) => theme.utils.screen('lg', `flex-direction: column; gap: 0 !important;`)}
+    ${({ theme }) => theme.utils.screen('lg', `flex-direction: column; gap: 0;`)}
+
+    ${({ theme, inline }) =>
+        theme.utils.screen(
+            'lg',
+            `flex-direction: column; ${inline ? `gap: ${theme.ref.spacing['12']} !important;` : ''};`
+        )}
+
+
+    ${({ inline, theme }) => (inline ? `flex-direction: row !important; gap: ${theme.ref.spacing['8']};` : '')}
 `;

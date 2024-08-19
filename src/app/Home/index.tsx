@@ -52,10 +52,7 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <CarrouselCardMovieSkeleton />
-
-                        {/* 
-                         <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                        <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                             <Await resolve={highlightMovies}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
@@ -65,8 +62,6 @@ function Home() {
                                 )}
                             </Await>
                         </Suspense>
-                       
-                     */}
                     </div>
                 </SectionHighligsToo>
             </SectionHighlight>
@@ -118,7 +113,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline />}>
                         <Await resolve={latestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
@@ -178,7 +173,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline />}>
                         <Await resolve={recommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
