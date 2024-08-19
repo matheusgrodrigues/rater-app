@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
-import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
+import CardMovieHighlight, { CardMovieHighlightSkeleton } from '../../components/organisms/CardMovieHighlight';
 import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
 import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
@@ -25,7 +25,7 @@ function Home() {
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
-                <Suspense fallback={<CardMovieHighlightLoader />}>
+                <Suspense fallback={<CardMovieHighlightSkeleton />}>
                     <Await resolve={hightlightMovieDetail}>
                         {(resolvedHighlightMovieDetail) => (
                             <CardMovieHighlight
