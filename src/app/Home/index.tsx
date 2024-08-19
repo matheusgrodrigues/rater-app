@@ -52,7 +52,10 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                        <CarrouselCardMovieSkeleton />
+
+                        {/* 
+                         <Suspense fallback={<CarrouselCardMovieSkeleton />}>
                             <Await resolve={highlightMovies}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
@@ -62,9 +65,6 @@ function Home() {
                                 )}
                             </Await>
                         </Suspense>
-                        {/* 
-                        <CarrouselCardMovieSkeleton />
-                     
                        
                      */}
                     </div>

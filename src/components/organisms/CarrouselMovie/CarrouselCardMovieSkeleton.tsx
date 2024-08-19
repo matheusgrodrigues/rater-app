@@ -29,16 +29,10 @@ const CarrouselCardMovieSkeletonContainer = styled.div`
     width: 100%;
     height: 100%;
     position: relative;
-
-    ${({ theme }) => theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)};`)}
-
-    flex-direction: column;
-    display: flex;
-    gap: ${({ theme }) => theme.ref.spacing['12']};
-
     overflow: hidden;
 
-    ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(786)};`)}
+    ${({ theme }) =>
+        theme.utils.screen('lg', `max-width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(786)};`)}
 `;
 
 const CarrouselCardMovieSkeletonCard = styled.div`
@@ -48,5 +42,9 @@ const CarrouselCardMovieSkeletonCard = styled.div`
     ${({ theme }) =>
         theme.utils.screen('md', `width: ${theme.utils.pxToRem(380)}; height: ${theme.utils.pxToRem(253)};`)}
 
-    margin-bottom: ${({ theme }) => theme.ref.spacing['12']};
+    flex-direction: row;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['8']};
+
+    ${({ theme }) => theme.utils.screen('lg', `flex-direction: column; gap: 0 !important;`)}
 `;
