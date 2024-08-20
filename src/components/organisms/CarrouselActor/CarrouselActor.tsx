@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 interface CarrouselActorProps extends SwiperProps {
-    actors: ActorSchema[];
+    actors: ActorSchema[] | undefined;
     isCast?: boolean;
 }
 

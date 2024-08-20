@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Paragraph from '../../atoms/Paragraph';
 import Button from '../../atoms/Button';
 import Icon from '../../atoms/Icon';
 
