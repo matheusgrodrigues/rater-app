@@ -5,14 +5,17 @@ import styled from 'styled-components';
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
+import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 import CardMovieHighlight, { CardMovieHighlightSkeleton } from '../../components/organisms/CardMovieHighlight';
-import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
 import CarrouselMovie, {
     CarrouselCardMovieSkeleton,
     CarrouselMovieRef,
 } from '../../components/organisms/CarrouselMovie';
-import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
-import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+import {
+    CarrouselActor,
+    CarrouselActorRef,
+    CarrouselCardActorSkeleton,
+} from '../../components/organisms/CarrouselActor';
 
 import { LoaderHomeData } from './loader';
 import { LoaderActorData } from '../Actor/loader';
@@ -233,7 +236,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CardActorLoader />}>
+                    <Suspense fallback={<CarrouselCardActorSkeleton />}>
                         <Await resolve={actors}>
                             {(resolvedActors) => (
                                 <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActorRef} />

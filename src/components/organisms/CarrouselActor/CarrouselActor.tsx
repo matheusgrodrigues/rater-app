@@ -12,7 +12,6 @@ import Strong from '../../atoms/Strong';
 import Image from '../../atoms/Image';
 
 import { ActorSchema } from '../../../schemas/ActorSchema';
-import CardActorLoader from './CardActorLoader';
 import Paragraph from '../../atoms/Paragraph';
 import { Link } from 'react-router-dom';
 
@@ -46,7 +45,8 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {actors && actors.length > 0 ? (
+            {actors &&
+                actors.length > 0 &&
                 actors.map((actor) => (
                     <SwiperSlideOverride key={actor.id}>
                         <Link to={`actor/${actor.id}`}>
@@ -89,10 +89,7 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                             </CardActor>
                         </Link>
                     </SwiperSlideOverride>
-                ))
-            ) : (
-                <CardActorLoader>Nenhum registro encontrado.</CardActorLoader>
-            )}
+                ))}
         </BaseCarrousel>
     );
 };
