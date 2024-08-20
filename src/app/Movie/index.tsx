@@ -11,14 +11,17 @@ import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
 import CarrouselMovie, { CarrouselCardMovieSkeleton } from '../../components/organisms/CarrouselMovie';
+import {
+    CarrouselCardActorSkeleton,
+    CarrouselActorRef,
+    CarrouselActor,
+} from '../../components/organisms/CarrouselActor';
 
 import Paragraph from '../../components/atoms/Paragraph';
 import Heading from '../../components/atoms/Heading';
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
-import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
-import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import { LoaderMovieData } from './loader';
 
 export default function Movie() {
@@ -186,7 +189,7 @@ export default function Movie() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CardActorLoader />}>
+                    <Suspense fallback={<CarrouselCardActorSkeleton />}>
                         <Await resolve={movieDetailCast}>
                             {(resolvedMovieDetailCast) => (
                                 <CarrouselActor
@@ -246,7 +249,7 @@ export default function Movie() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline />}>
                         <Await resolve={movieDetailSimilar}>
                             {(resolvedSimilar) => (
                                 <CarrouselMovie
