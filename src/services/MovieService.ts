@@ -1,6 +1,6 @@
 import Middleware from '../core/middleware';
 
-import { MovieDetailCast, MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
+import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
 
 const api_url = process.env.REACT_APP_TMDB_API_URL;
 
