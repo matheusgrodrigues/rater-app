@@ -16,7 +16,7 @@ const MovieService = {
     },
     getById: async (movie_id: number): Promise<MovieDetailSchema> => {
         const req = await Middleware.request({
-            url: `${api_url}/movie/${movie_id}?append_to_response=videos&language=pt-BR&page=1`,
+            url: `${api_url}/movie/${movie_id}?append_to_response=videos,credits,crew&language=pt-BR&page=1`,
         });
 
         const resp = await req.json();
@@ -45,16 +45,6 @@ const MovieService = {
         console.log(`${api_url}/search/movie?language=pt-BR&page=1&${query}`);
         const req = await Middleware.request({
             url: `${api_url}/search/movie?language=pt-BR&page=1&query=${query}`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
-    },
-
-    getCastByMovieId: async (movie_id: number): Promise<MovieDetailCast> => {
-        const req = await Middleware.request({
-            url: `${api_url}/movie/${movie_id}/credits?language=pt-BR&page=1`,
         });
 
         const resp = await req.json();

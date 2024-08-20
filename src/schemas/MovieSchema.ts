@@ -1,4 +1,4 @@
-import { ActorSchema } from './ActorSchema';
+import { ActorCrewSchema, ActorSchema } from './ActorSchema';
 
 export interface MovieSchema {
     adult: false;
@@ -87,6 +87,10 @@ export interface MovieDetailSchema {
             published_at: string;
             id: string;
         }>;
+    };
+    credits?: {
+        cast: Array<ActorSchema>;
+        crew: Array<ActorCrewSchema>;
     };
 }
 

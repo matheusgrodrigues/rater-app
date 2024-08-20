@@ -9,12 +9,7 @@ import {
 } from './app/Home/loader';
 
 import { getActorLoader, LoaderActorData } from './app/Actor/loader';
-import {
-    movieDetailSimilarLoader,
-    movieDetailCastLoader,
-    movieDetailLoader,
-    LoaderMovieData,
-} from './app/Movie/loader';
+import { movieDetailSimilarLoader, movieDetailLoader, LoaderMovieData } from './app/Movie/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
@@ -35,7 +30,6 @@ const loaderActorData: LoaderActorData = {
 
 const loaderMovieData = (movie_id: string | undefined): LoaderMovieData => ({
     movieDetailSimilar: movieDetailSimilarLoader(Number(movie_id)),
-    movieDetailCast: movieDetailCastLoader(Number(movie_id)),
     movieDetail: movieDetailLoader(Number(movie_id)),
 });
 

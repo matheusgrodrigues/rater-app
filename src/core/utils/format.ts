@@ -1,3 +1,4 @@
+import { ActorCrewSchema, ActorSchema } from '../../schemas/ActorSchema';
 import { MovieDetailGenre } from '../../schemas/MovieSchema';
 
 export const formatVoteAverage = (vote?: string) => {
@@ -61,6 +62,46 @@ export const formatYear = (year?: string) => {
 
     if (year) {
         result = year.split('-')[0];
+    }
+
+    return result;
+};
+
+export const formatScreenWriters = (screenWriters: ActorCrewSchema[]) => {
+    let result = '';
+
+    if (screenWriters && screenWriters.length > 0) {
+        const getScreenWriterName = screenWriters
+            .filter((screenWriter) => screenWriter.department.toLowerCase() === 'writing')
+            .map((screenWriter) => screenWriter.name);
+
+        result = getScreenWriterName.join(', ');
+    }
+
+    return result;
+};
+
+export const formatDirectors = (directors: ActorCrewSchema[]) => {
+    let result = '';
+
+    if (directors && directors.length > 0) {
+        const getDirectors = directors
+            .filter((director) => director.job.toLowerCase() === 'director')
+            .map((director) => director.name);
+
+        result = getDirectors.join(', ');
+    }
+
+    return result;
+};
+
+export const formatArtists = (directors: ActorSchema[]) => {
+    let result = '';
+
+    if (directors && directors.length > 0) {
+        const getDirectors = directors.map((director) => director.name);
+
+        result = getDirectors.join(', ');
     }
 
     return result;

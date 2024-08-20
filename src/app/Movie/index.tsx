@@ -3,7 +3,15 @@ import { Await, useLoaderData } from 'react-router';
 import styled from 'styled-components';
 
 import { MovieDetailSchema } from '../../schemas/MovieSchema';
-import { formatPopularity, formatReleaseDate, formatRuntime, formatVoteAverage } from '../../core/utils/format';
+import {
+    formatArtists,
+    formatDirectors,
+    formatPopularity,
+    formatReleaseDate,
+    formatRuntime,
+    formatScreenWriters,
+    formatVoteAverage,
+} from '../../core/utils/format';
 
 import CarrouselCategory, { CarrouselCategoryLoader } from '../../components/organisms/CarrouselCategory';
 import CardTrailer, { CardTrailerLoader } from '../../components/organisms/CardTrailer';
@@ -25,7 +33,7 @@ import Icon from '../../components/atoms/Icon';
 import { LoaderMovieData } from './loader';
 
 export default function Movie() {
-    const { movieDetailSimilar, movieDetailCast, movieDetail } = useLoaderData() as LoaderMovieData;
+    const { movieDetailSimilar, movieDetail } = useLoaderData() as LoaderMovieData;
 
     const carrouselSimilarRef = useRef<CarrouselActorRef>(null);
     const carrouselActorRef = useRef<CarrouselActorRef>(null);
@@ -111,34 +119,89 @@ export default function Movie() {
                     </Await>
                 </Suspense>
 
-                {/* TODO: não consegui encontrar esta informação na api do TMDB, e para não perder muito tempo, deixei estatica por enquanto. */}
                 <SectionDescriptionSideStaff data-testid="section-description-side-staff">
-                    <StaffItem>
-                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
-                            Direção
-                        </Heading>
-                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
-                            Shawn Levy
-                        </Paragraph>
-                    </StaffItem>
+                    <Suspense>
+                        <Await resolve={movieDetail}>
+                            {(resolvedMovieDetail: MovieDetailSchema) => (
+                                <>
+                                    <StaffItem>
+                                        {resolvedMovieDetail.credits && resolvedMovieDetail.credits.crew.length > 0 && (
+                                            <>
+                                                <Heading
+                                                    config={{
+                                                        fontWeight: '500',
+                                                        fontSize: '16',
+                                                        color: 'secondary-accessible-text-12',
+                                                    }}
+                                                >
+                                                    Direção
+                                                </Heading>
+                                                <Paragraph
+                                                    config={{
+                                                        fontWeight: 500,
+                                                        color: 'secondary-accessible-text-11',
+                                                        size: 16,
+                                                    }}
+                                                >
+                                                    {`${formatDirectors(resolvedMovieDetail.credits.crew)}`}
+                                                </Paragraph>
+                                            </>
+                                        )}
+                                    </StaffItem>
 
-                    <StaffItem>
-                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
-                            Direção
-                        </Heading>
-                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
-                            Shawn Levy
-                        </Paragraph>
-                    </StaffItem>
+                                    <StaffItem>
+                                        {resolvedMovieDetail.credits && resolvedMovieDetail.credits.crew.length > 0 && (
+                                            <>
+                                                <Heading
+                                                    config={{
+                                                        fontWeight: '500',
+                                                        fontSize: '16',
+                                                        color: 'secondary-accessible-text-12',
+                                                    }}
+                                                >
+                                                    Roteiristas
+                                                </Heading>
+                                                <Paragraph
+                                                    config={{
+                                                        fontWeight: 500,
+                                                        color: 'secondary-accessible-text-11',
+                                                        size: 16,
+                                                    }}
+                                                >
+                                                    {`${formatScreenWriters(resolvedMovieDetail.credits.crew)}`}
+                                                </Paragraph>
+                                            </>
+                                        )}
+                                    </StaffItem>
 
-                    <StaffItem>
-                        <Heading config={{ fontWeight: '500', fontSize: '16', color: 'secondary-accessible-text-12' }}>
-                            Direção
-                        </Heading>
-                        <Paragraph config={{ fontWeight: 500, color: 'secondary-accessible-text-11', size: 16 }}>
-                            Shawn Levy
-                        </Paragraph>
-                    </StaffItem>
+                                    <StaffItem>
+                                        {resolvedMovieDetail.credits && resolvedMovieDetail.credits.cast.length > 0 && (
+                                            <>
+                                                <Heading
+                                                    config={{
+                                                        fontWeight: '500',
+                                                        fontSize: '16',
+                                                        color: 'secondary-accessible-text-12',
+                                                    }}
+                                                >
+                                                    Artistas
+                                                </Heading>
+                                                <Paragraph
+                                                    config={{
+                                                        fontWeight: 500,
+                                                        color: 'secondary-accessible-text-11',
+                                                        size: 16,
+                                                    }}
+                                                >
+                                                    {`${formatArtists(resolvedMovieDetail.credits.cast)}`}
+                                                </Paragraph>
+                                            </>
+                                        )}
+                                    </StaffItem>
+                                </>
+                            )}
+                        </Await>
+                    </Suspense>
                 </SectionDescriptionSideStaff>
             </SectionDescription>
 
@@ -188,18 +251,22 @@ export default function Movie() {
                     </ButtonNextPrev>
                 </TitleCarrouselContainer>
 
-                <div>
-                    <Suspense fallback={<CarrouselCardActorSkeleton />}>
-                        <Await resolve={movieDetailCast}>
-                            {(resolvedMovieDetailCast) => (
+                <Suspense fallback={<CarrouselCardActorSkeleton />}>
+                    <Await resolve={movieDetail}>
+                        {(resolvedMovieDetail: MovieDetailSchema) => (
+                            <div>
                                 <CarrouselActor
-                                    actors={resolvedMovieDetailCast ? resolvedMovieDetailCast.cast : undefined}
+                                    actors={
+                                        resolvedMovieDetail && resolvedMovieDetail.credits
+                                            ? resolvedMovieDetail.credits.cast
+                                            : undefined
+                                    }
                                     ref={carrouselActorRef}
                                 />
-                            )}
-                        </Await>
-                    </Suspense>
-                </div>
+                            </div>
+                        )}
+                    </Await>
+                </Suspense>
             </SectionCarrousel>
 
             <SectionCarrousel data-testid="section-filmes-semelhantes">
