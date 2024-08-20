@@ -16,7 +16,7 @@ const MovieService = {
     },
     getById: async (movie_id: number): Promise<MovieDetailSchema> => {
         const req = await Middleware.request({
-            url: `${api_url}/movie/${movie_id}?language=pt-BR&page=1`,
+            url: `${api_url}/movie/${movie_id}?append_to_response=videos&language=pt-BR&page=1`,
         });
 
         const resp = await req.json();

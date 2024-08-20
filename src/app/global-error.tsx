@@ -1,4 +1,4 @@
-import { ErrorResponse, useRouteError } from 'react-router-dom';
+import { ErrorResponse, Link, useRouteError } from 'react-router-dom';
 import styled from 'styled-components';
 
 import RootLayout from './layout';
@@ -6,6 +6,7 @@ import RootLayout from './layout';
 import Paragraph from '../components/atoms/Paragraph';
 import Heading from '../components/atoms/Heading';
 import Icon from '../components/atoms/Icon';
+import Button from '../components/atoms/Button';
 
 export default function GlobalError() {
     const error = useRouteError() as ErrorResponse & { message: string };
@@ -30,22 +31,25 @@ export default function GlobalError() {
                         ? 'Página não encontrada'
                         : error.message}
                 </Paragraph>
+
+                <Link to="..">
+                    <Button config={{ variant: 'secondary-button' }}>Voltar</Button>
+                </Link>
             </SectionContainer>
         </RootLayout>
     );
 }
 
 const SectionContainer = styled.div`
-    width: 100%;
+    text-align: center;
     height: 100%;
+    width: 100%;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    display: flex;
     flex-grow: 1;
-    text-align: center;
+    display: flex;
+    gap: ${({ theme }) => theme.ref.spacing['12']};
 
     ${({ theme }) => theme.utils.container()}
-
-    gap: ${({ theme }) => theme.ref.spacing['12']};
 `;

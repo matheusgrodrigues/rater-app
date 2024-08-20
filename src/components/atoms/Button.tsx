@@ -4,7 +4,7 @@ export interface ButtonProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     children: React.ReactNode;
     config: {
-        variant: 'rounded-icon-button' | 'transparent-button';
+        variant: 'rounded-icon-button' | 'transparent-button' | 'secondary-button';
     };
     type?: 'button' | 'submit' | 'reset' | undefined;
 }
@@ -16,6 +16,7 @@ export default function Button({ children, config, ...props }: ButtonProps) {
         <>
             {variant === 'rounded-icon-button' && <RoundedIconButton {...props}>{children}</RoundedIconButton>}
             {variant === 'transparent-button' && <TransparentButton {...props}>{children}</TransparentButton>}
+            {variant === 'secondary-button' && <SecondaryButton {...props}>{children}</SecondaryButton>}
         </>
     );
 }
@@ -23,6 +24,7 @@ export default function Button({ children, config, ...props }: ButtonProps) {
 const RoundedIconButton = styled.button`
     background-color: ${({ theme }) => theme.ref.colors['secondary-interactive-3']};
     border-radius: ${({ theme }) => theme.ref.borderRadius['99']};
+    cursor: pointer;
     max-height: ${({ theme }) => theme.utils.pxToRem(40)};
     min-height: ${({ theme }) => theme.utils.pxToRem(40)};
     min-width: ${({ theme }) => theme.utils.pxToRem(40)};
@@ -30,7 +32,6 @@ const RoundedIconButton = styled.button`
     justify-content: center;
     align-items: center;
     display: flex;
-    cursor: pointer;
 
     ${({ theme }) => theme.utils.applyHoverTransition()}
 `;
@@ -38,9 +39,6 @@ const RoundedIconButton = styled.button`
 const TransparentButton = styled.button`
     border-radius: ${({ theme }) => theme.ref.borderRadius['12']};
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
-
-    ${({ theme }) => theme.utils.applyTransparentBg()}
-
     padding: ${({ theme }) => theme.ref.spacing['12']};
     max-width: ${({ theme }) => theme.utils.pxToRem(139)};
     height: ${({ theme }) => theme.utils.pxToRem(27)};
@@ -49,10 +47,11 @@ const TransparentButton = styled.button`
     align-items: center;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
-    cursor: pointer;
-    font-size: ${({ theme }) => theme.ref.fontSize['12']};
     font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
+    font-size: ${({ theme }) => theme.ref.fontSize['12']};
+    cursor: pointer;
 
+    ${({ theme }) => theme.utils.applyTransparentBg()}
     ${({ theme }) => theme.utils.applyHoverTransition()}
 
     ${({ theme }) =>
@@ -67,8 +66,19 @@ const TransparentButton = styled.button`
             `
         )}
 
-
         & > span {
         white-space: nowrap;
     }
+`;
+
+const SecondaryButton = styled.button`
+    background-color: ${({ theme }) => theme.ref.colors['secondary-interactive-3']};
+    border-radius: ${({ theme }) => theme.ref.borderRadius['12']};
+    font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
+    font-size: ${({ theme }) => theme.ref.fontSize['16']};
+    padding: ${({ theme }) => theme.ref.spacing['12']} ${({ theme }) => theme.ref.spacing['24']};
+    cursor: pointer;
+    color: ${({ theme }) => theme.ref.colors['secondary-accessible-text-12']};
+
+    ${({ theme }) => theme.utils.applyHoverTransition()}
 `;
