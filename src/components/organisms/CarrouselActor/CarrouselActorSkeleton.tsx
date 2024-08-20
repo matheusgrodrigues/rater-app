@@ -44,6 +44,4 @@ const CarrouselCardActorSkeletonCard = styled.div`
     flex-direction: row;
     display: flex;
     gap: ${({ theme }) => theme.ref.spacing['8']};
-
-    ${({ theme }) => theme.utils.screen('lg', `gap: ${theme.ref.spacing['12']};`)}
 `;
