@@ -5,31 +5,41 @@ import Button from '../../atoms/Button';
 import Icon from '../../atoms/Icon';
 
 import { MovieDetailSchema } from '../../../schemas/MovieSchema';
+import { Link } from 'react-router-dom';
 
 interface CardTrailerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     movieDetail: MovieDetailSchema | undefined;
 }
 
 export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps) {
+    console.log(movieDetail?.videos);
     return (
         <CardTrailerStyled movie={movieDetail} {...props}>
             {movieDetail ? (
                 <CardTrailerContent>
-                    <ButtonOverride
-                        data-testid="btn-assistir-ao-trailer"
-                        config={{ variant: 'transparent-button' }}
-                        style={{ zIndex: 2 }}
+                    <Link
+                        to={
+                            movieDetail.videos && movieDetail.videos.results.length > 0
+                                ? `https://www.youtube.com/watch?v=${movieDetail.videos.results[0].key}`
+                                : ''
+                        }
                     >
-                        <span>Assitir ao trailer</span>
+                        <ButtonOverride
+                            data-testid="btn-assistir-ao-trailer"
+                            config={{ variant: 'transparent-button' }}
+                            style={{ zIndex: 2 }}
+                        >
+                            <span>Assitir ao trailer</span>
 
-                        <Icon
-                            config={{
-                                color: 'white',
-                                icon: 'play-right',
-                                size: 20,
-                            }}
-                        />
-                    </ButtonOverride>
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'play-right',
+                                    size: 20,
+                                }}
+                            />
+                        </ButtonOverride>
+                    </Link>
                 </CardTrailerContent>
             ) : (
                 <Paragraph config={{ fontWeight: 400, color: 'secondary-accessible-text-12', size: 16 }}>
