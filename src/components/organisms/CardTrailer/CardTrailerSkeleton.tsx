@@ -24,8 +24,7 @@ export default function CardTrailerSkeleton() {
 const CardTrailerSkeletonContainer = styled.div`
     width: 100%;
     height: ${({ theme }) => theme.utils.pxToRem(200)};
+    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
     ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(476)};`)}
-
-    border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 `;

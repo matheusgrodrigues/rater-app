@@ -15,6 +15,7 @@ export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps)
 
     const handleShowTrailler = useCallback(() => setShowTrailler((prev) => !prev), []);
 
+    console.log(movieDetail?.videos);
     return (
         <>
             <CardTrailerStyled movie={movieDetail} {...props}>
