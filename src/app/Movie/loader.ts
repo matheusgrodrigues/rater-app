@@ -9,7 +9,16 @@ export interface LoaderMovieData {
 }
 
 export const movieDetailLoader = async (movie_id: number) => {
-    const { cacheMovies, setCacheMovies } = useRatterStore.getState();
+    const { movieDetail, setMovieDetail } = useRatterStore.getState();
+
+    if (movieDetail) {
+        return movieDetail;
+    } else {
+        const data = await MovieService.getById(movie_id);
+        setMovieDetail(data);
+        return data;
+    }
+    /*  const { cacheMovies, setCacheMovies } = useRatterStore.getState();
 
     const getMovieFromCache = () => cacheMovies.filter((movie) => movie.id === movie_id);
 
@@ -23,7 +32,7 @@ export const movieDetailLoader = async (movie_id: number) => {
         }
 
         return data;
-    }
+    } */
 };
 
 export const movieDetailSimilarLoader = async (movie_id: number) => {

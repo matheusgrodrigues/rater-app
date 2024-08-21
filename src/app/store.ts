@@ -15,55 +15,65 @@ interface CacheMovieState {
     cast: MovieDetailCast[];
 }
 
-interface RatterStoreProps {
-    hightlightMovieDetail: MovieDetailSchema | undefined;
+type HomeStore = {
+    movieHighlightDetail: MovieDetailSchema | undefined;
+    movieHighlightsToo: MovieResponseSchema | undefined;
+    movieRecommended: MovieResponseSchema | undefined;
+    movieLatestRelease: MovieResponseSchema | undefined;
+    celebrities: ActorResponseSchema | undefined;
+
+    setMovieHighlightDetail: (movieHighlightDetail: MovieDetailSchema) => void;
+    setMovieLatestRelease: (movieLatestRelease: MovieResponseSchema) => void;
+    setMovieHighlighsToo: (movieHighlightsToo: MovieResponseSchema) => void;
+    setMovieRecommended: (movieRecommended: MovieResponseSchema) => void;
+    setCelebrities: (celebrities: ActorResponseSchema) => void;
+};
+
+interface RatterStoreProps extends HomeStore {
     movieDetailSimilar: MovieResponseSchema | undefined;
-    hightlightMovies: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
     filteredMovies: MovieSchema[] | undefined;
-    latestRelease: MovieResponseSchema | undefined;
     movieDetail: MovieDetailSchema | undefined;
-    recommended: MovieResponseSchema | undefined;
     actors: ActorResponseSchema | undefined;
 
     cacheCastMovie: CacheMovieState[] | [];
     cacheMovies: MovieCacheSchema[] | [];
 
-    setHighlightMovieDetail: (hightlighMovieDetail: MovieDetailSchema) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
-    setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
     setFilteredMovies: (filteredMovie: MovieSchema[] | undefined) => void;
-    setLatestRelease: (latestRelease: MovieResponseSchema) => void;
-    setRecommended: (movies: MovieResponseSchema) => void;
     setMovieDetail: (movieDetail: MovieDetailSchema) => void;
-    setActor: (actor: ActorResponseSchema) => void;
 
     setCacheCastMovie: (cacheCastMovie: CacheMovieState[]) => void;
     setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
+    setActor: (actors: ActorResponseSchema) => void;
 }
 
 const useRatterStore = create<RatterStoreProps>((set) => ({
-    hightlightMovieDetail: undefined,
+    movieHighlightDetail: undefined,
+    movieHighlightsToo: undefined,
+    movieRecommended: undefined,
+    movieLatestRelease: undefined,
+    celebrities: undefined,
+
+    setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
+    setMovieHighlighsToo: (movieHighlightsToo) => set({ movieHighlightsToo }),
+    setMovieRecommended: (movieRecommended) => set({ movieRecommended }),
+    setMovieLatestRelease: (movieLatestRelease) => set({ movieLatestRelease }),
+    setCelebrities: (celebrities) => set({ celebrities }),
+
     movieDetailSimilar: undefined,
-    hightlightMovies: undefined,
     movieDetailCast: undefined,
     filteredMovies: undefined,
-    latestRelease: undefined,
-    recommended: undefined,
     movieDetail: undefined,
     actors: undefined,
 
     cacheCastMovie: [],
     cacheMovies: [],
 
-    setHighlightMovieDetail: (hightlightMovieDetail) => set({ hightlightMovieDetail }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
-    setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),
     setFilteredMovies: (filteredMovies) => set({ filteredMovies }),
-    setLatestRelease: (latestRelease) => set({ latestRelease }),
-    setRecommended: (recommended) => set({ recommended }),
     setMovieDetail: (movieDetail) => set({ movieDetail }),
     setCacheMovies: (cacheMovies) => set({ cacheMovies }),
     setActor: (actors) => set({ actors }),
