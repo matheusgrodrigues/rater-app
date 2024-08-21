@@ -14,7 +14,7 @@ import {
 } from '../../core/utils/format';
 
 import CarrouselCategory, { CarrouselCategoryLoader } from '../../components/organisms/CarrouselCategory';
-import CardTrailer, { CardTrailerLoader } from '../../components/organisms/CardTrailer';
+import CardTrailer, { CardTrailerSkeleton } from '../../components/organisms/CardTrailer';
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
@@ -41,7 +41,7 @@ export default function Movie() {
     return (
         <>
             <SectionTrailer data-testid="section-trailer">
-                <Suspense fallback={<CardTrailerLoader />}>
+                <Suspense fallback={<CardTrailerSkeleton />}>
                     <Await resolve={movieDetail}>
                         {(resolvedMovieDetail: MovieDetailSchema) => <CardTrailer movieDetail={resolvedMovieDetail} />}
                     </Await>
