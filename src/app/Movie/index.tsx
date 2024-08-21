@@ -316,7 +316,7 @@ export default function Movie() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={true} />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
                         <Await resolve={movieDetailSimilar}>
                             {(resolvedSimilar) => (
                                 <CarrouselMovie

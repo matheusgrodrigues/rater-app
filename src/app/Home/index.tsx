@@ -116,7 +116,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={true} />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
                         <Await resolve={moviesLatestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
@@ -176,7 +176,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={true} />}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
                         <Await resolve={moviesRecommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
