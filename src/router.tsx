@@ -1,15 +1,15 @@
 import { createRoutesFromElements, createBrowserRouter, Route, defer } from 'react-router-dom';
 
 import {
-    highlightMovieLoader,
-    latestReleasesLoader,
-    recommendedLoader,
-    LoaderHomeData,
     highlightMovieDetailLoader,
+    latestReleaseMoviesLoader,
+    recommendedMoviesLoader,
+    highlightMoviesLoader,
+    LoaderHomeData,
 } from './app/Home/loader';
 
-import { getActorLoader, LoaderActorData } from './app/Actor/loader';
 import { movieDetailSimilarLoader, movieDetailLoader, LoaderMovieData } from './app/Movie/loader';
+import { getActorLoader, LoaderActorData } from './app/Actor/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
@@ -18,10 +18,10 @@ import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
 const loaderHomeData: LoaderHomeData = {
-    hightlightMovieDetail: highlightMovieDetailLoader(),
-    highlightMovies: highlightMovieLoader(),
-    latestReleases: latestReleasesLoader(),
-    recommended: recommendedLoader(),
+    movieHightlightDetail: highlightMovieDetailLoader(),
+    moviesHighlightsToo: highlightMoviesLoader(),
+    moviesLatestReleases: latestReleaseMoviesLoader(),
+    moviesRecommended: recommendedMoviesLoader(),
 };
 
 const loaderActorData: LoaderActorData = {

@@ -1,71 +1,61 @@
 import useRatterStore from '../store';
 import MovieService from '../../services/MovieService';
-import { MovieCacheSchema, MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
-import { setStoreCacheMovie } from '../lib/cache';
+import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 
 export interface LoaderHomeData {
-    hightlightMovieDetail: Promise<MovieDetailSchema | undefined>;
-    highlightMovies: Promise<MovieResponseSchema>;
-    latestReleases: Promise<MovieResponseSchema>;
-    recommended: Promise<MovieResponseSchema>;
+    movieHightlightDetail: Promise<MovieDetailSchema | undefined>;
+    moviesLatestReleases: Promise<MovieResponseSchema>;
+    moviesHighlightsToo: Promise<MovieResponseSchema>;
+    moviesRecommended: Promise<MovieResponseSchema>;
 }
 
 export const highlightMovieDetailLoader = async () => {
-    const { hightlightMovieDetail, cacheMovies, setCacheMovies, setHighlightMovieDetail } = useRatterStore.getState();
+    const { movieHighlightDetail, setMovieHighlightDetail } = useRatterStore.getState();
 
     try {
-        const highlightMovies = await highlightMovieLoader();
-
-        const getId = Array.isArray(highlightMovies)
-            ? (highlightMovies as unknown as MovieDetailSchema).id
-            : highlightMovies.results[0].id;
-
-        const data = await MovieService.getById(getId);
-
-        if (hightlightMovieDetail) {
-            return hightlightMovieDetail;
+        if (movieHighlightDetail) {
+            return movieHighlightDetail;
         } else {
-            setStoreCacheMovie({ cacheMovies, setCacheMovies }, data as MovieCacheSchema);
-            setHighlightMovieDetail(data);
+            const highlightMovies = await highlightMoviesLoader();
+            const data = await MovieService.getById(highlightMovies.results[0].id);
+            setMovieHighlightDetail(data);
             return data;
         }
     } catch {}
 };
 
-export const highlightMovieLoader = async () => {
-    const { cacheMovies, setCacheMovies } = useRatterStore.getState();
+export const highlightMoviesLoader = async () => {
+    const { moviesHighlightsToo, setMoviesHighlighsToo } = useRatterStore.getState();
 
-    if (cacheMovies.length > 0) {
-        return cacheMovies as unknown as MovieResponseSchema;
+    if (moviesHighlightsToo) {
+        return moviesHighlightsToo;
     } else {
         const data = await MovieService.getHighlights();
-        setCacheMovies([...cacheMovies, ...data.results] as unknown as MovieCacheSchema[]);
+        setMoviesHighlighsToo(data);
         return data;
     }
 };
 
-export const latestReleasesLoader = async () => {
-    const { latestRelease, setLatestRelease, cacheMovies, setCacheMovies } = useRatterStore.getState();
+export const latestReleaseMoviesLoader = async () => {
+    const { moviesLatestRelease, setMoviesLatestRelease } = useRatterStore.getState();
 
-    if (latestRelease) {
-        return latestRelease;
+    if (moviesLatestRelease) {
+        return moviesLatestRelease;
     } else {
         const data = await MovieService.getLastReleases();
-        setCacheMovies([...cacheMovies, ...data.results] as unknown as MovieCacheSchema[]);
-        setLatestRelease(data);
+        setMoviesLatestRelease(data);
         return data;
     }
 };
 
-export const recommendedLoader = async () => {
-    const { recommended, setRecommended, cacheMovies, setCacheMovies } = useRatterStore.getState();
+export const recommendedMoviesLoader = async () => {
+    const { moviesRecommended, setMoviesRecommended } = useRatterStore.getState();
 
-    if (recommended) {
-        return recommended;
+    if (moviesRecommended) {
+        return moviesRecommended;
     } else {
         const data = await MovieService.getLastReleases();
-        setCacheMovies([...cacheMovies, ...data.results] as unknown as MovieCacheSchema[]);
-        setRecommended(data);
+        setMoviesRecommended(data);
         return data;
     }
 };

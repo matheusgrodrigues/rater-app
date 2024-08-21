@@ -42,7 +42,6 @@ const MovieService = {
         return resp;
     },
     filterByQuery: async (query: string): Promise<MovieResponseSchema> => {
-        console.log(`${api_url}/search/movie?language=pt-BR&page=1&${query}`);
         const req = await Middleware.request({
             url: `${api_url}/search/movie?language=pt-BR&page=1&query=${query}`,
         });

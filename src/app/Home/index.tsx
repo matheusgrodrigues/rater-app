@@ -21,7 +21,7 @@ import { LoaderHomeData } from './loader';
 import { LoaderActorData } from '../Actor/loader';
 
 function Home() {
-    const { hightlightMovieDetail, highlightMovies, latestReleases, recommended, actors } =
+    const { movieHightlightDetail, moviesHighlightsToo, moviesLatestReleases, moviesRecommended, actors } =
         useLoaderData() as LoaderHomeData & LoaderActorData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
@@ -32,7 +32,7 @@ function Home() {
         <>
             <SectionHighlight data-testid="section-highlight">
                 <Suspense fallback={<CardMovieHighlightSkeleton />}>
-                    <Await resolve={hightlightMovieDetail}>
+                    <Await resolve={movieHightlightDetail}>
                         {(resolvedHighlightMovieDetail) => (
                             <CardMovieHighlight
                                 highlightMovie={resolvedHighlightMovieDetail ?? undefined}
@@ -56,7 +56,7 @@ function Home() {
 
                     <div>
                         <Suspense fallback={<CarrouselCardMovieSkeleton />}>
-                            <Await resolve={highlightMovies}>
+                            <Await resolve={moviesHighlightsToo}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
                                         enableVerticalOnDesktop
@@ -116,8 +116,8 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={true} />}>
-                        <Await resolve={latestReleases}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
+                        <Await resolve={moviesLatestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
                                     movies={resolvedLatestReleases.results ?? undefined}
@@ -176,8 +176,8 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={true} />}>
-                        <Await resolve={recommended}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
+                        <Await resolve={moviesRecommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
                                     movies={resolvedRecommended.results ?? undefined}

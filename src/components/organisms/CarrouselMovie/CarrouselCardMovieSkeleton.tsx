@@ -42,7 +42,7 @@ const CarrouselCardMovieSkeletonContainer = styled.div<CarrouselCardMovieSkeleto
 `;
 
 interface CarrouselCardMovieSkeletonCardProps {
-    inline?: boolean | undefined;
+    inline?: string;
 }
 
 const CarrouselCardMovieSkeletonCard = styled.div<CarrouselCardMovieSkeletonCardProps>`
