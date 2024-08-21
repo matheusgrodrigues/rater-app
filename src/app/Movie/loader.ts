@@ -1,7 +1,6 @@
 import useRatterStore from '../store';
-import { MovieDetailSchema, MovieCacheSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
+import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
 import MovieService from '../../services/MovieService';
-import { setStoreCacheMovie } from '../lib/cache';
 
 export interface LoaderMovieData {
     movieDetailSimilar: Promise<MovieResponseSchema>;
