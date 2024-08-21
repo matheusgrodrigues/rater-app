@@ -168,8 +168,8 @@ const HeadingOverride = styled(Heading)`
     ${({ theme }) => theme.utils.screen('md', `font-size: ${theme.ref.fontSize['24']};`)}
 
     left: ${({ theme }) => theme.ref.spacing['12']};
-
     bottom: ${({ theme }) => theme.ref.spacing['48']};
+
     ${({ theme }) => theme.utils.screen('md', `bottom: ${theme.utils.pxToRem(71)};`)}
 
     font-weight: ${({ theme }) => theme.ref.fontWeight['600']};
