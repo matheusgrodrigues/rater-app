@@ -125,12 +125,6 @@ export default function Header() {
         }
     }, [filteredMovies]);
 
-    const { movieDetail, movieDetailSimilar } = useRatterStore.getState();
-
-    console.log('movieDetail', movieDetail);
-    // console.log('hightlightMovies', hightlightMovies);
-    console.log('movieDetailSimilar', movieDetailSimilar);
-
     return (
         <HeaderStyled data-testid="header">
             <HeaderStyledContainer>

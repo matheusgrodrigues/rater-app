@@ -36,8 +36,7 @@ export const movieDetailLoader = async (movie_id: number) => {
 };
 
 export const movieDetailSimilarLoader = async (movie_id: number) => {
-    const { movieDetailSimilar, movieDetail, cacheMovies, setMovieDetailSimilar, setCacheMovies } =
-        useRatterStore.getState();
+    const { movieDetailSimilar, movieDetail, setMovieDetailSimilar } = useRatterStore.getState();
 
     /*
     // TODO: criar um estado global neste formato para salvar os filmes similares, para evitar buscas desnecessarias.
@@ -56,7 +55,6 @@ export const movieDetailSimilarLoader = async (movie_id: number) => {
         return movieDetailSimilar;
     } else {
         const data = await MovieService.getSimilarByMovieId(movie_id);
-        setStoreCacheMovie({ cacheMovies, setCacheMovies }, data.results as unknown as MovieCacheSchema[]);
         setMovieDetailSimilar(data);
         return data;
     }
