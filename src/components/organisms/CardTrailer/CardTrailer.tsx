@@ -13,13 +13,12 @@ interface CardTrailerProps extends React.DetailedHTMLProps<React.HTMLAttributes<
 export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps) {
     const [showTrailler, setShowTrailler] = useState(false);
 
-    console.log(movieDetail?.videos);
-
     const handleShowTrailler = useCallback(() => setShowTrailler((prev) => !prev), []);
+
     return (
         <>
             <CardTrailerStyled movie={movieDetail} {...props}>
-                {movieDetail && (
+                {movieDetail && movieDetail.videos && movieDetail.videos.results.length > 0 && (
                     <CardTrailerContent>
                         <ButtonOverride
                             data-testid="btn-assistir-ao-trailer"
@@ -38,17 +37,15 @@ export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps)
                             />
                         </ButtonOverride>
 
-                        {movieDetail.videos && movieDetail.videos.results.length > 0 && showTrailler && (
-                            <>
-                                <Iframe
-                                    allowFullScreen
-                                    frameBorder="0"
-                                    loading="lazy"
-                                    title={movieDetail.videos.results[0].name}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    src={`https://www.youtube.com/embed/${movieDetail.videos.results[0].key}?&modestbranding=1`}
-                                />
-                            </>
+                        {showTrailler && (
+                            <Iframe
+                                allowFullScreen
+                                frameBorder="0"
+                                loading="lazy"
+                                title={movieDetail.videos.results[0].name}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                src={`https://www.youtube.com/embed/${movieDetail.videos.results[0].key}?&modestbranding=1`}
+                            />
                         )}
                     </CardTrailerContent>
                 )}

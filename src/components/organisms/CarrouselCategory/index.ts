@@ -1,7 +1,7 @@
-import CarrouselCategoryLoader from './CarrouselCardCategoryLoader';
+import CarrouselCategorySkeleton from './CarrouselCategorySkeleton';
 import CarrouselCategory, { CarrouselCategoryRef } from './CarrouselCategory';
 
-export { CarrouselCategoryLoader };
+export { CarrouselCategorySkeleton };
 
 export type { CarrouselCategoryRef };
 

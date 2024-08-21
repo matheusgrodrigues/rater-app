@@ -13,7 +13,7 @@ import {
     formatVoteAverage,
 } from '../../core/utils/format';
 
-import CarrouselCategory, { CarrouselCategoryLoader } from '../../components/organisms/CarrouselCategory';
+import CarrouselCategory, { CarrouselCategorySkeleton } from '../../components/organisms/CarrouselCategory';
 import CardTrailer, { CardTrailerSkeleton } from '../../components/organisms/CardTrailer';
 import SpecDuratCatYear from '../../components/organisms/SpecDuratCatYear';
 import SpecRatingView from '../../components/organisms/SpecRatingView';
@@ -50,7 +50,7 @@ export default function Movie() {
 
             <SectionCarrousel data-testid="section-category">
                 <div>
-                    <Suspense fallback={<CarrouselCategoryLoader />}>
+                    <Suspense fallback={<CarrouselCategorySkeleton />}>
                         <Await resolve={movieDetail}>
                             {(resolvedMovieDetail: MovieDetailSchema) => (
                                 <CarrouselCategory
