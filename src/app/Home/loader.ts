@@ -42,7 +42,7 @@ export const latestReleaseMoviesLoader = async () => {
     if (moviesLatestRelease) {
         return moviesLatestRelease;
     } else {
-        const data = await MovieService.getLastReleases();
+        const data = await MovieService.getLatestReleases();
         setMoviesLatestRelease(data);
         return data;
     }
@@ -54,7 +54,7 @@ export const recommendedMoviesLoader = async () => {
     if (moviesRecommended) {
         return moviesRecommended;
     } else {
-        const data = await MovieService.getLastReleases();
+        const data = await MovieService.getLatestReleases();
         setMoviesRecommended(data);
         return data;
     }
