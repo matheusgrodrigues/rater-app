@@ -8,7 +8,7 @@ export interface LoaderActorData {
     actors: Promise<ActorResponseSchema>;
 }
 
-export const getActorLoader = async () => {
+export const getAllActorsLoader = async () => {
     const { actors, setActor } = useRatterStore.getState();
 
     if (actors) {

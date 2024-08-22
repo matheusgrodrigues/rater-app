@@ -1,64 +1,31 @@
-import Middleware from '../core/middleware';
+import MovieRepository, { MovieRepositoryImp } from '../repository/MovieRepository';
 
-import { MovieDetailSchema, MovieResponseSchema } from '../schemas/MovieSchema';
+interface MovieServiceImp extends MovieRepositoryImp {}
 
-const api_url = process.env.REACT_APP_TMDB_API_URL;
-
-const MovieService = {
-    getHighlights: async (): Promise<MovieResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/movie/popular?language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+const MovieService: MovieServiceImp = {
+    getSimilarByMovieId: async (movie_id: number) => {
+        const result = await MovieRepository.getSimilarByMovieId(movie_id);
+        return result;
     },
-    getById: async (movie_id: number): Promise<MovieDetailSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/movie/${movie_id}?append_to_response=videos,credits,crew&language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+    getLatestReleases: async () => {
+        const result = await MovieRepository.getLatestReleases();
+        return result;
     },
-    getLastReleases: async (): Promise<MovieResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/trending/movie/week?language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+    getRecommended: async () => {
+        const result = await MovieRepository.getRecommended();
+        return result;
     },
-    getRecommended: async (): Promise<MovieResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/top_rated?language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+    filterByQuery: async (query: string) => {
+        const result = await MovieRepository.filterByQuery(query);
+        return result;
     },
-    filterByQuery: async (query: string): Promise<MovieResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/search/movie?language=pt-BR&page=1&query=${query}`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+    getHighlights: async () => {
+        const result = await MovieRepository.getHighlights();
+        return result;
     },
-
-    getSimilarByMovieId: async (movie_id: number): Promise<MovieResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/movie/${movie_id}/similar?language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+    getById: async (movie_id: number) => {
+        const result = await MovieRepository.getById(movie_id);
+        return result;
     },
 };
 

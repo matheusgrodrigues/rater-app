@@ -9,7 +9,7 @@ import {
 } from './app/Home/loader';
 
 import { movieDetailSimilarLoader, movieDetailLoader, LoaderMovieData } from './app/Movie/loader';
-import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+import { getAllActorsLoader, LoaderActorData } from './app/Actor/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
@@ -17,15 +17,12 @@ import Movie from './app/Movie';
 import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
-const loaderHomeData: LoaderHomeData = {
+const loaderHomeData: LoaderHomeData & LoaderActorData = {
     movieHightlightDetail: highlightMovieDetailLoader(),
     moviesHighlightsToo: highlightMoviesLoader(),
     moviesLatestReleases: latestReleaseMoviesLoader(),
     moviesRecommended: recommendedMoviesLoader(),
-};
-
-const loaderActorData: LoaderActorData = {
-    actors: getActorLoader(),
+    actors: getAllActorsLoader(),
 };
 
 const loaderMovieData = (movie_id: string | undefined): LoaderMovieData => ({
@@ -40,7 +37,6 @@ const router = createBrowserRouter(
                 element={<Home />}
                 loader={() =>
                     defer({
-                        ...loaderActorData,
                         ...loaderHomeData,
                     })
                 }

@@ -32,18 +32,18 @@ const createHomeSlice: StateCreator<HomeSlice, []> = (set) => ({
 interface MovieSlice {
     movieDetailSimilar: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
-    movieDetail: MovieDetailSchema | undefined;
+    movieDetail: MovieDetailSchema[];
     actors: ActorResponseSchema | undefined;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
-    setMovieDetail: (movieDetail: MovieDetailSchema) => void;
+    setMovieDetail: (movieDetail: MovieDetailSchema[]) => void;
     setActor: (actors: ActorResponseSchema) => void;
 }
 
 const createMovieSlice: StateCreator<MovieSlice, []> = (set) => ({
     movieDetailSimilar: undefined,
     movieDetailCast: undefined,
-    movieDetail: undefined,
+    movieDetail: [],
     actors: undefined,
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
