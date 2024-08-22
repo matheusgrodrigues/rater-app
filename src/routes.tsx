@@ -9,7 +9,7 @@ import {
 } from './app/Home/loader';
 
 import { movieDetailSimilarLoader, movieDetailLoader, LoaderMovieData } from './app/Movie/loader';
-import { getActorLoader, LoaderActorData } from './app/Actor/loader';
+import { getAllActorsLoader, LoaderActorData } from './app/Actor/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
@@ -22,7 +22,7 @@ const loaderHomeData: LoaderHomeData & LoaderActorData = {
     moviesHighlightsToo: highlightMoviesLoader(),
     moviesLatestReleases: latestReleaseMoviesLoader(),
     moviesRecommended: recommendedMoviesLoader(),
-    actors: getActorLoader(),
+    actors: getAllActorsLoader(),
 };
 
 const loaderMovieData = (movie_id: string | undefined): LoaderMovieData => ({
