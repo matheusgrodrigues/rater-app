@@ -17,14 +17,11 @@ import Movie from './app/Movie';
 import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
-const loaderHomeData: LoaderHomeData = {
+const loaderHomeData: LoaderHomeData & LoaderActorData = {
     movieHightlightDetail: highlightMovieDetailLoader(),
     moviesHighlightsToo: highlightMoviesLoader(),
     moviesLatestReleases: latestReleaseMoviesLoader(),
     moviesRecommended: recommendedMoviesLoader(),
-};
-
-const loaderActorData: LoaderActorData = {
     actors: getActorLoader(),
 };
 
@@ -40,7 +37,6 @@ const router = createBrowserRouter(
                 element={<Home />}
                 loader={() =>
                     defer({
-                        ...loaderActorData,
                         ...loaderHomeData,
                     })
                 }

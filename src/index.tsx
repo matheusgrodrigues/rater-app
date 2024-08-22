@@ -7,7 +7,7 @@ import './index.css';
 
 import { defaultTheme } from './config/theme';
 
-import router from './router';
+import router from './routes';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
