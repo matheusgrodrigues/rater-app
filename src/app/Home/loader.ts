@@ -1,12 +1,15 @@
 import useRatterStore from '../store';
 import MovieService from '../../services/MovieService';
 import { MovieDetailSchema, MovieResponseSchema } from '../../schemas/MovieSchema';
+import ActorService from '../../services/ActorService';
+import { ActorResponseSchema } from '../../schemas/ActorSchema';
 
 export interface LoaderHomeData {
     movieHightlightDetail: Promise<MovieDetailSchema | undefined>;
     moviesLatestReleases: Promise<MovieResponseSchema>;
     moviesHighlightsToo: Promise<MovieResponseSchema>;
     moviesRecommended: Promise<MovieResponseSchema>;
+    actors: Promise<ActorResponseSchema>;
 }
 
 export const highlightMovieDetailLoader = async () => {
@@ -56,6 +59,19 @@ export const recommendedMoviesLoader = async () => {
     } else {
         const data = await MovieService.getLatestReleases();
         setMoviesRecommended(data);
+        return data;
+    }
+};
+
+export const getAllActorsLoader = async () => {
+    const { actors, setActor } = useRatterStore.getState();
+
+    if (actors) {
+        return actors;
+    } else {
+        const data = await ActorService.getAll();
+        setActor(data);
+
         return data;
     }
 };
