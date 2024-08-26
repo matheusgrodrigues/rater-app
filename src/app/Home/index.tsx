@@ -18,11 +18,10 @@ import {
 } from '../../components/organisms/CarrouselActor';
 
 import { LoaderHomeData } from './loader';
-import { LoaderActorData } from '../Actor/loader';
 
 function Home() {
     const { movieHightlightDetail, moviesHighlightsToo, moviesLatestReleases, moviesRecommended, actors } =
-        useLoaderData() as LoaderHomeData & LoaderActorData;
+        useLoaderData() as LoaderHomeData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
     const carrouselRecommendedRef = useRef<CarrouselMovieRef>(null);
