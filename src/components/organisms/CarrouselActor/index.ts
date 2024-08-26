@@ -1,5 +1,6 @@
 import CarrouselActor, { CarrouselActorRef } from './CarrouselActor';
+import CarrouselCardActorSkeleton from './CarrouselActorSkeleton';
 
 export type { CarrouselActorRef };
 
-export default CarrouselActor;
+export { CarrouselCardActorSkeleton, CarrouselActor };

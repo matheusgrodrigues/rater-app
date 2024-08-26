@@ -1,6 +1,6 @@
-import CardTrailerLoader from './CardTrailerLoader';
+import CardTrailerSkeleton from './CardTrailerSkeleton';
 import CardTrailer from './CardTrailer';
 
-export { CardTrailerLoader };
+export { CardTrailerSkeleton };
 
 export default CardTrailer;

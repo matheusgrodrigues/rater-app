@@ -35,7 +35,7 @@ const CarrouselCategory: React.ForwardRefRenderFunction<CarrouselCategoryRef, Ca
         <BaseCarrousel
             slidesPerView={'auto'}
             spaceBetween={12}
-            style={{ maxHeight: '49.125rem', position: 'relative' }}
+            style={{ position: 'relative' }}
             ref={baseCarrouselRef}
             {...props}
         >

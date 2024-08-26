@@ -1,74 +1,70 @@
-import { create } from 'zustand';
+import { create, StateCreator } from 'zustand';
 
-import {
-    MovieDetailCast,
-    MovieDetailSchema,
-    MovieCacheSchema,
-    MovieResponseSchema,
-    MovieSchema,
-} from '../schemas/MovieSchema';
-
+import { MovieResponseSchema, MovieDetailSchema, MovieDetailCast, MovieSchema } from '../schemas/MovieSchema';
 import { ActorResponseSchema } from '../schemas/ActorSchema';
 
-interface CacheMovieState {
-    movie_id: number;
-    cast: MovieDetailCast[];
+interface HomeSlice {
+    movieHighlightDetail: MovieDetailSchema | undefined;
+    moviesHighlightsToo: MovieResponseSchema | undefined;
+    moviesRecommended: MovieResponseSchema | undefined;
+    moviesLatestRelease: MovieResponseSchema | undefined;
+    celebrities: ActorResponseSchema | undefined;
+    setMovieHighlightDetail: (movieHighlightDetail: MovieDetailSchema) => void;
+    setMoviesLatestRelease: (moviesLatestRelease: MovieResponseSchema) => void;
+    setMoviesHighlighsToo: (moviesHighlightsToo: MovieResponseSchema) => void;
+    setMoviesRecommended: (moviesRecommended: MovieResponseSchema) => void;
+    setCelebrities: (celebrities: ActorResponseSchema) => void;
 }
 
-interface RatterStoreProps {
-    hightlightMovieDetail: MovieDetailSchema | undefined;
+const createHomeSlice: StateCreator<HomeSlice, []> = (set) => ({
+    movieHighlightDetail: undefined,
+    moviesHighlightsToo: undefined,
+    moviesRecommended: undefined,
+    moviesLatestRelease: undefined,
+    celebrities: undefined,
+    setMovieHighlightDetail: (movieHighlightDetail) => set({ movieHighlightDetail }),
+    setMoviesHighlighsToo: (moviesHighlightsToo) => set({ moviesHighlightsToo }),
+    setMoviesRecommended: (moviesRecommended) => set({ moviesRecommended }),
+    setMoviesLatestRelease: (moviesLatestRelease) => set({ moviesLatestRelease }),
+    setCelebrities: (celebrities) => set({ celebrities }),
+});
+
+interface MovieSlice {
     movieDetailSimilar: MovieResponseSchema | undefined;
-    hightlightMovies: MovieResponseSchema | undefined;
     movieDetailCast: MovieDetailCast | undefined;
-    filteredMovies: MovieSchema[] | undefined;
-    latestRelease: MovieResponseSchema | undefined;
-    movieDetail: MovieDetailSchema | undefined;
-    recommended: MovieResponseSchema | undefined;
+    movieDetail: MovieDetailSchema[];
     actors: ActorResponseSchema | undefined;
-
-    cacheCastMovie: CacheMovieState[] | [];
-    cacheMovies: MovieCacheSchema[] | [];
-
-    setHighlightMovieDetail: (hightlighMovieDetail: MovieDetailSchema) => void;
     setMovieDetailSimilar: (movieDetailSimilar: MovieResponseSchema) => void;
-    setHighlightMovies: (hightlightMovies: MovieResponseSchema) => void;
     setMovieDetailCast: (movieDetailCast: MovieDetailCast) => void;
-    setFilteredMovies: (filteredMovie: MovieSchema[] | undefined) => void;
-    setLatestRelease: (latestRelease: MovieResponseSchema) => void;
-    setRecommended: (movies: MovieResponseSchema) => void;
-    setMovieDetail: (movieDetail: MovieDetailSchema) => void;
-    setActor: (actor: ActorResponseSchema) => void;
-
-    setCacheCastMovie: (cacheCastMovie: CacheMovieState[]) => void;
-    setCacheMovies: (cacheMovies: MovieCacheSchema[]) => void;
+    setMovieDetail: (movieDetail: MovieDetailSchema[]) => void;
+    setActor: (actors: ActorResponseSchema) => void;
 }
 
-const useRatterStore = create<RatterStoreProps>((set) => ({
-    hightlightMovieDetail: undefined,
+const createMovieSlice: StateCreator<MovieSlice, []> = (set) => ({
     movieDetailSimilar: undefined,
-    hightlightMovies: undefined,
     movieDetailCast: undefined,
-    filteredMovies: undefined,
-    latestRelease: undefined,
-    recommended: undefined,
-    movieDetail: undefined,
+    movieDetail: [],
     actors: undefined,
-
-    cacheCastMovie: [],
-    cacheMovies: [],
-
-    setHighlightMovieDetail: (hightlightMovieDetail) => set({ hightlightMovieDetail }),
     setMovieDetailSimilar: (movieDetailSimilar) => set({ movieDetailSimilar }),
     setMovieDetailCast: (movieDetailCast) => set({ movieDetailCast }),
-    setHighlightMovies: (hightlightMovies) => set({ hightlightMovies }),
-    setFilteredMovies: (filteredMovies) => set({ filteredMovies }),
-    setLatestRelease: (latestRelease) => set({ latestRelease }),
-    setRecommended: (recommended) => set({ recommended }),
     setMovieDetail: (movieDetail) => set({ movieDetail }),
-    setCacheMovies: (cacheMovies) => set({ cacheMovies }),
     setActor: (actors) => set({ actors }),
+});
 
-    setCacheCastMovie: (cacheCastMovie) => set({ cacheCastMovie }),
+interface GlobalSlice {
+    filteredMovies: MovieSchema[] | undefined;
+    setFilteredMovies: (filteredMovie: MovieSchema[] | undefined) => void;
+}
+
+const createGlobalSlice: StateCreator<GlobalSlice, []> = (set) => ({
+    filteredMovies: undefined,
+    setFilteredMovies: (filteredMovies) => set({ filteredMovies }),
+});
+
+const useRatterStore = create<HomeSlice & MovieSlice & GlobalSlice>()((...a) => ({
+    ...createHomeSlice(...a),
+    ...createMovieSlice(...a),
+    ...createGlobalSlice(...a),
 }));
 
 export default useRatterStore;

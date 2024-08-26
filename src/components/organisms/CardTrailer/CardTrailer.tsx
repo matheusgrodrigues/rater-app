@@ -1,42 +1,70 @@
 import styled from 'styled-components';
 
-import Paragraph from '../../atoms/Paragraph';
 import Button from '../../atoms/Button';
 import Icon from '../../atoms/Icon';
 
 import { MovieDetailSchema } from '../../../schemas/MovieSchema';
+import { useCallback, useState } from 'react';
 
 interface CardTrailerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     movieDetail: MovieDetailSchema | undefined;
 }
 
 export default function CardTrailer({ movieDetail, ...props }: CardTrailerProps) {
-    return (
-        <CardTrailerStyled movie={movieDetail} {...props}>
-            {movieDetail ? (
-                <CardTrailerContent>
-                    <ButtonOverride
-                        data-testid="btn-assistir-ao-trailer"
-                        config={{ variant: 'transparent-button' }}
-                        style={{ zIndex: 2 }}
-                    >
-                        <span>Assitir ao trailer</span>
+    const [showTrailler, setShowTrailler] = useState(false);
 
-                        <Icon
-                            config={{
-                                color: 'white',
-                                icon: 'play-right',
-                                size: 20,
-                            }}
-                        />
-                    </ButtonOverride>
-                </CardTrailerContent>
-            ) : (
-                <Paragraph config={{ fontWeight: 400, color: 'secondary-accessible-text-12', size: 16 }}>
-                    Nenhum Registro encontrado
-                </Paragraph>
+    const handleShowTrailler = useCallback(() => setShowTrailler((prev) => !prev), []);
+
+    return (
+        <>
+            <CardTrailerStyled movie={movieDetail} {...props}>
+                {movieDetail && movieDetail.videos && movieDetail.videos.results.length > 0 && (
+                    <CardTrailerContent>
+                        <ButtonOverride
+                            data-testid="btn-assistir-ao-trailer"
+                            onClick={handleShowTrailler}
+                            config={{ variant: 'transparent-button' }}
+                            style={{ zIndex: 2 }}
+                        >
+                            <span>Assitir ao trailer</span>
+
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'play-right',
+                                    size: 20,
+                                }}
+                            />
+                        </ButtonOverride>
+
+                        {showTrailler && (
+                            <Iframe
+                                allowFullScreen
+                                frameBorder="0"
+                                loading="lazy"
+                                title={movieDetail.videos.results[0].name}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                src={`https://www.youtube.com/embed/${movieDetail.videos.results[0].key}?&modestbranding=1`}
+                            />
+                        )}
+                    </CardTrailerContent>
+                )}
+            </CardTrailerStyled>
+
+            {showTrailler && (
+                <ButtonClose onClick={handleShowTrailler} config={{ variant: 'transparent-button' }}>
+                    <span>Fechar Trailer</span>
+
+                    <Icon
+                        config={{
+                            color: 'white',
+                            icon: 'close',
+                            size: 24,
+                        }}
+                    />
+                </ButtonClose>
             )}
-        </CardTrailerStyled>
+        </>
     );
 }
 
@@ -121,6 +149,12 @@ const CardTrailerContent = styled.div`
                 }        
         `
         )}
+
+        &:hover {
+        button {
+            display: flex;
+        }
+    }
 `;
 
 const ButtonOverride = styled(Button)`
@@ -129,4 +163,20 @@ const ButtonOverride = styled(Button)`
             'sm',
             `max-width: 100%; height: ${theme.utils.pxToRem(48)}; font-size: ${theme.ref.fontSize['20']}; justify-content:center;`
         )}
+`;
+
+const Iframe = styled.iframe`
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+`;
+
+const ButtonClose = styled(Button)`
+    position: fixed;
+    bottom: ${({ theme }) => theme.ref.spacing['48']};
+    right: ${({ theme }) => theme.ref.spacing['48']};
+    z-index: 99;
 `;

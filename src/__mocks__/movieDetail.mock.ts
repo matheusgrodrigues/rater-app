@@ -94,6 +94,46 @@ const movieDetailMock: MovieDetailSchema = {
     video: false,
     vote_average: 7.838,
     vote_count: 1808,
+    videos: {
+        results: [
+            {
+                iso_639_1: 'pt',
+                iso_3166_1: 'BR',
+                name: 'TWISTERS l Trailer Oficial Dublado #2',
+                key: '4Yn8hiiwSu8',
+                site: 'YouTube',
+                size: 1080,
+                type: 'Trailer',
+                official: true,
+                published_at: '2024-06-11T21:05:22.000Z',
+                id: '6668cf07f30eda0c8c3c6c95',
+            },
+            {
+                iso_639_1: 'pt',
+                iso_3166_1: 'BR',
+                name: 'TWISTERS | Trailer LEGENDADO Oficial | WARNER BROS. PICTURES BRASIL #TwistersFilme',
+                key: 'isrGvaDIPxw',
+                site: 'YouTube',
+                size: 1080,
+                type: 'Trailer',
+                official: false,
+                published_at: '2024-02-12T03:04:31.000Z',
+                id: '65c98c95680be8017ea5ed27',
+            },
+            {
+                iso_639_1: 'pt',
+                iso_3166_1: 'BR',
+                name: 'TWISTERS | Trailer Oficial',
+                key: 'Q2ORbiB-bH8',
+                site: 'YouTube',
+                size: 1080,
+                type: 'Trailer',
+                official: true,
+                published_at: '2024-02-12T00:20:49.000Z',
+                id: '65c96b80aaec7101625966fd',
+            },
+        ],
+    },
 };
 
 export default movieDetailMock;

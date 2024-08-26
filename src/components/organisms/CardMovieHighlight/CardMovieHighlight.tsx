@@ -18,6 +18,7 @@ import {
     formatRuntime,
     formatGenre,
 } from '../../../core/utils/format';
+import { Link } from 'react-router-dom';
 
 interface CardMovieHighlightProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -99,21 +100,20 @@ export default function CardMovieHighlight({ highlightMovie, ...props }: CardMov
                             {highlightMovie.overview}
                         </CardMovieHighlightSinopseText>
                     </CardMovieHighlightSinopse>
-                    <Button
-                        config={{ variant: 'transparent-button' }}
-                        style={{ zIndex: 2 }}
-                        onClick={() => navigate(`/movie/${highlightMovie.id}`)}
-                    >
-                        <span>Assitir ao trailer</span>
 
-                        <Icon
-                            config={{
-                                color: 'white',
-                                icon: 'play-right',
-                                size: 20,
-                            }}
-                        />
-                    </Button>
+                    <Link to={`movie/${highlightMovie.id}`} style={{ maxWidth: 'max-content', zIndex: 2 }}>
+                        <Button config={{ variant: 'transparent-button' }}>
+                            <span>Assitir ao trailer</span>
+
+                            <Icon
+                                config={{
+                                    color: 'white',
+                                    icon: 'play-right',
+                                    size: 20,
+                                }}
+                            />
+                        </Button>
+                    </Link>
                 </CardMovieHighlightContent>
             ) : (
                 <Paragraph config={{ fontWeight: 400, color: 'secondary-accessible-text-12', size: 16 }}>
@@ -135,16 +135,10 @@ const CardMovieHighlightStyled = styled.div<CardMovieHighlightStyledProps>`
     min-height: ${({ theme }) => theme.utils.pxToRem(284)};
 
     ${({ theme }) => theme.utils.screen('md', `height: ${theme.utils.pxToRem(836)};`)}
-    ${({ theme }) => theme.utils.screen('lg', `height: ${theme.utils.pxToRem(836)};`)}
 
     border-radius: ${({ theme }) => theme.ref.borderRadius['24']};
 
     flex-direction: column;
-
-    ${({ movie, theme }) =>
-        !movie &&
-        `justify-content: center; align-items: center; border: ${theme.utils.pxToRem(1)} solid ${theme.ref.colors['secondary-borders-6']};`}
-
     display: flex;
     position: relative;
 

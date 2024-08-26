@@ -1,18 +1,11 @@
-import Middleware from '../core/middleware';
+import ActorRepository, { ActorRepositoryImp } from '../repository/ActorRepository';
 
-import { ActorResponseSchema } from '../schemas/ActorSchema';
+interface ActorServiceImp extends ActorRepositoryImp {}
 
-const api_url = process.env.REACT_APP_TMDB_API_URL;
-
-const ActorService = {
-    getAll: async (): Promise<ActorResponseSchema> => {
-        const req = await Middleware.request({
-            url: `${api_url}/person/popular?language=pt-BR&page=1`,
-        });
-
-        const resp = await req.json();
-
-        return resp;
+const ActorService: ActorServiceImp = {
+    getAll: async () => {
+        const result = ActorRepository.getAll();
+        return result;
     },
 };
 

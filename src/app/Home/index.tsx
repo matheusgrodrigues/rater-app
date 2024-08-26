@@ -5,17 +5,23 @@ import styled from 'styled-components';
 import Button from '../../components/atoms/Button';
 import Icon from '../../components/atoms/Icon';
 
-import CardMovieHighlight, { CardMovieHighlightLoader } from '../../components/organisms/CardMovieHighlight';
-import CardActorLoader from '../../components/organisms/CarrouselActor/CardActorLoader';
-import CarrouselMovie, { CarrouselCardMovieLoader, CarrouselMovieRef } from '../../components/organisms/CarrouselMovie';
-import CarrouselActor, { CarrouselActorRef } from '../../components/organisms/CarrouselActor';
 import HeadingWithBar from '../../components/organisms/HeadingWithBar';
+import CardMovieHighlight, { CardMovieHighlightSkeleton } from '../../components/organisms/CardMovieHighlight';
+import CarrouselMovie, {
+    CarrouselCardMovieSkeleton,
+    CarrouselMovieRef,
+} from '../../components/organisms/CarrouselMovie';
+import {
+    CarrouselActor,
+    CarrouselActorRef,
+    CarrouselCardActorSkeleton,
+} from '../../components/organisms/CarrouselActor';
 
 import { LoaderHomeData } from './loader';
 import { LoaderActorData } from '../Actor/loader';
 
 function Home() {
-    const { hightlightMovieDetail, highlightMovies, latestReleases, recommended, actors } =
+    const { movieHightlightDetail, moviesHighlightsToo, moviesLatestReleases, moviesRecommended, actors } =
         useLoaderData() as LoaderHomeData & LoaderActorData;
 
     const carrouselLatestReleaseRef = useRef<CarrouselMovieRef>(null);
@@ -25,8 +31,8 @@ function Home() {
     return (
         <>
             <SectionHighlight data-testid="section-highlight">
-                <Suspense fallback={<CardMovieHighlightLoader />}>
-                    <Await resolve={hightlightMovieDetail}>
+                <Suspense fallback={<CardMovieHighlightSkeleton />}>
+                    <Await resolve={movieHightlightDetail}>
                         {(resolvedHighlightMovieDetail) => (
                             <CardMovieHighlight
                                 highlightMovie={resolvedHighlightMovieDetail ?? undefined}
@@ -49,8 +55,8 @@ function Home() {
                     </HeadingWithBar>
 
                     <div>
-                        <Suspense fallback={<CarrouselCardMovieLoader />}>
-                            <Await resolve={highlightMovies}>
+                        <Suspense fallback={<CarrouselCardMovieSkeleton />}>
+                            <Await resolve={moviesHighlightsToo}>
                                 {(resolvedHighlightsToo) => (
                                     <CarrouselMovie
                                         enableVerticalOnDesktop
@@ -110,8 +116,8 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader />}>
-                        <Await resolve={latestReleases}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
+                        <Await resolve={moviesLatestReleases}>
                             {(resolvedLatestReleases) => (
                                 <CarrouselMovie
                                     movies={resolvedLatestReleases.results ?? undefined}
@@ -170,8 +176,8 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CarrouselCardMovieLoader />}>
-                        <Await resolve={recommended}>
+                    <Suspense fallback={<CarrouselCardMovieSkeleton inline={'true'} />}>
+                        <Await resolve={moviesRecommended}>
                             {(resolvedRecommended) => (
                                 <CarrouselMovie
                                     movies={resolvedRecommended.results ?? undefined}
@@ -230,7 +236,7 @@ function Home() {
                 </TitleCarrouselContainer>
 
                 <div>
-                    <Suspense fallback={<CardActorLoader />}>
+                    <Suspense fallback={<CarrouselCardActorSkeleton />}>
                         <Await resolve={actors}>
                             {(resolvedActors) => (
                                 <CarrouselActor actors={resolvedActors.results ?? undefined} ref={carrouselActorRef} />

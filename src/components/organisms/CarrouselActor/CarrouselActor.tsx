@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 import { SwiperProps, SwiperSlide } from 'swiper/react';
@@ -13,13 +12,13 @@ import Strong from '../../atoms/Strong';
 import Image from '../../atoms/Image';
 
 import { ActorSchema } from '../../../schemas/ActorSchema';
-import CardActorLoader from './CardActorLoader';
 import Paragraph from '../../atoms/Paragraph';
+import { Link } from 'react-router-dom';
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
 interface CarrouselActorProps extends SwiperProps {
-    actors: ActorSchema[];
+    actors: ActorSchema[] | undefined;
     isCast?: boolean;
 }
 
@@ -27,8 +26,6 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
     { actors, ...props },
     ref
 ) => {
-    const navigate = useNavigate();
-
     const baseCarrouselRef = useRef<BaseCarrouselRef>(null);
 
     useImperativeHandle(
@@ -48,45 +45,51 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
             ref={baseCarrouselRef}
             {...props}
         >
-            {actors && actors.length > 0 ? (
+            {actors &&
+                actors.length > 0 &&
                 actors.map((actor) => (
-                    <SwiperSlideOverride onClick={() => navigate(`/actor/${actor.id}`)} key={actor.id}>
-                        <CardActor>
-                            <ImageOverride src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`} />
+                    <SwiperSlideOverride key={actor.id}>
+                        <Link to={`actor/${actor.id}`}>
+                            <CardActor>
+                                <ImageOverride
+                                    src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`}
+                                />
 
-                            <HeadingOverride
-                                config={{
-                                    fontWeight: '700',
-                                    fontSize: '12',
-                                    color: 'white',
-                                }}
-                            >
-                                <div>
-                                    {actor.name}
-                                    <StrongAgeOverride
-                                        config={{
-                                            color: 'secondary-accessible-text-11',
-                                            fontWeight: 400,
-                                            label: '47',
-                                            size: 12,
-                                        }}
-                                    />
-                                </div>
+                                <HeadingOverride
+                                    config={{
+                                        fontWeight: '700',
+                                        fontSize: '12',
+                                        color: 'white',
+                                    }}
+                                >
+                                    <div>
+                                        {actor.name}
+                                        <StrongAgeOverride
+                                            config={{
+                                                color: 'secondary-accessible-text-11',
+                                                fontWeight: 400,
+                                                label: '47',
+                                                size: 12,
+                                            }}
+                                        />
+                                    </div>
 
-                                {actor.character && (
-                                    <ParagraphOverride
-                                        config={{ fontWeight: 400, color: 'secondary-accessible-text-11', size: 12 }}
-                                    >
-                                        Wade Wilson
-                                    </ParagraphOverride>
-                                )}
-                            </HeadingOverride>
-                        </CardActor>
+                                    {actor.character && (
+                                        <ParagraphOverride
+                                            config={{
+                                                fontWeight: 400,
+                                                color: 'secondary-accessible-text-11',
+                                                size: 12,
+                                            }}
+                                        >
+                                            Wade Wilson
+                                        </ParagraphOverride>
+                                    )}
+                                </HeadingOverride>
+                            </CardActor>
+                        </Link>
                     </SwiperSlideOverride>
-                ))
-            ) : (
-                <CardActorLoader>Nenhum registro encontrado.</CardActorLoader>
-            )}
+                ))}
         </BaseCarrousel>
     );
 };

@@ -1,4 +1,4 @@
-import { ActorSchema } from './ActorSchema';
+import { ActorCrewSchema, ActorSchema } from './ActorSchema';
 
 export interface MovieSchema {
     adult: false;
@@ -74,6 +74,24 @@ export interface MovieDetailSchema {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    videos?: {
+        results: Array<{
+            iso_639_1: string;
+            iso_3166_1: string;
+            name: string;
+            key: string;
+            site: string;
+            size: number;
+            type: string;
+            official: boolean;
+            published_at: string;
+            id: string;
+        }>;
+    };
+    credits?: {
+        cast: Array<ActorSchema>;
+        crew: Array<ActorCrewSchema>;
+    };
 }
 
 export interface MovieDetailCast {

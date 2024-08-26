@@ -3,8 +3,7 @@ import { MemoryRouter } from 'react-router';
 import { render, screen } from '../../../core/utils/test-utils/testing-library';
 
 import { actorMock } from '../../../__mocks__/actor.mock';
-
-import CarrouselActor from '../../../components/organisms/CarrouselActor';
+import { CarrouselActor } from '../../../components/organisms/CarrouselActor';
 
 interface SwiperMockProps {
     children: React.ReactNode;
