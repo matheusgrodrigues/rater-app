@@ -6,18 +6,17 @@ import {
     recommendedMoviesLoader,
     highlightMoviesLoader,
     LoaderHomeData,
+    getAllActorsLoader,
 } from './app/Home/loader';
 
 import { movieDetailSimilarLoader, movieDetailLoader, LoaderMovieData } from './app/Movie/loader';
-import { getAllActorsLoader, LoaderActorData } from './app/Actor/loader';
 
 import GlobalError from './app/global-error';
 import RootLayout from './app/layout';
 import Movie from './app/Movie';
-import Actor from './app/Actor/Actor';
 import Home from './app/Home';
 
-const loaderHomeData: LoaderHomeData & LoaderActorData = {
+const loaderHomeData: LoaderHomeData = {
     movieHightlightDetail: highlightMovieDetailLoader(),
     moviesHighlightsToo: highlightMoviesLoader(),
     moviesLatestReleases: latestReleaseMoviesLoader(),
@@ -51,7 +50,6 @@ const router = createBrowserRouter(
                 }
                 path="movie/:id"
             />
-            <Route element={<Actor />} path="actor/:id" />
         </Route>
     )
 );

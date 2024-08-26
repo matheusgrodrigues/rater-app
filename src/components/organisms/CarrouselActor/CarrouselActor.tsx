@@ -13,7 +13,6 @@ import Image from '../../atoms/Image';
 
 import { ActorSchema } from '../../../schemas/ActorSchema';
 import Paragraph from '../../atoms/Paragraph';
-import { Link } from 'react-router-dom';
 
 export interface CarrouselActorRef extends BaseCarrouselRef {}
 
@@ -49,45 +48,41 @@ const CarrouselActor: React.ForwardRefRenderFunction<CarrouselActorRef, Carrouse
                 actors.length > 0 &&
                 actors.map((actor) => (
                     <SwiperSlideOverride key={actor.id}>
-                        <Link to={`actor/${actor.id}`}>
-                            <CardActor>
-                                <ImageOverride
-                                    src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`}
-                                />
+                        <CardActor>
+                            <ImageOverride src={`${process.env.REACT_APP_TMDB_IMAGE_URL}/w500/${actor.profile_path}`} />
 
-                                <HeadingOverride
-                                    config={{
-                                        fontWeight: '700',
-                                        fontSize: '12',
-                                        color: 'white',
-                                    }}
-                                >
-                                    <div>
-                                        {actor.name}
-                                        <StrongAgeOverride
-                                            config={{
-                                                color: 'secondary-accessible-text-11',
-                                                fontWeight: 400,
-                                                label: '47',
-                                                size: 12,
-                                            }}
-                                        />
-                                    </div>
+                            <HeadingOverride
+                                config={{
+                                    fontWeight: '700',
+                                    fontSize: '12',
+                                    color: 'white',
+                                }}
+                            >
+                                <div>
+                                    {actor.name}
+                                    <StrongAgeOverride
+                                        config={{
+                                            color: 'secondary-accessible-text-11',
+                                            fontWeight: 400,
+                                            label: '47',
+                                            size: 12,
+                                        }}
+                                    />
+                                </div>
 
-                                    {actor.character && (
-                                        <ParagraphOverride
-                                            config={{
-                                                fontWeight: 400,
-                                                color: 'secondary-accessible-text-11',
-                                                size: 12,
-                                            }}
-                                        >
-                                            Wade Wilson
-                                        </ParagraphOverride>
-                                    )}
-                                </HeadingOverride>
-                            </CardActor>
-                        </Link>
+                                {actor.character && (
+                                    <ParagraphOverride
+                                        config={{
+                                            fontWeight: 400,
+                                            color: 'secondary-accessible-text-11',
+                                            size: 12,
+                                        }}
+                                    >
+                                        Wade Wilson
+                                    </ParagraphOverride>
+                                )}
+                            </HeadingOverride>
+                        </CardActor>
                     </SwiperSlideOverride>
                 ))}
         </BaseCarrousel>
@@ -102,8 +97,6 @@ const SwiperSlideOverride = styled(SwiperSlide)`
 
     ${({ theme }) =>
         theme.utils.screen('md', `width: ${theme.utils.pxToRem(268)}; height: ${theme.utils.pxToRem(253)};`)}
-
-    cursor: pointer;
 `;
 
 const CardActor = styled.div`
